@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uni.mapadventureproject;
 
-/**
- *
- * @author marta
- */
 public class GameInteraction {
-    
+
+    public void inputManager(Game g) {
+        /* Parser p = new Parser();
+         * Map<> commandMap = new HashMap<>();
+         * 
+         * Scanner input = new Scanner(System.in);
+         * 
+         * while ( input.hasNextLine() ) {
+         *  String command = input.nextLine();
+         *  commandMap = p.parse(command, g.getCroom, g.getInv, g.getComm);
+         * }
+         */
+    }
+
 }
