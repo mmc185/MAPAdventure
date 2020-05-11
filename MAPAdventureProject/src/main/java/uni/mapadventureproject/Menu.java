@@ -7,17 +7,17 @@ public class Menu {
 
     public Menu(GameManager g) {
         this.g = g;
-        this.gInteraction = new GameInteraction();
+        this.gInteraction = new GameInteraction(g);
     }
 
     public void newGame() {
         g.getGame().init("/NewGame"); // Da aggiungere e/o cambiare
-        gInteraction.inputManager(g);
+        gInteraction.inputManager();
     }
 
     public void loadGame() {
         g.getGame().init("/SavedGame"); // Da aggiungere e/o cambiare
-        gInteraction.inputManager(g);
+        gInteraction.inputManager();
     }
 
     public void saveGame() {

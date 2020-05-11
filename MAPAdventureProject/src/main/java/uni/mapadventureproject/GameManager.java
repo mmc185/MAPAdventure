@@ -18,7 +18,7 @@ public abstract class GameManager {
         return game;
     }
 
-    public void setG(Game game) {
+    public void setGame(Game game) {
         this.game = game;
     }
 
