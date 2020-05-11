@@ -1,10 +1,11 @@
 package uni.mapadventureproject.type;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Item {
+public class Item implements Serializable {
 
     private final int id;
     private String name;
