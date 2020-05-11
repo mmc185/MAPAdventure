@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uni.mapadventureproject;
 
 import java.util.Map;
@@ -11,13 +6,21 @@ import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.Inventory;
 import uni.mapadventureproject.type.Room;
 
-/**
- *
- * @author Admin
- */
-public class GameManager {
+public abstract class GameManager {
 
-    public void executeCommand(Room currentRoom, Inventory inv, Command commands, Map<WordType, String> commandMap) {
+    Game game;
 
+    GameManager() {
+        this.game = new Game();
     }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setG(Game game) {
+        this.game = game;
+    }
+
+    public abstract void executeCommand(Room currentRoom, Inventory inv, Command commands, Map<WordType, String> commandMap);
 }

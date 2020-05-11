@@ -2,7 +2,13 @@ package uni.mapadventureproject;
 
 public class GameInteraction {
 
-    public void inputManager(Game g) {
+    Game g;
+
+    GameInteraction() {
+        g = new Game();
+    }
+
+    public void inputManager(GameManager g) {
         /* Parser p = new Parser();
          * Map<> commandMap = new HashMap<>();
          * 
