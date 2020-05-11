@@ -1,10 +1,11 @@
 package uni.mapadventureproject.type;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ItemContainer extends Item {
+public class ItemContainer extends Item implements Serializable {
 
     private List<Item> cItemList;
 

@@ -1,27 +1,22 @@
 package uni.mapadventureproject;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import uni.mapadventureproject.type.*;
 
-public abstract class Game {
+public class Game {
 
-    private final List<Room> map;
+    //private final List<Room> map; //Dovrebbe essere inutile
     private final Set<Command> commands;
     private Inventory inventory;
     private Room currentRoom;
 
-    public Game(Room room) {
-        this.map = new ArrayList<>();
+    public Game() {
         this.commands = new HashSet<>();
         this.inventory = new Inventory();
-        this.currentRoom = room;
     }
 
-    public Game(List<Room> map, Set<Command> commands, Inventory inventory, Room currentRoom) {
-        this.map = map;
+    public Game(Set<Command> commands, Inventory inventory, Room currentRoom) {
         this.commands = commands;
         this.inventory = inventory;
         this.currentRoom = currentRoom;
@@ -47,8 +42,10 @@ public abstract class Game {
         this.currentRoom = currentRoom;
     }
 
-    public abstract void init(String filePath);
+    public void init(String filePath) {
+    }
 
-    public abstract void saveGame(String dirPath);
+    public void saveGame(String dirPath) {
+    }
 
 }
