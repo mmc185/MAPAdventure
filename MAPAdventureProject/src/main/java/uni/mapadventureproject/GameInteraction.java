@@ -1,9 +1,19 @@
 package uni.mapadventureproject;
 
+import uni.mapadventureproject.parser.Parser;
+
 public class GameInteraction {
 
-    public void inputManager(Game g) {
-        /* Parser p = new Parser();
+    GameManager g;
+    Parser p;
+
+    GameInteraction(GameManager g) {
+        this.g = g;
+        p = new Parser();
+    }
+
+    public void inputManager() {
+        /* //Parser p = new Parser();
          * Map<> commandMap = new HashMap<>();
          * 
          * Scanner input = new Scanner(System.in);

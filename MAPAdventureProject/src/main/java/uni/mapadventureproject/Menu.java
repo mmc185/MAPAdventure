@@ -1,35 +1,31 @@
-
 package uni.mapadventureproject;
 
-
 public class Menu {
-    
-    private Game g;
+
+    private GameManager g;
     private GameInteraction gInteraction;
 
-    public Menu(Game g) {
+    public Menu(GameManager g) {
         this.g = g;
-        this.gInteraction = new GameInteraction();
+        this.gInteraction = new GameInteraction(g);
     }
-    
+
     public void newGame() {
-        g.init("/NewGame"); // Da aggiungere e/o cambiare
-        gInteraction.inputManager(g);
+        g.getGame().init("/NewGame"); // Da aggiungere e/o cambiare
+        gInteraction.inputManager();
     }
-    
+
     public void loadGame() {
-        g.init("/SavedGame"); // Da aggiungere e/o cambiare
-        gInteraction.inputManager(g);
+        g.getGame().init("/SavedGame"); // Da aggiungere e/o cambiare
+        gInteraction.inputManager();
     }
-    
+
     public void saveGame() {
-        g.saveGame("/SavedGame");
+        g.getGame().saveGame("/SavedGame");
     }
-    
+
     public void quitGame() {
         System.exit(0);
     }
-    
-    
-    
+
 }
