@@ -8,6 +8,7 @@ package uni.mapadventureproject.GUI;
 import javax.swing.JOptionPane;
 
 
+
 /**
  *
  * @author Admin
@@ -100,15 +101,15 @@ public class MenuGUI extends javax.swing.JFrame {
         jpMenu.add(jbEsci);
         jbEsci.setBounds(270, 350, 180, 30);
 
-        jlOscuro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uni/mapadventureproject/GUI/portale oscuro.png"))); // NOI18N
+        jlOscuro.setIcon(new javax.swing.ImageIcon("img//portale oscuro.png"));
         jpMenu.add(jlOscuro);
         jlOscuro.setBounds(0, 0, 350, 250);
 
-        jlLuce.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uni/mapadventureproject/GUI/portale luce.png"))); // NOI18N
+        jlLuce.setIcon(new javax.swing.ImageIcon("img//portale luce.png"));
         jpMenu.add(jlLuce);
         jlLuce.setBounds(0, 250, 350, 230);
 
-        jlVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uni/mapadventureproject/GUI/portale verde.png"))); // NOI18N
+        jlVerde.setIcon(new javax.swing.ImageIcon("img//portale verde.png"));
         jpMenu.add(jlVerde);
         jlVerde.setBounds(350, -20, 350, 500);
 
@@ -143,12 +144,12 @@ public class MenuGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jpMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+                .addComponent(jpMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+            .addComponent(jpMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();
