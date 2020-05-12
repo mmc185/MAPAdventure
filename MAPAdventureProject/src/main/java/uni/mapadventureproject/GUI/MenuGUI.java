@@ -100,15 +100,15 @@ public class MenuGUI extends javax.swing.JFrame {
         jpMenu.add(jbEsci);
         jbEsci.setBounds(270, 350, 180, 30);
 
-        jlOscuro.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\img\\portale oscuro.png")); // NOI18N
+        jlOscuro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uni/mapadventureproject/GUI/portale oscuro.png"))); // NOI18N
         jpMenu.add(jlOscuro);
         jlOscuro.setBounds(0, 0, 350, 250);
 
-        jlLuce.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\img\\portale luce.png")); // NOI18N
+        jlLuce.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uni/mapadventureproject/GUI/portale luce.png"))); // NOI18N
         jpMenu.add(jlLuce);
         jlLuce.setBounds(0, 250, 350, 230);
 
-        jlVerde.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\img\\portale verde.png")); // NOI18N
+        jlVerde.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uni/mapadventureproject/GUI/portale verde.png"))); // NOI18N
         jpMenu.add(jlVerde);
         jlVerde.setBounds(350, -20, 350, 500);
 

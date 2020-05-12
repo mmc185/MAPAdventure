@@ -208,7 +208,7 @@
         <Component class="javax.swing.JLabel" name="jlOscuro">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\img\portale oscuro.png"/>
+              <Image iconType="3" name="/uni/mapadventureproject/GUI/portale oscuro.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -220,7 +220,7 @@
         <Component class="javax.swing.JLabel" name="jlLuce">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\img\portale luce.png"/>
+              <Image iconType="3" name="/uni/mapadventureproject/GUI/portale luce.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -232,7 +232,7 @@
         <Component class="javax.swing.JLabel" name="jlVerde">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\img\portale verde.png"/>
+              <Image iconType="3" name="/uni/mapadventureproject/GUI/portale verde.png"/>
             </Property>
           </Properties>
           <Constraints>
