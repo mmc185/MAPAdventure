@@ -20,14 +20,16 @@ public class FileSaver {
     }
 
     public void saveFile() throws FileNotFoundException, IOException {
-        
+
         FileOutputStream fOut = new FileOutputStream("NewGame//Intro.dat");
         ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 
         objOut.writeObject(g.getCommands());
-        
-        //TODO inventario e currentRoom
-        
+
+        objOut.writeObject(g.getInventory());
+
+        objOut.writeObject(g.getCurrentRoom());
+
         objOut.close();
         fOut.close();
     }
@@ -38,8 +40,7 @@ public class FileSaver {
         try {
             while (fIn.available() != 0) {
 
-                //TODO inventario e currentRoom
-                g = new Game( (HashSet<Command>) objIn.readObject(), null, null);
+                g = new Game((HashSet<Command>) objIn.readObject(), (Inventory) objIn.readObject(), (Room) objIn.readObject());
 
             }
         } catch (ClassNotFoundException exc) {
@@ -50,30 +51,29 @@ public class FileSaver {
     }
 
     public static void main(String[] args) {
-        
-        Command c1 = new Command("Apri");
-        Command c2 = new Command("Chiudi");
-        Command c3 = new Command("Cammina");
-        
-        Set<Command> s = new HashSet<Command>();
-        s.add(c1);
-        s.add(c2);
-        s.add(c3);
-       
-         
+
         FileSaver fs = new FileSaver();
         //fs.g = new Game(s, null, null);
 
         try {
-            //fs.saveFile();
-            fs.readFile("NewGame//Intro.dat");
+            fs.saveFile();
+            /*fs.readFile("NewGame//Intro.dat");
             for (Command c : fs.g.getCommands()) {
                 System.out.println(c.getName());
             }
+           System.out.println("==========================");
+            for (Item i : fs.g.getInventory().getInventoryList() ) {
+                System.out.println(i.getName() + ": " + i.getDesc() );
+            }
+            System.out.println("==========================");
+            System.out.println("Nome: " + fs.g.getCurrentRoom().getName() +
+                    "\nDesc: " + fs.g.getCurrentRoom().getDesc()+ 
+                    "\nLook: " + fs.g.getCurrentRoom().getLook());
+             */
         } catch (IOException exc) {
-            System.out.println("1"+exc.getMessage());
+            System.out.println("1" + exc.getMessage());
         } catch (Exception e) {
-            System.out.println("2"+e.getMessage());
+            System.out.println("2" + e.getMessage());
         }
     }
 
