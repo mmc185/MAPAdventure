@@ -78,14 +78,14 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jpMenu" pref="700" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jpMenu" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jpMenu" pref="480" max="32767" attributes="0"/>
+          <Component id="jpMenu" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -208,7 +208,7 @@
         <Component class="javax.swing.JLabel" name="jlOscuro">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\4.png"/>
+              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\img\portale oscuro.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -220,7 +220,7 @@
         <Component class="javax.swing.JLabel" name="jlLuce">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\2.png"/>
+              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\img\portale luce.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -232,12 +232,12 @@
         <Component class="javax.swing.JLabel" name="jlVerde">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Admin\Desktop\1.png"/>
+              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\img\portale verde.png"/>
             </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="350" y="-20" width="350" height="-1"/>
+              <AbsoluteConstraints x="350" y="-20" width="350" height="500"/>
             </Constraint>
           </Constraints>
         </Component>
