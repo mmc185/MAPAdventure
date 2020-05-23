@@ -94,11 +94,11 @@ in modo tale da visualizzare lo storico delle mosse giocate.
     > al comando **moves**:
     - l'applicazione mostra la storia delle mosse con una notazione algebrica abbreviata in italiano.
     - Esempio:
-    > 1. e4 c6
-    2. d4 d5
-    3. Cc3 dxe4
-    4. Cxe4 Cd7
-    5. De2 Cgf6
+ 1. e4 c6
+ 2. d4 d5
+ 3. Cc3 dxe4
+ 4. Cxe4 Cd7
+ 5. De2 Cgf6
    
    
 
