@@ -17,7 +17,7 @@ public class Room implements Serializable {
     private Room east = null;
     private Room up = null;
     private Room down = null;
-    private List<Item> itemList = new ArrayList<>();
+    private List<Item> itemList = new ArrayList<>(); //puo' essere di tipo Inventory?
 
     public Room(int id, String name, String desc) {
         this.id = id;
