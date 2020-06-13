@@ -13,6 +13,7 @@ public class Command implements Serializable {
 
     public Command(String name) {
         this.name = name;
+        this.alias = new HashSet<String>();
     }
 
     public Command(String name, Set<String> alias) {
