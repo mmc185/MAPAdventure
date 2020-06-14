@@ -17,12 +17,13 @@ public class Room implements Serializable {
     private Room east = null;
     private Room up = null;
     private Room down = null;
-    private List<Item> itemList = new ArrayList<>(); //puo' essere di tipo Inventory?
+    private Inventory itemList; 
 
     public Room(int id, String name, String desc) {
         this.id = id;
         this.name = name;
         this.desc = desc;
+        itemList = new Inventory();
     }
 
     public String getName() {
@@ -105,11 +106,11 @@ public class Room implements Serializable {
         this.down = down;
     }
 
-    public List<Item> getItemList() {
+    public Inventory getItemList() {
         return itemList;
     }
 
-    public void setItemList(List<Item> itemList) {
+    public void setItemList(Inventory itemList) {
         this.itemList = itemList;
     }
 
