@@ -73,41 +73,41 @@ public class FileSaver {
         metaStation.addItem(poster);
         
         //Comandi
-        Command north = new Command("nord");
+        Command north = new Command("nord", CommandType.MOVE_N);
         north.setAlias(new String[]{"n"}); //tutto minuscolo
         g.getCommands().add(north);
-        Command south = new Command("sud");
+        Command south = new Command("sud", CommandType.MOVE_S);
         south.setAlias(new String[]{"s"});
         g.getCommands().add(south);
-        Command west = new Command("ovest");
+        Command west = new Command("ovest", CommandType.MOVE_W);
         west.setAlias(new String[]{"o"});
         g.getCommands().add(west);
-        Command east = new Command("est");
+        Command east = new Command("est", CommandType.MOVE_E);
         east.setAlias(new String[]{"e"});
         g.getCommands().add(east);
-        Command inv = new Command("inventario");
+        Command inv = new Command("inventario", CommandType.INV);
         inv.setAlias(new String[]{"i", "zaino", "borsa"});
-        Command look = new Command("guarda");
+        Command look = new Command("guarda", CommandType.LOOK);
         look.setAlias(new String[]{"osserva", "vedi", "trova", "cerca", "descrivi", "controlla"});
-        Command pickup = new Command("prendi");
+        Command pickup = new Command("prendi", CommandType.PICK_UP);
         pickup.setAlias(new String[]{"raccogli"});
         g.getCommands().add(pickup);
-        Command open = new Command("apri");
+        Command open = new Command("apri", CommandType.OPEN);
         g.getCommands().add(open);
-        Command push = new Command("premi");
+        Command push = new Command("premi", CommandType.PUSH);
         push.setAlias(new String[]{"spingi", "attiva"});
         g.getCommands().add(push);
         
-        Command up = new Command("sali");
+        Command up = new Command("sali", CommandType.MOVE_U);
         up.setAlias(new String[]{"vai su", "vai sopra"});
         g.getCommands().add(up);
-        Command down = new Command("scendi");
+        Command down = new Command("scendi", CommandType.MOVE_D);
         down.setAlias(new String[]{"vai giu'", "vai sotto"});
         g.getCommands().add(down);
-        Command escape = new Command("scappa");
+        Command escape = new Command("scappa", CommandType.RUN);
         escape.setAlias(new String[]{"fuggi", "vai via"});
         g.getCommands().add(escape);
-        Command end = new Command("esci");
+        Command end = new Command("esci", CommandType.EXIT);
         end.setAlias(new String[]{"svegliati", "sveglia"});
         g.getCommands().add(end);
         

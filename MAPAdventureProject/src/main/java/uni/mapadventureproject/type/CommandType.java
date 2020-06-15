@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uni.mapadventureproject.parser;
+package uni.mapadventureproject.type;
 
 /**
  *
- * @author Admin
+ * @author marta
  */
-public enum WordType{
-   I_OBJ, R_OBJ, COMMAND
+public enum CommandType {
+    MOVE_N, MOVE_S, MOVE_E, MOVE_W, MOVE_U, MOVE_D, INV, LOOK, PICK_UP, OPEN, 
+    PUSH, RUN, EXIT
 }
