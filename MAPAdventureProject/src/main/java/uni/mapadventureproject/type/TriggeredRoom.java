@@ -12,10 +12,14 @@ package uni.mapadventureproject.type;
 public class TriggeredRoom extends Room {
 
     private boolean trigger = false;
+    private String triggerDesc;
 
-    public TriggeredRoom(int id, String name, String desc) {
+    public TriggeredRoom(String triggerDesc, int id, String name, String desc) {
         super(id, name, desc);
+        this.triggerDesc = triggerDesc;
     }
+
+   
 
     public boolean isTrigger() {
         return trigger;
@@ -23,7 +27,7 @@ public class TriggeredRoom extends Room {
 
     public void setTrigger(boolean trigger) {
         this.trigger = trigger;
-        setDesc(desc);
+        setDesc(triggerDesc);
     }
 
     @Override
