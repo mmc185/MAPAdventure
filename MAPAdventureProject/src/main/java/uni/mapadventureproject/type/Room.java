@@ -8,7 +8,7 @@ public class Room implements Serializable {
 
     private final int id;
     private String name;
-    private String desc;
+    protected String desc;
     private String look;
     private boolean visible = true;
     private Room north = null;
