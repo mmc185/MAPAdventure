@@ -5,6 +5,8 @@
  */
 package uni.mapadventureproject.type;
 
+import java.util.Objects;
+
 /**
  *
  * @author Admin
@@ -14,12 +16,10 @@ public class TriggeredRoom extends Room {
     private boolean trigger = false;
     private String triggerDesc;
 
-    public TriggeredRoom(String triggerDesc, int id, String name, String desc) {
+    public TriggeredRoom(int id, String name, String desc, String triggerDesc) {
         super(id, name, desc);
         this.triggerDesc = triggerDesc;
     }
-
-   
 
     public boolean isTrigger() {
         return trigger;
@@ -30,10 +30,19 @@ public class TriggeredRoom extends Room {
         setDesc(triggerDesc);
     }
 
+    public String getTriggerDesc() {
+        return triggerDesc;
+    }
+
+    public void setTriggerDesc(String triggerDesc) {
+        this.triggerDesc = triggerDesc;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + (this.trigger ? 1 : 0);
+        int hash = 5;
+        hash = 89 * hash + (this.trigger ? 1 : 0);
+        hash = 89 * hash + Objects.hashCode(this.triggerDesc);
         return hash;
     }
 
@@ -50,6 +59,9 @@ public class TriggeredRoom extends Room {
         }
         final TriggeredRoom other = (TriggeredRoom) obj;
         if (this.trigger != other.trigger) {
+            return false;
+        }
+        if (!Objects.equals(this.triggerDesc, other.triggerDesc)) {
             return false;
         }
         return true;
