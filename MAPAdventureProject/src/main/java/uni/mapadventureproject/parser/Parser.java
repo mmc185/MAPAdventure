@@ -10,24 +10,29 @@ import uni.mapadventureproject.type.Room;
 
 public class Parser {
 
-    public Map<WordType, String> parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) {
+    public Map<WordType, String> parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) throws InvalidStringException {
 
         // Formato da coppie di tipi di parola e stringa che lo identifica. (e.g. (OBJECT, "taralli") )
         Map<WordType, String> parsedData = new HashMap<>();
 
-        String[] tokens = phrase.toLowerCase().split("\\s+");
+        // Rimuove anche punteggiatura e cifre
+        String[] tokens = phrase.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
 
         for (String t : tokens) {
 
-            if (this.isCommand(t, commands)) {
+            if (this.isCommand(t, commands) && parsedData.isEmpty()) {
 
                 parsedData.put(WordType.COMMAND, t);
 
+            } else if (this.isCommand(t, commands) && !parsedData.isEmpty()) {
+                
+                throw new InvalidStringException();
+                
             }
 
         }
 
-        if (parsedData.size() == 1) {
+        if (!parsedData.isEmpty()) {
 
             for (String t : tokens) {
 
@@ -45,6 +50,8 @@ public class Parser {
 
             }
 
+        } else {
+            throw new InvalidStringException();
         }
 
         return parsedData;
