@@ -40,6 +40,10 @@ public class Command implements Serializable {
         this.alias = new HashSet<>(Arrays.asList(alias));
     }
 
+    public CommandType getcType() {
+        return cType;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
