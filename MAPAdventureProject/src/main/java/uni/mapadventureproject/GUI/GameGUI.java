@@ -5,7 +5,13 @@
  */
 package uni.mapadventureproject.GUI;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,11 +20,42 @@ import javax.swing.JOptionPane;
  */
 public class GameGUI extends javax.swing.JFrame {
 
+    Font font;
+    Font font1;
+
     /**
      * Creates new form GameGUI
      */
     public GameGUI() {
         initComponents();
+        init();
+    }
+
+    private void init() {
+
+        try {
+            InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
+            font1 = font.deriveFont(Font.PLAIN, 12);
+
+            this.setFont(font1);
+            jmbOptions.setFont(font1);
+            jmOptions.setFont(font1);
+            jmiBackMenu.setFont(font1);
+            jmiSaveGame.setFont(font1);
+            jmHelp.setFont(font1);
+            jmiHelp.setFont(font1);
+            jtaReadingArea.setFont(font1);
+            jlCommand.setFont(font1);
+            jtTypingField.setFont(font1);
+            jbSend.setFont(font1);
+            jbUp.setFont(font1);
+            jbDown.setFont(font1);
+
+            
+        } catch (FontFormatException | IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -37,32 +74,37 @@ public class GameGUI extends javax.swing.JFrame {
         jbEast = new javax.swing.JButton();
         jbUp = new javax.swing.JButton();
         jbDown = new javax.swing.JButton();
-        jlType = new javax.swing.JLabel();
+        jlCommand = new javax.swing.JLabel();
         jbSend = new javax.swing.JButton();
-        jScrollPaneRead = new javax.swing.JScrollPane();
+        jspRead = new javax.swing.JScrollPane();
         jtaReadingArea = new javax.swing.JTextArea();
-        jScrollPaneWrite = new javax.swing.JScrollPane();
+        jspWrite = new javax.swing.JScrollPane();
         jtTypingField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jlImage = new javax.swing.JLabel();
+        jlBackground = new javax.swing.JLabel();
+        jmbOptions = new javax.swing.JMenuBar();
         jmOptions = new javax.swing.JMenu();
         jmiSaveGame = new javax.swing.JMenuItem();
         jmiBackMenu = new javax.swing.JMenuItem();
         jmHelp = new javax.swing.JMenu();
-        jmiSaveGame1 = new javax.swing.JMenuItem();
+        jmiHelp = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("MAP Adventure");
+        setTitle("Metastation: the last exam");
+        setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Agency FB", 0, 14)); // NOI18N
+        setForeground(java.awt.Color.white);
         setLocation(new java.awt.Point(0, 0));
         setMaximumSize(new java.awt.Dimension(1000, 700));
         setMinimumSize(new java.awt.Dimension(1000, 700));
         setPreferredSize(new java.awt.Dimension(1000, 700));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 700));
+        getContentPane().setLayout(null);
 
         jpButtons.setForeground(new java.awt.Color(60, 63, 65));
+        jpButtons.setOpaque(false);
 
         jbNorth.setBackground(new java.awt.Color(0, 102, 102));
         jbNorth.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
@@ -134,7 +176,8 @@ public class GameGUI extends javax.swing.JFrame {
 
         jbUp.setBackground(new java.awt.Color(0, 102, 102));
         jbUp.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
-        jbUp.setIcon(new javax.swing.ImageIcon("img//up.png"));
+        jbUp.setForeground(new java.awt.Color(255, 255, 255));
+        jbUp.setText("su");
         jbUp.setToolTipText("su");
         jbUp.setAlignmentY(0.0F);
         jbUp.setBorder(new javax.swing.border.MatteBorder(null));
@@ -151,7 +194,8 @@ public class GameGUI extends javax.swing.JFrame {
 
         jbDown.setBackground(new java.awt.Color(0, 102, 102));
         jbDown.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
-        jbDown.setIcon(new javax.swing.ImageIcon("img//down.png"));
+        jbDown.setForeground(new java.awt.Color(255, 255, 255));
+        jbDown.setText("giu'");
         jbDown.setToolTipText("giu'");
         jbDown.setAlignmentY(0.0F);
         jbDown.setBorder(new javax.swing.border.MatteBorder(null));
@@ -208,8 +252,15 @@ public class GameGUI extends javax.swing.JFrame {
 
         jpButtonsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
 
-        jlType.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jlType.setText("Inserisci un comando:");
+        getContentPane().add(jpButtons);
+        jpButtons.setBounds(680, 495, 242, 118);
+
+        jlCommand.setBackground(new java.awt.Color(0, 102, 102));
+        jlCommand.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlCommand.setForeground(new java.awt.Color(255, 255, 255));
+        jlCommand.setText("Inserisci un comando:");
+        getContentPane().add(jlCommand);
+        jlCommand.setBounds(53, 514, 170, 28);
 
         jbSend.setBackground(new java.awt.Color(0, 102, 102));
         jbSend.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -220,15 +271,17 @@ public class GameGUI extends javax.swing.JFrame {
                 jbSendActionPerformed(evt);
             }
         });
+        getContentPane().add(jbSend);
+        jbSend.setBounds(569, 563, 77, 38);
 
-        jScrollPaneRead.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPaneRead.setToolTipText("");
-        jScrollPaneRead.setColumnHeaderView(null);
-        jScrollPaneRead.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPaneRead.setMaximumSize(new java.awt.Dimension(900, 450));
-        jScrollPaneRead.setMinimumSize(new java.awt.Dimension(900, 450));
-        jScrollPaneRead.setPreferredSize(new java.awt.Dimension(900, 450));
-        jScrollPaneRead.setViewportView(jtaReadingArea);
+        jspRead.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jspRead.setToolTipText("");
+        jspRead.setColumnHeaderView(null);
+        jspRead.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jspRead.setMaximumSize(new java.awt.Dimension(900, 450));
+        jspRead.setMinimumSize(new java.awt.Dimension(900, 450));
+        jspRead.setPreferredSize(new java.awt.Dimension(900, 450));
+        jspRead.setViewportView(jtaReadingArea);
 
         jtaReadingArea.setEditable(false);
         jtaReadingArea.setBackground(new java.awt.Color(0, 0, 0));
@@ -237,18 +290,22 @@ public class GameGUI extends javax.swing.JFrame {
         jtaReadingArea.setForeground(new java.awt.Color(255, 255, 255));
         jtaReadingArea.setLineWrap(true);
         jtaReadingArea.setRows(15);
+        jtaReadingArea.setBorder(null);
         jtaReadingArea.setMaximumSize(new java.awt.Dimension(900, 450));
         jtaReadingArea.setMinimumSize(new java.awt.Dimension(900, 450));
-        jScrollPaneRead.setViewportView(jtaReadingArea);
+        jspRead.setViewportView(jtaReadingArea);
 
-        jScrollPaneWrite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPaneWrite.setAutoscrolls(true);
-        jScrollPaneWrite.setColumnHeaderView(jtTypingField);
-        jScrollPaneWrite.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jScrollPaneWrite.setMaximumSize(new java.awt.Dimension(500, 40));
-        jScrollPaneWrite.setMinimumSize(new java.awt.Dimension(500, 40));
-        jScrollPaneWrite.setPreferredSize(new java.awt.Dimension(500, 40));
-        jScrollPaneWrite.setViewportView(jtTypingField);
+        getContentPane().add(jspRead);
+        jspRead.setBounds(40, 30, 520, 450);
+
+        jspWrite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jspWrite.setAutoscrolls(true);
+        jspWrite.setColumnHeaderView(jtTypingField);
+        jspWrite.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jspWrite.setMaximumSize(new java.awt.Dimension(500, 40));
+        jspWrite.setMinimumSize(new java.awt.Dimension(500, 40));
+        jspWrite.setPreferredSize(new java.awt.Dimension(500, 40));
+        jspWrite.setViewportView(jtTypingField);
 
         jtTypingField.setBackground(new java.awt.Color(255, 255, 255));
         jtTypingField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -265,10 +322,22 @@ public class GameGUI extends javax.swing.JFrame {
                 jtTypingFieldKeyPressed(evt);
             }
         });
-        jScrollPaneWrite.setViewportView(jtTypingField);
+        jspWrite.setViewportView(jtTypingField);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("img//placeHolder.png"));
-        jLabel1.setBorder(new javax.swing.border.MatteBorder(null));
+        getContentPane().add(jspWrite);
+        jspWrite.setBounds(43, 548, 520, 65);
+
+        jlImage.setBackground(new java.awt.Color(0, 0, 0));
+        jlImage.setIcon(new javax.swing.ImageIcon("img//placeHolder.png"));
+        jlImage.setMaximumSize(new java.awt.Dimension(361, 450));
+        jlImage.setOpaque(true);
+        jlImage.setPreferredSize(new java.awt.Dimension(361, 448));
+        getContentPane().add(jlImage);
+        jlImage.setBounds(570, 50, 361, 410);
+
+        jlBackground.setIcon(new javax.swing.ImageIcon("img//background1.png"));
+        getContentPane().add(jlBackground);
+        jlBackground.setBounds(0, 0, 1000, 660);
 
         jmOptions.setText("Opzioni");
         jmOptions.setToolTipText("");
@@ -287,68 +356,19 @@ public class GameGUI extends javax.swing.JFrame {
         });
         jmOptions.add(jmiBackMenu);
 
-        jMenuBar1.add(jmOptions);
+        jmbOptions.add(jmOptions);
 
         jmHelp.setText("?");
         jmHelp.setToolTipText("");
         jmHelp.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
-        jmiSaveGame1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jmiSaveGame1.setText("Aiuto...");
-        jmHelp.add(jmiSaveGame1);
+        jmiHelp.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jmiHelp.setText("Guida...");
+        jmHelp.add(jmiHelp);
 
-        jMenuBar1.add(jmHelp);
+        jmbOptions.add(jmHelp);
 
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPaneRead, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jlType))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPaneWrite, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbSend)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jpButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPaneRead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlType, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPaneWrite, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jbSend)
-                                .addGap(12, 12, 12))))
-                    .addComponent(jpButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        setJMenuBar(jmbOptions);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -392,13 +412,6 @@ public class GameGUI extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jbSend.doClick();
         }
-
-        /*
-Devi fare un getText sulla textfield
-Salvarti il testo in una stringa
-E fare un append alla textarea
-In modo da farlo uscire sotto
-Ah e poi ovviamente ripulisci la textfield Per pulirla di basta fare setText("")*/
     }//GEN-LAST:event_jtTypingFieldKeyPressed
 
     private void jmiBackMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackMenuActionPerformed
@@ -448,10 +461,6 @@ Ah e poi ovviamente ripulisci la textfield Per pulirla di basta fare setText("")
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPaneRead;
-    private javax.swing.JScrollPane jScrollPaneWrite;
     private javax.swing.JButton jbDown;
     private javax.swing.JButton jbEast;
     private javax.swing.JButton jbNorth;
@@ -459,13 +468,18 @@ Ah e poi ovviamente ripulisci la textfield Per pulirla di basta fare setText("")
     private javax.swing.JButton jbSouth;
     private javax.swing.JButton jbUp;
     private javax.swing.JButton jbWest;
-    private javax.swing.JLabel jlType;
+    private javax.swing.JLabel jlBackground;
+    private javax.swing.JLabel jlCommand;
+    private javax.swing.JLabel jlImage;
     private javax.swing.JMenu jmHelp;
     private javax.swing.JMenu jmOptions;
+    private javax.swing.JMenuBar jmbOptions;
     private javax.swing.JMenuItem jmiBackMenu;
+    private javax.swing.JMenuItem jmiHelp;
     private javax.swing.JMenuItem jmiSaveGame;
-    private javax.swing.JMenuItem jmiSaveGame1;
     private javax.swing.JPanel jpButtons;
+    private javax.swing.JScrollPane jspRead;
+    private javax.swing.JScrollPane jspWrite;
     private javax.swing.JTextField jtTypingField;
     private javax.swing.JTextArea jtaReadingArea;
     // End of variables declaration//GEN-END:variables
