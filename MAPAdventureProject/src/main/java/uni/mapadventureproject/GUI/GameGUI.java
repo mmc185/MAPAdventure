@@ -5,17 +5,57 @@
  */
 package uni.mapadventureproject.GUI;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
  */
 public class GameGUI extends javax.swing.JFrame {
 
+    Font font;
+    Font font1;
+
     /**
      * Creates new form GameGUI
      */
     public GameGUI() {
         initComponents();
+        init();
+    }
+
+    private void init() {
+
+        try {
+            InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
+            font1 = font.deriveFont(Font.PLAIN, 12);
+
+            this.setFont(font1);
+            jmbOptions.setFont(font1);
+            jmOptions.setFont(font1);
+            jmiBackMenu.setFont(font1);
+            jmiSaveGame.setFont(font1);
+            jmHelp.setFont(font1);
+            jmiHelp.setFont(font1);
+            jtaReadingArea.setFont(font1);
+            jlCommand.setFont(font1);
+            jtTypingField.setFont(font1);
+            jbSend.setFont(font1);
+            jbUp.setFont(font1);
+            jbDown.setFont(font1);
+
+            
+        } catch (FontFormatException | IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -27,22 +67,363 @@ public class GameGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(0, 0));
+        jpButtons = new javax.swing.JPanel();
+        jbNorth = new javax.swing.JButton();
+        jbSouth = new javax.swing.JButton();
+        jbWest = new javax.swing.JButton();
+        jbEast = new javax.swing.JButton();
+        jbUp = new javax.swing.JButton();
+        jbDown = new javax.swing.JButton();
+        jlCommand = new javax.swing.JLabel();
+        jbSend = new javax.swing.JButton();
+        jspRead = new javax.swing.JScrollPane();
+        jtaReadingArea = new javax.swing.JTextArea();
+        jspWrite = new javax.swing.JScrollPane();
+        jtTypingField = new javax.swing.JTextField();
+        jlImage = new javax.swing.JLabel();
+        jlBackground = new javax.swing.JLabel();
+        jmbOptions = new javax.swing.JMenuBar();
+        jmOptions = new javax.swing.JMenu();
+        jmiSaveGame = new javax.swing.JMenuItem();
+        jmiBackMenu = new javax.swing.JMenuItem();
+        jmHelp = new javax.swing.JMenu();
+        jmiHelp = new javax.swing.JMenuItem();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Metastation: the last exam");
+        setBackground(new java.awt.Color(0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFont(new java.awt.Font("Agency FB", 0, 14)); // NOI18N
+        setForeground(java.awt.Color.white);
+        setLocation(new java.awt.Point(0, 0));
+        setMaximumSize(new java.awt.Dimension(1000, 700));
+        setMinimumSize(new java.awt.Dimension(1000, 700));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1000, 700));
+        getContentPane().setLayout(null);
+
+        jpButtons.setForeground(new java.awt.Color(60, 63, 65));
+        jpButtons.setOpaque(false);
+
+        jbNorth.setBackground(new java.awt.Color(0, 102, 102));
+        jbNorth.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        jbNorth.setIcon(new javax.swing.ImageIcon("img//arrowNorthT.png"));
+        jbNorth.setToolTipText("nord [n]");
+        jbNorth.setAlignmentY(0.0F);
+        jbNorth.setBorder(new javax.swing.border.MatteBorder(null));
+        jbNorth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbNorth.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbNorth.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        jbNorth.setMaximumSize(new java.awt.Dimension(50, 50));
+        jbNorth.setMinimumSize(new java.awt.Dimension(50, 50));
+        jbNorth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNorthActionPerformed(evt);
+            }
+        });
+
+        jbSouth.setBackground(new java.awt.Color(0, 102, 102));
+        jbSouth.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        jbSouth.setIcon(new javax.swing.ImageIcon("img//arrowSouthT.png"));
+        jbSouth.setToolTipText("sud [s]");
+        jbSouth.setAlignmentY(0.0F);
+        jbSouth.setBorder(new javax.swing.border.MatteBorder(null));
+        jbSouth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbSouth.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbSouth.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        jbSouth.setMaximumSize(new java.awt.Dimension(50, 50));
+        jbSouth.setMinimumSize(new java.awt.Dimension(50, 50));
+        jbSouth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSouthActionPerformed(evt);
+            }
+        });
+
+        jbWest.setBackground(new java.awt.Color(0, 102, 102));
+        jbWest.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        jbWest.setIcon(new javax.swing.ImageIcon("img//arrowWestT.png"));
+        jbWest.setToolTipText("ovest [o]");
+        jbWest.setAlignmentY(0.0F);
+        jbWest.setBorder(new javax.swing.border.MatteBorder(null));
+        jbWest.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbWest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbWest.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        jbWest.setMaximumSize(new java.awt.Dimension(50, 50));
+        jbWest.setMinimumSize(new java.awt.Dimension(50, 50));
+        jbWest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbWestActionPerformed(evt);
+            }
+        });
+
+        jbEast.setBackground(new java.awt.Color(0, 102, 102));
+        jbEast.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        jbEast.setIcon(new javax.swing.ImageIcon("img//arrowEastT.png"));
+        jbEast.setToolTipText("est [e]");
+        jbEast.setAlignmentY(0.0F);
+        jbEast.setBorder(new javax.swing.border.MatteBorder(null));
+        jbEast.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbEast.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbEast.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        jbEast.setMaximumSize(new java.awt.Dimension(50, 50));
+        jbEast.setMinimumSize(new java.awt.Dimension(50, 50));
+        jbEast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEastActionPerformed(evt);
+            }
+        });
+
+        jbUp.setBackground(new java.awt.Color(0, 102, 102));
+        jbUp.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        jbUp.setForeground(new java.awt.Color(255, 255, 255));
+        jbUp.setText("su");
+        jbUp.setToolTipText("su");
+        jbUp.setAlignmentY(0.0F);
+        jbUp.setBorder(new javax.swing.border.MatteBorder(null));
+        jbUp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbUp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbUp.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        jbUp.setMaximumSize(new java.awt.Dimension(50, 50));
+        jbUp.setMinimumSize(new java.awt.Dimension(50, 50));
+        jbUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbUpActionPerformed(evt);
+            }
+        });
+
+        jbDown.setBackground(new java.awt.Color(0, 102, 102));
+        jbDown.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        jbDown.setForeground(new java.awt.Color(255, 255, 255));
+        jbDown.setText("giu'");
+        jbDown.setToolTipText("giu'");
+        jbDown.setAlignmentY(0.0F);
+        jbDown.setBorder(new javax.swing.border.MatteBorder(null));
+        jbDown.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbDown.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbDown.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        jbDown.setMaximumSize(new java.awt.Dimension(50, 50));
+        jbDown.setMinimumSize(new java.awt.Dimension(50, 50));
+        jbDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDownActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpButtonsLayout = new javax.swing.GroupLayout(jpButtons);
+        jpButtons.setLayout(jpButtonsLayout);
+        jpButtonsLayout.setHorizontalGroup(
+            jpButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jbWest, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbSouth, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbNorth, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbEast, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jpButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbDown, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+
+        jpButtonsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
+
+        jpButtonsLayout.setVerticalGroup(
+            jpButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpButtonsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpButtonsLayout.createSequentialGroup()
+                        .addComponent(jbUp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbDown, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbWest, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpButtonsLayout.createSequentialGroup()
+                        .addComponent(jbNorth, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbSouth, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbEast, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
+
+        jpButtonsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
+
+        getContentPane().add(jpButtons);
+        jpButtons.setBounds(680, 495, 242, 118);
+
+        jlCommand.setBackground(new java.awt.Color(0, 102, 102));
+        jlCommand.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlCommand.setForeground(new java.awt.Color(255, 255, 255));
+        jlCommand.setText("Inserisci un comando:");
+        getContentPane().add(jlCommand);
+        jlCommand.setBounds(53, 514, 170, 28);
+
+        jbSend.setBackground(new java.awt.Color(0, 102, 102));
+        jbSend.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jbSend.setForeground(new java.awt.Color(255, 255, 255));
+        jbSend.setText("Invia");
+        jbSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSendActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbSend);
+        jbSend.setBounds(569, 563, 77, 38);
+
+        jspRead.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jspRead.setToolTipText("");
+        jspRead.setColumnHeaderView(null);
+        jspRead.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jspRead.setMaximumSize(new java.awt.Dimension(900, 450));
+        jspRead.setMinimumSize(new java.awt.Dimension(900, 450));
+        jspRead.setPreferredSize(new java.awt.Dimension(900, 450));
+        jspRead.setViewportView(jtaReadingArea);
+
+        jtaReadingArea.setEditable(false);
+        jtaReadingArea.setBackground(new java.awt.Color(0, 0, 0));
+        jtaReadingArea.setColumns(20);
+        jtaReadingArea.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jtaReadingArea.setForeground(new java.awt.Color(255, 255, 255));
+        jtaReadingArea.setLineWrap(true);
+        jtaReadingArea.setRows(15);
+        jtaReadingArea.setBorder(null);
+        jtaReadingArea.setMaximumSize(new java.awt.Dimension(900, 450));
+        jtaReadingArea.setMinimumSize(new java.awt.Dimension(900, 450));
+        jspRead.setViewportView(jtaReadingArea);
+
+        getContentPane().add(jspRead);
+        jspRead.setBounds(40, 30, 520, 450);
+
+        jspWrite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jspWrite.setAutoscrolls(true);
+        jspWrite.setColumnHeaderView(jtTypingField);
+        jspWrite.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jspWrite.setMaximumSize(new java.awt.Dimension(500, 40));
+        jspWrite.setMinimumSize(new java.awt.Dimension(500, 40));
+        jspWrite.setPreferredSize(new java.awt.Dimension(500, 40));
+        jspWrite.setViewportView(jtTypingField);
+
+        jtTypingField.setBackground(new java.awt.Color(255, 255, 255));
+        jtTypingField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jtTypingField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jtTypingField.setMaximumSize(new java.awt.Dimension(500, 40));
+        jtTypingField.setMinimumSize(new java.awt.Dimension(500, 40));
+        jtTypingField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtTypingFieldActionPerformed(evt);
+            }
+        });
+        jtTypingField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtTypingFieldKeyPressed(evt);
+            }
+        });
+        jspWrite.setViewportView(jtTypingField);
+
+        getContentPane().add(jspWrite);
+        jspWrite.setBounds(43, 548, 520, 65);
+
+        jlImage.setBackground(new java.awt.Color(0, 0, 0));
+        jlImage.setIcon(new javax.swing.ImageIcon("img//placeHolder.png"));
+        jlImage.setMaximumSize(new java.awt.Dimension(361, 450));
+        jlImage.setOpaque(true);
+        jlImage.setPreferredSize(new java.awt.Dimension(361, 448));
+        getContentPane().add(jlImage);
+        jlImage.setBounds(570, 50, 361, 410);
+
+        jlBackground.setIcon(new javax.swing.ImageIcon("img//background1.png"));
+        getContentPane().add(jlBackground);
+        jlBackground.setBounds(0, 0, 1000, 660);
+
+        jmOptions.setText("Opzioni");
+        jmOptions.setToolTipText("");
+        jmOptions.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        jmiSaveGame.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jmiSaveGame.setText("Salva partita");
+        jmOptions.add(jmiSaveGame);
+
+        jmiBackMenu.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jmiBackMenu.setText("Torna al menu principale");
+        jmiBackMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBackMenuActionPerformed(evt);
+            }
+        });
+        jmOptions.add(jmiBackMenu);
+
+        jmbOptions.add(jmOptions);
+
+        jmHelp.setText("?");
+        jmHelp.setToolTipText("");
+        jmHelp.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        jmiHelp.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jmiHelp.setText("Guida...");
+        jmHelp.add(jmiHelp);
+
+        jmbOptions.add(jmHelp);
+
+        setJMenuBar(jmbOptions);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtTypingFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtTypingFieldActionPerformed
+        //Qui l'utente inserisce il suo testo
+    }//GEN-LAST:event_jtTypingFieldActionPerformed
+
+    private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
+        if (!jtTypingField.getText().isBlank()) {
+            jtaReadingArea.append(jtTypingField.getText() + "\n");
+            jtTypingField.setText("");
+        }
+    }//GEN-LAST:event_jbSendActionPerformed
+
+    private void jbNorthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNorthActionPerformed
+        // L'utente si muove verso nord
+    }//GEN-LAST:event_jbNorthActionPerformed
+
+    private void jbSouthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSouthActionPerformed
+        // L'utente si muove verso sud
+    }//GEN-LAST:event_jbSouthActionPerformed
+
+    private void jbWestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWestActionPerformed
+        // L'utente si muove verso ovest
+    }//GEN-LAST:event_jbWestActionPerformed
+
+    private void jbEastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEastActionPerformed
+        // L'utente si muove verso est
+    }//GEN-LAST:event_jbEastActionPerformed
+
+    private void jbUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpActionPerformed
+        // L'utente si muove verso su
+    }//GEN-LAST:event_jbUpActionPerformed
+
+    private void jbDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDownActionPerformed
+        // L'utente si muove verso giù
+    }//GEN-LAST:event_jbDownActionPerformed
+
+    private void jtTypingFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTypingFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbSend.doClick();
+        }
+    }//GEN-LAST:event_jtTypingFieldKeyPressed
+
+    private void jmiBackMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackMenuActionPerformed
+        int yesOption;
+        yesOption = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler tornare al menu principale?", "Ritorno al menu principale", JOptionPane.YES_NO_OPTION);
+        if (yesOption == JOptionPane.YES_OPTION) {
+            MenuGUI m = new MenuGUI();
+            m.setVisible(true);
+            this.dispose();
+        }
+
+    }//GEN-LAST:event_jmiBackMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +461,26 @@ public class GameGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jbDown;
+    private javax.swing.JButton jbEast;
+    private javax.swing.JButton jbNorth;
+    private javax.swing.JButton jbSend;
+    private javax.swing.JButton jbSouth;
+    private javax.swing.JButton jbUp;
+    private javax.swing.JButton jbWest;
+    private javax.swing.JLabel jlBackground;
+    private javax.swing.JLabel jlCommand;
+    private javax.swing.JLabel jlImage;
+    private javax.swing.JMenu jmHelp;
+    private javax.swing.JMenu jmOptions;
+    private javax.swing.JMenuBar jmbOptions;
+    private javax.swing.JMenuItem jmiBackMenu;
+    private javax.swing.JMenuItem jmiHelp;
+    private javax.swing.JMenuItem jmiSaveGame;
+    private javax.swing.JPanel jpButtons;
+    private javax.swing.JScrollPane jspRead;
+    private javax.swing.JScrollPane jspWrite;
+    private javax.swing.JTextField jtTypingField;
+    private javax.swing.JTextArea jtaReadingArea;
     // End of variables declaration//GEN-END:variables
 }
