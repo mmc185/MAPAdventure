@@ -1,5 +1,7 @@
 package uni.mapadventureproject;
 
+import java.io.IOException;
+
 public class Menu {
 
     private GameManager g;
@@ -10,17 +12,17 @@ public class Menu {
         this.gInteraction = new GameInteraction(g);
     }
 
-    public void newGame() {
+    public void newGame() throws IOException {
         g.getGame().init("/NewGame"); // Da aggiungere e/o cambiare
         gInteraction.inputManager();
     }
 
-    public void loadGame() {
+    public void loadGame() throws IOException {
         g.getGame().init("/SavedGame"); // Da aggiungere e/o cambiare
         gInteraction.inputManager();
     }
 
-    public void saveGame() {
+    public void saveGame() throws IOException {
         g.getGame().saveGame("/SavedGame");
     }
 
