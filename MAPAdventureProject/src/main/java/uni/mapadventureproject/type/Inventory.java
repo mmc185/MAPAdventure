@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/** Usata per Inventario del giocatore e Inventario nella stanza. 
+ * (Da creare interfaccia?)*/
 public class Inventory implements Serializable {
     
     private List<Item> inventoryList;

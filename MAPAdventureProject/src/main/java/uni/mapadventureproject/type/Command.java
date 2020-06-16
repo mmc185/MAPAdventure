@@ -9,15 +9,18 @@ import java.util.Set;
 public class Command implements Serializable {
 
     private final String name;
+    private final CommandType cType;
     private Set<String> alias;
 
-    public Command(String name) {
+    public Command(String name, CommandType cType) {
         this.name = name;
+        this.cType = cType;
         this.alias = new HashSet<String>();
     }
 
-    public Command(String name, Set<String> alias) {
+    public Command(String name, CommandType cType, Set<String> alias) {
         this.name = name;
+        this.cType = cType;
         this.alias = alias;
     }
 
@@ -35,6 +38,10 @@ public class Command implements Serializable {
 
     public void setAlias(String[] alias) {
         this.alias = new HashSet<>(Arrays.asList(alias));
+    }
+
+    public CommandType getcType() {
+        return cType;
     }
 
     @Override
