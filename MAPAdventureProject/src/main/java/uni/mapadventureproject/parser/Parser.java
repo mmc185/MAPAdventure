@@ -16,7 +16,7 @@ public class Parser {
         Map<WordType, String> parsedData = new HashMap<>();
 
         // Rimuove anche punteggiatura e cifre
-        String[] tokens = phrase.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
+        String[] tokens = phrase.replaceAll("[^a-zA-Z ]", " ").toLowerCase().split("\\s+");
 
         for (String t : tokens) {
 
