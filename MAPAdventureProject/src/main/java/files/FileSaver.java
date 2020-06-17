@@ -87,8 +87,10 @@ public class FileSaver {
         g.getCommands().add(east);
         Command inv = new Command("inventario", CommandType.INV);
         inv.setAlias(new String[]{"i", "zaino", "borsa"});
+        g.getCommands().add(inv);
         Command look = new Command("guarda", CommandType.LOOK);
         look.setAlias(new String[]{"osserva", "vedi", "trova", "cerca", "descrivi", "controlla"});
+        g.getCommands().add(inv);
         Command pickup = new Command("prendi", CommandType.PICK_UP);
         pickup.setAlias(new String[]{"raccogli"});
         g.getCommands().add(pickup);
