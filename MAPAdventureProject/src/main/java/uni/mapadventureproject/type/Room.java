@@ -18,6 +18,7 @@ public class Room implements Serializable {
     private Room up = null;
     private Room down = null;
     private Inventory itemList;
+    private String lockedBy = "";
 
     public Room(int id, String name, String desc) {
         this.id = id;
@@ -56,6 +57,14 @@ public class Room implements Serializable {
 
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public String getLockedBy() {
+        return lockedBy;
+    }
+
+    public void setLockedBy(String lockedBy) {
+        this.lockedBy = lockedBy;
     }
 
     public Room getNorth() {
