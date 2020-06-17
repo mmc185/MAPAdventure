@@ -30,4 +30,16 @@ public class Inventory implements Serializable {
         inventoryList.remove(i);
     }
     
+    @Override
+    public String toString() {
+        
+        String invList = "";
+        
+        for ( Item i : inventoryList ) {
+            invList= invList + "\n- " + i.getName();
+        }
+        
+        return invList;
+    }
+    
 }
