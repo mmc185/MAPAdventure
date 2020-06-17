@@ -10,6 +10,8 @@ import java.util.Objects;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.CommandType;
+import uni.mapadventureproject.type.Inventory;
+import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.Room;
 
 public class MSGame extends GameManager {
@@ -23,6 +25,7 @@ public class MSGame extends GameManager {
 
         CommandType command = this.getCommandType(commandMap.get(WordType.COMMAND));
         Room r;
+        Item i = null;
         String output = "";
 
         switch (command) {
@@ -32,14 +35,42 @@ public class MSGame extends GameManager {
             case MOVE_W:
             case MOVE_U:
             case MOVE_D:
-                if ((r = this.move(command)).isVisible()) {
+                
+                if (Objects.isNull(r = this.move(command))) {
+                    output = "Non puoi andare lì!";
+                } else if (r.isVisible()) {
+                    
                     this.getGame().setCurrentRoom(r);
                     output = this.getGame().getCurrentRoom().getDesc();
+                    
                 } else {
                     output = "Questa stanza è chiusa!";
                 }
                 break;
             case INV:
+                
+                output = "Oggetti presenti nell'inventario: " + this.getGame().getInventory().toString();
+                break;
+            case LOOK:
+                
+                if (commandMap.size() == 2) {
+                    
+                    if (commandMap.containsKey(WordType.I_OBJ)) {
+                        i = searchItem( commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                    } else if (commandMap.containsKey(WordType.R_OBJ)) {
+                        i = searchItem( commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                    }
+                    
+                    output = i.getDesc();
+                    
+                } else if (commandMap.size() == 1) {
+                    
+                    output = this.getGame().getCurrentRoom().getLook();
+                    
+                } else if (commandMap.size() > 2) {
+                    output = "Inserire un oggetto alla volta."; ///???? da rimuovere? throw eccezione?
+                }
+                break;
         }
 
         return "";
@@ -80,6 +111,16 @@ public class MSGame extends GameManager {
         return null;
     }
     
-   
+    public Item searchItem (String iName, Inventory inv) {
+        for ( Item i : inv.getInventoryList() ) {
+            if (i.getName().equals(iName) || i.getAlias().contains(iName)) {
+
+                return i;
+
+            }
+        }
+        
+        return null;
+    }
 
 }
