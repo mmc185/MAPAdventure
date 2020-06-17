@@ -22,5 +22,5 @@ public abstract class GameManager {
         this.game = game;
     }
 
-    public abstract void executeCommand(Room currentRoom, Inventory inv, Command commands, Map<WordType, String> commandMap);
+    public abstract String executeCommand(Map<WordType, String> commandMap);
 }
