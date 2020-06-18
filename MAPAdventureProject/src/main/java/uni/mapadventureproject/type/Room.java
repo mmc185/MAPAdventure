@@ -10,14 +10,14 @@ public class Room implements Serializable {
     private String name;
     private String desc;
     private String look;
-    private boolean visible = true;
     private Room north = null;
     private Room south = null;
     private Room west = null;
     private Room east = null;
     private Room up = null;
     private Room down = null;
-    private Inventory itemList; 
+    private Inventory itemList;
+    private String lockedBy = "";
 
     public Room(int id, String name, String desc) {
         this.id = id;
@@ -50,12 +50,12 @@ public class Room implements Serializable {
         this.look = look;
     }
 
-    public boolean isVisible() {
-        return visible;
+    public String getLockedBy() {
+        return lockedBy;
     }
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
+    public void setLockedBy(String lockedBy) {
+        this.lockedBy = lockedBy;
     }
 
     public Room getNorth() {
