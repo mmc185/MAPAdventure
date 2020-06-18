@@ -10,7 +10,6 @@ import java.util.Objects;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.CommandType;
-import uni.mapadventureproject.type.Inventory;
 import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.Room;
 
@@ -38,7 +37,7 @@ public class MSGame extends GameManager {
 
                 if (Objects.isNull(r = this.move(command))) {
                     output = "Non puoi andare lì!";
-                } else if (r.isVisible()) { //locked by controllo
+                } else if (r.getLockedBy().equals("")) {
 
                     this.getGame().setCurrentRoom(r);
                     output = this.getGame().getCurrentRoom().getDesc();
@@ -56,9 +55,9 @@ public class MSGame extends GameManager {
                 if (commandMap.size() == 2) {
 
                     if (commandMap.containsKey(WordType.I_OBJ)) {
-                        i = searchItem(commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                        i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
                     } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                        i = searchItem(commandMap.get(WordType.R_OBJ), this.getGame().getCurrentRoom().getItemList());
+                        i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
                     }
 
                     output = i.getDesc();
@@ -75,7 +74,7 @@ public class MSGame extends GameManager {
 
                 if (commandMap.containsKey(WordType.R_OBJ)) {
 
-                    i = searchItem(commandMap.get(WordType.R_OBJ), this.getGame().getCurrentRoom().getItemList());
+                    i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
 
                     if (!Objects.isNull(i) && i.isPickupable()) {
 
@@ -95,7 +94,7 @@ public class MSGame extends GameManager {
 
                 if (commandMap.size() == 2 && commandMap.containsKey(WordType.I_OBJ)) {
 
-                    i = searchItem(commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                    i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
                     this.unlockRoom(i.getName());
 
                 }
@@ -103,9 +102,9 @@ public class MSGame extends GameManager {
             case PUSH:
 
                 if (commandMap.containsKey(WordType.I_OBJ)) {
-                    i = searchItem(commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                    i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
                 } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                    i = searchItem(commandMap.get(WordType.R_OBJ), this.getGame().getCurrentRoom().getItemList());
+                    i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
                 }
 
                 if (i.isPushable()) {
@@ -127,24 +126,10 @@ public class MSGame extends GameManager {
 
         //trigger room??
         
-        return "";
+        return output;
     }
 
-    public CommandType getCommandType(String cName) {
-
-        for (Command c : this.getGame().getCommands()) {
-
-            if (c.getName().equals(cName) || c.getAlias().contains(cName)) {
-
-                return c.getcType();
-
-            }
-
-        }
-
-        return null;
-
-    }
+    
 
     public Room move(CommandType c) {
 
@@ -165,25 +150,31 @@ public class MSGame extends GameManager {
         return null;
     }
 
-    // Da trasferire in Inventory?
-    public Item searchItem(String iName, Inventory inv) {
-        for (Item i : inv.getInventoryList()) {
-            if (i.getName().equals(iName) || i.getAlias().contains(iName)) {
-
-                return i;
-
-            }
-        }
-
-        return null;
-    }
-
     public boolean unlockRoom(String iName) {
-        /* if ( this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
+        
+        boolean flag = false;
+        //try / catch?
+        if ( this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
             this.getGame().getCurrentRoom().getSouth().setLockedBy("");
+            flag = true;
+        } else if ( this.getGame().getCurrentRoom().getNorth().getLockedBy().equals(iName)) {
+            this.getGame().getCurrentRoom().getNorth().setLockedBy("");
+            flag = true;
+        } else if (this.getGame().getCurrentRoom().getEast().getLockedBy().equals(iName)) {
+            this.getGame().getCurrentRoom().getEast().setLockedBy("");
+            flag = true;
+        } else if (this.getGame().getCurrentRoom().getWest().getLockedBy().equals(iName)) {
+            this.getGame().getCurrentRoom().getWest().setLockedBy("");
+            flag = true;
+        } else if (this.getGame().getCurrentRoom().getUp().getLockedBy().equals(iName)) {
+            this.getGame().getCurrentRoom().getUp().setLockedBy("");
+            flag = true;
+        } else if (this.getGame().getCurrentRoom().getDown().getLockedBy().equals(iName)) {
+            this.getGame().getCurrentRoom().getDown().setLockedBy("");
+            flag = true;
         }
-         */
-        return true;
+         
+        return flag;
     }
 
 }

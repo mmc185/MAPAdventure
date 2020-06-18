@@ -42,4 +42,16 @@ public class Inventory implements Serializable {
         return invList;
     }
     
+    public Item searchItem(String iName) {
+        for (Item i : this.getInventoryList()) {
+            if (i.getName().equals(iName) || i.getAlias().contains(iName)) {
+
+                return i;
+
+            }
+        }
+
+        return null;
+    }
+    
 }
