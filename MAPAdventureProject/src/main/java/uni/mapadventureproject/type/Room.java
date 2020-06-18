@@ -10,7 +10,6 @@ public class Room implements Serializable {
     private String name;
     private String desc;
     private String look;
-    private boolean locked = false;
     private Room north = null;
     private Room south = null;
     private Room west = null;
@@ -49,14 +48,6 @@ public class Room implements Serializable {
 
     public void setLook(String look) {
         this.look = look;
-    }
-
-    public boolean isLocked() {
-        return locked;
-    }
-
-    public void setLocked(boolean locked) {
-        this.locked = locked;
     }
 
     public String getLockedBy() {
