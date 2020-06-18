@@ -1,6 +1,10 @@
 package uni.mapadventureproject;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import uni.mapadventureproject.parser.Parser;
+import uni.mapadventureproject.parser.InvalidStringException;
 
 public class GameInteraction {
 
@@ -12,17 +16,17 @@ public class GameInteraction {
         p = new Parser();
     }
 
-    public void inputManager() {
-        /* //Parser p = new Parser();
-         * Map<> commandMap = new HashMap<>();
-         * 
-         * Scanner input = new Scanner(System.in);
-         * 
-         * while ( input.hasNextLine() ) {
-         *  String command = input.nextLine();
-         *  commandMap = p.parse(command, g.getCroom, g.getInv, g.getComm);
-         * }
-         */
+    public void inputManager() throws InvalidStringException {
+
+        Map commandMap = new HashMap<>();
+
+        Scanner input = new Scanner(System.in);
+
+        while (input.hasNextLine()) {
+            String command = input.nextLine();
+            commandMap = p.parse(command, g.getGame().getCurrentRoom(), g.getGame().getInventory(), g.getGame().getCommands());
+        }
+
     }
 
 }

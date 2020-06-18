@@ -253,7 +253,7 @@ public class GameGUI extends javax.swing.JFrame {
         jpButtonsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
 
         getContentPane().add(jpButtons);
-        jpButtons.setBounds(680, 495, 242, 118);
+        jpButtons.setBounds(680, 495, 250, 128);
 
         jlCommand.setBackground(new java.awt.Color(0, 102, 102));
         jlCommand.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -272,7 +272,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbSend);
-        jbSend.setBounds(569, 563, 77, 38);
+        jbSend.setBounds(569, 563, 79, 31);
 
         jspRead.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jspRead.setToolTipText("");
@@ -307,7 +307,6 @@ public class GameGUI extends javax.swing.JFrame {
         jspWrite.setPreferredSize(new java.awt.Dimension(500, 40));
         jspWrite.setViewportView(jtTypingField);
 
-        jtTypingField.setBackground(new java.awt.Color(255, 255, 255));
         jtTypingField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jtTypingField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jtTypingField.setMaximumSize(new java.awt.Dimension(500, 40));

@@ -5,15 +5,15 @@ package uni.mapadventureproject.parser;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+ package uni.mapadventureproject.parser;
 
 /**
  *
- * @author marta
+ * @author Admin
  */
 public class InvalidStringException extends Exception {
-    
+
     public InvalidStringException() {
         super("Stringa non valida.");
     }
-    
 }
