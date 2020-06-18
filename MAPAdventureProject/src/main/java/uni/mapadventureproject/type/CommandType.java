@@ -11,5 +11,5 @@ package uni.mapadventureproject.type;
  */
 public enum CommandType {
     MOVE_N, MOVE_S, MOVE_E, MOVE_W, MOVE_U, MOVE_D, INV, LOOK, PICK_UP, OPEN, 
-    PUSH, RUN, EXIT
+    PUSH, RUN, EXIT, WAKE_UP
 }

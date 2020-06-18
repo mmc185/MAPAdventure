@@ -107,12 +107,13 @@ public class FileSaver {
         down.setAlias(new String[]{"vai giu'", "vai sotto"});
         g.getCommands().add(down);
         Command escape = new Command("scappa", CommandType.RUN);
-        escape.setAlias(new String[]{"fuggi", "vai via"});
+        escape.setAlias(new String[]{"fuggi", "vai via", "muori", "crepa"});
         g.getCommands().add(escape);
         Command end = new Command("esci", CommandType.EXIT);
-        end.setAlias(new String[]{"svegliati", "sveglia"});
         g.getCommands().add(end);
-        
+        Command wake = new Command("sveglia", CommandType.WAKE_UP);
+        wake.setAlias(new String[]{"svegliati"});
+         g.getCommands().add(wake);
         
         //Comando buttati?
 
