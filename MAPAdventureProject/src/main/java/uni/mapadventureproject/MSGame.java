@@ -16,8 +16,8 @@ import uni.mapadventureproject.type.Room;
 
 public class MSGame extends GameManager {
 
-    public MSGame() {
-        super();
+    public MSGame(Game g) {
+        super(g);
     }
 
     @Override
@@ -35,44 +35,98 @@ public class MSGame extends GameManager {
             case MOVE_W:
             case MOVE_U:
             case MOVE_D:
-                
+
                 if (Objects.isNull(r = this.move(command))) {
                     output = "Non puoi andare lì!";
-                } else if (r.isVisible()) {
-                    
+                } else if (r.isVisible()) { //locked by controllo
+
                     this.getGame().setCurrentRoom(r);
                     output = this.getGame().getCurrentRoom().getDesc();
-                    
+
                 } else {
                     output = "Questa stanza è chiusa!";
                 }
                 break;
             case INV:
-                
+
                 output = "Oggetti presenti nell'inventario: " + this.getGame().getInventory().toString();
                 break;
             case LOOK:
-                
+
                 if (commandMap.size() == 2) {
-                    
+
                     if (commandMap.containsKey(WordType.I_OBJ)) {
-                        i = searchItem( commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                        i = searchItem(commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
                     } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                        i = searchItem( commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                        i = searchItem(commandMap.get(WordType.R_OBJ), this.getGame().getCurrentRoom().getItemList());
                     }
-                    
+
                     output = i.getDesc();
-                    
+
                 } else if (commandMap.size() == 1) {
-                    
+
                     output = this.getGame().getCurrentRoom().getLook();
-                    
+
                 } else if (commandMap.size() > 2) {
-                    output = "Inserire un oggetto alla volta."; ///???? da rimuovere? throw eccezione?
+                    output = "Uno alla volta, ho una certa età."; ///???? da rimuovere? throw eccezione?
                 }
+                break;
+            case PICK_UP:
+
+                if (commandMap.containsKey(WordType.R_OBJ)) {
+
+                    i = searchItem(commandMap.get(WordType.R_OBJ), this.getGame().getCurrentRoom().getItemList());
+
+                    if (!Objects.isNull(i) && i.isPickupable()) {
+
+                        this.getGame().getInventory().add(i);
+                        this.getGame().getCurrentRoom().getItemList().remove(i);
+
+                        output = "L'oggetto è stato aggiunto al tuo inventario.";
+
+                    } else {
+                        output = "Non puoi prendere questo oggetto.";
+                    }
+                } else {
+                    //output = "Prendere cosa?";
+                }
+                break;
+            case OPEN:
+
+                if (commandMap.size() == 2 && commandMap.containsKey(WordType.I_OBJ)) {
+
+                    i = searchItem(commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                    this.unlockRoom(i.getName());
+
+                }
+                break;
+            case PUSH:
+
+                if (commandMap.containsKey(WordType.I_OBJ)) {
+                    i = searchItem(commandMap.get(WordType.I_OBJ), this.getGame().getInventory());
+                } else if (commandMap.containsKey(WordType.R_OBJ)) {
+                    i = searchItem(commandMap.get(WordType.R_OBJ), this.getGame().getCurrentRoom().getItemList());
+                }
+
+                if (i.isPushable()) {
+                    i.setPush(true);
+                } //???
+
+                break;
+            case RUN:
+
+                output = "Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!";
+                break;
+            case EXIT:
+                //System.exit(0);
+                break;
+            case WAKE_UP:
+                //output = "bad ending?";
                 break;
         }
 
+        //trigger room??
+        
         return "";
     }
 
@@ -110,17 +164,26 @@ public class MSGame extends GameManager {
 
         return null;
     }
-    
-    public Item searchItem (String iName, Inventory inv) {
-        for ( Item i : inv.getInventoryList() ) {
+
+    // Da trasferire in Inventory?
+    public Item searchItem(String iName, Inventory inv) {
+        for (Item i : inv.getInventoryList()) {
             if (i.getName().equals(iName) || i.getAlias().contains(iName)) {
 
                 return i;
 
             }
         }
-        
+
         return null;
+    }
+
+    public boolean unlockRoom(String iName) {
+        /* if ( this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
+            this.getGame().getCurrentRoom().getSouth().setLockedBy("");
+        }
+         */
+        return true;
     }
 
 }
