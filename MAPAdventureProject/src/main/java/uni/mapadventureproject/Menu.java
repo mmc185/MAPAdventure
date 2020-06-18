@@ -1,6 +1,7 @@
 package uni.mapadventureproject;
 
 import java.io.IOException;
+import uni.mapadventureproject.parser.InvalidStringException;
 
 public class Menu {
 
@@ -12,12 +13,12 @@ public class Menu {
         this.gInteraction = new GameInteraction(g);
     }
 
-    public void newGame() throws IOException {
+    public void newGame() throws IOException, InvalidStringException {
         g.getGame().init("/NewGame"); // Da aggiungere e/o cambiare
         gInteraction.inputManager();
     }
 
-    public void loadGame() throws IOException {
+    public void loadGame() throws IOException, InvalidStringException {
         g.getGame().init("/SavedGame"); // Da aggiungere e/o cambiare
         gInteraction.inputManager();
     }

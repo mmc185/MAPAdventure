@@ -54,10 +54,10 @@ public class MenuGUI extends javax.swing.JFrame {
         jpMenu.setLayout(null);
 
         jlTitolo.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
-        jlTitolo.setForeground(new java.awt.Color(255, 255, 255));
-        jlTitolo.setText("MAP ADVENTURE");
+        jlTitolo.setForeground(new java.awt.Color(204, 255, 255));
+        jlTitolo.setText("Metastation:the last exam");
         jpMenu.add(jlTitolo);
-        jlTitolo.setBounds(200, 20, 340, 40);
+        jlTitolo.setBounds(160, 20, 390, 40);
 
         jbNuovo.setBackground(new java.awt.Color(0, 102, 102));
         jbNuovo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

@@ -8,6 +8,7 @@ import uni.mapadventureproject.type.Inventory;
 import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.Room;
 
+
 public class Parser {
 
     public Map<WordType, String> parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) throws InvalidStringException {
