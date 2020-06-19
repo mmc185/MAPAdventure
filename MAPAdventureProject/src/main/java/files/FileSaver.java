@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashSet;
-import java.util.Set;
 import uni.mapadventureproject.Game;
 import uni.mapadventureproject.type.*;
 
@@ -90,7 +89,7 @@ public class FileSaver {
         g.getCommands().add(inv);
         Command look = new Command("guarda", CommandType.LOOK);
         look.setAlias(new String[]{"osserva", "vedi", "trova", "cerca", "descrivi", "controlla"});
-        g.getCommands().add(inv);
+        g.getCommands().add(look);
         Command pickup = new Command("prendi", CommandType.PICK_UP);
         pickup.setAlias(new String[]{"raccogli"});
         g.getCommands().add(pickup);
@@ -142,13 +141,15 @@ public class FileSaver {
         }
     }
 
-    public void readFile(String path/*, Game g*/) throws IOException {
+    public void readFile(String path, Game g) throws IOException {
         try (FileInputStream fIn = new FileInputStream(path)) {
             ObjectInputStream objIn = new ObjectInputStream(fIn);
             try {
                 while (fIn.available() != 0) {
 
-                    g = new Game((HashSet<Command>) objIn.readObject(), (Inventory) objIn.readObject(), (Room) objIn.readObject());
+                    g.setCommands((HashSet<Command>) objIn.readObject());
+                    g.setInventory((Inventory) objIn.readObject());
+                    g.setCurrentRoom((Room) objIn.readObject());
 
                 }
             } catch (ClassNotFoundException exc) {
@@ -165,11 +166,11 @@ public class FileSaver {
 
         FileSaver fs = new FileSaver();
         //fs.g = new Game(s, null, null);
-        //fs.init();
+        fs.init();
 
         try {
-            //fs.saveFile();
-            fs.readFile("NewGame//Intro.dat");
+            fs.saveFile();
+            /*fs.readFile("NewGame//Intro.dat");
             for (Command c : fs.g.getCommands()) {
                 System.out.println(c.getName());
             }
@@ -183,7 +184,7 @@ public class FileSaver {
                     "\nLook: " + fs.g.getCurrentRoom().getLook());
              
         } catch (IOException exc) {
-            System.out.println("1" + exc.getMessage());
+            System.out.println("1" + exc.getMessage());*/
         } catch (Exception e) {
             System.out.println("2" + e.getMessage());
         }
