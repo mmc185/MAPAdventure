@@ -8,7 +8,6 @@ package uni.mapadventureproject;
 import java.util.Map;
 import java.util.Objects;
 import uni.mapadventureproject.parser.WordType;
-import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.CommandType;
 import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.Room;

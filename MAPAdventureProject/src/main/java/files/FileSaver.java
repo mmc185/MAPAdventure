@@ -73,19 +73,15 @@ public class FileSaver {
         
         //Comandi
         Command north = new Command("nord", CommandType.MOVE_N);
-        north.setAlias(new String[]{"n"}); //tutto minuscolo
         g.getCommands().add(north);
         Command south = new Command("sud", CommandType.MOVE_S);
-        south.setAlias(new String[]{"s"});
         g.getCommands().add(south);
         Command west = new Command("ovest", CommandType.MOVE_W);
-        west.setAlias(new String[]{"o"});
         g.getCommands().add(west);
         Command east = new Command("est", CommandType.MOVE_E);
-        east.setAlias(new String[]{"e"});
         g.getCommands().add(east);
         Command inv = new Command("inventario", CommandType.INV);
-        inv.setAlias(new String[]{"i", "zaino", "borsa"});
+        inv.setAlias(new String[]{"inv", "zaino", "borsa"});
         g.getCommands().add(inv);
         Command look = new Command("guarda", CommandType.LOOK);
         look.setAlias(new String[]{"osserva", "vedi", "trova", "cerca", "descrivi", "controlla"});
