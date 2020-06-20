@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.JOptionPane;
+import uni.mapadventureproject.GameInteraction;
 
 /**
  *
@@ -20,15 +21,20 @@ import javax.swing.JOptionPane;
  */
 public class GameGUI extends javax.swing.JFrame {
 
+    GameInteraction gInteraction;
     Font font;
     Font font1;
 
     /**
      * Creates new form GameGUI
      */
-    public GameGUI() {
+    public GameGUI(GameInteraction gInteraction) {
+        
         initComponents();
         init();
+        this.gInteraction = gInteraction;
+        initGame();
+        
     }
 
     private void init() {
@@ -56,6 +62,10 @@ public class GameGUI extends javax.swing.JFrame {
         } catch (FontFormatException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public void initGame() {
+        jtaReadingArea.append(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
     }
 
     /**
@@ -378,33 +388,46 @@ public class GameGUI extends javax.swing.JFrame {
 
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
         if (!jtTypingField.getText().isBlank()) {
-            jtaReadingArea.append(jtTypingField.getText() + "\n");
+            
+            String s = jtTypingField.getText();
+            jtaReadingArea.append("\n" + s + "\n");
             jtTypingField.setText("");
+            
+            //jtaReadingArea.setForeground(Color.red);
+            jtaReadingArea.append("\n" + gInteraction.inputManager(s) + "\n");
+            //jtaReadingArea.setForeground(Color.white);
+            
         }
     }//GEN-LAST:event_jbSendActionPerformed
 
     private void jbNorthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNorthActionPerformed
         // L'utente si muove verso nord
+        jtaReadingArea.append("\n" + gInteraction.inputManager("nord") + "\n");
     }//GEN-LAST:event_jbNorthActionPerformed
 
     private void jbSouthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSouthActionPerformed
         // L'utente si muove verso sud
+        jtaReadingArea.append("\n" + gInteraction.inputManager("sud") + "\n");
     }//GEN-LAST:event_jbSouthActionPerformed
 
     private void jbWestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWestActionPerformed
         // L'utente si muove verso ovest
+        jtaReadingArea.append("\n" + gInteraction.inputManager("ovest") + "\n");
     }//GEN-LAST:event_jbWestActionPerformed
 
     private void jbEastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEastActionPerformed
         // L'utente si muove verso est
+        jtaReadingArea.append("\n" + gInteraction.inputManager("est") + "\n");
     }//GEN-LAST:event_jbEastActionPerformed
 
     private void jbUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpActionPerformed
         // L'utente si muove verso su
+        jtaReadingArea.append("\n" + gInteraction.inputManager("sali") + "\n");
     }//GEN-LAST:event_jbUpActionPerformed
 
     private void jbDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDownActionPerformed
         // L'utente si muove verso giù
+        jtaReadingArea.append("\n" + gInteraction.inputManager("scendi") + "\n");
     }//GEN-LAST:event_jbDownActionPerformed
 
     private void jtTypingFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTypingFieldKeyPressed
@@ -454,7 +477,7 @@ public class GameGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GameGUI().setVisible(true);
+                //new GameGUI().setVisible(true);
             }
         });
     }

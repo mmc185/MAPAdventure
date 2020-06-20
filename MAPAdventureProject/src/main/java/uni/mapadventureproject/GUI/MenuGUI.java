@@ -5,7 +5,13 @@
  */
 package uni.mapadventureproject.GUI;
 
+import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import uni.mapadventureproject.Game;
+import uni.mapadventureproject.GameManager;
+import uni.mapadventureproject.MSGame;
+import uni.mapadventureproject.Menu;
 
 
 
@@ -15,6 +21,8 @@ import javax.swing.JOptionPane;
  */
 public class MenuGUI extends javax.swing.JFrame {
 
+    Menu gMenu;
+    
     /**
      * Creates new form MenuGUI
      */
@@ -157,11 +165,10 @@ public class MenuGUI extends javax.swing.JFrame {
 
 
     private void jmiNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuovoActionPerformed
-        //Game g=new Game();
-        //Menu menu=new Menu(game g);
-        // menu.newGame();
-        GameGUI g = new GameGUI();
-        g.setVisible(true);
+        Game game = new Game();
+
+        //GameGUI g = new GameGUI();
+        //g.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jmiNuovoActionPerformed
 
@@ -175,20 +182,35 @@ public class MenuGUI extends javax.swing.JFrame {
 
     private void jbNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuovoActionPerformed
 
-        //Game g=new Game();
-        //Menu menu=new Menu(game g);
-        // menu.newGame();
-        GameGUI g = new GameGUI();
-        g.setVisible(true);
-        this.dispose();
+        Game game = new Game();
+        try {
+
+            GameManager gManager = new MSGame(game);
+
+            gMenu = new Menu(gManager);
+            gMenu.newGame();
+            
+            //Per iniziare il gioco si passa al GameGUI
+            GameGUI g = new GameGUI(gMenu.getgInteraction());
+            g.setVisible(true);
+            this.dispose();
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), "Errore nell'apertura del file", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            /*???*/JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jbNuovoActionPerformed
 
     private void jbCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCaricaActionPerformed
+        JFileChooser fChooser = new JFileChooser();
+        fChooser.setMultiSelectionEnabled(false);
+        fChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         //Game g=new Game();
         //Menu menu=new Menu(game g);
         // menu.loadGame();
-        GameGUI g = new GameGUI();
-        g.setVisible(true);
+        //GameGUI g = new GameGUI();
+        //g.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jbCaricaActionPerformed
 
@@ -196,8 +218,8 @@ public class MenuGUI extends javax.swing.JFrame {
         //Game g=new Game();
         //Menu menu=new Menu(game g);
         // menu.loadGame();
-        GameGUI g = new GameGUI();
-        g.setVisible(true);
+        //GameGUI g = new GameGUI();
+        //g.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jmiCaricaActionPerformed
 
