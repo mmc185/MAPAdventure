@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashSet;
-import java.util.Set;
 import uni.mapadventureproject.Game;
 import uni.mapadventureproject.type.*;
 
@@ -74,21 +73,19 @@ public class FileSaver {
         
         //Comandi
         Command north = new Command("nord", CommandType.MOVE_N);
-        north.setAlias(new String[]{"n"}); //tutto minuscolo
         g.getCommands().add(north);
         Command south = new Command("sud", CommandType.MOVE_S);
-        south.setAlias(new String[]{"s"});
         g.getCommands().add(south);
         Command west = new Command("ovest", CommandType.MOVE_W);
-        west.setAlias(new String[]{"o"});
         g.getCommands().add(west);
         Command east = new Command("est", CommandType.MOVE_E);
-        east.setAlias(new String[]{"e"});
         g.getCommands().add(east);
         Command inv = new Command("inventario", CommandType.INV);
-        inv.setAlias(new String[]{"i", "zaino", "borsa"});
+        inv.setAlias(new String[]{"inv", "zaino", "borsa"});
+        g.getCommands().add(inv);
         Command look = new Command("guarda", CommandType.LOOK);
         look.setAlias(new String[]{"osserva", "vedi", "trova", "cerca", "descrivi", "controlla"});
+        g.getCommands().add(look);
         Command pickup = new Command("prendi", CommandType.PICK_UP);
         pickup.setAlias(new String[]{"raccogli"});
         g.getCommands().add(pickup);
@@ -105,12 +102,13 @@ public class FileSaver {
         down.setAlias(new String[]{"vai giu'", "vai sotto"});
         g.getCommands().add(down);
         Command escape = new Command("scappa", CommandType.RUN);
-        escape.setAlias(new String[]{"fuggi", "vai via"});
+        escape.setAlias(new String[]{"fuggi", "vai via", "muori", "crepa"});
         g.getCommands().add(escape);
         Command end = new Command("esci", CommandType.EXIT);
-        end.setAlias(new String[]{"svegliati", "sveglia"});
         g.getCommands().add(end);
-        
+        Command wake = new Command("sveglia", CommandType.WAKE_UP);
+        wake.setAlias(new String[]{"svegliati"});
+         g.getCommands().add(wake);
         
         //Comando buttati?
 
@@ -139,13 +137,15 @@ public class FileSaver {
         }
     }
 
-    public void readFile(String path/*, Game g*/) throws IOException {
+    public void readFile(String path, Game g) throws IOException {
         try (FileInputStream fIn = new FileInputStream(path)) {
             ObjectInputStream objIn = new ObjectInputStream(fIn);
             try {
                 while (fIn.available() != 0) {
 
-                    g = new Game((HashSet<Command>) objIn.readObject(), (Inventory) objIn.readObject(), (Room) objIn.readObject());
+                    g.setCommands((HashSet<Command>) objIn.readObject());
+                    g.setInventory((Inventory) objIn.readObject());
+                    g.setCurrentRoom((Room) objIn.readObject());
 
                 }
             } catch (ClassNotFoundException exc) {
@@ -162,11 +162,11 @@ public class FileSaver {
 
         FileSaver fs = new FileSaver();
         //fs.g = new Game(s, null, null);
-        //fs.init();
+        fs.init();
 
         try {
-            //fs.saveFile();
-            fs.readFile("NewGame//Intro.dat");
+            fs.saveFile();
+            /*fs.readFile("NewGame//Intro.dat");
             for (Command c : fs.g.getCommands()) {
                 System.out.println(c.getName());
             }
@@ -180,7 +180,7 @@ public class FileSaver {
                     "\nLook: " + fs.g.getCurrentRoom().getLook());
              
         } catch (IOException exc) {
-            System.out.println("1" + exc.getMessage());
+            System.out.println("1" + exc.getMessage());*/
         } catch (Exception e) {
             System.out.println("2" + e.getMessage());
         }

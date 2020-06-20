@@ -9,7 +9,7 @@ import uni.mapadventureproject.type.*;
 public class Game {
 
     //private final List<Room> map; //Dovrebbe essere inutile
-    private final Set<Command> commands;
+    private Set<Command> commands;
     private Inventory inventory; //inventario del protagonista
     private Room currentRoom;
     
@@ -44,10 +44,14 @@ public class Game {
         this.currentRoom = currentRoom;
     }
     
+    public void setCommands(Set<Command> commands) {
+        this.commands = commands;
+    }
+    
     public void init(String filePath) throws IOException {
         
         FileSaver fs = new FileSaver();
-        fs.readFile(filePath /*, this*/);
+        fs.readFile(filePath, this);
         
     }
     

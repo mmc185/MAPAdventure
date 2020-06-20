@@ -3,15 +3,14 @@ package uni.mapadventureproject;
 import java.util.Map;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.Command;
-import uni.mapadventureproject.type.Inventory;
-import uni.mapadventureproject.type.Room;
+import uni.mapadventureproject.type.CommandType;
 
 public abstract class GameManager {
 
     Game game;
 
-    GameManager() {
-        this.game = new Game();
+    GameManager( Game g ) {
+        this.game = g;
     }
 
     public Game getGame() {
@@ -22,5 +21,21 @@ public abstract class GameManager {
         this.game = game;
     }
 
-    public abstract void executeCommand(Room currentRoom, Inventory inv, Command commands, Map<WordType, String> commandMap);
+    protected abstract String executeCommand(Map<WordType, String> commandMap);
+    
+    public CommandType getCommandType(String cName) {
+
+        for (Command c : this.getGame().getCommands()) {
+
+            if (c.getName().equals(cName) || c.getAlias().contains(cName)) {
+
+                return c.getcType();
+
+            }
+
+        }
+
+        return null;
+
+    }
 }

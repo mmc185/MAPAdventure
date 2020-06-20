@@ -5,11 +5,12 @@ import java.util.Map;
 import java.util.Scanner;
 import uni.mapadventureproject.parser.Parser;
 import uni.mapadventureproject.parser.InvalidStringException;
+import uni.mapadventureproject.type.CommandType;
 
 public class GameInteraction {
 
-    GameManager g;
-    Parser p;
+    private GameManager g;
+    private Parser p;
 
     GameInteraction(GameManager g) {
         this.g = g;
@@ -21,10 +22,19 @@ public class GameInteraction {
         Map commandMap = new HashMap<>();
 
         Scanner input = new Scanner(System.in);
+        String command = "";
 
-        while (input.hasNextLine()) {
-            String command = input.nextLine();
+        System.out.println(g.getGame().getCurrentRoom().getDesc());
+        
+        while (!commandMap.containsKey(CommandType.EXIT)) {
+            command = input.nextLine();
+            try {
             commandMap = p.parse(command, g.getGame().getCurrentRoom(), g.getGame().getInventory(), g.getGame().getCommands());
+            System.out.println(g.executeCommand(commandMap));
+            } catch (InvalidStringException e) {
+                System.out.println("Eh??");
+            }
+            
         }
 
     }
