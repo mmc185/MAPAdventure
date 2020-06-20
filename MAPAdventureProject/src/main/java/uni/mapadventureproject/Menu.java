@@ -14,13 +14,11 @@ public class Menu {
     }
 
     public void newGame() throws IOException, InvalidStringException {
-        g.getGame().init("/NewGame"); // Da aggiungere e/o cambiare
-        gInteraction.inputManager();
+        g.getGame().init("NewGame//Intro.dat"); // Da aggiungere e/o cambiare
     }
 
     public void loadGame() throws IOException, InvalidStringException {
         g.getGame().init("/SavedGame"); // Da aggiungere e/o cambiare
-        gInteraction.inputManager();
     }
 
     public void saveGame() throws IOException {
@@ -29,6 +27,14 @@ public class Menu {
 
     public void quitGame() {
         System.exit(0);
+    }
+
+    public GameInteraction getgInteraction() {
+        return gInteraction;
+    }
+
+    public void setgInteraction(GameInteraction gInteraction) {
+        this.gInteraction = gInteraction;
     }
 
 }

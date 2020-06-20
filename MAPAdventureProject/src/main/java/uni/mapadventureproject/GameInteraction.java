@@ -2,10 +2,8 @@ package uni.mapadventureproject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import uni.mapadventureproject.parser.Parser;
 import uni.mapadventureproject.parser.InvalidStringException;
-import uni.mapadventureproject.type.CommandType;
 
 public class GameInteraction {
 
@@ -17,26 +15,28 @@ public class GameInteraction {
         p = new Parser();
     }
 
-    public void inputManager() throws InvalidStringException {
+    public GameManager getGameManager() {
+        return g;
+    }
+
+    public String inputManager(String sInput) {
 
         Map commandMap = new HashMap<>();
-
-        Scanner input = new Scanner(System.in);
+        String sOutput = "";
+        /*Scanner input = new Scanner(System.in);
         String command = "";
 
         System.out.println(g.getGame().getCurrentRoom().getDesc());
         
-        while (!commandMap.containsKey(CommandType.EXIT)) {
-            command = input.nextLine();
-            try {
-            commandMap = p.parse(command, g.getGame().getCurrentRoom(), g.getGame().getInventory(), g.getGame().getCommands());
-            System.out.println(g.executeCommand(commandMap));
-            } catch (InvalidStringException e) {
-                System.out.println("Eh??");
-            }
-            
+        command = input.nextLine();*/
+        try {
+            commandMap = p.parse(sInput, g.getGame().getCurrentRoom(), g.getGame().getInventory(), g.getGame().getCommands());
+            sOutput = g.executeCommand(commandMap);
+        } catch (InvalidStringException e) {
+            sOutput = "Idea interessante... ma no.";
         }
-
+        
+        return sOutput;
     }
 
 }
