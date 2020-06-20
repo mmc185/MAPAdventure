@@ -390,7 +390,7 @@ public class GameGUI extends javax.swing.JFrame {
         if (!jtTypingField.getText().isBlank()) {
             
             String s = jtTypingField.getText();
-            jtaReadingArea.append("\n" + s + "\n");
+            jtaReadingArea.append("\n> " + s + "\n");
             jtTypingField.setText("");
             
             //jtaReadingArea.setForeground(Color.red);
