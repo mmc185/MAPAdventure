@@ -5,11 +5,15 @@
  */
 package uni.mapadventureproject.GUI;
 
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import javax.swing.ScrollPaneConstants;
 
 /**
  *
@@ -25,34 +29,53 @@ public class InventoryGUI extends javax.swing.JFrame {
         init();
     }
 
-    public void init(){
+    public void init() {
         //inventory.add(oggetto);
         //jLabel2.setIcon(oggetto.path);
         int i;
-        
-        jDesktopPane1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        for(i=0;i<7;i++){
-         //String label="jl"+i;
-         if(i>35){
-             JOptionPane.showMessageDialog(rootPane,"inventario pieno");
-             break;
-         }else{
-        
-        JLabel label = new javax.swing.JLabel();
-        label.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        //label.setSize(new Dimension(75,75));
-        label.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\casa1.jpg"));
-        label.setToolTipText("casa per vacanze");
-        jDesktopPane1.add(label);
-         }
-       
-        }
-    }
-    
- 
-	
 
-    
+        this.setSize(712, 737);
+
+        jScrollPane1.setSize(660, 660);
+        jScrollPane1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        jScrollPane1.setAlignmentX(50);
+        //jScrollPane1.setAlignmentY(50);
+        jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        //jScrollPane1.setVisible(false);
+
+        for (i = 0; i < 3; i++) {
+            //String label="jl"+i;
+            //if(i>35){
+            //JOptionPane.showMessageDialog(rootPane,"inventario pieno");
+            //break;
+            //}else{
+
+            JButton jbImage = new JButton();
+            jbImage.setBackground(Color.black);
+
+            ImageIcon img = new ImageIcon("C://Users//marta//MAPAdventure//MAPAdventureProject//img//placeHolder.png");
+            Image img2 = img.getImage();
+            jbImage.setIcon(new ImageIcon(img2.getScaledInstance(75, 75, 0)));
+            jbImage.setSize(75, 75);
+            jbImage.setToolTipText("Treno");
+
+            jbImage.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jbImageActionPerformed(evt, "mi piacciono i treni", "treno");
+                }
+            });
+        
+            jInventoryPanel.add(jbImage);
+        }
+
+        //}
+    }
+
+    private void jbImageActionPerformed(java.awt.event.ActionEvent evt, String ItemDesc, String ItemName) {
+        JOptionPane.showMessageDialog(this, ItemDesc, ItemName, JOptionPane.PLAIN_MESSAGE);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,19 +85,50 @@ public class InventoryGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jInventoryPanel = new javax.swing.JPanel();
+        jBackgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inventario");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(450, 450));
+        setMaximumSize(new java.awt.Dimension(700, 700));
+        setMinimumSize(new java.awt.Dimension(700, 700));
+        setPreferredSize(new java.awt.Dimension(700, 700));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jDesktopPane1.setPreferredSize(new java.awt.Dimension(1, 100));
-        jDesktopPane1.setLayout(new java.awt.GridLayout(6, 6));
-        getContentPane().add(jDesktopPane1);
-        jDesktopPane1.setBounds(0, 0, 450, 450);
+        jPanel2.setMaximumSize(new java.awt.Dimension(700, 700));
+        jPanel2.setMinimumSize(new java.awt.Dimension(700, 700));
+        jPanel2.setPreferredSize(new java.awt.Dimension(700, 700));
+        jPanel2.setLayout(null);
+
+        jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(650, 650));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(650, 650));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(650, 650));
+
+        jInventoryPanel.setBackground(new java.awt.Color(0, 0, 0));
+        jInventoryPanel.setLayout(new java.awt.GridLayout(6, 6));
+        jScrollPane1.setViewportView(jInventoryPanel);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 20, 660, 660);
+
+        jBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBackgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\marta\\Downloads\\Telegram Desktop\\v3b.png")); // NOI18N
+        jBackgroundLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jBackgroundLabel.setMaximumSize(new java.awt.Dimension(700, 700));
+        jBackgroundLabel.setMinimumSize(new java.awt.Dimension(700, 700));
+        jBackgroundLabel.setPreferredSize(new java.awt.Dimension(700, 700));
+        jBackgroundLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jPanel2.add(jBackgroundLabel);
+        jBackgroundLabel.setBounds(0, 0, 700, 700);
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 700, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,6 +169,9 @@ public class InventoryGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jBackgroundLabel;
+    private javax.swing.JPanel jInventoryPanel;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
