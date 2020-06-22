@@ -15,9 +15,9 @@ public class FileSaver {
     Game g;
 
     public void init() {
-        
+
         g = new Game();
-        
+
         //Items dell'inventario
         Item taralli = new Item(50, "taralli", "Taralli in busta... Gli ottimi taralli del forno (che ti compra tua madre), ti viene l'acquolina in bocca solo a pensarci!");
         taralli.setAlias(new String[]{"tarallini"});
@@ -39,20 +39,20 @@ public class FileSaver {
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
                 + "\n\"Il treno regionale delle ore 9:00 diretto a Bari Centrale è in partenza dal binario 9 con un ritardo di 10 minuti!\""
                 + "\nSenti il fischio assordante del capotreno che ti sollecita a salire.");
-        
+
         Room wagon = new Room(1, "Vagone del treno", "Dopo esserti fatto strada tra l'assembramento di persone sui vagoni, trovi il tuo amico nonché compagno di progetto.\n"
                 + "Che fortuna, ti ha preso il posto! (stonks) Ti siedi.\n"
-                + "\"Beh, ti senti preparato per l'esame di oggi? Spero che il prof sia clemente...\" ti chiede il tuo amico."
-                + "\"Io ricordavo che il prof si chiamasse Pierpaolo\" rispondi. Il tuo amico ti defenestra. GAME OVER\n"
+                + "\"Beh, ti senti preparato per l'esame di oggi? Spero che il prof sia clemente...\" ti chiede il tuo amico.\n\n"
+                + "\"Io ricordavo che il prof si chiamasse Pierpaolo\" rispondi. \nIl tuo amico ti defenestra. GAME OVER\n\n"
                 + "Scherzo, riprendiamo.\n\n"
                 + "\"Hey, hai con te la pen-drive, vero?! Non ripetiamo l'incidente di laboratorio...\" ti chiede il tuo amico.\n"
                 + "Apri lo zaino e gliela mostri, non perderesti mai qualcosa di così importante... vero? ");
-        
+
         Room metaStation = new Room(2, "Metastazione", "Come sempre scendi dal treno stretto come una sardina in mezzo ad altri poveri pendolari.\n"
                 + "Noti che il treno si è fermato a un binario diverso dal solito, alzi lo sguardo e leggi \"Binario 0\".\n"
                 + "Strano, non ti ricordavi esistesse quel binario\n"
                 + "Aspetta, questa non sembra la stazione di Bari.\n"
-                + "Ti guardi intorno spaesato. \n"
+                + "Ti guardi intorno spaesato.\n"
                 + "Un strano uomo con delle orecchie a punta si avvicina al capotreno:\n"
                 + "\"Scusi, mi può dire la strada per il portale che conduce a PaleoliticCity?\"\n"
                 + "Guardi il tuo amico con gli occhi strabuzzati e lui scrolla le spalle \n"
@@ -62,7 +62,7 @@ public class FileSaver {
         Item poster = new Item(55, "poster", "L'Agenzia di viaggi Artskjid ti dà il benvenuto alla Metastazione Centrale! \n"
                 + "Luogo da cui puoi raggiungere ogni dimensione immaginabile. \nPer informazioni, chiedere al personale in divisa.\"");
         poster.setAlias(new String[]{"cartello", "cartellone", "manifesto", "affisso", "locandina"});
-        
+
         station.setUp(wagon);
         station.setLook("Ti trovi di fronte alle porte del treno. Dovresti muoverti prima che si chiudano!");
         wagon.setDown(metaStation);
@@ -70,7 +70,7 @@ public class FileSaver {
         metaStation.setLook("Sul muro della stazione è affisso un grande poster con grandi scritte colorate e vicino al cancello di uscita\n"
                 + "c'è una strana creatura simile a un polpo che suona i tamburi con i suoi diversi tentacoli.");
         metaStation.addItem(poster);
-        
+
         //Comandi
         Command north = new Command("nord", CommandType.MOVE_N);
         g.getCommands().add(north);
@@ -94,12 +94,12 @@ public class FileSaver {
         Command push = new Command("premi", CommandType.PUSH);
         push.setAlias(new String[]{"spingi", "attiva"});
         g.getCommands().add(push);
-        
+
         Command up = new Command("sali", CommandType.MOVE_U);
-        up.setAlias(new String[]{"vai su", "vai sopra"});
+        up.setAlias(new String[]{"vai su", "vai sopra", "su"});
         g.getCommands().add(up);
         Command down = new Command("scendi", CommandType.MOVE_D);
-        down.setAlias(new String[]{"vai giu'", "vai sotto"});
+        down.setAlias(new String[]{"vai giu'", "vai sotto", "giù"});
         g.getCommands().add(down);
         Command escape = new Command("scappa", CommandType.RUN);
         escape.setAlias(new String[]{"fuggi", "vai via", "muori", "crepa"});
@@ -108,54 +108,46 @@ public class FileSaver {
         g.getCommands().add(end);
         Command wake = new Command("sveglia", CommandType.WAKE_UP);
         wake.setAlias(new String[]{"svegliati"});
-         g.getCommands().add(wake);
-        
-        //Comando buttati?
+        g.getCommands().add(wake);
 
+        //Comando buttati?
         //TODO Serve anche un comando per uscire dal gioco?
-        
         g.setCurrentRoom(station);
 
     }
 
-    public void saveFile(/*Game g*/) throws FileNotFoundException, IOException {
+    public void saveFile(String path, Game g) throws FileNotFoundException, IOException {
 
-        try {
-            FileOutputStream fOut = new FileOutputStream("NewGame//Intro.dat");
-            ObjectOutputStream objOut = new ObjectOutputStream(fOut);
+        FileOutputStream fOut = new FileOutputStream(path + "/Save.dat");
+        ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 
-            objOut.writeObject(g.getCommands());
+        objOut.writeObject(g.getCommands());
 
-            objOut.writeObject(g.getInventory());
+        objOut.writeObject(g.getInventory());
 
-            objOut.writeObject(g.getCurrentRoom());
+        objOut.writeObject(g.getCurrentRoom());
 
-            objOut.close();
-            fOut.close();
-        } catch ( Exception exc ) {
-            System.out.println("Save" + exc.getMessage()+ exc.getCause() +exc.toString());
-        }
+        objOut.close();
+        fOut.close();
+
     }
 
-    public void readFile(String path, Game g) throws IOException {
-        try (FileInputStream fIn = new FileInputStream(path)) {
-            ObjectInputStream objIn = new ObjectInputStream(fIn);
-            try {
-                while (fIn.available() != 0) {
+    public void readFile(String path, Game g) throws IOException, ClassNotFoundException {
+        FileInputStream fIn = new FileInputStream(path);
 
-                    g.setCommands((HashSet<Command>) objIn.readObject());
-                    g.setInventory((Inventory) objIn.readObject());
-                    g.setCurrentRoom((Room) objIn.readObject());
+        ObjectInputStream objIn = new ObjectInputStream(fIn);
 
-                }
-            } catch (ClassNotFoundException exc) {
-                System.out.println(exc.getMessage());
-            }
-            objIn.close();
-            fIn.close();
-        } catch ( Exception exc ) {
-            System.out.println("Save" + exc.getMessage());
+        while (fIn.available() != 0) {
+
+            g.setCommands((HashSet<Command>) objIn.readObject());
+            g.setInventory((Inventory) objIn.readObject());
+            g.setCurrentRoom((Room) objIn.readObject());
+
         }
+
+        objIn.close();
+        fIn.close();
+
     }
 
     public static void main(String[] args) {
@@ -165,7 +157,7 @@ public class FileSaver {
         fs.init();
 
         try {
-            fs.saveFile();
+            //fs.saveFile();
             /*fs.readFile("NewGame//Intro.dat");
             for (Command c : fs.g.getCommands()) {
                 System.out.println(c.getName());

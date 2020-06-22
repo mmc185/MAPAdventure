@@ -13,22 +13,28 @@ public class Menu {
         this.gInteraction = new GameInteraction(g);
     }
 
-    public void newGame() throws IOException, InvalidStringException {
-        g.getGame().init("/NewGame"); // Da aggiungere e/o cambiare
-        gInteraction.inputManager();
+    public void newGame() throws IOException, InvalidStringException, ClassNotFoundException {
+        g.getGame().init("NewGame//Intro.dat"); // Da aggiungere e/o cambiare
     }
 
-    public void loadGame() throws IOException, InvalidStringException {
-        g.getGame().init("/SavedGame"); // Da aggiungere e/o cambiare
-        gInteraction.inputManager();
+    public void loadGame(String path) throws IOException, InvalidStringException, ClassNotFoundException {
+        g.getGame().init(path); // Da aggiungere e/o cambiare
     }
 
-    public void saveGame() throws IOException {
+    /*public void saveGame() throws IOException {
         g.getGame().saveGame("/SavedGame");
-    }
+    }*/
 
     public void quitGame() {
         System.exit(0);
+    }
+
+    public GameInteraction getgInteraction() {
+        return gInteraction;
+    }
+
+    public void setgInteraction(GameInteraction gInteraction) {
+        this.gInteraction = gInteraction;
     }
 
 }
