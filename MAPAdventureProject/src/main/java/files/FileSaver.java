@@ -42,8 +42,8 @@ public class FileSaver {
 
         Room wagon = new Room(1, "Vagone del treno", "Dopo esserti fatto strada tra l'assembramento di persone sui vagoni, trovi il tuo amico nonché compagno di progetto.\n"
                 + "Che fortuna, ti ha preso il posto! (stonks) Ti siedi.\n"
-                + "\"Beh, ti senti preparato per l'esame di oggi? Spero che il prof sia clemente...\" ti chiede il tuo amico."
-                + "\"Io ricordavo che il prof si chiamasse Pierpaolo\" rispondi. Il tuo amico ti defenestra. GAME OVER\n"
+                + "\"Beh, ti senti preparato per l'esame di oggi? Spero che il prof sia clemente...\" ti chiede il tuo amico.\n\n"
+                + "\"Io ricordavo che il prof si chiamasse Pierpaolo\" rispondi. \nIl tuo amico ti defenestra. GAME OVER\n\n"
                 + "Scherzo, riprendiamo.\n\n"
                 + "\"Hey, hai con te la pen-drive, vero?! Non ripetiamo l'incidente di laboratorio...\" ti chiede il tuo amico.\n"
                 + "Apri lo zaino e gliela mostri, non perderesti mai qualcosa di così importante... vero? ");
@@ -52,7 +52,7 @@ public class FileSaver {
                 + "Noti che il treno si è fermato a un binario diverso dal solito, alzi lo sguardo e leggi \"Binario 0\".\n"
                 + "Strano, non ti ricordavi esistesse quel binario\n"
                 + "Aspetta, questa non sembra la stazione di Bari.\n"
-                + "Ti guardi intorno spaesato. \n"
+                + "Ti guardi intorno spaesato.\n"
                 + "Un strano uomo con delle orecchie a punta si avvicina al capotreno:\n"
                 + "\"Scusi, mi può dire la strada per il portale che conduce a PaleoliticCity?\"\n"
                 + "Guardi il tuo amico con gli occhi strabuzzati e lui scrolla le spalle \n"
@@ -96,10 +96,10 @@ public class FileSaver {
         g.getCommands().add(push);
 
         Command up = new Command("sali", CommandType.MOVE_U);
-        up.setAlias(new String[]{"vai su", "vai sopra"});
+        up.setAlias(new String[]{"vai su", "vai sopra", "su"});
         g.getCommands().add(up);
         Command down = new Command("scendi", CommandType.MOVE_D);
-        down.setAlias(new String[]{"vai giu'", "vai sotto"});
+        down.setAlias(new String[]{"vai giu'", "vai sotto", "giù"});
         g.getCommands().add(down);
         Command escape = new Command("scappa", CommandType.RUN);
         escape.setAlias(new String[]{"fuggi", "vai via", "muori", "crepa"});
@@ -116,9 +116,9 @@ public class FileSaver {
 
     }
 
-    public void saveFile(/*Game g*/) throws FileNotFoundException, IOException {
+    public void saveFile(String path, Game g) throws FileNotFoundException, IOException {
 
-        FileOutputStream fOut = new FileOutputStream("NewGame//Intro.dat");
+        FileOutputStream fOut = new FileOutputStream(path + "/Save.dat");
         ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 
         objOut.writeObject(g.getCommands());
@@ -157,7 +157,7 @@ public class FileSaver {
         fs.init();
 
         try {
-            fs.saveFile();
+            //fs.saveFile();
             /*fs.readFile("NewGame//Intro.dat");
             for (Command c : fs.g.getCommands()) {
                 System.out.println(c.getName());

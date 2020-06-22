@@ -23,12 +23,7 @@ public class GameInteraction {
 
         Map commandMap = new HashMap<>();
         String sOutput = "";
-        /*Scanner input = new Scanner(System.in);
-        String command = "";
-
-        System.out.println(g.getGame().getCurrentRoom().getDesc());
         
-        command = input.nextLine();*/
         try {
             commandMap = p.parse(sInput, g.getGame().getCurrentRoom(), g.getGame().getInventory(), g.getGame().getCommands());
             sOutput = g.executeCommand(commandMap);

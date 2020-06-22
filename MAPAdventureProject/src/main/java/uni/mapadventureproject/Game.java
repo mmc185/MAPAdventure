@@ -48,7 +48,7 @@ public class Game {
         this.commands = commands;
     }
     
-    public void init(String filePath) throws IOException {
+    public void init(String filePath) throws IOException, ClassNotFoundException {
         
         FileSaver fs = new FileSaver();
         fs.readFile(filePath, this);
@@ -57,7 +57,7 @@ public class Game {
     
     public void saveGame(String dirPath) throws IOException {
         FileSaver fs = new FileSaver(); 
-        fs.saveFile();
+        fs.saveFile(dirPath, this);
     }
     
 }

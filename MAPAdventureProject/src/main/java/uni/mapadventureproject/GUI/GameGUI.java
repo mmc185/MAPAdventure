@@ -9,9 +9,11 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import uni.mapadventureproject.GameInteraction;
 
@@ -122,7 +124,7 @@ public class GameGUI extends javax.swing.JFrame {
         jbNorth.setToolTipText("nord [n]");
         jbNorth.setAlignmentY(0.0F);
         jbNorth.setBorder(new javax.swing.border.MatteBorder(null));
-        jbNorth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbNorth.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jbNorth.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbNorth.setMargin(new java.awt.Insets(1, 1, 1, 1));
         jbNorth.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -139,7 +141,7 @@ public class GameGUI extends javax.swing.JFrame {
         jbSouth.setToolTipText("sud [s]");
         jbSouth.setAlignmentY(0.0F);
         jbSouth.setBorder(new javax.swing.border.MatteBorder(null));
-        jbSouth.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbSouth.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jbSouth.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbSouth.setMargin(new java.awt.Insets(1, 1, 1, 1));
         jbSouth.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -156,7 +158,7 @@ public class GameGUI extends javax.swing.JFrame {
         jbWest.setToolTipText("ovest [o]");
         jbWest.setAlignmentY(0.0F);
         jbWest.setBorder(new javax.swing.border.MatteBorder(null));
-        jbWest.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbWest.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jbWest.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbWest.setMargin(new java.awt.Insets(1, 1, 1, 1));
         jbWest.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -173,7 +175,7 @@ public class GameGUI extends javax.swing.JFrame {
         jbEast.setToolTipText("est [e]");
         jbEast.setAlignmentY(0.0F);
         jbEast.setBorder(new javax.swing.border.MatteBorder(null));
-        jbEast.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbEast.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jbEast.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbEast.setMargin(new java.awt.Insets(1, 1, 1, 1));
         jbEast.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -191,7 +193,7 @@ public class GameGUI extends javax.swing.JFrame {
         jbUp.setToolTipText("su");
         jbUp.setAlignmentY(0.0F);
         jbUp.setBorder(new javax.swing.border.MatteBorder(null));
-        jbUp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbUp.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jbUp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbUp.setMargin(new java.awt.Insets(1, 1, 1, 1));
         jbUp.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -209,7 +211,7 @@ public class GameGUI extends javax.swing.JFrame {
         jbDown.setToolTipText("giu'");
         jbDown.setAlignmentY(0.0F);
         jbDown.setBorder(new javax.swing.border.MatteBorder(null));
-        jbDown.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jbDown.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jbDown.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbDown.setMargin(new java.awt.Insets(1, 1, 1, 1));
         jbDown.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -263,7 +265,7 @@ public class GameGUI extends javax.swing.JFrame {
         jpButtonsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
 
         getContentPane().add(jpButtons);
-        jpButtons.setBounds(680, 495, 250, 128);
+        jpButtons.setBounds(680, 495, 256, 133);
 
         jlCommand.setBackground(new java.awt.Color(0, 102, 102));
         jlCommand.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -286,12 +288,10 @@ public class GameGUI extends javax.swing.JFrame {
 
         jspRead.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jspRead.setToolTipText("");
-        jspRead.setColumnHeaderView(null);
         jspRead.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jspRead.setMaximumSize(new java.awt.Dimension(900, 450));
         jspRead.setMinimumSize(new java.awt.Dimension(900, 450));
         jspRead.setPreferredSize(new java.awt.Dimension(900, 450));
-        jspRead.setViewportView(jtaReadingArea);
 
         jtaReadingArea.setEditable(false);
         jtaReadingArea.setBackground(new java.awt.Color(0, 0, 0));
@@ -310,15 +310,13 @@ public class GameGUI extends javax.swing.JFrame {
 
         jspWrite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         jspWrite.setAutoscrolls(true);
-        jspWrite.setColumnHeaderView(jtTypingField);
         jspWrite.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jspWrite.setMaximumSize(new java.awt.Dimension(500, 40));
         jspWrite.setMinimumSize(new java.awt.Dimension(500, 40));
         jspWrite.setPreferredSize(new java.awt.Dimension(500, 40));
-        jspWrite.setViewportView(jtTypingField);
 
         jtTypingField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jtTypingField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jtTypingField.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jtTypingField.setMaximumSize(new java.awt.Dimension(500, 40));
         jtTypingField.setMinimumSize(new java.awt.Dimension(500, 40));
         jtTypingField.addActionListener(new java.awt.event.ActionListener() {
@@ -354,6 +352,11 @@ public class GameGUI extends javax.swing.JFrame {
 
         jmiSaveGame.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jmiSaveGame.setText("Salva partita");
+        jmiSaveGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSaveGameActionPerformed(evt);
+            }
+        });
         jmOptions.add(jmiSaveGame);
 
         jmiBackMenu.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -387,6 +390,7 @@ public class GameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jtTypingFieldActionPerformed
 
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
+        
         if (!jtTypingField.getText().isBlank()) {
             
             String s = jtTypingField.getText();
@@ -398,6 +402,7 @@ public class GameGUI extends javax.swing.JFrame {
             //jtaReadingArea.setForeground(Color.white);
             
         }
+        
     }//GEN-LAST:event_jbSendActionPerformed
 
     private void jbNorthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNorthActionPerformed
@@ -437,15 +442,37 @@ public class GameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jtTypingFieldKeyPressed
 
     private void jmiBackMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackMenuActionPerformed
+        
         int yesOption;
         yesOption = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler tornare al menu principale?", "Ritorno al menu principale", JOptionPane.YES_NO_OPTION);
         if (yesOption == JOptionPane.YES_OPTION) {
-            MenuGUI m = new MenuGUI();
+            MenuGUI m = new MenuGUI(gInteraction.getGameManager());
             m.setVisible(true);
             this.dispose();
         }
 
     }//GEN-LAST:event_jmiBackMenuActionPerformed
+
+    private void jmiSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveGameActionPerformed
+        
+        JFileChooser fChooser = new JFileChooser();
+        fChooser.setMultiSelectionEnabled(false);
+        fChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fChooser.setCurrentDirectory(new File("."));
+        
+        try {
+            
+        if ( fChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION ) {
+            gInteraction.getGameManager().getGame().saveGame(fChooser.getSelectedFile().getPath());
+        }
+        
+        } catch ( IOException e ) {
+            JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), "Errore nel salvataggio del file", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            /*???*/JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jmiSaveGameActionPerformed
 
     /**
      * @param args the command line arguments
