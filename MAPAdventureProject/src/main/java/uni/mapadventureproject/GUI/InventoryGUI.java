@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
+import uni.mapadventureproject.type.Inventory;
+import uni.mapadventureproject.type.Item;
 
 /**
  *
@@ -21,18 +23,20 @@ import javax.swing.ScrollPaneConstants;
  */
 public class InventoryGUI extends javax.swing.JFrame {
 
+    Inventory inv;
+
     /**
      * Creates new form InventoryGUI
      */
-    public InventoryGUI() {
+    public InventoryGUI(Inventory inv) {
         initComponents();
         init();
+        this.inv = inv;
     }
 
     public void init() {
         //inventory.add(oggetto);
         //jLabel2.setIcon(oggetto.path);
-        int i;
 
         this.setSize(712, 737);
 
@@ -43,29 +47,24 @@ public class InventoryGUI extends javax.swing.JFrame {
         jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         //jScrollPane1.setVisible(false);
 
-        for (i = 0; i < 3; i++) {
-            //String label="jl"+i;
-            //if(i>35){
-            //JOptionPane.showMessageDialog(rootPane,"inventario pieno");
-            //break;
-            //}else{
+        for (Item i :inv.getInventoryList()) {
 
             JButton jbImage = new JButton();
             jbImage.setBackground(Color.black);
 
-            ImageIcon img = new ImageIcon("C://Users//marta//MAPAdventure//MAPAdventureProject//img//placeHolder.png");
-            Image img2 = img.getImage();
-            jbImage.setIcon(new ImageIcon(img2.getScaledInstance(75, 75, 0)));
+            //ImageIcon img = new ImageIcon("C://Users//marta//MAPAdventure//MAPAdventureProject//img//placeHolder.png");
+            //Image img2 = img.getImage();
+            jbImage.setIcon(new ImageIcon(i.getImage().getScaledInstance(75, 75, 0)));
             jbImage.setSize(75, 75);
-            jbImage.setToolTipText("Treno");
+            jbImage.setToolTipText(i.getName());
 
             jbImage.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jbImageActionPerformed(evt, "mi piacciono i treni", "treno");
+                    jbImageActionPerformed(evt, i.getDesc(),i.getName());
                 }
             });
-        
+
             jInventoryPanel.add(jbImage);
         }
 
@@ -163,7 +162,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InventoryGUI().setVisible(true);
+              //  new InventoryGUI().setVisible(true);
             }
         });
     }

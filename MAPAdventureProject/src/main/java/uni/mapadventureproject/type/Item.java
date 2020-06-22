@@ -1,5 +1,6 @@
 package uni.mapadventureproject.type;
 
+import java.awt.Image;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ public class Item implements Serializable {
     private boolean pushable = false;
     private boolean open = false;
     private boolean push = false;
+    private Image image;
 
     public Item(int id, String name, String desc) {
         this.id = id;
@@ -99,6 +101,16 @@ public class Item implements Serializable {
         this.push = push;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 3;
