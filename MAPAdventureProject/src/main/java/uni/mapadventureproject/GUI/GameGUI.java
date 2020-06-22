@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class GameGUI extends javax.swing.JFrame {
 
     Font font;
-    Font font1;
+    Font fontMinecraft;
 
     /**
      * Creates new form GameGUI
@@ -36,23 +36,22 @@ public class GameGUI extends javax.swing.JFrame {
         try {
             InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"));
             font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
-            font1 = font.deriveFont(Font.PLAIN, 12);
+            fontMinecraft = font.deriveFont(Font.PLAIN, 12);
 
-            this.setFont(font1);
-            jmbOptions.setFont(font1);
-            jmOptions.setFont(font1);
-            jmiBackMenu.setFont(font1);
-            jmiSaveGame.setFont(font1);
-            jmHelp.setFont(font1);
-            jmiHelp.setFont(font1);
-            jtaReadingArea.setFont(font1);
-            jlCommand.setFont(font1);
-            jtTypingField.setFont(font1);
-            jbSend.setFont(font1);
-            jbUp.setFont(font1);
-            jbDown.setFont(font1);
+            this.setFont(fontMinecraft);
+            jmbOptions.setFont(fontMinecraft);
+            jmOptions.setFont(fontMinecraft);
+            jmiBackMenu.setFont(fontMinecraft);
+            jmiSaveGame.setFont(fontMinecraft);
+            jmHelp.setFont(fontMinecraft);
+            jmiHelp.setFont(fontMinecraft);
+            jtaReadingArea.setFont(fontMinecraft);
+            jlCommand.setFont(fontMinecraft.deriveFont(Font.PLAIN, 14));
+            jtTypingField.setFont(fontMinecraft);
+            jbSend.setFont(fontMinecraft);
+            jbUp.setFont(fontMinecraft);
+            jbDown.setFont(fontMinecraft);
 
-            
         } catch (FontFormatException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
         }
@@ -106,7 +105,7 @@ public class GameGUI extends javax.swing.JFrame {
         jpButtons.setForeground(new java.awt.Color(60, 63, 65));
         jpButtons.setOpaque(false);
 
-        jbNorth.setBackground(new java.awt.Color(0, 102, 102));
+        jbNorth.setBackground(new java.awt.Color(56, 86, 128));
         jbNorth.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jbNorth.setIcon(new javax.swing.ImageIcon("img//arrowNorthT.png"));
         jbNorth.setToolTipText("nord [n]");
@@ -123,7 +122,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
         });
 
-        jbSouth.setBackground(new java.awt.Color(0, 102, 102));
+        jbSouth.setBackground(new java.awt.Color(56, 86, 128));
         jbSouth.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jbSouth.setIcon(new javax.swing.ImageIcon("img//arrowSouthT.png"));
         jbSouth.setToolTipText("sud [s]");
@@ -140,7 +139,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
         });
 
-        jbWest.setBackground(new java.awt.Color(0, 102, 102));
+        jbWest.setBackground(new java.awt.Color(56, 86, 128));
         jbWest.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jbWest.setIcon(new javax.swing.ImageIcon("img//arrowWestT.png"));
         jbWest.setToolTipText("ovest [o]");
@@ -157,7 +156,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
         });
 
-        jbEast.setBackground(new java.awt.Color(0, 102, 102));
+        jbEast.setBackground(new java.awt.Color(56, 86, 128));
         jbEast.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jbEast.setIcon(new javax.swing.ImageIcon("img//arrowEastT.png"));
         jbEast.setToolTipText("est [e]");
@@ -174,7 +173,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
         });
 
-        jbUp.setBackground(new java.awt.Color(0, 102, 102));
+        jbUp.setBackground(new java.awt.Color(56, 86, 128));
         jbUp.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jbUp.setForeground(new java.awt.Color(255, 255, 255));
         jbUp.setText("su");
@@ -192,7 +191,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
         });
 
-        jbDown.setBackground(new java.awt.Color(0, 102, 102));
+        jbDown.setBackground(new java.awt.Color(56, 86, 128));
         jbDown.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jbDown.setForeground(new java.awt.Color(255, 255, 255));
         jbDown.setText("giu'");
@@ -253,16 +252,17 @@ public class GameGUI extends javax.swing.JFrame {
         jpButtonsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
 
         getContentPane().add(jpButtons);
-        jpButtons.setBounds(680, 495, 250, 128);
+        jpButtons.setBounds(680, 495, 242, 118);
 
         jlCommand.setBackground(new java.awt.Color(0, 102, 102));
-        jlCommand.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jlCommand.setForeground(new java.awt.Color(255, 255, 255));
+        jlCommand.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlCommand.setForeground(new java.awt.Color(0, 0, 0));
+        jlCommand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlCommand.setText("Inserisci un comando:");
         getContentPane().add(jlCommand);
-        jlCommand.setBounds(53, 514, 170, 28);
+        jlCommand.setBounds(53, 514, 500, 28);
 
-        jbSend.setBackground(new java.awt.Color(0, 102, 102));
+        jbSend.setBackground(new java.awt.Color(56, 86, 128));
         jbSend.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jbSend.setForeground(new java.awt.Color(255, 255, 255));
         jbSend.setText("Invia");
@@ -272,7 +272,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbSend);
-        jbSend.setBounds(569, 563, 79, 31);
+        jbSend.setBounds(569, 563, 77, 38);
 
         jspRead.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jspRead.setToolTipText("");
@@ -307,6 +307,7 @@ public class GameGUI extends javax.swing.JFrame {
         jspWrite.setPreferredSize(new java.awt.Dimension(500, 40));
         jspWrite.setViewportView(jtTypingField);
 
+        jtTypingField.setBackground(new java.awt.Color(255, 255, 255));
         jtTypingField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jtTypingField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jtTypingField.setMaximumSize(new java.awt.Dimension(500, 40));
@@ -334,7 +335,7 @@ public class GameGUI extends javax.swing.JFrame {
         getContentPane().add(jlImage);
         jlImage.setBounds(570, 50, 361, 410);
 
-        jlBackground.setIcon(new javax.swing.ImageIcon("img//background1.png"));
+        jlBackground.setIcon(new javax.swing.ImageIcon("img//background22.png"));
         getContentPane().add(jlBackground);
         jlBackground.setBounds(0, 0, 1000, 660);
 
