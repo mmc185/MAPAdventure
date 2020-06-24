@@ -7,12 +7,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashSet;
+import javax.swing.ImageIcon;
 import uni.mapadventureproject.Game;
 import uni.mapadventureproject.type.*;
 
 public class FileSaver {
 
     Game g;
+
+    public Game getG() {
+        return g;
+    }
 
     public void init() {
 
@@ -21,18 +26,28 @@ public class FileSaver {
         //Items dell'inventario
         Item taralli = new Item(50, "taralli", "Taralli in busta... Gli ottimi taralli del forno (che ti compra tua madre), ti viene l'acquolina in bocca solo a pensarci!");
         taralli.setAlias(new String[]{"tarallini"});
+        ImageIcon img = new ImageIcon("img//inventario//taralli.png");
+        taralli.setItemImage(img);
         g.getInventory().add(taralli);
         Item notes = new Item(51, "quaderno", "Quaderno con gli appunti di MAP pieno di \"pippottoni\"");
         notes.setAlias(new String[]{"appunti", "riassunti", "block-notes", "fogli"});
+        img = new ImageIcon("img//inventario//appunti.png");
+        notes.setItemImage(img);
         g.getInventory().add(notes);
         Item umbrella = new Item(52, "ombrello", "Fidato ombrello, ogni volta che ce l'hai con te non piove mai!");
         umbrella.setAlias(new String[]{"ombrellino"});
+        img = new ImageIcon("img//inventario//ombrello.png");
+        umbrella.setItemImage(img);
         g.getInventory().add(umbrella);
         Item bottle = new Item(53, "borraccia", "La borraccia che hai aspettato tanto per avere dal DIB, forse facevi prima a scroccarla dal PoliBa...");
         bottle.setAlias(new String[]{"bottiglietta", "bottiglia"});
+        img = new ImageIcon("img//inventario//bottiglia.png");
+        bottle.setItemImage(img);
         g.getInventory().add(bottle);
         Item pendrive = new Item(54, "pendrive", "La solita pen-drive che usi ormai da diversi anni.");
         pendrive.setAlias(new String[]{"chiavetta", "usb", "chiavetta usb", "pen-drive"});
+        img = new ImageIcon("img//inventario//chiavetta.png");
+        pendrive.setItemImage(img);
         g.getInventory().add(pendrive);
 
         //Stanze
@@ -118,7 +133,8 @@ public class FileSaver {
 
     public void saveFile(String path, Game g) throws FileNotFoundException, IOException {
 
-        FileOutputStream fOut = new FileOutputStream(path + "/Save.dat");
+        // FileOutputStream fOut = new FileOutputStream(path + "/Save.dat");
+        FileOutputStream fOut = new FileOutputStream(path + "/Intro.dat");
         ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 
         objOut.writeObject(g.getCommands());
@@ -157,7 +173,7 @@ public class FileSaver {
         fs.init();
 
         try {
-            //fs.saveFile();
+            fs.saveFile("NewGame",fs.getG());
             /*fs.readFile("NewGame//Intro.dat");
             for (Command c : fs.g.getCommands()) {
                 System.out.println(c.getName());
