@@ -5,14 +5,19 @@
  */
 package uni.mapadventureproject.GUI;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.io.File;
-import java.io.IOException;
+import java.io.IOException; 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import uni.mapadventureproject.Game;
 import uni.mapadventureproject.GameManager;
 import uni.mapadventureproject.MSGame;
 import uni.mapadventureproject.Menu;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 
 
 
@@ -23,12 +28,16 @@ import uni.mapadventureproject.Menu;
 public class MenuGUI extends javax.swing.JFrame {
 
     Menu gMenu;
+    Font font;
+    Font fontMinecraft;
+    
     
     /**
      * Creates new form MenuGUI
      */
     public MenuGUI(GameManager gManager) {
         initComponents();
+        init();
         gMenu = new Menu(gManager);
     }
 
@@ -42,10 +51,11 @@ public class MenuGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jpMenu = new javax.swing.JPanel();
-        jlTitolo = new javax.swing.JLabel();
         jbNuovo = new javax.swing.JButton();
         jbCarica = new javax.swing.JButton();
         jbEsci = new javax.swing.JButton();
+        jTitolo1 = new javax.swing.JLabel();
+        jTitolo2 = new javax.swing.JLabel();
         jlOscuro = new javax.swing.JLabel();
         jlLuce = new javax.swing.JLabel();
         jlVerde = new javax.swing.JLabel();
@@ -55,7 +65,7 @@ public class MenuGUI extends javax.swing.JFrame {
         jmiCarica = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("MAP ADVENTURE");
+        setTitle("Metastation: the last exam");
         setLocation(new java.awt.Point(0, 0));
         setPreferredSize(new java.awt.Dimension(700, 500));
         setResizable(false);
@@ -63,44 +73,40 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jpMenu.setLayout(null);
 
-        jlTitolo.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
-        jlTitolo.setForeground(new java.awt.Color(204, 255, 255));
-        jlTitolo.setText("Metastation:the last exam");
-        jpMenu.add(jlTitolo);
-        jlTitolo.setBounds(160, 20, 390, 40);
-
         jbNuovo.setBackground(new java.awt.Color(0, 102, 102));
         jbNuovo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jbNuovo.setForeground(new java.awt.Color(255, 255, 255));
-        jbNuovo.setText("NUOVA PARTITA");
+        jbNuovo.setText("Nuova Partita");
         jbNuovo.setToolTipText("Inizia una nuova avventura");
         jbNuovo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(153, 255, 255)));
+        jbNuovo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbNuovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbNuovoActionPerformed(evt);
             }
         });
         jpMenu.add(jbNuovo);
-        jbNuovo.setBounds(270, 130, 180, 30);
+        jbNuovo.setBounds(260, 150, 180, 30);
 
         jbCarica.setBackground(new java.awt.Color(0, 102, 102));
         jbCarica.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jbCarica.setForeground(new java.awt.Color(255, 255, 255));
-        jbCarica.setText("CARICA PARTITA");
+        jbCarica.setText("Carica Partita");
         jbCarica.setToolTipText("Carica e continua una partita salvata");
         jbCarica.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(153, 255, 255)));
+        jbCarica.setPreferredSize(new java.awt.Dimension(180, 30));
         jbCarica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCaricaActionPerformed(evt);
             }
         });
         jpMenu.add(jbCarica);
-        jbCarica.setBounds(270, 230, 180, 30);
+        jbCarica.setBounds(260, 260, 180, 30);
 
         jbEsci.setBackground(new java.awt.Color(0, 102, 102));
         jbEsci.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jbEsci.setForeground(new java.awt.Color(255, 255, 255));
-        jbEsci.setText("ESCI");
+        jbEsci.setText("Esci");
         jbEsci.setToolTipText("Chiudi il gioco");
         jbEsci.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(153, 255, 255)));
         jbEsci.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +115,23 @@ public class MenuGUI extends javax.swing.JFrame {
             }
         });
         jpMenu.add(jbEsci);
-        jbEsci.setBounds(270, 350, 180, 30);
+        jbEsci.setBounds(260, 370, 180, 30);
+
+        jTitolo1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jTitolo1.setForeground(new java.awt.Color(204, 255, 255));
+        jTitolo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTitolo1.setText("Metastation:");
+        jTitolo1.setPreferredSize(new java.awt.Dimension(700, 50));
+        jpMenu.add(jTitolo1);
+        jTitolo1.setBounds(0, 30, 700, 50);
+
+        jTitolo2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jTitolo2.setForeground(new java.awt.Color(204, 255, 255));
+        jTitolo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTitolo2.setText("the last exam");
+        jTitolo2.setPreferredSize(new java.awt.Dimension(700, 40));
+        jpMenu.add(jTitolo2);
+        jTitolo2.setBounds(0, 70, 700, 40);
 
         jlOscuro.setIcon(new javax.swing.ImageIcon("img//portale oscuro.png"));
         jpMenu.add(jlOscuro);
@@ -165,7 +187,26 @@ public class MenuGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    
+    private void init() {
+        try {
+            InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, is);
+            fontMinecraft = font.deriveFont(Font.PLAIN, 12);
+            
+            this.setFont(fontMinecraft);
+            jbNuovo.setFont(fontMinecraft);
+            jbCarica.setFont(fontMinecraft);
+            jbEsci.setFont(fontMinecraft);
+            jMenuBar.setFont(fontMinecraft);
+            jmOpzioni.setFont(fontMinecraft);
+            jmiCarica.setFont(fontMinecraft);
+            jmiNuovo.setFont(fontMinecraft);
+        } catch (FontFormatException | IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private void jmiNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuovoActionPerformed
         
         this.jbNuovoActionPerformed(evt);
@@ -265,12 +306,13 @@ public class MenuGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JLabel jTitolo1;
+    private javax.swing.JLabel jTitolo2;
     private javax.swing.JButton jbCarica;
     private javax.swing.JButton jbEsci;
     private javax.swing.JButton jbNuovo;
     private javax.swing.JLabel jlLuce;
     private javax.swing.JLabel jlOscuro;
-    private javax.swing.JLabel jlTitolo;
     private javax.swing.JLabel jlVerde;
     private javax.swing.JMenu jmOpzioni;
     private javax.swing.JMenuItem jmiCarica;

@@ -11,6 +11,7 @@ import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.CommandType;
 import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.Room;
+import uni.mapadventureproject.type.TriggeredRoom;
 
 public class MSGame extends GameManager {
 
@@ -22,7 +23,7 @@ public class MSGame extends GameManager {
     public String executeCommand(Map<WordType, String> commandMap) {
 
         CommandType command = this.getCommandType(commandMap.get(WordType.COMMAND));
-        Room r;
+        Room r = null; 
         Item i = null;
         String output = "";
 
@@ -123,12 +124,38 @@ public class MSGame extends GameManager {
                 break;
         }
 
-        //trigger room??
-        
-        return output;
-    }
+        //Triggera la stanza, se necessario
+        if (r instanceof TriggeredRoom) {
 
-    
+            if (!((TriggeredRoom) r).isTrigger()) { //Se la stanza non e' gia' triggerata
+              
+                String triggerer = null; //Stringa da confrontare con quella che causa il trigger
+
+                if (commandMap.size() == 2) {
+
+                    if (commandMap.containsKey(WordType.R_OBJ)) {
+
+                        triggerer = command + " " + commandMap.get(WordType.R_OBJ);
+
+                    } else if (commandMap.containsKey(WordType.I_OBJ)) {
+
+                        triggerer = command + " " + commandMap.get(WordType.I_OBJ);
+
+                    }
+
+                    //se triggerer=triggerer della stanza, si effettua il trigger
+                    if (triggerer.equals(((TriggeredRoom) r).getTriggerer())) {
+
+                        ((TriggeredRoom) r).setTrigger(true);
+
+                    }
+                }
+            }
+        }
+
+        return output;
+
+    }
 
     public Room move(CommandType c) {
 
@@ -150,13 +177,13 @@ public class MSGame extends GameManager {
     }
 
     public boolean unlockRoom(String iName) {
-        
+
         boolean flag = false;
         //try / catch?
-        if ( this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
+        if (this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
             this.getGame().getCurrentRoom().getSouth().setLockedBy("");
             flag = true;
-        } else if ( this.getGame().getCurrentRoom().getNorth().getLockedBy().equals(iName)) {
+        } else if (this.getGame().getCurrentRoom().getNorth().getLockedBy().equals(iName)) {
             this.getGame().getCurrentRoom().getNorth().setLockedBy("");
             flag = true;
         } else if (this.getGame().getCurrentRoom().getEast().getLockedBy().equals(iName)) {
@@ -172,7 +199,7 @@ public class MSGame extends GameManager {
             this.getGame().getCurrentRoom().getDown().setLockedBy("");
             flag = true;
         }
-         
+
         return flag;
     }
 
