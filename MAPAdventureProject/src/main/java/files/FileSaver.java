@@ -96,13 +96,13 @@ public class FileSaver {
         g.getCommands().add(push);
 
         Command up = new Command("sali", CommandType.MOVE_U);
-        up.setAlias(new String[]{"vai su", "vai sopra", "su"});
+        up.setAlias(new String[]{"sopra", "su"});
         g.getCommands().add(up);
         Command down = new Command("scendi", CommandType.MOVE_D);
-        down.setAlias(new String[]{"vai giu'", "vai sotto", "giù"});
+        down.setAlias(new String[]{"sotto", "giù"});
         g.getCommands().add(down);
         Command escape = new Command("scappa", CommandType.RUN);
-        escape.setAlias(new String[]{"fuggi", "vai via", "muori", "crepa"});
+        escape.setAlias(new String[]{"fuggi", "muori", "crepa"});
         g.getCommands().add(escape);
         Command end = new Command("esci", CommandType.EXIT);
         g.getCommands().add(end);

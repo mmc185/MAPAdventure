@@ -5,6 +5,7 @@
  */
 package uni.mapadventureproject.GUI;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.KeyEvent;
@@ -15,6 +16,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import uni.mapadventureproject.GameInteraction;
 
 /**
@@ -31,20 +36,21 @@ public class GameGUI extends javax.swing.JFrame {
      * Creates new form GameGUI
      */
     public GameGUI(GameInteraction gInteraction) {
-        
+
         initComponents();
         init();
         this.gInteraction = gInteraction;
         initGame();
-        
+
     }
 
     private void init() {
 
-        try {
-            InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"));
+        // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
+        try (InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))){
+            
             font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
-            fontMinecraft = font.deriveFont(Font.PLAIN, 12);
+            fontMinecraft = font.deriveFont(Font.PLAIN, 14);
 
             this.setFont(fontMinecraft);
             jmbOptions.setFont(fontMinecraft);
@@ -53,20 +59,23 @@ public class GameGUI extends javax.swing.JFrame {
             jmiSaveGame.setFont(fontMinecraft);
             jmHelp.setFont(fontMinecraft);
             jmiHelp.setFont(fontMinecraft);
-            jtaReadingArea.setFont(fontMinecraft);
-            jlCommand.setFont(fontMinecraft.deriveFont(Font.PLAIN, 14));
+            jlCommand.setFont(fontMinecraft.deriveFont(Font.BOLD, 14));
             jtTypingField.setFont(fontMinecraft);
             jbSend.setFont(fontMinecraft);
             jbUp.setFont(fontMinecraft);
             jbDown.setFont(fontMinecraft);
+            jtpReadingArea.setFont(fontMinecraft);
+           
 
         } catch (FontFormatException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
-        }
+        } 
     }
-    
+
     public void initGame() {
-        jtaReadingArea.append(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
+        
+        jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
+        
     }
 
     /**
@@ -87,12 +96,12 @@ public class GameGUI extends javax.swing.JFrame {
         jbDown = new javax.swing.JButton();
         jlCommand = new javax.swing.JLabel();
         jbSend = new javax.swing.JButton();
-        jspRead = new javax.swing.JScrollPane();
-        jtaReadingArea = new javax.swing.JTextArea();
         jspWrite = new javax.swing.JScrollPane();
         jtTypingField = new javax.swing.JTextField();
         jlImage = new javax.swing.JLabel();
         jlBackground = new javax.swing.JLabel();
+        jspRead2 = new javax.swing.JScrollPane();
+        jtpReadingArea = new javax.swing.JTextPane();
         jmbOptions = new javax.swing.JMenuBar();
         jmOptions = new javax.swing.JMenu();
         jmiSaveGame = new javax.swing.JMenuItem();
@@ -285,28 +294,6 @@ public class GameGUI extends javax.swing.JFrame {
         getContentPane().add(jbSend);
         jbSend.setBounds(569, 563, 79, 31);
 
-        jspRead.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jspRead.setToolTipText("");
-        jspRead.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jspRead.setMaximumSize(new java.awt.Dimension(900, 450));
-        jspRead.setMinimumSize(new java.awt.Dimension(900, 450));
-        jspRead.setPreferredSize(new java.awt.Dimension(900, 450));
-
-        jtaReadingArea.setEditable(false);
-        jtaReadingArea.setBackground(new java.awt.Color(0, 0, 0));
-        jtaReadingArea.setColumns(20);
-        jtaReadingArea.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jtaReadingArea.setForeground(new java.awt.Color(255, 255, 255));
-        jtaReadingArea.setLineWrap(true);
-        jtaReadingArea.setRows(15);
-        jtaReadingArea.setBorder(null);
-        jtaReadingArea.setMaximumSize(new java.awt.Dimension(900, 450));
-        jtaReadingArea.setMinimumSize(new java.awt.Dimension(900, 450));
-        jspRead.setViewportView(jtaReadingArea);
-
-        getContentPane().add(jspRead);
-        jspRead.setBounds(40, 30, 520, 450);
-
         jspWrite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         jspWrite.setAutoscrolls(true);
         jspWrite.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -344,6 +331,17 @@ public class GameGUI extends javax.swing.JFrame {
         jlBackground.setIcon(new javax.swing.ImageIcon("img//background22.png"));
         getContentPane().add(jlBackground);
         jlBackground.setBounds(0, 0, 1000, 660);
+
+        jtpReadingArea.setEditable(false);
+        jtpReadingArea.setBackground(new java.awt.Color(0, 0, 0));
+        jtpReadingArea.setForeground(new java.awt.Color(255, 255, 255));
+        jtpReadingArea.setMaximumSize(new java.awt.Dimension(900, 450));
+        jtpReadingArea.setMinimumSize(new java.awt.Dimension(900, 450));
+        jtpReadingArea.setPreferredSize(new java.awt.Dimension(280, 360));
+        jspRead2.setViewportView(jtpReadingArea);
+
+        getContentPane().add(jspRead2);
+        jspRead2.setBounds(40, 30, 520, 450);
 
         jmOptions.setText("Opzioni");
         jmOptions.setToolTipText("");
@@ -384,54 +382,73 @@ public class GameGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void appendToPane(JTextPane tp, String msg, Color c) {
+        
+        try {
+
+            StyledDocument sDoc = tp.getStyledDocument();
+            
+            // Aggiungo come attributo il colore desiderato c
+            SimpleAttributeSet sAttrSet = new SimpleAttributeSet();
+            StyleConstants.setForeground(sAttrSet, c);
+            
+            // Inserisco la stringa in coda, con gli attributi desiderati
+            sDoc.insertString(sDoc.getLength(), msg, sAttrSet);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+
     private void jtTypingFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtTypingFieldActionPerformed
         //Qui l'utente inserisce il suo testo
     }//GEN-LAST:event_jtTypingFieldActionPerformed
 
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
-        
+
         if (!jtTypingField.getText().isBlank()) {
-            
+
             String s = jtTypingField.getText();
-            jtaReadingArea.append("\n> " + s + "\n");
+            appendToPane(jtpReadingArea, "\n> " + s + "\n", new Color(104, 140, 189));
+
             jtTypingField.setText("");
-            
-            //jtaReadingArea.setForeground(Color.red);
-            jtaReadingArea.append("\n" + gInteraction.inputManager(s) + "\n");
-            //jtaReadingArea.setForeground(Color.white);
-            
+
+            appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager(s) + "\n", Color.white);
+
         }
-        
+
     }//GEN-LAST:event_jbSendActionPerformed
 
     private void jbNorthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNorthActionPerformed
         // L'utente si muove verso nord
-        jtaReadingArea.append("\n" + gInteraction.inputManager("nord") + "\n");
+        appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("nord") + "\n", Color.white);
+
     }//GEN-LAST:event_jbNorthActionPerformed
 
     private void jbSouthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSouthActionPerformed
         // L'utente si muove verso sud
-        jtaReadingArea.append("\n" + gInteraction.inputManager("sud") + "\n");
+        appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("sud") + "\n", Color.white);
     }//GEN-LAST:event_jbSouthActionPerformed
 
     private void jbWestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWestActionPerformed
         // L'utente si muove verso ovest
-        jtaReadingArea.append("\n" + gInteraction.inputManager("ovest") + "\n");
+        appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("ovest") + "\n", Color.white);
     }//GEN-LAST:event_jbWestActionPerformed
 
     private void jbEastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEastActionPerformed
         // L'utente si muove verso est
-        jtaReadingArea.append("\n" + gInteraction.inputManager("est") + "\n");
+        appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("est") + "\n", Color.white);
     }//GEN-LAST:event_jbEastActionPerformed
 
     private void jbUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpActionPerformed
         // L'utente si muove verso su
-        jtaReadingArea.append("\n" + gInteraction.inputManager("sali") + "\n");
+        appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("sali") + "\n", Color.white);
     }//GEN-LAST:event_jbUpActionPerformed
 
     private void jbDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDownActionPerformed
         // L'utente si muove verso giù
-        jtaReadingArea.append("\n" + gInteraction.inputManager("scendi") + "\n");
+        appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("scendi") + "\n", Color.white);
     }//GEN-LAST:event_jbDownActionPerformed
 
     private void jtTypingFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTypingFieldKeyPressed
@@ -441,7 +458,7 @@ public class GameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jtTypingFieldKeyPressed
 
     private void jmiBackMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackMenuActionPerformed
-        
+
         int yesOption;
         yesOption = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler tornare al menu principale?", "Ritorno al menu principale", JOptionPane.YES_NO_OPTION);
         if (yesOption == JOptionPane.YES_OPTION) {
@@ -453,24 +470,25 @@ public class GameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiBackMenuActionPerformed
 
     private void jmiSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveGameActionPerformed
-        
+
         JFileChooser fChooser = new JFileChooser();
         fChooser.setMultiSelectionEnabled(false);
         fChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fChooser.setCurrentDirectory(new File("."));
-        
+
         try {
-            
-        if ( fChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION ) {
-            gInteraction.getGameManager().getGame().saveGame(fChooser.getSelectedFile().getPath());
-        }
-        
-        } catch ( IOException e ) {
+
+            if (fChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                gInteraction.getGameManager().getGame().saveGame(fChooser.getSelectedFile().getPath());
+            }
+
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), "Errore nel salvataggio del file", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            /*???*/JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            /*???*/
+            JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jmiSaveGameActionPerformed
 
     /**
@@ -526,9 +544,9 @@ public class GameGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiHelp;
     private javax.swing.JMenuItem jmiSaveGame;
     private javax.swing.JPanel jpButtons;
-    private javax.swing.JScrollPane jspRead;
+    private javax.swing.JScrollPane jspRead2;
     private javax.swing.JScrollPane jspWrite;
     private javax.swing.JTextField jtTypingField;
-    private javax.swing.JTextArea jtaReadingArea;
+    private javax.swing.JTextPane jtpReadingArea;
     // End of variables declaration//GEN-END:variables
 }
