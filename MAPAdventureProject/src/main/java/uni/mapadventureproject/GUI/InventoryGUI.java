@@ -46,15 +46,15 @@ public class InventoryGUI extends javax.swing.JFrame {
         //jScrollPane1.setAlignmentY(50);
         jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         //jScrollPane1.setVisible(false);
-
+     try{
         for (Item i :inv.getInventoryList()) {
 
             JButton jbImage = new JButton();
             jbImage.setBackground(Color.black);
 
-            //ImageIcon img = new ImageIcon("C://Users//marta//MAPAdventure//MAPAdventureProject//img//placeHolder.png");
-            //Image img2 = img.getImage();
-            jbImage.setIcon(new ImageIcon(i.getImage().getScaledInstance(75, 75, 0)));
+            ImageIcon img =i.getImage(); //new ImageIcon("C://Users//marta//MAPAdventure//MAPAdventureProject//img//placeHolder.png");
+            Image img2 = img.getImage();
+            jbImage.setIcon(new ImageIcon(img2.getScaledInstance(75, 75, 0)));
             jbImage.setSize(75, 75);
             jbImage.setToolTipText(i.getName());
 
@@ -67,7 +67,9 @@ public class InventoryGUI extends javax.swing.JFrame {
 
             jInventoryPanel.add(jbImage);
         }
-
+     }catch(Exception e) {
+         JOptionPane.showMessageDialog(this,e.getLocalizedMessage(), "Errore" ,JOptionPane.ERROR_MESSAGE);
+     }
         //}
     }
 
@@ -117,7 +119,6 @@ public class InventoryGUI extends javax.swing.JFrame {
         jScrollPane1.setBounds(20, 20, 660, 660);
 
         jBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jBackgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\marta\\Downloads\\Telegram Desktop\\v3b.png")); // NOI18N
         jBackgroundLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jBackgroundLabel.setMaximumSize(new java.awt.Dimension(700, 700));
         jBackgroundLabel.setMinimumSize(new java.awt.Dimension(700, 700));
@@ -162,7 +163,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-              //  new InventoryGUI().setVisible(true);
+               //new InventoryGUI().setVisible(true);
             }
         });
     }

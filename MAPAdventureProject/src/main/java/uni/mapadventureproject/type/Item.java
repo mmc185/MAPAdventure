@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.ImageIcon;
 
 public class Item implements Serializable {
 
@@ -17,7 +18,7 @@ public class Item implements Serializable {
     private boolean pushable = false;
     private boolean open = false;
     private boolean push = false;
-    private Image image;
+    private ImageIcon image;
 
     public Item(int id, String name, String desc) {
         this.id = id;
@@ -101,11 +102,11 @@ public class Item implements Serializable {
         this.push = push;
     }
 
-    public Image getImage() {
+    public ImageIcon getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(ImageIcon image) {
         this.image = image;
     }
 
