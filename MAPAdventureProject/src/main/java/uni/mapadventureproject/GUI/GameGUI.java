@@ -17,10 +17,8 @@ import java.io.InputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
-import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 import uni.mapadventureproject.GameInteraction;
 
@@ -61,14 +59,11 @@ public class GameGUI extends javax.swing.JFrame {
             jmiSaveGame.setFont(fontMinecraft);
             jmHelp.setFont(fontMinecraft);
             jmiHelp.setFont(fontMinecraft);
-            jtaReadingArea.setFont(fontMinecraft);
             jlCommand.setFont(fontMinecraft.deriveFont(Font.BOLD, 14));
             jtTypingField.setFont(fontMinecraft);
             jbSend.setFont(fontMinecraft);
             jbUp.setFont(fontMinecraft);
             jbDown.setFont(fontMinecraft);
-            jtaReadingArea.setVisible(false); //da rimuovere
-            jspRead.setVisible(false); //da rimuovere
             jtpReadingArea.setFont(fontMinecraft);
            
 
@@ -78,9 +73,9 @@ public class GameGUI extends javax.swing.JFrame {
     }
 
     public void initGame() {
+        
         jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
-        //appendToPane(jtpReadingArea, gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n", Color.white);
-        jtaReadingArea.append(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
+        
     }
 
     /**
@@ -101,8 +96,6 @@ public class GameGUI extends javax.swing.JFrame {
         jbDown = new javax.swing.JButton();
         jlCommand = new javax.swing.JLabel();
         jbSend = new javax.swing.JButton();
-        jspRead = new javax.swing.JScrollPane();
-        jtaReadingArea = new javax.swing.JTextArea();
         jspWrite = new javax.swing.JScrollPane();
         jtTypingField = new javax.swing.JTextField();
         jlImage = new javax.swing.JLabel();
@@ -301,28 +294,6 @@ public class GameGUI extends javax.swing.JFrame {
         getContentPane().add(jbSend);
         jbSend.setBounds(569, 563, 79, 31);
 
-        jspRead.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jspRead.setToolTipText("");
-        jspRead.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jspRead.setMaximumSize(new java.awt.Dimension(900, 450));
-        jspRead.setMinimumSize(new java.awt.Dimension(900, 450));
-        jspRead.setPreferredSize(new java.awt.Dimension(900, 450));
-
-        jtaReadingArea.setEditable(false);
-        jtaReadingArea.setBackground(new java.awt.Color(0, 0, 0));
-        jtaReadingArea.setColumns(20);
-        jtaReadingArea.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jtaReadingArea.setForeground(new java.awt.Color(255, 255, 255));
-        jtaReadingArea.setLineWrap(true);
-        jtaReadingArea.setRows(15);
-        jtaReadingArea.setBorder(null);
-        jtaReadingArea.setMaximumSize(new java.awt.Dimension(900, 450));
-        jtaReadingArea.setMinimumSize(new java.awt.Dimension(900, 450));
-        jspRead.setViewportView(jtaReadingArea);
-
-        getContentPane().add(jspRead);
-        jspRead.setBounds(40, 30, 520, 450);
-
         jspWrite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         jspWrite.setAutoscrolls(true);
         jspWrite.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -439,16 +410,12 @@ public class GameGUI extends javax.swing.JFrame {
         if (!jtTypingField.getText().isBlank()) {
 
             String s = jtTypingField.getText();
-            //jtpReadingArea.append("\n> " + s + "\n");
             appendToPane(jtpReadingArea, "\n> " + s + "\n", new Color(104, 140, 189));
 
             jtTypingField.setText("");
 
-            //jtaReadingArea.setForeground(Color.red);
-            //jtpReadingArea.append("\n" + gInteraction.inputManager(s) + "\n");
             appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager(s) + "\n", Color.white);
 
-            //jtaReadingArea.setForeground(Color.white);
         }
 
     }//GEN-LAST:event_jbSendActionPerformed
@@ -577,11 +544,9 @@ public class GameGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiHelp;
     private javax.swing.JMenuItem jmiSaveGame;
     private javax.swing.JPanel jpButtons;
-    private javax.swing.JScrollPane jspRead;
     private javax.swing.JScrollPane jspRead2;
     private javax.swing.JScrollPane jspWrite;
     private javax.swing.JTextField jtTypingField;
-    private javax.swing.JTextArea jtaReadingArea;
     private javax.swing.JTextPane jtpReadingArea;
     // End of variables declaration//GEN-END:variables
 }
