@@ -7,11 +7,8 @@ package uni.mapadventureproject.GUI;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import uni.mapadventureproject.type.Inventory;
@@ -30,8 +27,8 @@ public class InventoryGUI extends javax.swing.JFrame {
      */
     public InventoryGUI(Inventory inv) {
         initComponents();
-        init();
         this.inv = inv;
+        init();
     }
 
     public void init() {
@@ -43,34 +40,32 @@ public class InventoryGUI extends javax.swing.JFrame {
         jScrollPane1.setSize(660, 660);
         jScrollPane1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         jScrollPane1.setAlignmentX(50);
-        //jScrollPane1.setAlignmentY(50);
         jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        //jScrollPane1.setVisible(false);
-     try{
-        for (Item i :inv.getInventoryList()) {
 
-            JButton jbImage = new JButton();
-            jbImage.setBackground(Color.black);
+        try {
+            for (Item i : inv.getInventoryList()) {
 
-            ImageIcon img =i.getImage(); //new ImageIcon("C://Users//marta//MAPAdventure//MAPAdventureProject//img//placeHolder.png");
-            Image img2 = img.getImage();
-            jbImage.setIcon(new ImageIcon(img2.getScaledInstance(75, 75, 0)));
-            jbImage.setSize(75, 75);
-            jbImage.setToolTipText(i.getName());
+                JButton jbImage = new JButton();
+                jbImage.setBackground(Color.black);
+                jbImage.setFocusable(false);
 
-            jbImage.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jbImageActionPerformed(evt, i.getDesc(),i.getName());
-                }
-            });
+                ImageIcon img = i.getItemImage();
+                jbImage.setIcon(img);
+                jbImage.setSize(75, 75);
+                jbImage.setToolTipText(i.getName());
 
-            jInventoryPanel.add(jbImage);
+                jbImage.addActionListener(new java.awt.event.ActionListener() {
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        jbImageActionPerformed(evt, i.getDesc(), i.getName());
+                    }
+                });
+
+                jInventoryPanel.add(jbImage);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
         }
-     }catch(Exception e) {
-         JOptionPane.showMessageDialog(this,e.getLocalizedMessage(), "Errore" ,JOptionPane.ERROR_MESSAGE);
-     }
-        //}
     }
 
     private void jbImageActionPerformed(java.awt.event.ActionEvent evt, String ItemDesc, String ItemName) {
@@ -91,7 +86,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         jInventoryPanel = new javax.swing.JPanel();
         jBackgroundLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inventario");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(700, 700));
@@ -119,6 +114,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         jScrollPane1.setBounds(20, 20, 660, 660);
 
         jBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jBackgroundLabel.setIcon(new javax.swing.ImageIcon("img//invBackground.png"));
         jBackgroundLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jBackgroundLabel.setMaximumSize(new java.awt.Dimension(700, 700));
         jBackgroundLabel.setMinimumSize(new java.awt.Dimension(700, 700));
@@ -163,7 +159,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               //new InventoryGUI().setVisible(true);
+                //new InventoryGUI().setVisible(true);
             }
         });
     }

@@ -18,7 +18,7 @@ public class Item implements Serializable {
     private boolean pushable = false;
     private boolean open = false;
     private boolean push = false;
-    private ImageIcon image;
+    private ImageIcon itemImage;
 
     public Item(int id, String name, String desc) {
         this.id = id;
@@ -102,15 +102,13 @@ public class Item implements Serializable {
         this.push = push;
     }
 
-    public ImageIcon getImage() {
-        return image;
+    public ImageIcon getItemImage() {
+        return itemImage;
     }
 
-    public void setImage(ImageIcon image) {
-        this.image = image;
-    }
-
-    
+    public void setItemImage(ImageIcon itemImage) {
+        this.itemImage = itemImage;
+    }    
     
     @Override
     public int hashCode() {
