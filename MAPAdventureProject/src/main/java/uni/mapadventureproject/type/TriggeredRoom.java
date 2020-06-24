@@ -15,6 +15,7 @@ public class TriggeredRoom extends Room {
 
     private boolean trigger = false;
     private String triggerDesc;
+    private String triggerer;
 
     public TriggeredRoom(int id, String name, String desc, String triggerDesc) {
         super(id, name, desc);
@@ -36,6 +37,14 @@ public class TriggeredRoom extends Room {
 
     public void setTriggerDesc(String triggerDesc) {
         this.triggerDesc = triggerDesc;
+    }
+
+    public String getTriggerer() {
+        return triggerer;
+    }
+
+    public void setTriggerer(String triggerer) {
+        this.triggerer = triggerer;
     }
 
     @Override
