@@ -144,7 +144,7 @@ public class MSGame extends GameManager {
             //Triggera la stanza, se necessario
             if (r instanceof TriggeredRoom) {
                 
-                if (!((TriggeredRoom) r).isTrigger()) { //Se la stanza non e' gia' triggerata
+                if (((TriggeredRoom) r).isTriggerable()) { //Se la stanza è triggerabile
                     
                     String triggerer = commandMap.get(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
                     
@@ -159,9 +159,9 @@ public class MSGame extends GameManager {
                             triggerer += " " + commandMap.get(WordType.I_OBJ);
                             
                         }
-
-                        //se triggerer=triggerer della stanza, si effettua il trigger
-                        if (triggerer.equals(((TriggeredRoom) r).getTriggerer())) {
+                        
+                        //se triggerer=triggerer attuale della stanza, si effettua il trigger
+                        if (triggerer.equals(((TriggeredRoom) r).getCurrentTriggerer())) {
 
                             ((TriggeredRoom) r).setTrigger(true);
                             output += "\n\n" + r.getDesc();
