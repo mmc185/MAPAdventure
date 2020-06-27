@@ -1,4 +1,4 @@
-package files;
+package uni.mapadventureproject.files;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,7 +34,7 @@ public class FileSaver {
         img = new ImageIcon("img//inventario//appunti.png");
         notes.setItemImage(img);
         g.getInventory().add(notes);
-        Item umbrella = new Item(52, "ombrello", "Fidato ombrello, ogni volta che ce l'hai con te non piove mai!");
+        Item umbrella = new Item(52, "ombrello verde", "Fidato ombrello, ogni volta che ce l'hai con te non piove mai!");
         umbrella.setAlias(new String[]{"ombrellino"});
         img = new ImageIcon("img//inventario//ombrello.png");
         umbrella.setItemImage(img);
@@ -128,13 +128,40 @@ public class FileSaver {
         //Comando buttati?
         //TODO Serve anche un comando per uscire dal gioco?
         g.setCurrentRoom(station);
+        
+        ///////
+        Room r1 = new Room(3, "Stanza normale", "Una stanza normale, che ne pensi?");
+        r1.setLook("Vedi una piccola spazzola rosa");
+        
+        
+        Item i = new Item(11,"spazzola rosa", "Una piccola spazzola per togliere nodi");
+        i.setAlias(new String[]{"pettine rosa"});
+        i.setPickupable(true);
+        r1.addItem(i);
+        
+        Room rLocked = new Room(4, "Stanza Lockata", "Hey ce l'hai fatta ad entrare!");
+        r1.setWest(rLocked);
+        rLocked.setLockedBy("spazzola rosa");
+        
+        Room rTrig = new TriggeredRoom(5, "Stanza Trigger", "Hey attento che mi triggero così");
+        ((TriggeredRoom) rTrig).addTriggerer("premi bottone");
+        ((TriggeredRoom) rTrig).addTriggerDesc("[TRIGGERED]");
+        ((TriggeredRoom) rTrig).addTriggerer("guarda appunti");
+        ((TriggeredRoom) rTrig).addTriggerDesc("beh che dire.");
+        rLocked.setNorth(rTrig);
+        rTrig.setSouth(wagon);
+        wagon.setEast(rTrig);
+        
+        Item i2 = new Item(12, "bottone", "Grande e grosso bottone rosso");
+        i2.setPushable(true);
+        rTrig.addItem(i2);
+        
 
     }
 
     public void saveFile(String path, Game g) throws FileNotFoundException, IOException {
 
-        // FileOutputStream fOut = new FileOutputStream(path + "/Save.dat");
-        FileOutputStream fOut = new FileOutputStream(path + "/Intro.dat");
+        FileOutputStream fOut = new FileOutputStream(path + "/Save.dat");
         ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 
         objOut.writeObject(g.getCommands());
