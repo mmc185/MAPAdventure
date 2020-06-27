@@ -8,7 +8,6 @@ import uni.mapadventureproject.type.Inventory;
 import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.Room;
 
-
 public class Parser {
 
     public Map<WordType, String> parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) throws InvalidStringException {
@@ -17,7 +16,7 @@ public class Parser {
         Map<WordType, String> parsedData = new HashMap<>();
 
         // Rimuove anche punteggiatura e cifre
-        String[] tokens = phrase.replaceAll("[^a-zA-Z ]", " ").toLowerCase().split("\\s+");
+        String[] tokens = phrase.replaceAll("[^a-zA-Z]", " ").toLowerCase().split("\\s+");
 
         for (String t : tokens) {
 
@@ -26,26 +25,30 @@ public class Parser {
                 parsedData.put(WordType.COMMAND, t);
 
             } else if (this.isCommand(t, commands) && !parsedData.isEmpty()) {
-                
+
                 throw new InvalidStringException();
-                
+
             }
 
         }
 
         if (!parsedData.isEmpty()) {
 
-            for (String t : tokens) {
+            String s;
 
-                if (this.isItem(t, inv)) {
+            // Ciclo con indice poiché serve mantenere il contatore
+            for (short i = 0; i < tokens.length; i++) {
 
-                    parsedData.put(WordType.I_OBJ, t);
+                // Controlla se il token corrispondente è un oggetto dell'inventario o  della stanza
+                if (!(s = this.isItem(tokens[i], inv, tokens, i)).isEmpty()) {
+
+                    parsedData.put(WordType.I_OBJ, s);
 
                 }
 
-                if (this.isItem(t, currentRoom.getItemList())) {
+                if (!(s = this.isItem(tokens[i], currentRoom.getItemList(), tokens, i)).isEmpty()) {
 
-                    parsedData.put(WordType.R_OBJ, t);
+                    parsedData.put(WordType.R_OBJ, s);
 
                 }
 
@@ -58,6 +61,7 @@ public class Parser {
         return parsedData;
     }
 
+    
     private boolean isCommand(String s, Set<Command> commands) {
 
         for (Command c : commands) {
@@ -73,19 +77,37 @@ public class Parser {
         return false;
     }
 
-    private boolean isItem(String s, Inventory inv) {
+    /** Gli oggetti possono essere formati da una o due parole */
+    private String isItem(String s, Inventory inv, String[] tokens, short counter) {
 
-        for (Item i : inv.getInventoryList()) {
+        try {
 
-            if (i.getName().equals(s) || i.getAlias().contains(s)) {
+            for (Item i : inv.getInventoryList()) {
 
-                return true;
+                if (i.getName().equals(s) || i.getAlias().contains(s)) {
+
+                    return s;
+
+                } else if (i.getName().startsWith(s) /*|| i.getAlias().contains(s)*/) {
+
+                    if (i.getName().contains(tokens[counter + 1]) /*|| i.getAlias().contains(tokens[counter + 1])*/) {
+
+                        return s + " " + tokens[counter + 1];
+
+                    }
+
+                }
 
             }
 
+            return "";
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            
+            return "";
+            
         }
 
-        return false;
     }
 
 }
