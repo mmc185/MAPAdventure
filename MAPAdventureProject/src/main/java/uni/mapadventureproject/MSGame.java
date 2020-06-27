@@ -27,6 +27,7 @@ public class MSGame extends GameManager {
         Room r = null;
         Item i = null;
         String output = "";
+        GameTime gTime=new GameTime(); //aggiunto
 
         try {
 
@@ -135,6 +136,13 @@ public class MSGame extends GameManager {
                     break;
                 case WAKE_UP:
                     //output = "bad ending?";
+                    gTime.task.cancel();
+                    gTime.time.cancel();
+                    
+                    System.out.println(gTime.getSecondPassed()); //PROVA
+                    
+                    output="Hai scelto la via più semplice e questo non ti fa onore"
+                            +"\n HAI COMPLETATO IL GIOCO IN: "+gTime.secondPassed+" SECONDI";
                     break;
             }
 
