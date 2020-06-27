@@ -7,6 +7,7 @@ package uni.mapadventureproject;
 
 import java.util.Map;
 import java.util.Objects;
+import uni.mapadventureproject.parser.InvalidStringException;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.CommandType;
 import uni.mapadventureproject.type.Item;
@@ -23,137 +24,162 @@ public class MSGame extends GameManager {
     public String executeCommand(Map<WordType, String> commandMap) {
 
         CommandType command = this.getCommandType(commandMap.get(WordType.COMMAND));
-        Room r = null; 
+        Room r = null;
         Item i = null;
         String output = "";
 
-        switch (command) {
-            case MOVE_S:
-            case MOVE_N:
-            case MOVE_E:
-            case MOVE_W:
-            case MOVE_U:
-            case MOVE_D:
+        try {
 
-                if (Objects.isNull(r = this.move(command))) {
-                    output = "Non puoi andare lì!";
-                } else if (r.getLockedBy().equals("")) {
+            switch (command) {
+                case MOVE_S:
+                case MOVE_N:
+                case MOVE_E:
+                case MOVE_W:
+                case MOVE_U:
+                case MOVE_D:
 
-                    this.getGame().setCurrentRoom(r);
-                    output = this.getGame().getCurrentRoom().getDesc();
+                    if (Objects.isNull(r = this.move(command))) {
+                        output = "Non puoi andare lì!";
 
-                } else {
-                    output = "Questa stanza è chiusa!";
-                }
-                break;
-            case INV:
+                    } else if (r.getLockedBy().equals("")) {
 
-                output = "Oggetti presenti nell'inventario: " + this.getGame().getInventory().toString();
-                break;
-            case LOOK:
-
-                if (commandMap.size() == 2) {
-
-                    if (commandMap.containsKey(WordType.I_OBJ)) {
-                        i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-                    } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                        i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-                    }
-
-                    output = i.getDesc();
-
-                } else if (commandMap.size() == 1) {
-
-                    output = this.getGame().getCurrentRoom().getLook();
-
-                } else if (commandMap.size() > 2) {
-                    output = "Uno alla volta, ho una certa età."; ///???? da rimuovere? throw eccezione?
-                }
-                break;
-            case PICK_UP:
-
-                if (commandMap.containsKey(WordType.R_OBJ)) {
-
-                    i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-
-                    if (!Objects.isNull(i) && i.isPickupable()) {
-
-                        this.getGame().getInventory().add(i);
-                        this.getGame().getCurrentRoom().getItemList().remove(i);
-
-                        output = "L'oggetto è stato aggiunto al tuo inventario.";
+                        this.getGame().setCurrentRoom(r);
+                        output = "===========================================\n"
+                                + this.getGame().getCurrentRoom().getDesc();
 
                     } else {
-                        output = "Non puoi prendere questo oggetto.";
+                        output = "Questa stanza è chiusa!";
                     }
-                } else {
-                    //output = "Prendere cosa?";
-                }
-                break;
-            case OPEN:
+                    break;
+                case INV:
 
-                if (commandMap.size() == 2 && commandMap.containsKey(WordType.I_OBJ)) {
+                    output = "Oggetti presenti nell'inventario: " + this.getGame().getInventory().toString();
+                    break;
+                case LOOK:
 
-                    i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-                    this.unlockRoom(i.getName());
+                    if (commandMap.size() == 2) {
 
-                }
-                break;
-            case PUSH:
+                        if (commandMap.containsKey(WordType.I_OBJ)) {
+                            i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
+                        } else if (commandMap.containsKey(WordType.R_OBJ)) {
+                            i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
+                        }
 
-                if (commandMap.containsKey(WordType.I_OBJ)) {
-                    i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-                } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                    i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-                }
+                        output = i.getDesc();
 
-                if (i.isPushable()) {
-                    i.setPush(true);
-                } //???
+                    } else if (commandMap.size() == 1) {
 
-                break;
-            case RUN:
+                        output = this.getGame().getCurrentRoom().getLook();
 
-                output = "Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!";
-                break;
-            case EXIT:
-                //System.exit(0);
-                break;
-            case WAKE_UP:
-                //output = "bad ending?";
-                break;
-        }
-
-        //Triggera la stanza, se necessario
-        if (r instanceof TriggeredRoom) {
-
-            if (!((TriggeredRoom) r).isTrigger()) { //Se la stanza non e' gia' triggerata
-              
-                String triggerer = null; //Stringa da confrontare con quella che causa il trigger
-
-                if (commandMap.size() == 2) {
+                    } else if (commandMap.size() > 2) {
+                        output = "Uno alla volta, ho una certa età."; ///???? da rimuovere? throw eccezione?
+                    }
+                    break;
+                case PICK_UP:
 
                     if (commandMap.containsKey(WordType.R_OBJ)) {
 
-                        triggerer = command + " " + commandMap.get(WordType.R_OBJ);
+                        i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
 
-                    } else if (commandMap.containsKey(WordType.I_OBJ)) {
+                        if (!Objects.isNull(i) && i.isPickupable()) {
 
-                        triggerer = command + " " + commandMap.get(WordType.I_OBJ);
+                            this.getGame().getInventory().add(i);
+                            this.getGame().getCurrentRoom().getItemList().remove(i);
 
+                            output = "L'oggetto è stato aggiunto al tuo inventario.";
+
+                        } else {
+                            output = "Non puoi prendere questo oggetto.";
+                        }
+                    } else {
+                        output = "Prendere cosa?";
+                    }
+                    break;
+                case OPEN:
+
+                    if (commandMap.size() == 2 && commandMap.containsKey(WordType.I_OBJ)) {
+
+                        i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
+                        this.unlockRoom(i.getName());
+
+                        output = "Hai sbloccato la stanza!";
+
+                    } else {
+                        output = "Non puoi aprire la stanza con un oggetto non tuo!";
                     }
 
-                    //se triggerer=triggerer della stanza, si effettua il trigger
-                    if (triggerer.equals(((TriggeredRoom) r).getTriggerer())) {
+                    break;
+                case PUSH:
 
-                        ((TriggeredRoom) r).setTrigger(true);
+                    if (commandMap.containsKey(WordType.I_OBJ)) {
+                        
+                        i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
+                        
+                    } else if (commandMap.containsKey(WordType.R_OBJ)) {
+                        
+                        i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
+                        
+                    }
 
+                    if (i.isPushable() && !i.isPush()) {
+                        i.setPush(true);
+                    } //???
+
+                    break;
+                case RUN:
+
+                    output = "Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!";
+                    break;
+                case EXIT:
+                    //System.exit(0);
+                    break;
+                case WAKE_UP:
+                    //output = "bad ending?";
+                    break;
+            }
+
+            
+            r = this.getGame().getCurrentRoom();
+            
+            //Triggera la stanza, se necessario
+            if (r instanceof TriggeredRoom) {
+                
+                if (!((TriggeredRoom) r).isTrigger()) { //Se la stanza non e' gia' triggerata
+                    
+                    String triggerer = commandMap.get(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
+                    
+                    if (commandMap.size() == 2) {
+
+                        if (commandMap.containsKey(WordType.R_OBJ)) {
+
+                            triggerer += " " + commandMap.get(WordType.R_OBJ);
+                            
+                        } else if (commandMap.containsKey(WordType.I_OBJ)) {
+
+                            triggerer += " " + commandMap.get(WordType.I_OBJ);
+                            
+                        }
+
+                        //se triggerer=triggerer della stanza, si effettua il trigger
+                        if (triggerer.equals(((TriggeredRoom) r).getTriggerer())) {
+
+                            ((TriggeredRoom) r).setTrigger(true);
+                            output += "\n\n" + r.getDesc();
+
+                        }
                     }
                 }
             }
-        }
+           
+        } catch (NullPointerException e) {
 
-        return output;
+            output = "Sembra esserci qualcosa di strano in questa richiesta..."; //boh da cambiare?
+
+        } finally {
+
+            return output;
+
+        }
 
     }
 
@@ -179,25 +205,43 @@ public class MSGame extends GameManager {
     public boolean unlockRoom(String iName) {
 
         boolean flag = false;
-        //try / catch?
-        if (this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
+        
+        if (!Objects.isNull(this.getGame().getCurrentRoom().getSouth())
+                && this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
+
             this.getGame().getCurrentRoom().getSouth().setLockedBy("");
             flag = true;
-        } else if (this.getGame().getCurrentRoom().getNorth().getLockedBy().equals(iName)) {
+
+        } else if (!Objects.isNull(this.getGame().getCurrentRoom().getNorth())
+                && this.getGame().getCurrentRoom().getNorth().getLockedBy().equals(iName)) {
+
             this.getGame().getCurrentRoom().getNorth().setLockedBy("");
             flag = true;
-        } else if (this.getGame().getCurrentRoom().getEast().getLockedBy().equals(iName)) {
+
+        } else if (!Objects.isNull(this.getGame().getCurrentRoom().getEast())
+                && this.getGame().getCurrentRoom().getEast().getLockedBy().equals(iName)) {
+
             this.getGame().getCurrentRoom().getEast().setLockedBy("");
             flag = true;
-        } else if (this.getGame().getCurrentRoom().getWest().getLockedBy().equals(iName)) {
+
+        } else if (!Objects.isNull(this.getGame().getCurrentRoom().getWest())
+                && this.getGame().getCurrentRoom().getWest().getLockedBy().equals(iName)) {
+
             this.getGame().getCurrentRoom().getWest().setLockedBy("");
             flag = true;
-        } else if (this.getGame().getCurrentRoom().getUp().getLockedBy().equals(iName)) {
+
+        } else if (!Objects.isNull(this.getGame().getCurrentRoom().getUp())
+                && this.getGame().getCurrentRoom().getUp().getLockedBy().equals(iName)) {
+
             this.getGame().getCurrentRoom().getUp().setLockedBy("");
             flag = true;
-        } else if (this.getGame().getCurrentRoom().getDown().getLockedBy().equals(iName)) {
+
+        } else if (!Objects.isNull(this.getGame().getCurrentRoom().getSouth())
+                && this.getGame().getCurrentRoom().getDown().getLockedBy().equals(iName)) {
+
             this.getGame().getCurrentRoom().getDown().setLockedBy("");
             flag = true;
+
         }
 
         return flag;

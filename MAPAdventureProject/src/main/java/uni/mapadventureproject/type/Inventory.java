@@ -43,7 +43,7 @@ public class Inventory implements Serializable {
     }
     
     public Item searchItem(String iName) {
-        for (Item i : this.getInventoryList()) {
+        for (Item i : inventoryList ) {
             if (i.getName().equals(iName) || i.getAlias().contains(iName)) {
 
                 return i;

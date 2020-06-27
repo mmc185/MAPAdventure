@@ -13,21 +13,26 @@ import java.util.Objects;
  */
 public class TriggeredRoom extends Room {
 
-    private boolean trigger = false;
+    private boolean activedTrigger = false;
     private String triggerDesc;
     private String triggerer;
 
-    public TriggeredRoom(int id, String name, String desc, String triggerDesc) {
+    public TriggeredRoom(int id, String name, String desc) {
         super(id, name, desc);
+    }
+    
+    public TriggeredRoom(int id, String name, String desc, String triggerer, String triggerDesc) {
+        super(id, name, desc);
+        this.triggerer = triggerer;
         this.triggerDesc = triggerDesc;
     }
 
     public boolean isTrigger() {
-        return trigger;
+        return activedTrigger;
     }
 
     public void setTrigger(boolean trigger) {
-        this.trigger = trigger;
+        this.activedTrigger = trigger;
         setDesc(triggerDesc);
     }
 
@@ -50,7 +55,7 @@ public class TriggeredRoom extends Room {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + (this.trigger ? 1 : 0);
+        hash = 89 * hash + (this.activedTrigger ? 1 : 0);
         hash = 89 * hash + Objects.hashCode(this.triggerDesc);
         return hash;
     }
@@ -67,7 +72,7 @@ public class TriggeredRoom extends Room {
             return false;
         }
         final TriggeredRoom other = (TriggeredRoom) obj;
-        if (this.trigger != other.trigger) {
+        if (this.activedTrigger != other.activedTrigger) {
             return false;
         }
         if (!Objects.equals(this.triggerDesc, other.triggerDesc)) {
