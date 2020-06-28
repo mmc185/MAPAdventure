@@ -16,8 +16,11 @@ import uni.mapadventureproject.type.TriggeredRoom;
 
 public class MSGame extends GameManager {
 
+    GameTimeThread gTime = new GameTimeThread();
+
     public MSGame(Game g) {
         super(g);
+        gTime.start();
     }
 
     @Override
@@ -27,7 +30,6 @@ public class MSGame extends GameManager {
         Room r = null;
         Item i = null;
         String output = "";
-        GameTime gTime=new GameTime(); //aggiunto
 
         try {
 
@@ -113,13 +115,13 @@ public class MSGame extends GameManager {
                 case PUSH:
 
                     if (commandMap.containsKey(WordType.I_OBJ)) {
-                        
+
                         i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-                        
+
                     } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                        
+
                         i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-                        
+
                     }
 
                     if (i.isPushable() && !i.isPush()) {
@@ -136,36 +138,31 @@ public class MSGame extends GameManager {
                     break;
                 case WAKE_UP:
                     //output = "bad ending?";
-                    gTime.task.cancel();
-                    gTime.time.cancel();
-                    
-                    System.out.println(gTime.getSecondPassed()); //PROVA
-                    
-                    output="Hai scelto la via più semplice e questo non ti fa onore"
-                            +"\n HAI COMPLETATO IL GIOCO IN: "+gTime.secondPassed+" SECONDI";
+
+                    output = "Hai scelto la via più semplice e questo non ti fa onore"
+                            + "\n \n HAI COMPLETATO IL GIOCO IN : " + gTime.getTime(gTime.secondPassed);
                     break;
             }
 
-            
             r = this.getGame().getCurrentRoom();
-            
+
             //Triggera la stanza, se necessario
             if (r instanceof TriggeredRoom) {
-                
+
                 if (!((TriggeredRoom) r).isTrigger()) { //Se la stanza non e' gia' triggerata
-                    
+
                     String triggerer = commandMap.get(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
-                    
+
                     if (commandMap.size() == 2) {
 
                         if (commandMap.containsKey(WordType.R_OBJ)) {
 
                             triggerer += " " + commandMap.get(WordType.R_OBJ);
-                            
+
                         } else if (commandMap.containsKey(WordType.I_OBJ)) {
 
                             triggerer += " " + commandMap.get(WordType.I_OBJ);
-                            
+
                         }
 
                         //se triggerer=triggerer della stanza, si effettua il trigger
@@ -178,7 +175,7 @@ public class MSGame extends GameManager {
                     }
                 }
             }
-           
+
         } catch (NullPointerException e) {
 
             output = "Sembra esserci qualcosa di strano in questa richiesta..."; //boh da cambiare?
@@ -213,7 +210,7 @@ public class MSGame extends GameManager {
     public boolean unlockRoom(String iName) {
 
         boolean flag = false;
-        
+
         if (!Objects.isNull(this.getGame().getCurrentRoom().getSouth())
                 && this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
 

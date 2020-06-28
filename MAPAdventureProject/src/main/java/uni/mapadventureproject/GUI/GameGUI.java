@@ -15,7 +15,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
@@ -23,7 +22,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import uni.mapadventureproject.GameInteraction;
-import uni.mapadventureproject.GameTime;
+import uni.mapadventureproject.GameTimeThread;
 
 /**
  *
@@ -35,7 +34,7 @@ public class GameGUI extends javax.swing.JFrame {
     Font font;
     Font fontMinecraft;
     Timer time;
-    GameTime gtime;
+    GameTimeThread gtime;
 
     /**
      * Creates new form GameGUI
@@ -79,8 +78,7 @@ public class GameGUI extends javax.swing.JFrame {
     public void initGame() {
 
         jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
-        gtime=new GameTime();
-        gtime.start();
+       
         
     }
     
