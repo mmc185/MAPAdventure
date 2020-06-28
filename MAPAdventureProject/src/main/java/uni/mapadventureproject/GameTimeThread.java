@@ -14,10 +14,9 @@ import java.util.TimerTask;
  */
 public class GameTimeThread {
 
-    int secondPassed = 0;
-    int v;
-    Timer time = new Timer();
-    TimerTask task = new TimerTask() {
+    private int secondPassed = 0;
+    private Timer time = new Timer();
+    private TimerTask task = new TimerTask() {
         @Override
         public void run() {
             secondPassed++;
@@ -31,6 +30,32 @@ public class GameTimeThread {
 
     }
 
+    public int getSecondPassed() {
+        return secondPassed;
+    }
+
+    public void setSecondPassed(int secondPassed) {
+        this.secondPassed = secondPassed;
+    }
+
+    public Timer getTime() {
+        return time;
+    }
+
+    public void setTime(Timer time) {
+        this.time = time;
+    }
+
+    public TimerTask getTask() {
+        return task;
+    }
+
+    public void setTask(TimerTask task) {
+        this.task = task;
+    }
+
+    
+    
     public String getTime(int secondPassed) {
         
         int hours = 0;

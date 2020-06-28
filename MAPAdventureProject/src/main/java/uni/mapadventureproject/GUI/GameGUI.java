@@ -33,8 +33,7 @@ public class GameGUI extends javax.swing.JFrame {
     GameInteraction gInteraction;
     Font font;
     Font fontMinecraft;
-    Timer time;
-    GameTimeThread gtime;
+    
 
     /**
      * Creates new form GameGUI

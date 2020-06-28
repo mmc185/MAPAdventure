@@ -16,7 +16,7 @@ import uni.mapadventureproject.type.TriggeredRoom;
 
 public class MSGame extends GameManager {
 
-    GameTimeThread gTime = new GameTimeThread();
+    private GameTimeThread gTime = new GameTimeThread();
 
     public MSGame(Game g) {
         super(g);
@@ -140,7 +140,7 @@ public class MSGame extends GameManager {
                     //output = "bad ending?";
 
                     output = "Hai scelto la via più semplice e questo non ti fa onore"
-                            + "\n \n HAI COMPLETATO IL GIOCO IN : " + gTime.getTime(gTime.secondPassed);
+                            + "\n \n HAI COMPLETATO IL GIOCO IN : " + gTime.getTime(gTime.getSecondPassed());
                     break;
             }
 
