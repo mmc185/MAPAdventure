@@ -34,9 +34,9 @@ public class FileSaver {
         img = new ImageIcon("img//inventario//appunti.png");
         notes.setItemImage(img);
         g.getInventory().add(notes);
-        Item umbrella = new Item(52, "ombrello verde", "Fidato ombrello, ogni volta che ce l'hai con te non piove mai!");
+        Item umbrella = new Item(52, "ombrello", "Fidato ombrello, ogni volta che ce l'hai con te non piove mai!");
         umbrella.setAlias(new String[]{"ombrellino"});
-        img = new ImageIcon("img//inventario//ombrello.png");
+        img = new ImageIcon("img//inventario//biglietto.png");
         umbrella.setItemImage(img);
         g.getInventory().add(umbrella);
         Item bottle = new Item(53, "borraccia", "La borraccia che hai aspettato tanto per avere dal DIB, forse facevi prima a scroccarla dal PoliBa...");
@@ -53,7 +53,10 @@ public class FileSaver {
         //Oggetti non inventario
         Item buttonTrain = new Item(55, "bottone", "Bottone per far aprire le porte del treno");
         buttonTrain.setAlias(new String[] {"pulsante"});
+        img = new ImageIcon("img//inventario//biglietto.png");
+        buttonTrain.setItemImage(img);
         buttonTrain.setPushable(true);
+        buttonTrain.setConsumable((byte) 1);
         
         Item note = new Item(56, "bigliettino", "\"Ho preso un oggetto per te importante, se vuoi averlo indietro devi portarmi degli oggetti altrettanto importanti per me:\n"
                 + "1) OggettoX dal portale nella direzione in cui sorge il sole,\n"
@@ -160,7 +163,7 @@ public class FileSaver {
         up.setAlias(new String[]{"sopra", "su"});
         g.getCommands().add(up);
         Command down = new Command("scendi", CommandType.MOVE_D);
-        down.setAlias(new String[]{"sotto", "giù"});
+        down.setAlias(new String[]{"sotto", "giu"});
         g.getCommands().add(down);
         Command escape = new Command("scappa", CommandType.RUN);
         escape.setAlias(new String[]{"fuggi", "muori", "crepa"});
@@ -180,7 +183,7 @@ public class FileSaver {
 
     public void saveFile(String path, Game g) throws FileNotFoundException, IOException {
 
-        FileOutputStream fOut = new FileOutputStream(path + "/Save.dat");
+        FileOutputStream fOut = new FileOutputStream(path + "/Intro.dat");
         ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 
         objOut.writeObject(g.getCommands());
