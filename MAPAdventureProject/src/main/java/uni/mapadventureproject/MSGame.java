@@ -27,6 +27,8 @@ public class MSGame extends GameManager {
         Room r = null;
         Item i = null;
         String output = "";
+        
+        this.advancePlot();
 
         try {
 
@@ -72,7 +74,9 @@ public class MSGame extends GameManager {
                         output = this.getGame().getCurrentRoom().getLook();
 
                     } else if (commandMap.size() > 2) {
+                        
                         output = "Uno alla volta, ho una certa età."; ///???? da rimuovere? throw eccezione?
+                        
                     }
                     break;
                 case PICK_UP:
@@ -91,8 +95,14 @@ public class MSGame extends GameManager {
                         } else {
                             output = "Non puoi prendere questo oggetto.";
                         }
+                    } else if (commandMap.containsKey(WordType.I_OBJ)) {
+                        
+                        output = "Non puoi prendere qualcosa che hai già con te!";
+                        
                     } else {
-                        output = "Prendere cosa?";
+                        
+                        output = "Prendere... cosa?";
+                        
                     }
                     break;
                 case OPEN:
@@ -105,24 +115,26 @@ public class MSGame extends GameManager {
                         output = "Hai sbloccato la stanza!";
 
                     } else {
-                        output = "Non puoi aprire la stanza con un oggetto non tuo!";
+                        output = "Non puoi aprire la stanza così!";
                     }
 
                     break;
                 case PUSH:
 
                     if (commandMap.containsKey(WordType.I_OBJ)) {
-                        
+
                         i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-                        
+
                     } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                        
+
                         i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-                        
+
                     }
 
                     if (i.isPushable() && !i.isPush()) {
                         i.setPush(true);
+                        this.unlockRoom(i.getName());
+                        output = i.getName() + " premuto!";
                     } //???
 
                     break;
@@ -138,39 +150,39 @@ public class MSGame extends GameManager {
                     break;
             }
 
-            
             r = this.getGame().getCurrentRoom();
-            
+
             //Triggera la stanza, se necessario
             if (r instanceof TriggeredRoom) {
-                
+
                 if (((TriggeredRoom) r).isTriggerable()) { //Se la stanza è triggerabile
-                    
+
                     String triggerer = commandMap.get(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
-                    
+
                     if (commandMap.size() == 2) {
 
                         if (commandMap.containsKey(WordType.R_OBJ)) {
 
                             triggerer += " " + commandMap.get(WordType.R_OBJ);
-                            
+
                         } else if (commandMap.containsKey(WordType.I_OBJ)) {
 
                             triggerer += " " + commandMap.get(WordType.I_OBJ);
-                            
-                        }
-                        
-                        //se triggerer=triggerer attuale della stanza, si effettua il trigger
-                        if (triggerer.equals(((TriggeredRoom) r).getCurrentTriggerer())) {
-
-                            ((TriggeredRoom) r).setTrigger(true);
-                            output += "\n\n" + r.getDesc();
 
                         }
                     }
+
+                    //se triggerer=triggerer attuale della stanza, si effettua il trigger
+                    if (triggerer.equals(((TriggeredRoom) r).getCurrentTriggerer())) {
+
+                        ((TriggeredRoom) r).setTrigger(true);
+                        output += "\n\n" + r.getDesc();
+
+                    }
+
                 }
             }
-           
+
         } catch (NullPointerException e) {
 
             output = "Sembra esserci qualcosa di strano in questa richiesta..."; //boh da cambiare?
@@ -236,7 +248,7 @@ public class MSGame extends GameManager {
             this.getGame().getCurrentRoom().getUp().setLockedBy("");
             flag = true;
 
-        } else if (!Objects.isNull(this.getGame().getCurrentRoom().getSouth())
+        } else if (!Objects.isNull(this.getGame().getCurrentRoom().getDown())
                 && this.getGame().getCurrentRoom().getDown().getLockedBy().equals(iName)) {
 
             this.getGame().getCurrentRoom().getDown().setLockedBy("");
@@ -245,6 +257,38 @@ public class MSGame extends GameManager {
         }
 
         return flag;
+    }
+    
+    private void advancePlot() {
+        
+        Item i;
+        
+        // Se è nella stanza principale del gioco
+        if (this.getGame().getCurrentRoom().getName().equals("Atrio della Metastazione")) {
+            
+            // Se ha con sè l'oggetto pendrive ovvero se è parte iniziale dell'avventura
+            if (this.getGame().getInventory().getInventoryList().contains(i = new Item(54,"",""))) {
+                
+                /*
+                    Il cattivo "ruba" la pendrive al protagonista quindi si rimuove
+                    dall'inventario del giocatore e si inserisce nella stanza,
+                    dove però non sarà possibile raccoglierla (pickupable = false)
+                */
+                this.getGame().getCurrentRoom().addItem(i);
+                this.getGame().getInventory().getInventoryList().remove(i);
+                i = this.getGame().getCurrentRoom().getItemList().searchItem("bigliettino");
+                this.getGame().getInventory().add(i);
+                this.getGame().getCurrentRoom().getItemList().remove(i);
+                
+            } /*
+            else if ( this.getGame().getInventory().getInventoryList().contains(tre oggetti chiave) {
+                this.getGame().getCurrentRoom().getItemList().remove(i);
+                this.getGame().getInventory().add(i);
+            }
+            */
+            
+        }
+        
     }
 
 }
