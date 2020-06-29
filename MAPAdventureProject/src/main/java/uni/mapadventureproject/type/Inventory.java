@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Usata per Inventario del giocatore e Inventario nella stanza. 
- * (Da creare interfaccia?)*/
+/**
+ * Usata per Inventario del giocatore e Inventario nella stanza. (Da creare interfaccia?)
+ */
 public class Inventory implements Serializable {
-    
+
     private List<Item> inventoryList;
 
     public Inventory() {
@@ -21,29 +22,31 @@ public class Inventory implements Serializable {
     public void setInventoryList(List<Item> inventoryList) {
         this.inventoryList = inventoryList;
     }
-    
+
     public void add(Item i) {
         inventoryList.add(i);
     }
-    
+
     public void remove(Item i) {
-        inventoryList.remove(i);
+        if (inventoryList.contains(i)) {
+            inventoryList.remove(i);
+        }
     }
-    
+
     @Override
     public String toString() {
-        
+
         String invList = "";
-        
-        for ( Item i : inventoryList ) {
-            invList= invList + "\n- " + i.getName();
+
+        for (Item i : inventoryList) {
+            invList = invList + "\n- " + i.getName();
         }
-        
+
         return invList;
     }
-    
+
     public Item searchItem(String iName) {
-        for (Item i : inventoryList ) {
+        for (Item i : inventoryList) {
             if (i.getName().equals(iName) || i.getAlias().contains(iName)) {
 
                 return i;
@@ -53,5 +56,5 @@ public class Inventory implements Serializable {
 
         return null;
     }
-    
+
 }
