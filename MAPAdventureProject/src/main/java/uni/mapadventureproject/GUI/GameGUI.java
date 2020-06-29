@@ -47,9 +47,9 @@ public class GameGUI extends javax.swing.JFrame {
     private void init() {
 
         // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
-        try (InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))){
-            
-            font = Font.createFont(Font.TRUETYPE_FONT, is); 
+        try ( InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))) {
+
+            font = Font.createFont(Font.TRUETYPE_FONT, is);
             fontMinecraft = font.deriveFont(Font.PLAIN, 14);
 
             this.setFont(fontMinecraft);
@@ -65,17 +65,16 @@ public class GameGUI extends javax.swing.JFrame {
             jbUp.setFont(fontMinecraft);
             jbDown.setFont(fontMinecraft);
             jtpReadingArea.setFont(fontMinecraft);
-           
 
         } catch (FontFormatException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
-        } 
+        }
     }
 
     public void initGame() {
-        
+
         jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
-        
+
     }
 
     /**
@@ -395,6 +394,11 @@ public class GameGUI extends javax.swing.JFrame {
 
         jmiHelp.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jmiHelp.setText("Guida...");
+        jmiHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiHelpActionPerformed(evt);
+            }
+        });
         jmHelp.add(jmiHelp);
 
         jmbOptions.add(jmHelp);
@@ -405,22 +409,22 @@ public class GameGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void appendToPane(JTextPane tp, String msg, Color c) {
-        
+
         try {
 
             StyledDocument sDoc = tp.getStyledDocument();
-            
+
             // Aggiungo come attributo il colore desiderato c
             SimpleAttributeSet sAttrSet = new SimpleAttributeSet();
             StyleConstants.setForeground(sAttrSet, c);
-            
+
             // Inserisco la stringa in coda, con gli attributi desiderati
             sDoc.insertString(sDoc.getLength(), msg, sAttrSet);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
 
     private void jtTypingFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtTypingFieldActionPerformed
@@ -514,9 +518,15 @@ public class GameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiSaveGameActionPerformed
 
     private void jbInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInvActionPerformed
-      InventoryGUI inventory = new InventoryGUI(gInteraction.getGameManager().getGame().getInventory());
-      inventory.setVisible(true);
+        InventoryGUI inventory = new InventoryGUI(gInteraction.getGameManager().getGame().getInventory());
+        inventory.setVisible(true);
     }//GEN-LAST:event_jbInvActionPerformed
+
+    private void jmiHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHelpActionPerformed
+        appendToPane(jtpReadingArea, "\n" + gInteraction.getGameManager().showHelp() + "\n", new Color(108, 202, 224));
+        //108,202,224
+        //Color.green
+    }//GEN-LAST:event_jmiHelpActionPerformed
 
     /**
      * @param args the command line arguments

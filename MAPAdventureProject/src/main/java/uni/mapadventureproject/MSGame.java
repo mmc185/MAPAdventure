@@ -112,13 +112,13 @@ public class MSGame extends GameManager {
                 case PUSH:
 
                     if (commandMap.containsKey(WordType.I_OBJ)) {
-                        
+
                         i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-                        
+
                     } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                        
+
                         i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-                        
+
                     }
 
                     if (i.isPushable() && !i.isPush()) {
@@ -138,26 +138,25 @@ public class MSGame extends GameManager {
                     break;
             }
 
-            
             r = this.getGame().getCurrentRoom();
-            
+
             //Triggera la stanza, se necessario
             if (r instanceof TriggeredRoom) {
-                
+
                 if (!((TriggeredRoom) r).isTrigger()) { //Se la stanza non e' gia' triggerata
-                    
+
                     String triggerer = commandMap.get(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
-                    
+
                     if (commandMap.size() == 2) {
 
                         if (commandMap.containsKey(WordType.R_OBJ)) {
 
                             triggerer += " " + commandMap.get(WordType.R_OBJ);
-                            
+
                         } else if (commandMap.containsKey(WordType.I_OBJ)) {
 
                             triggerer += " " + commandMap.get(WordType.I_OBJ);
-                            
+
                         }
 
                         //se triggerer=triggerer della stanza, si effettua il trigger
@@ -170,7 +169,7 @@ public class MSGame extends GameManager {
                     }
                 }
             }
-           
+
         } catch (NullPointerException e) {
 
             output = "Sembra esserci qualcosa di strano in questa richiesta..."; //boh da cambiare?
@@ -205,7 +204,7 @@ public class MSGame extends GameManager {
     public boolean unlockRoom(String iName) {
 
         boolean flag = false;
-        
+
         if (!Objects.isNull(this.getGame().getCurrentRoom().getSouth())
                 && this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
 
@@ -249,6 +248,31 @@ public class MSGame extends GameManager {
 
     @Override
     public String showHelp() {
-        return "";
+        return "===========================================\n" +
+"GUIDA\n" +
+"\n" +
+"* Inserisci un comando nel rettangolo in basso e premi \"Invia\" o il tasto Invio.\n" +
+"\n" +
+"* Per spostarti, puoi premere le frecce o \"su\", \"giù\", oppure scriverlo nel rettangolo.\n" +
+"\n" +
+"* Per visualizzare il contenuto dell'inventario, premi l'icona dello zaino, oppure digita comandi come \"inventario\", \"inv\", \"borsa\"...\n" +
+"\n" +
+"* Quelli descritti in questa guida sono solo alcuni dei comandi disponibili, scommetto che sarai capace di scoprire gli altri senza ulteriori aiuti...\n" +
+"\n" +
+"* Sei in difficoltà? Prova a guardarti intorno con il comando \"guarda\" e fa' attenzione agli indizi che ti vengono suggeriti!\n" +
+"\n" +
+"Esempi di frasi accettate:\n" +
+"- Raccogli la bottiglia / Prendi bottiglia\n" +
+"- Guarda\n" +
+"- Osserva la bottiglia\n" +
+"- Nord\n" +
+"- Apri con chiave / Usa la chiave \n" +
+"- Apri con la chiave dorata \n" +
+"- Premi il pulsante \n" +
+"\n" +
+"E' importante inserire solo un'azione alla volta!\n" +
+"Esempio di frase NON accettata:\n" +
+"- Prendi la bottiglia e prendi l'ombrello \n" +
+"===========================================";
     }
 }
