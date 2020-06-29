@@ -50,18 +50,46 @@ public class FileSaver {
         pendrive.setItemImage(img);
         g.getInventory().add(pendrive);
 
+        //Oggetti non inventario
+        Item buttonTrain = new Item(55, "bottone", "Bottone per far aprire le porte del treno");
+        buttonTrain.setAlias(new String[] {"pulsante"});
+        buttonTrain.setPushable(true);
+        
+        Item note = new Item(56, "bigliettino", "\"Ho preso un oggetto per te importante, se vuoi averlo indietro devi portarmi degli oggetti altrettanto importanti per me:\n"
+                + "1) OggettoX dal portale nella direzione in cui sorge il sole,\n"
+                + "2) OggettoY dal portale più oscuro,\n"
+                + "3) OggettoZ dal portale da cui sembra provenire una dolce musica.\n"
+                + "Portali qui nell'atrio e riavrai il tuo bene prezioso.\"\n"
+                + "\"Ah, bene!\" esclama il tuo amico \"Vuole che gli facciamo la spesa.\"");
+        note.setAlias(new String[]{"biglietto", "fogliettino", "foglietto"});
+
         //Stanze
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
                 + "\n\"Il treno regionale delle ore 9:00 diretto a Bari Centrale è in partenza dal binario 9 con un ritardo di 10 minuti!\""
                 + "\nSenti il fischio assordante del capotreno che ti sollecita a salire.");
 
-        Room wagon = new Room(1, "Vagone del treno", "Dopo esserti fatto strada tra l'assembramento di persone sui vagoni, trovi il tuo amico nonché compagno di progetto.\n"
+        Room wagon = new TriggeredRoom(1, "Vagone del treno", "Dopo esserti fatto strada tra l'assembramento di persone sui vagoni, trovi il tuo amico nonché compagno di progetto.\n"
                 + "Che fortuna, ti ha preso il posto! (stonks) Ti siedi.\n"
                 + "\"Beh, ti senti preparato per l'esame di oggi? Spero che il prof sia clemente...\" ti chiede il tuo amico.\n\n"
                 + "\"Io ricordavo che il prof si chiamasse Pierpaolo\" rispondi. \nIl tuo amico ti defenestra. GAME OVER\n\n"
                 + "Scherzo, riprendiamo.\n\n"
                 + "\"Hey, hai con te la pen-drive, vero?! Non ripetiamo l'incidente di laboratorio...\" ti chiede il tuo amico.\n"
                 + "Apri lo zaino e gliela mostri, non perderesti mai qualcosa di così importante... vero? ");
+
+        ((TriggeredRoom) wagon).addTriggerer("guarda");
+        ((TriggeredRoom) wagon).addTriggerDesc("Fuori dal finestrino si estende una distesa immensa di ulivi.\n"
+                + "\"Speriamo che il treno recuperi il ritardo\" senti il tuo amico che riflette ad alta voce.\n"
+                + "Tira fuori i suoi appunti e comincia a ripetere per conto suo, dovresti farlo anche tu!");
+
+        ((TriggeredRoom) wagon).addTriggerer("guarda appunti");
+        ((TriggeredRoom) wagon).addTriggerDesc("Cominci a rileggere gli appunti, ma le palpebre si fanno pesanti e crolli in un sonno profondo...\n"
+                + "...\n"
+                + "\"Il treno è in arrivo a destinazione con un ANTICIPO di 1 minuto.\"\n"
+                + "Ti svegli di sobbalzo, 1 minuto di anticipo? C'è qualcosa che non quadra, qui i treni non arrivano neanche in orario...\n"
+                + "Senti il fischio dei freni e il treno si arresta completamente sui binari.\n"
+                + "Il tuo amico è già vicino alle porte e sollecita \"Dai, sbrigati, premi il bottone per aprirle le porte "
+                + "o arriveremo in ritardo.\"\n");
+        // trigger o locked per la metastation?
 
         Room metaStation = new Room(2, "Metastazione", "Come sempre scendi dal treno stretto come una sardina in mezzo ad altri poveri pendolari.\n"
                 + "Noti che il treno si è fermato a un binario diverso dal solito, alzi lo sguardo e leggi \"Binario 0\".\n"
@@ -73,6 +101,13 @@ public class FileSaver {
                 + "Guardi il tuo amico con gli occhi strabuzzati e lui scrolla le spalle \n"
                 + "\"Cerchiamo di capire dove cavolo siamo finiti!\" e inizia a guardarsi intorno.");
 
+        Room metaStationLobby = new Room(3, "Atrio della Metastazione", "Uscendo dalla stazione ti rendi conto di avere lo zaino aperto.\n"
+                + "Chiedi al tuo amico di controllare che ci sia tutto e, gentilmente, di chiuderti lo zaino.\n"
+                + "Il tuo amico, non gentilmente, esclama \"Oh no! Come dannazione hai fatto?! La chiavetta con su il progetto è scomparsa!\"\n"
+                + "Gli premi di controllare meglio e comincia ad elencare il contenuto dello zaino.\n"
+                + "\"Borraccia, i tuoi immancabili taralli, ombrello, quaderno e un fogliettino sparso. Cos'è vuoi copiare all'esame?\"\n"
+                + "(Non avevi un bigliettino prima!)");
+
         //Items delle stanze 
         Item poster = new Item(55, "poster", "L'Agenzia di viaggi Artskjid ti dà il benvenuto alla Metastazione Centrale! \n"
                 + "Luogo da cui puoi raggiungere ogni dimensione immaginabile. \nPer informazioni, chiedere al personale in divisa.\"");
@@ -80,11 +115,22 @@ public class FileSaver {
 
         station.setUp(wagon);
         station.setLook("Ti trovi di fronte alle porte del treno. Dovresti muoverti prima che si chiudano!");
+
         wagon.setDown(metaStation);
         wagon.setLook("Il vagone è strapieno come sempre! ");
+        wagon.addItem(buttonTrain);
+
         metaStation.setLook("Sul muro della stazione è affisso un grande poster con grandi scritte colorate e vicino al cancello di uscita\n"
                 + "c'è una strana creatura simile a un polpo che suona i tamburi con i suoi diversi tentacoli.");
         metaStation.addItem(poster);
+        metaStation.setNorth(metaStationLobby);
+        metaStation.setLockedBy("bottone");
+
+        metaStationLobby.setLook("Il grande atrio è costellato da portali variopinti, la tua attenzione viene catturata da tre portali:\n"
+                + "quello alla tua destra brilla di giallo,\nquello di fronte a te è scuro con tante luci lontane e\n"
+                + "infine, quello alla tua sinistra è verde e il suono che proviene da lì ti affascina.");
+        metaStationLobby.setSouth(metaStation);
+        metaStationLobby.addItem(note);
 
         //Comandi
         Command north = new Command("nord", CommandType.MOVE_N);
@@ -173,7 +219,7 @@ public class FileSaver {
         fs.init();
 
         try {
-            fs.saveFile("NewGame",fs.getG());
+            fs.saveFile("NewGame", fs.getG());
             /*fs.readFile("NewGame//Intro.dat");
             for (Command c : fs.g.getCommands()) {
                 System.out.println(c.getName());
