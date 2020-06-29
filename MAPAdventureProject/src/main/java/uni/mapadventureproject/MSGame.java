@@ -17,10 +17,13 @@ import uni.mapadventureproject.type.TriggeredRoom;
 public class MSGame extends GameManager {
 
     private GameTimeThread gTime = new GameTimeThread();
+    private PlayMusic music=new PlayMusic(); //aggiunto
 
-    public MSGame(Game g) {
+    public MSGame(Game g) throws InterruptedException {
         super(g);
         gTime.start();
+       
+        music.playSound("Musica//gameMusic.wav");
     }
 
     @Override
@@ -141,6 +144,7 @@ public class MSGame extends GameManager {
 
                     output = "Hai scelto la via più semplice e questo non ti fa onore"
                             + "\n \n HAI COMPLETATO IL GIOCO IN : " + gTime.getTime(gTime.getSecondPassed());
+                    gTime.getTime().cancel();
                     break;
             }
 
