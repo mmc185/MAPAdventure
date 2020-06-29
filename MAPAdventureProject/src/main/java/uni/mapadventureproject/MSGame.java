@@ -31,6 +31,21 @@ public class MSGame extends GameManager {
         Item i = null;
         String output = "";
         
+        /* Se l'azione sfrutta un oggetto salva l'oggetto e 
+           lo rinomina nella Map per fare riferimento al suo nome principale
+           e non a potenziali alias
+        */
+        if (commandMap.containsKey(WordType.I_OBJ)) {
+            
+            i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
+            commandMap.put(WordType.I_OBJ, i.getName());
+            
+        } else if (commandMap.containsKey(WordType.R_OBJ)) {
+            
+            i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
+            commandMap.put(WordType.R_OBJ, i.getName());
+            
+        }
         
         try {
             
@@ -64,12 +79,6 @@ public class MSGame extends GameManager {
                     
                     if (commandMap.size() == 2) {
                         
-                        if (commandMap.containsKey(WordType.I_OBJ)) {
-                            i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-                        } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                            i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-                        }
-                        
                         output = i.getDesc();
                         
                     } else if (commandMap.size() == 1) {
@@ -85,8 +94,6 @@ public class MSGame extends GameManager {
                 case PICK_UP:
                     
                     if (commandMap.containsKey(WordType.R_OBJ)) {
-                        
-                        i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
                         
                         if (!Objects.isNull(i) && i.isPickupable()) {
                             
@@ -110,7 +117,7 @@ public class MSGame extends GameManager {
                     break;
                 case OPEN:
                     
-                    if (commandMap.size() == 2 && commandMap.containsKey(WordType.I_OBJ)) {
+                    if (commandMap.containsKey(WordType.I_OBJ)) {
                         
                         i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
                         
@@ -135,16 +142,6 @@ public class MSGame extends GameManager {
                     
                     break;
                 case PUSH:
-                    
-                    if (commandMap.containsKey(WordType.I_OBJ)) {
-                        
-                        i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-                        
-                    } else if (commandMap.containsKey(WordType.R_OBJ)) {
-                        
-                        i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-                        
-                    }
                     
                     if (i.isPushable() && !i.isPush()) {
 

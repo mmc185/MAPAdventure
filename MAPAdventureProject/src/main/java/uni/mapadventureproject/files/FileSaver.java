@@ -36,7 +36,7 @@ public class FileSaver {
         g.getInventory().add(notes);
         Item umbrella = new Item(52, "ombrello", "Fidato ombrello, ogni volta che ce l'hai con te non piove mai!");
         umbrella.setAlias(new String[]{"ombrellino"});
-        img = new ImageIcon("img//inventario//biglietto.png");
+        img = new ImageIcon("img//inventario//ombrello.png");
         umbrella.setItemImage(img);
         g.getInventory().add(umbrella);
         Item bottle = new Item(53, "borraccia", "La borraccia che hai aspettato tanto per avere dal DIB, forse facevi prima a scroccarla dal PoliBa...");
@@ -53,8 +53,6 @@ public class FileSaver {
         //Oggetti non inventario
         Item buttonTrain = new Item(55, "bottone", "Bottone per far aprire le porte del treno");
         buttonTrain.setAlias(new String[] {"pulsante"});
-        img = new ImageIcon("img//inventario//biglietto.png");
-        buttonTrain.setItemImage(img);
         buttonTrain.setPushable(true);
         buttonTrain.setConsumable((byte) 1);
         
@@ -65,6 +63,8 @@ public class FileSaver {
                 + "Portali qui nell'atrio e riavrai il tuo bene prezioso.\"\n"
                 + "\"Ah, bene!\" esclama il tuo amico \"Vuole che gli facciamo la spesa.\"");
         note.setAlias(new String[]{"biglietto", "fogliettino", "foglietto"});
+        img = new ImageIcon("img//inventario//biglietto.png");
+        note.setItemImage(img);
 
         //Stanze
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
@@ -84,7 +84,7 @@ public class FileSaver {
                 + "\"Speriamo che il treno recuperi il ritardo\" senti il tuo amico che riflette ad alta voce.\n"
                 + "Tira fuori i suoi appunti e comincia a ripetere per conto suo, dovresti farlo anche tu!");
 
-        ((TriggeredRoom) wagon).addTriggerer("guarda appunti");
+        ((TriggeredRoom) wagon).addTriggerer("guarda quaderno");
         ((TriggeredRoom) wagon).addTriggerDesc("Cominci a rileggere gli appunti, ma le palpebre si fanno pesanti e crolli in un sonno profondo...\n"
                 + "...\n"
                 + "\"Il treno è in arrivo a destinazione con un ANTICIPO di 1 minuto.\"\n"
