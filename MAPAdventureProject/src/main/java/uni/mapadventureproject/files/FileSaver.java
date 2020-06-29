@@ -54,6 +54,7 @@ public class FileSaver {
         Item buttonTrain = new Item(55, "bottone", "Bottone per far aprire le porte del treno");
         buttonTrain.setAlias(new String[] {"pulsante"});
         buttonTrain.setPushable(true);
+        buttonTrain.setConsumable((byte) 1);
         
         Item note = new Item(56, "bigliettino", "\"Ho preso un oggetto per te importante, se vuoi averlo indietro devi portarmi degli oggetti altrettanto importanti per me:\n"
                 + "1) OggettoX dal portale nella direzione in cui sorge il sole,\n"
@@ -62,6 +63,8 @@ public class FileSaver {
                 + "Portali qui nell'atrio e riavrai il tuo bene prezioso.\"\n"
                 + "\"Ah, bene!\" esclama il tuo amico \"Vuole che gli facciamo la spesa.\"");
         note.setAlias(new String[]{"biglietto", "fogliettino", "foglietto"});
+        img = new ImageIcon("img//inventario//biglietto.png");
+        note.setItemImage(img);
 
         //Stanze
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
@@ -81,7 +84,7 @@ public class FileSaver {
                 + "\"Speriamo che il treno recuperi il ritardo\" senti il tuo amico che riflette ad alta voce.\n"
                 + "Tira fuori i suoi appunti e comincia a ripetere per conto suo, dovresti farlo anche tu!");
 
-        ((TriggeredRoom) wagon).addTriggerer("guarda appunti");
+        ((TriggeredRoom) wagon).addTriggerer("guarda quaderno");
         ((TriggeredRoom) wagon).addTriggerDesc("Cominci a rileggere gli appunti, ma le palpebre si fanno pesanti e crolli in un sonno profondo...\n"
                 + "...\n"
                 + "\"Il treno è in arrivo a destinazione con un ANTICIPO di 1 minuto.\"\n"
@@ -160,7 +163,7 @@ public class FileSaver {
         up.setAlias(new String[]{"sopra", "su"});
         g.getCommands().add(up);
         Command down = new Command("scendi", CommandType.MOVE_D);
-        down.setAlias(new String[]{"sotto", "giù"});
+        down.setAlias(new String[]{"sotto", "giu"});
         g.getCommands().add(down);
         Command escape = new Command("scappa", CommandType.RUN);
         escape.setAlias(new String[]{"fuggi", "muori", "crepa"});
@@ -174,12 +177,12 @@ public class FileSaver {
         //Comando buttati?
         //TODO Serve anche un comando per uscire dal gioco?
         g.setCurrentRoom(station);
+        
 
     }
 
     public void saveFile(String path, Game g) throws FileNotFoundException, IOException {
 
-        // FileOutputStream fOut = new FileOutputStream(path + "/Save.dat");
         FileOutputStream fOut = new FileOutputStream(path + "/Intro.dat");
         ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 
