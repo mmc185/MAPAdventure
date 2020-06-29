@@ -5,6 +5,7 @@
  */
 package uni.mapadventureproject;
 
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,7 +13,7 @@ import java.util.TimerTask;
  *
  * @author Admin
  */
-public class GameTimeThread {
+public class GameTimeThread implements Serializable {
 
     private int secondPassed = 0;
     private Timer time = new Timer();
@@ -38,11 +39,11 @@ public class GameTimeThread {
         this.secondPassed = secondPassed;
     }
 
-    public Timer getTime() {
+    public Timer getTimer() {
         return time;
     }
 
-    public void setTime(Timer time) {
+    public void setTimer(Timer time) {
         this.time = time;
     }
 
@@ -54,8 +55,6 @@ public class GameTimeThread {
         this.task = task;
     }
 
-    
-    
     public String getTime(int secondPassed) {
         
         int hours = 0;
