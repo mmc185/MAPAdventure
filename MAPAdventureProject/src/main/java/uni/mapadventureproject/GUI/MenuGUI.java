@@ -79,6 +79,7 @@ public class MenuGUI extends javax.swing.JFrame {
         jbNuovo.setText("Nuova Partita");
         jbNuovo.setToolTipText("Inizia una nuova avventura");
         jbNuovo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(153, 255, 255)));
+        jbNuovo.setFocusable(false);
         jbNuovo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbNuovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +95,7 @@ public class MenuGUI extends javax.swing.JFrame {
         jbCarica.setText("Carica Partita");
         jbCarica.setToolTipText("Carica e continua una partita salvata");
         jbCarica.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(153, 255, 255)));
+        jbCarica.setFocusable(false);
         jbCarica.setPreferredSize(new java.awt.Dimension(180, 30));
         jbCarica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +111,7 @@ public class MenuGUI extends javax.swing.JFrame {
         jbEsci.setText("Esci");
         jbEsci.setToolTipText("Chiudi il gioco");
         jbEsci.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 255, 255), new java.awt.Color(153, 255, 255)));
+        jbEsci.setFocusable(false);
         jbEsci.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbEsciActionPerformed(evt);
@@ -145,8 +148,10 @@ public class MenuGUI extends javax.swing.JFrame {
         jpMenu.add(jlVerde);
         jlVerde.setBounds(350, -20, 350, 500);
 
-        jMenuBar.setBackground(new java.awt.Color(0, 0, 0));
+        jMenuBar.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jMenuBar.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuBar.setToolTipText("");
         jMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jmOpzioni.setText("Opzioni");
