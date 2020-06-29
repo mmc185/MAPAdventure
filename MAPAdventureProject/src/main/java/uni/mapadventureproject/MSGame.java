@@ -247,4 +247,8 @@ public class MSGame extends GameManager {
         return flag;
     }
 
+    @Override
+    public String showHelp() {
+        return "";
+    }
 }
