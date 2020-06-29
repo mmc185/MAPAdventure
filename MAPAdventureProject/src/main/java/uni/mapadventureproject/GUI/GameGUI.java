@@ -50,9 +50,11 @@ public class GameGUI extends javax.swing.JFrame {
     private void init() {
 
         // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
-        try (InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))) {
 
-            font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
+        try (InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))){
+            
+            font = Font.createFont(Font.TRUETYPE_FONT, is); 
+
             fontMinecraft = font.deriveFont(Font.PLAIN, 14);
 
             this.setFont(fontMinecraft);
@@ -100,13 +102,14 @@ public class GameGUI extends javax.swing.JFrame {
         jbUp = new javax.swing.JButton();
         jbDown = new javax.swing.JButton();
         jlCommand = new javax.swing.JLabel();
+        jbInv = new javax.swing.JButton();
         jbSend = new javax.swing.JButton();
         jspWrite = new javax.swing.JScrollPane();
         jtTypingField = new javax.swing.JTextField();
         jlImage = new javax.swing.JLabel();
-        jlBackground = new javax.swing.JLabel();
         jspRead2 = new javax.swing.JScrollPane();
         jtpReadingArea = new javax.swing.JTextPane();
+        jlBackground = new javax.swing.JLabel();
         jmbOptions = new javax.swing.JMenuBar();
         jmOptions = new javax.swing.JMenu();
         jmiSaveGame = new javax.swing.JMenuItem();
@@ -278,26 +281,47 @@ public class GameGUI extends javax.swing.JFrame {
         jpButtonsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
 
         getContentPane().add(jpButtons);
-        jpButtons.setBounds(680, 495, 256, 133);
+        jpButtons.setBounds(680, 495, 242, 118);
 
-        jlCommand.setBackground(new java.awt.Color(0, 102, 102));
+        jlCommand.setBackground(new java.awt.Color(108, 202, 224));
         jlCommand.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlCommand.setForeground(new java.awt.Color(0, 0, 0));
         jlCommand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlCommand.setText("Inserisci un comando:");
+        jlCommand.setOpaque(true);
         getContentPane().add(jlCommand);
-        jlCommand.setBounds(53, 514, 500, 28);
+        jlCommand.setBounds(53, 514, 200, 28);
+
+        jbInv.setBackground(new java.awt.Color(56, 86, 128));
+        jbInv.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jbInv.setForeground(new java.awt.Color(255, 255, 255));
+        jbInv.setIcon(new javax.swing.ImageIcon("img//inv.png"));
+        jbInv.setToolTipText("inventario [inv]");
+        jbInv.setFocusable(false);
+        jbInv.setMaximumSize(new java.awt.Dimension(80, 80));
+        jbInv.setMinimumSize(new java.awt.Dimension(80, 80));
+        jbInv.setName(""); // NOI18N
+        jbInv.setPreferredSize(new java.awt.Dimension(80, 80));
+        jbInv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInvActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbInv);
+        jbInv.setBounds(580, 490, 60, 60);
 
         jbSend.setBackground(new java.awt.Color(56, 86, 128));
         jbSend.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jbSend.setForeground(new java.awt.Color(255, 255, 255));
         jbSend.setText("Invia");
+        jbSend.setPreferredSize(new java.awt.Dimension(80, 38));
         jbSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSendActionPerformed(evt);
             }
         });
         getContentPane().add(jbSend);
-        jbSend.setBounds(569, 563, 79, 31);
+        jbSend.setBounds(570, 560, 80, 38);
 
         jspWrite.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         jspWrite.setAutoscrolls(true);
@@ -333,10 +357,6 @@ public class GameGUI extends javax.swing.JFrame {
         getContentPane().add(jlImage);
         jlImage.setBounds(570, 50, 361, 410);
 
-        jlBackground.setIcon(new javax.swing.ImageIcon("img//background22.png"));
-        getContentPane().add(jlBackground);
-        jlBackground.setBounds(0, 0, 1000, 660);
-
         jtpReadingArea.setEditable(false);
         jtpReadingArea.setBackground(new java.awt.Color(0, 0, 0));
         jtpReadingArea.setForeground(new java.awt.Color(255, 255, 255));
@@ -347,6 +367,10 @@ public class GameGUI extends javax.swing.JFrame {
 
         getContentPane().add(jspRead2);
         jspRead2.setBounds(40, 30, 520, 450);
+
+        jlBackground.setIcon(new javax.swing.ImageIcon("img//background232.png"));
+        getContentPane().add(jlBackground);
+        jlBackground.setBounds(0, 0, 1000, 660);
 
         jmOptions.setText("Opzioni");
         jmOptions.setToolTipText("");
@@ -496,6 +520,11 @@ public class GameGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jmiSaveGameActionPerformed
 
+    private void jbInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInvActionPerformed
+      InventoryGUI inventory = new InventoryGUI(gInteraction.getGameManager().getGame().getInventory());
+      inventory.setVisible(true);
+    }//GEN-LAST:event_jbInvActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -554,6 +583,7 @@ public class GameGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbDown;
     private javax.swing.JButton jbEast;
+    private javax.swing.JButton jbInv;
     private javax.swing.JButton jbNorth;
     private javax.swing.JButton jbSend;
     private javax.swing.JButton jbSouth;

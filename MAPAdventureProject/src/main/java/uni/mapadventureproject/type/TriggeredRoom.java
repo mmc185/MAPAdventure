@@ -5,7 +5,9 @@
  */
 package uni.mapadventureproject.type;
 
+import java.util.ArrayDeque;
 import java.util.Objects;
+import java.util.Queue;
 
 /**
  *
@@ -13,49 +15,66 @@ import java.util.Objects;
  */
 public class TriggeredRoom extends Room {
 
-    private boolean activedTrigger = false;
-    private String triggerDesc;
-    private String triggerer;
+    private Queue<String> triggerDesc;
+    private Queue<String> triggerer;
 
     public TriggeredRoom(int id, String name, String desc) {
         super(id, name, desc);
+        triggerDesc = new ArrayDeque<>();
+        triggerer = new ArrayDeque<>();
     }
     
-    public TriggeredRoom(int id, String name, String desc, String triggerer, String triggerDesc) {
+    public TriggeredRoom(int id, String name, String desc, Queue<String> triggerer, Queue<String> triggerDesc) {
         super(id, name, desc);
         this.triggerer = triggerer;
         this.triggerDesc = triggerDesc;
     }
 
-    public boolean isTrigger() {
-        return activedTrigger;
+    // Se ci sono ancora trigger la stanza è triggerabile
+    public boolean isTriggerable() {
+        return !triggerer.isEmpty();
     }
 
+    // se il trigger è positivo, avanza nelle code
     public void setTrigger(boolean trigger) {
-        this.activedTrigger = trigger;
-        setDesc(triggerDesc);
+        
+        if (trigger) {
+        setDesc(triggerDesc.poll());
+        triggerer.poll();
+        }
+        
     }
 
-    public String getTriggerDesc() {
+    public Queue<String> getTriggerDesc() {
         return triggerDesc;
     }
-
-    public void setTriggerDesc(String triggerDesc) {
-        this.triggerDesc = triggerDesc;
+   
+    public void addTriggerDesc(String triggerDesc) {
+        this.triggerDesc.offer(triggerDesc);
     }
 
-    public String getTriggerer() {
+    public Queue<String> getTriggerer() {
         return triggerer;
     }
 
-    public void setTriggerer(String triggerer) {
-        this.triggerer = triggerer;
+    public void addTriggerer(String triggerer) {
+        this.triggerer.offer(triggerer);
     }
+    
+    public String getCurrentTriggerer() {
+        
+        if (this.isTriggerable()) {
+            return triggerer.peek();
+        } else {
+            return "";
+        }
+        
+    }
+
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 89 * hash + (this.activedTrigger ? 1 : 0);
         hash = 89 * hash + Objects.hashCode(this.triggerDesc);
         return hash;
     }
@@ -72,9 +91,6 @@ public class TriggeredRoom extends Room {
             return false;
         }
         final TriggeredRoom other = (TriggeredRoom) obj;
-        if (this.activedTrigger != other.activedTrigger) {
-            return false;
-        }
         if (!Objects.equals(this.triggerDesc, other.triggerDesc)) {
             return false;
         }

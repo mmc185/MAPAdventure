@@ -18,7 +18,7 @@ import uni.mapadventureproject.type.Item;
  *
  * @author Admin
  */
-public class InventoryGUI extends javax.swing.JFrame {
+public class InventoryGUI extends javax.swing.JDialog {
 
     Inventory inv;
 
@@ -29,6 +29,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         initComponents();
         this.inv = inv;
         init();
+        this.setModalityType(ModalityType.APPLICATION_MODAL);
     }
 
     public void init() {
@@ -66,6 +67,7 @@ public class InventoryGUI extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     private void jbImageActionPerformed(java.awt.event.ActionEvent evt, String ItemDesc, String ItemName) {
