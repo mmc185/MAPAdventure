@@ -57,7 +57,7 @@ public class GameTimeThread implements Serializable {
         this.task = task;
     }
 
-    public String getTime(int secondPassed) {
+    public String getTime() {
 
         int hours = 0;
         int remainderOfHours;

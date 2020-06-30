@@ -167,7 +167,7 @@ public class MSGame extends GameManager {
 
                     output = "Hai scelto la via più semplice e questo non ti fa onore"
                             + "\n \n HAI COMPLETATO IL GIOCO IN : " + 
-                            this.getGame().getGameTime().getTime(this.getGame().getGameTime().getSecondPassed());
+                            this.getGame().getGameTime().getTime();
                     
                     this.getGame().getGameTime().getTimer().cancel();
                     
