@@ -13,7 +13,7 @@ public class Game {
     private Inventory inventory; //inventario del protagonista
     private Room currentRoom;
     
-    String player = "Pippo";
+    String player = "";
     private GameTimeTask gTime = new GameTimeTask();
     
     public Game() {

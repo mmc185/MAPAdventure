@@ -170,8 +170,10 @@ public class MSGame extends GameManager {
                             this.getGame().getGameTime().getTime();
                     
                     this.getGame().getGameTime().getTimer().cancel();
+                    this.getGame().getGameTime().setActive(false);
                     
-                    this.getGame().setCurrentRoom(new Room(0,"",""));
+                    this.getGame().setCurrentRoom( r = new Room(0,"",""));
+                    r.setLook("");
 
                     break;
             }
