@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,7 +25,7 @@ import java.util.Date;
 public class DBManager {
     
     Connection con;
-    private final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS scores (name VARCHAR(25), time TIMESTAMP)";
+    private final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS scores (name VARCHAR(25), time TIME)";
     
     public void connect() throws SQLException {
         
@@ -40,9 +41,8 @@ public class DBManager {
         prstm.setString(1, s);
         
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        Date date = dateFormat.parse(t);
-        Timestamp time = new Timestamp(date.getTime());
-        prstm.setTimestamp(2, time);
+        Time time = new Time(dateFormat.parse(t.replaceAll("[hms]", ":")).getTime());
+        prstm.setTime(2, time);
         
         prstm.executeUpdate();
         prstm.close();
@@ -55,7 +55,7 @@ public class DBManager {
         
         while (resSet.next() ) {
             
-            results = resSet.getString(1) + "\t" + resSet.getTimestamp(2) + "\n";
+            results =  resSet.getString(1) + "\t\t\t" + resSet.getTime(2) + "\n";
             
         }
         
