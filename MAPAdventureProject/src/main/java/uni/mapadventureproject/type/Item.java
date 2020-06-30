@@ -1,6 +1,5 @@
 package uni.mapadventureproject.type;
 
-import java.awt.Image;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,6 +12,7 @@ public class Item implements Serializable {
     private String name;
     private String desc;
     private Set<String> alias;
+    private byte consumable = -1; // indica il numero di usi possibili, -1 significa che non è consumabile
     private boolean openable = false;
     private boolean pickupable = false;
     private boolean pushable = false;
@@ -62,6 +62,14 @@ public class Item implements Serializable {
         this.alias = new HashSet<>(Arrays.asList(alias));
     }
 
+    public byte getConsumable() {
+        return consumable;
+    }
+
+    public void setConsumable(byte consumable) {
+        this.consumable = consumable;
+    }
+ 
     public boolean isOpenable() {
         return openable;
     }
