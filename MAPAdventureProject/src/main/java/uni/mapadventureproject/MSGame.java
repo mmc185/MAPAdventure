@@ -7,7 +7,6 @@ package uni.mapadventureproject;
 
 import java.util.Map;
 import java.util.Objects;
-import uni.mapadventureproject.parser.InvalidStringException;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.CommandType;
 import uni.mapadventureproject.type.Item;
@@ -16,11 +15,9 @@ import uni.mapadventureproject.type.TriggeredRoom;
 
 public class MSGame extends GameManager {
     
-    private GameTimeThread gTime = new GameTimeThread();
     
     public MSGame(Game g) {
         super(g);
-        gTime.start();
     }
     
     @Override
@@ -168,9 +165,10 @@ public class MSGame extends GameManager {
                     //output = "bad ending?";
 
                     output = "Hai scelto la via più semplice e questo non ti fa onore"
-                            + "\n \n HAI COMPLETATO IL GIOCO IN : " + gTime.getTime(gTime.getSecondPassed());
+                            + "\n \n HAI COMPLETATO IL GIOCO IN : " + 
+                            this.getGame().getGameTime().getTime(this.getGame().getGameTime().getSecondPassed());
                     
-                    gTime.getTimer().cancel();
+                    this.getGame().getGameTime().getTimer().cancel();
                     break;
             }
             
