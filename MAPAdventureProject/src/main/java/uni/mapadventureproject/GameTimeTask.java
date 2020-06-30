@@ -13,11 +13,12 @@ import java.util.TimerTask;
  *
  * @author Admin
  */
-public class GameTimeThread implements Serializable {
+public class GameTimeTask implements Serializable {
 
     private int secondPassed = 0;
     private Timer time;
     private TimerTask task;
+    private boolean active = false;
 
     public void start() {
         time = new Timer();
@@ -29,6 +30,7 @@ public class GameTimeThread implements Serializable {
             }
 
         };
+        active = true;
         time.scheduleAtFixedRate(task, 1000, 1000);
 
     }
@@ -55,6 +57,14 @@ public class GameTimeThread implements Serializable {
 
     public void setTask(TimerTask task) {
         this.task = task;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getTime() {

@@ -13,7 +13,8 @@ public class Game {
     private Inventory inventory; //inventario del protagonista
     private Room currentRoom;
     
-    private GameTimeThread gTime = new GameTimeThread();
+    String player = "Pippo";
+    private GameTimeTask gTime = new GameTimeTask();
     
     public Game() {
         this.commands = new HashSet<>();
@@ -62,11 +63,19 @@ public class Game {
         fs.saveFile(dirPath, this);
     }
 
-    public GameTimeThread getGameTime() {
+    public String getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(String player) {
+        this.player = player;
+    }
+
+    public GameTimeTask getGameTime() {
         return gTime;
     }
     
-    public void setGameTime(GameTimeThread gTime) {
+    public void setGameTime(GameTimeTask gTime) {
         this.gTime = gTime;
     }
     

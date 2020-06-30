@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import javax.swing.ImageIcon;
 import uni.mapadventureproject.Game;
-import uni.mapadventureproject.GameTimeThread;
+import uni.mapadventureproject.GameTimeTask;
 import uni.mapadventureproject.type.*;
 
 public class FileSaver {
@@ -179,6 +179,8 @@ public class FileSaver {
         //TODO Serve anche un comando per uscire dal gioco?
         g.setCurrentRoom(station);
         
+        g.setPlayer("Pizza");
+        
         //GameTimeThread gTime = new GameTimeThread();
         //g.setGameTime(gTime);
         
@@ -196,6 +198,8 @@ public class FileSaver {
 
         objOut.writeObject(g.getCurrentRoom());
         
+        objOut.writeUTF(g.getPlayer());
+        
         objOut.writeInt(g.getGameTime().getSecondPassed());
 
         objOut.close();
@@ -211,6 +215,7 @@ public class FileSaver {
         g.setCommands((HashSet<Command>) objIn.readObject());
             g.setInventory((Inventory) objIn.readObject());
             g.setCurrentRoom((Room) objIn.readObject());
+            g.setPlayer((String) objIn.readUTF());
             g.getGameTime().setSecondPassed((int) objIn.readInt());
 
         objIn.close();
