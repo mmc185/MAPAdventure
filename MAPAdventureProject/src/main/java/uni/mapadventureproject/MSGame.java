@@ -169,6 +169,8 @@ public class MSGame extends GameManager {
                             this.getGame().getGameTime().getTime(this.getGame().getGameTime().getSecondPassed());
                     
                     this.getGame().getGameTime().getTimer().cancel();
+                    
+                    this.getGame().setCurrentRoom(new Room(0,"",""));
                     break;
             }
             
