@@ -13,6 +13,8 @@ public class Game {
     private Inventory inventory; //inventario del protagonista
     private Room currentRoom;
     
+    private GameTimeThread gTime = new GameTimeThread();
+    
     public Game() {
         this.commands = new HashSet<>();
         this.inventory = new Inventory();
@@ -58,6 +60,14 @@ public class Game {
     public void saveGame(String dirPath) throws IOException {
         FileSaver fs = new FileSaver(); 
         fs.saveFile(dirPath, this);
+    }
+
+    public GameTimeThread getGameTime() {
+        return gTime;
+    }
+    
+    public void setGameTime(GameTimeThread gTime) {
+        this.gTime = gTime;
     }
     
 }

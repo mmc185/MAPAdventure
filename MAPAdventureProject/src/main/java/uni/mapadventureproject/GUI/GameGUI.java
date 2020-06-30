@@ -78,7 +78,8 @@ public class GameGUI extends javax.swing.JFrame {
 
     public void initGame() {
 
-        jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
+       jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
+       gInteraction.getGameManager().getGame().getGameTime().start();
        
         
     }
@@ -281,11 +282,10 @@ public class GameGUI extends javax.swing.JFrame {
         jpButtonsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
 
         getContentPane().add(jpButtons);
-        jpButtons.setBounds(680, 495, 242, 118);
+        jpButtons.setBounds(680, 495, 256, 133);
 
         jlCommand.setBackground(new java.awt.Color(108, 202, 224));
         jlCommand.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlCommand.setForeground(new java.awt.Color(0, 0, 0));
         jlCommand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlCommand.setText("Inserisci un comando:");
         jlCommand.setOpaque(true);
