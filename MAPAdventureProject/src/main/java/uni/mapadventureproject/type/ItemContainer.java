@@ -8,6 +8,7 @@ import java.util.Set;
 public class ItemContainer extends Item implements Serializable {
 
     private List<Item> cItemList;
+    private String lockedBy = "";
 
     public ItemContainer(List<Item> cItemList, int id, String name, String desc) {
         super(id, name, desc);
@@ -27,11 +28,41 @@ public class ItemContainer extends Item implements Serializable {
         this.cItemList = cItemList;
     }
 
+    public String getLockedBy() {
+        return lockedBy;
+    }
+
+    public void setLockedBy(String lockedBy) {
+        this.lockedBy = lockedBy;
+    }
+
     public void add(Item i) {
         this.cItemList.add(i);
     }
 
     public void remove(Item i) {
         this.cItemList.remove(i);
+    }
+
+    public boolean unlockContainer(String cName) {
+
+        boolean flag = false;
+
+        if (getLockedBy().equals(cName)) {
+            this.setLockedBy("");
+            flag = true;
+        }
+
+        return flag;
+
+    }
+
+    public String toString() {
+
+        String cList = "";
+        for (Item i : cItemList) {
+            cList = cList + "\n- " + i.getName();
+        }
+        return cList;
     }
 }
