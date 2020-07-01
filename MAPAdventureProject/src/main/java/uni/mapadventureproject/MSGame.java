@@ -13,6 +13,7 @@ import uni.mapadventureproject.type.CommandType;
 import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.Room;
 import uni.mapadventureproject.type.TriggeredRoom;
+import uni.mapadventureproject.type.ItemContainer;
 
 public class MSGame extends GameManager {
 
@@ -30,7 +31,6 @@ public class MSGame extends GameManager {
         Room r = null;
         Item i = null;
         String output = "";
-
         /* Se l'azione sfrutta un oggetto salva l'oggetto e 
            lo rinomina nella Map per fare riferimento al suo nome principale
            e non a potenziali alias
@@ -121,6 +121,7 @@ public class MSGame extends GameManager {
 
                         i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
 
+                        //Apertura stanza
                         if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
 
                             output = "Hai sbloccato la stanza!";
@@ -132,15 +133,48 @@ public class MSGame extends GameManager {
                                 output += "\nL'oggetto " + i.getName() + "è stato rimosso.";
                             }
 
-                        } else {
-                            output = "Non puoi aprire la stanza così!";
-                        }
+                            //Se la chiave non corrisponde a quella di una stanza, controlla se può essere di un ItemContainer
+                        } else { //Apertura ItemContainer in stile: "Apri con **item**"
 
+                            //ricerca di un itemContainer
+                            for (Item iC : this.getGame().getCurrentRoom().getItemList().getInventoryList()) {
+
+                                if (iC instanceof ItemContainer) {
+
+                                    if (i.getConsumable() != 0 && ((ItemContainer) iC).unlockContainer(i.getName())) {
+
+                                        if (((ItemContainer) iC).getcItemList().isEmpty()) {
+
+                                            output = "L'oggetto è stato aperto, ma è vuoto!";
+
+                                        } else {
+
+                                            output = "Oggetto aperto! Ecco il suo contenuto:" + ((ItemContainer) iC).toString();
+
+                                            i.setConsumable((byte) (i.getConsumable() - 1));
+
+                                            if (i.getConsumable() == 0) {
+
+                                                this.getGame().getInventory().remove(i);
+
+                                                output += "\nL'oggetto " + i.getName() + "è stato rimosso.";
+                                            }
+                                        }
+                                    } /*else { //INUTILE?
+                                        output = "Non puoi aprire quest'oggetto così!";
+                                    }*/
+                                }
+                            }
+                        } /*else {//INUTILE?
+                            output = "Non puoi aprire la stanza così!";
+                        }*/
                     } else {
-                        output = "Non puoi aprire la stanza così!";
+                        // output = "Non è possibile effettuare un'apertura in questo modo!";
+                        output = "Non è possibile aprire con questo oggetto";
                     }
 
                     break;
+
                 case PUSH:
 
                     if (i.isPushable() && !i.isPush()) {
