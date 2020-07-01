@@ -45,7 +45,8 @@ public class GameGUI extends javax.swing.JFrame {
         init();
         this.gInteraction = gInteraction;
         initGame();
-
+        initDB();
+        
     }
 
     private void init() {
@@ -77,11 +78,19 @@ public class GameGUI extends javax.swing.JFrame {
         }
     }
 
-    public void initGame() {
+    private void initGame() {
 
         jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
         gInteraction.getGameManager().getGame().getGameTime().start();
 
+    }
+    
+    private void initDB() {
+        try {
+        db.connect();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -461,9 +470,9 @@ public class GameGUI extends javax.swing.JFrame {
             if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
                 try {
 
-                    db.connect();
                     db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
                             gInteraction.getGameManager().getGame().getGameTime().getTime());
+                    System.out.println(db.topScores());
 
                 } catch (SQLException | ParseException e) {
                     JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);

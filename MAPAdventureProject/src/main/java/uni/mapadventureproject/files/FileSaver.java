@@ -179,7 +179,7 @@ public class FileSaver {
         //TODO Serve anche un comando per uscire dal gioco?
         g.setCurrentRoom(station);
         
-        g.setPlayer("Pizza");
+        g.setPlayer("Patatine");
         
         //GameTimeThread gTime = new GameTimeThread();
         //g.setGameTime(gTime);
