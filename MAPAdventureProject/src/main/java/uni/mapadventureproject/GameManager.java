@@ -9,7 +9,7 @@ public abstract class GameManager {
 
     Game game;
 
-    GameManager( Game g ) {
+    GameManager(Game g) {
         this.game = g;
     }
 
@@ -22,7 +22,7 @@ public abstract class GameManager {
     }
 
     protected abstract String executeCommand(Map<WordType, String> commandMap);
-    
+
     public CommandType getCommandType(String cName) {
 
         for (Command c : this.getGame().getCommands()) {
@@ -38,4 +38,7 @@ public abstract class GameManager {
         return null;
 
     }
+
+    public abstract String showHelp();
+
 }

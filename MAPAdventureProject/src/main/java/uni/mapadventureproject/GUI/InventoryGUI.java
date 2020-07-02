@@ -41,7 +41,7 @@ public class InventoryGUI extends javax.swing.JDialog {
         jScrollPane1.setSize(660, 660);
         jScrollPane1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         jScrollPane1.setAlignmentX(50);
-        jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         try {
             for (Item i : inv.getInventoryList()) {
