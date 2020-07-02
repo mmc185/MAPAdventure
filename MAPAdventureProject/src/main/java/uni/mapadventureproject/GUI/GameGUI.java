@@ -472,8 +472,7 @@ public class GameGUI extends javax.swing.JFrame {
 
                     db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
                             gInteraction.getGameManager().getGame().getGameTime().getTime());
-                    System.out.println(db.topScores());
-
+                    
                 } catch (SQLException | ParseException e) {
                     JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
                 }

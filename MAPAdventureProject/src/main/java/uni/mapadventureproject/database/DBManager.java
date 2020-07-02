@@ -52,7 +52,6 @@ public class DBManager {
         prstm.setTime(2, time);
 
         prstm.executeUpdate();
-        //con.commit();
         prstm.close();
     }
 
