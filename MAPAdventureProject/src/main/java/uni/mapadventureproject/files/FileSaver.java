@@ -52,10 +52,10 @@ public class FileSaver {
 
         //Oggetti non inventario
         Item buttonTrain = new Item(55, "bottone", "Bottone per far aprire le porte del treno");
-        buttonTrain.setAlias(new String[] {"pulsante"});
+        buttonTrain.setAlias(new String[]{"pulsante"});
         buttonTrain.setPushable(true);
         buttonTrain.setConsumable((byte) 1);
-        
+
         Item note = new Item(56, "bigliettino", "\"Ho preso un oggetto per te importante, se vuoi averlo indietro devi portarmi degli oggetti altrettanto importanti per me:\n"
                 + "1) OggettoX dal portale nella direzione in cui sorge il sole,\n"
                 + "2) OggettoY dal portale più oscuro,\n"
@@ -110,6 +110,16 @@ public class FileSaver {
                 + "Gli premi di controllare meglio e comincia ad elencare il contenuto dello zaino.\n"
                 + "\"Borraccia, i tuoi immancabili taralli, ombrello, quaderno e un fogliettino sparso. Cos'è vuoi copiare all'esame?\"\n"
                 + "(Non avevi un bigliettino prima!)");
+
+        //immagini stanze
+        img = new ImageIcon("img//stanze//station.png");
+        station.setRoomImage(img);
+        img = new ImageIcon("img//stanze//wagon.png");
+        wagon.setRoomImage(img);
+        img = new ImageIcon("img//stanze//metaStation.png");
+        metaStation.setRoomImage(img);
+        img = new ImageIcon("img//stanze//metaStation.png");
+        metaStationLobby.setRoomImage(img);
 
         //Items delle stanze 
         Item poster = new Item(55, "poster", "L'Agenzia di viaggi Artskjid ti dà il benvenuto alla Metastazione Centrale! \n"
@@ -177,7 +187,6 @@ public class FileSaver {
         //Comando buttati?
         //TODO Serve anche un comando per uscire dal gioco?
         g.setCurrentRoom(station);
-        
 
     }
 
