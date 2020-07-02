@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Timer;
 import javax.swing.ImageIcon;
+import java.sql.SQLException;
+import java.text.ParseException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
@@ -23,7 +25,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import uni.mapadventureproject.GameInteraction;
-import uni.mapadventureproject.GameTimeThread;
+import uni.mapadventureproject.database.DBManager;
 
 /**
  *
@@ -31,9 +33,10 @@ import uni.mapadventureproject.GameTimeThread;
  */
 public class GameGUI extends javax.swing.JFrame {
 
-    GameInteraction gInteraction;
-    Font font;
-    Font fontMinecraft;
+    private GameInteraction gInteraction;
+    private DBManager db = new DBManager();
+    private Font font;
+    private Font fontMinecraft;
 
     /**
      * Creates new form GameGUI
@@ -45,6 +48,7 @@ public class GameGUI extends javax.swing.JFrame {
         this.gInteraction = gInteraction;
         init();
         initGame();
+        initDB();
 
     }
 
@@ -64,16 +68,13 @@ public class GameGUI extends javax.swing.JFrame {
             jmiSaveGame.setFont(fontMinecraft);
             jmHelp.setFont(fontMinecraft);
             jmiHelp.setFont(fontMinecraft);
+            jmiScoreboard.setFont(fontMinecraft);
             jlCommand.setFont(fontMinecraft.deriveFont(Font.BOLD, 14));
             jtTypingField.setFont(fontMinecraft);
             jbSend.setFont(fontMinecraft);
             jbUp.setFont(fontMinecraft);
             jbDown.setFont(fontMinecraft);
             jtpReadingArea.setFont(fontMinecraft);
-
-            ImageIcon img = gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage();
-            jlImage.setIcon(img);
-            jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
 
         } catch (FontFormatException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
@@ -83,8 +84,21 @@ public class GameGUI extends javax.swing.JFrame {
     public void initGame() {
         jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
 
+        ImageIcon img = gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage();
+        jlImage.setIcon(img);
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
+        gInteraction.getGameManager().getGame().getGameTime().start();
+
     }
 
+    private void initDB() {
+        try {
+            db.connect();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,6 +128,7 @@ public class GameGUI extends javax.swing.JFrame {
         jmOptions = new javax.swing.JMenu();
         jmiSaveGame = new javax.swing.JMenuItem();
         jmiBackMenu = new javax.swing.JMenuItem();
+        jmiScoreboard = new javax.swing.JMenuItem();
         jmHelp = new javax.swing.JMenu();
         jmiHelp = new javax.swing.JMenuItem();
 
@@ -285,7 +300,6 @@ public class GameGUI extends javax.swing.JFrame {
 
         jlCommand.setBackground(new java.awt.Color(108, 202, 224));
         jlCommand.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlCommand.setForeground(new java.awt.Color(0, 0, 0));
         jlCommand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlCommand.setText("Inserisci un comando:");
         jlCommand.setOpaque(true);
@@ -394,6 +408,15 @@ public class GameGUI extends javax.swing.JFrame {
         });
         jmOptions.add(jmiBackMenu);
 
+        jmiScoreboard.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jmiScoreboard.setText("Scoreboard");
+        jmiScoreboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiScoreboardActionPerformed(evt);
+            }
+        });
+        jmOptions.add(jmiScoreboard);
+
         jmbOptions.add(jmOptions);
 
         jmHelp.setText("?");
@@ -449,6 +472,17 @@ public class GameGUI extends javax.swing.JFrame {
             jtTypingField.setText("");
 
             appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager(s) + "\n", Color.white);
+
+            if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
+                try {
+
+                    db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
+                            gInteraction.getGameManager().getGame().getGameTime().getTime());
+
+                } catch (SQLException | ParseException e) {
+                    JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
         }
         ImageIcon img = gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage();
@@ -539,6 +573,12 @@ public class GameGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jmiHelpActionPerformed
 
+    private void jmiScoreboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiScoreboardActionPerformed
+
+        ScoreboardGUI sbGUI = new ScoreboardGUI(this, true, db);
+        sbGUI.setVisible(true);
+    }//GEN-LAST:event_jmiScoreboardActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -553,6 +593,7 @@ public class GameGUI extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
@@ -596,6 +637,7 @@ public class GameGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiBackMenu;
     private javax.swing.JMenuItem jmiHelp;
     private javax.swing.JMenuItem jmiSaveGame;
+    private javax.swing.JMenuItem jmiScoreboard;
     private javax.swing.JPanel jpButtons;
     private javax.swing.JScrollPane jspRead2;
     private javax.swing.JScrollPane jspWrite;
