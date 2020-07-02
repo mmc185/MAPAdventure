@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import javax.swing.ImageIcon;
 import uni.mapadventureproject.Game;
+import uni.mapadventureproject.GameTimeTask;
 import uni.mapadventureproject.type.*;
 
 public class FileSaver {
@@ -178,6 +179,11 @@ public class FileSaver {
         //TODO Serve anche un comando per uscire dal gioco?
         g.setCurrentRoom(station);
         
+        g.setPlayer("Patatine");
+        
+        //GameTimeThread gTime = new GameTimeThread();
+        //g.setGameTime(gTime);
+        
 
     }
 
@@ -191,6 +197,10 @@ public class FileSaver {
         objOut.writeObject(g.getInventory());
 
         objOut.writeObject(g.getCurrentRoom());
+        
+        objOut.writeUTF(g.getPlayer());
+        
+        objOut.writeInt(g.getGameTime().getSecondPassed());
 
         objOut.close();
         fOut.close();
@@ -202,13 +212,11 @@ public class FileSaver {
 
         ObjectInputStream objIn = new ObjectInputStream(fIn);
 
-        while (fIn.available() != 0) {
-
-            g.setCommands((HashSet<Command>) objIn.readObject());
+        g.setCommands((HashSet<Command>) objIn.readObject());
             g.setInventory((Inventory) objIn.readObject());
             g.setCurrentRoom((Room) objIn.readObject());
-
-        }
+            g.setPlayer((String) objIn.readUTF());
+            g.getGameTime().setSecondPassed((int) objIn.readInt());
 
         objIn.close();
         fIn.close();
@@ -239,7 +247,8 @@ public class FileSaver {
         } catch (IOException exc) {
             System.out.println("1" + exc.getMessage());*/
         } catch (Exception e) {
-            System.out.println("2" + e.getMessage());
+            System.out.println("2" + e.getMessage() );
+            e.printStackTrace();
         }
     }
 
