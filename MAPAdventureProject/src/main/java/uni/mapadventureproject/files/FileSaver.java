@@ -1,5 +1,6 @@
 package uni.mapadventureproject.files;
 
+import java.awt.Image;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -71,6 +72,7 @@ public class FileSaver {
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
                 + "\n\"Il treno regionale delle ore 9:00 diretto a Bari Centrale è in partenza dal binario 9 con un ritardo di 10 minuti!\""
                 + "\nSenti il fischio assordante del capotreno che ti sollecita a salire.");
+        station.setRoomImage(new ImageIcon("img//stanze//station.png"));
 
         Room wagon = new TriggeredRoom(1, "Vagone del treno", "Dopo esserti fatto strada tra l'assembramento di persone sui vagoni, trovi il tuo amico nonché compagno di progetto.\n"
                 + "Che fortuna, ti ha preso il posto! (stonks) Ti siedi.\n"
@@ -94,6 +96,7 @@ public class FileSaver {
                 + "Il tuo amico è già vicino alle porte e sollecita \"Dai, sbrigati, premi il bottone per aprirle le porte "
                 + "o arriveremo in ritardo.\"\n");
         // trigger o locked per la metastation?
+        wagon.setRoomImage(new ImageIcon("img//stanze//wagon.png"));
 
         Room metaStation = new Room(2, "Metastazione", "Come sempre scendi dal treno stretto come una sardina in mezzo ad altri poveri pendolari.\n"
                 + "Noti che il treno si è fermato a un binario diverso dal solito, alzi lo sguardo e leggi \"Binario 0\".\n"
@@ -104,6 +107,7 @@ public class FileSaver {
                 + "\"Scusi, mi può dire la strada per il portale che conduce a PaleoliticCity?\"\n"
                 + "Guardi il tuo amico con gli occhi strabuzzati e lui scrolla le spalle \n"
                 + "\"Cerchiamo di capire dove cavolo siamo finiti!\" e inizia a guardarsi intorno.");
+        metaStation.setRoomImage(new ImageIcon("img//stanze//metaStation.png"));
 
         Room metaStationLobby = new Room(3, "Atrio della Metastazione", "Uscendo dalla stazione ti rendi conto di avere lo zaino aperto.\n"
                 + "Chiedi al tuo amico di controllare che ci sia tutto e, gentilmente, di chiuderti lo zaino.\n"
@@ -111,16 +115,7 @@ public class FileSaver {
                 + "Gli premi di controllare meglio e comincia ad elencare il contenuto dello zaino.\n"
                 + "\"Borraccia, i tuoi immancabili taralli, ombrello, quaderno e un fogliettino sparso. Cos'è vuoi copiare all'esame?\"\n"
                 + "(Non avevi un bigliettino prima!)");
-
-        //immagini stanze
-        img = new ImageIcon("img//stanze//station.png");
-        station.setRoomImage(img);
-        img = new ImageIcon("img//stanze//wagon.png");
-        wagon.setRoomImage(img);
-        img = new ImageIcon("img//stanze//metaStation.png");
-        metaStation.setRoomImage(img);
-        img = new ImageIcon("img//stanze//metaStation.png");
-        metaStationLobby.setRoomImage(img);
+        metaStationLobby.setRoomImage(new ImageIcon("img//stanze//metaStationLobby.png"));
 
         //Items delle stanze 
         Item poster = new Item(55, "poster", "L'Agenzia di viaggi Artskjid ti dà il benvenuto alla Metastazione Centrale! \n"
@@ -188,12 +183,11 @@ public class FileSaver {
         //Comando buttati?
         //TODO Serve anche un comando per uscire dal gioco?
         g.setCurrentRoom(station);
-        
-        g.setPlayer("Patatine"); 
-        
+
+        g.setPlayer("Patatine");
+
         //GameTimeThread gTime = new GameTimeThread();
         //g.setGameTime(gTime);
-       
     }
 
     public void saveFile(String path, Game g) throws FileNotFoundException, IOException {
@@ -206,9 +200,9 @@ public class FileSaver {
         objOut.writeObject(g.getInventory());
 
         objOut.writeObject(g.getCurrentRoom());
-        
+
         objOut.writeUTF(g.getPlayer());
-        
+
         objOut.writeInt(g.getGameTime().getSecondPassed());
 
         objOut.close();
@@ -222,10 +216,10 @@ public class FileSaver {
         ObjectInputStream objIn = new ObjectInputStream(fIn);
 
         g.setCommands((HashSet<Command>) objIn.readObject());
-            g.setInventory((Inventory) objIn.readObject());
-            g.setCurrentRoom((Room) objIn.readObject());
-            g.setPlayer((String) objIn.readUTF());
-            g.getGameTime().setSecondPassed((int) objIn.readInt());
+        g.setInventory((Inventory) objIn.readObject());
+        g.setCurrentRoom((Room) objIn.readObject());
+        g.setPlayer((String) objIn.readUTF());
+        g.getGameTime().setSecondPassed((int) objIn.readInt());
 
         objIn.close();
         fIn.close();
@@ -256,7 +250,7 @@ public class FileSaver {
         } catch (IOException exc) {
             System.out.println("1" + exc.getMessage());*/
         } catch (Exception e) {
-            System.out.println("2" + e.getMessage() );
+            System.out.println("2" + e.getMessage());
             e.printStackTrace();
         }
     }

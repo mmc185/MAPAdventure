@@ -44,7 +44,6 @@ public class GameGUI extends javax.swing.JFrame {
     public GameGUI(GameInteraction gInteraction) {
 
         initComponents();
-        //init();
         this.gInteraction = gInteraction;
         init();
         initGame();
@@ -84,9 +83,10 @@ public class GameGUI extends javax.swing.JFrame {
     public void initGame() {
         jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
 
-        ImageIcon img = gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage();
-        jlImage.setIcon(img);
+        //Imposta l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
+
         gInteraction.getGameManager().getGame().getGameTime().start();
 
     }
@@ -98,7 +98,7 @@ public class GameGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
         }
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -348,11 +348,6 @@ public class GameGUI extends javax.swing.JFrame {
         jtTypingField.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jtTypingField.setMaximumSize(new java.awt.Dimension(500, 40));
         jtTypingField.setMinimumSize(new java.awt.Dimension(500, 40));
-        jtTypingField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtTypingFieldActionPerformed(evt);
-            }
-        });
         jtTypingField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtTypingFieldKeyPressed(evt);
@@ -458,10 +453,6 @@ public class GameGUI extends javax.swing.JFrame {
 
     }
 
-    private void jtTypingFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtTypingFieldActionPerformed
-
-    }//GEN-LAST:event_jtTypingFieldActionPerformed
-
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
 
         if (!jtTypingField.getText().isBlank()) {
@@ -485,8 +476,8 @@ public class GameGUI extends javax.swing.JFrame {
             }
 
         }
-        ImageIcon img = gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage();
-        jlImage.setIcon(img);
+        //Aggiorna l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
 
 
