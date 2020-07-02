@@ -135,6 +135,8 @@ public class MSGame extends GameManager {
 
                             //Se la chiave non corrisponde a quella di una stanza, controlla se può essere di un ItemContainer
                         } else { //Apertura ItemContainer in stile: "Apri con **item**"
+                            //Apri itemcont con ogg
+                            //commandmap 2 og se apre la stanza e 3 se ci sono 2 ogg
 
                             //ricerca di un itemContainer
                             for (Item iC : this.getGame().getCurrentRoom().getItemList().getInventoryList()) {
@@ -151,7 +153,9 @@ public class MSGame extends GameManager {
 
                                             output = "Oggetto aperto! Ecco il suo contenuto:" + ((ItemContainer) iC).toString();
 
-                                            i.setConsumable((byte) (i.getConsumable() - 1));
+                                           
+                                        } 
+                                        i.setConsumable((byte) (i.getConsumable() - 1));
 
                                             if (i.getConsumable() == 0) {
 
@@ -159,10 +163,9 @@ public class MSGame extends GameManager {
 
                                                 output += "\nL'oggetto " + i.getName() + "è stato rimosso.";
                                             }
-                                        }
-                                    } /*else { //INUTILE?
+                                    } else { //INUTILE?
                                         output = "Non puoi aprire quest'oggetto così!";
-                                    }*/
+                                    }
                                 }
                             }
                         } /*else {//INUTILE?
