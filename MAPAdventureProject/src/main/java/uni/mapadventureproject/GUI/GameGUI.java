@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Timer;
+import javax.swing.ImageIcon;
 import java.sql.SQLException;
 import java.text.ParseException;
 import javax.swing.JFileChooser;
@@ -42,17 +44,16 @@ public class GameGUI extends javax.swing.JFrame {
     public GameGUI(GameInteraction gInteraction) {
 
         initComponents();
-        init();
         this.gInteraction = gInteraction;
+        init();
         initGame();
         initDB();
-        
+
     }
 
     private void init() {
 
         // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
-
         try (InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))) {
 
             font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
@@ -75,21 +76,25 @@ public class GameGUI extends javax.swing.JFrame {
             jbDown.setFont(fontMinecraft);
             jtpReadingArea.setFont(fontMinecraft);
 
-        } catch (FontFormatException | IOException e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
+        } catch (FontFormatException | IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void initGame() {
-
+    public void initGame() {
         jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
+
+        //Imposta l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
+
         gInteraction.getGameManager().getGame().getGameTime().start();
 
     }
-    
+
     private void initDB() {
         try {
-        db.connect();
+            db.connect();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
         }
@@ -144,6 +149,7 @@ public class GameGUI extends javax.swing.JFrame {
 
         jpButtons.setForeground(new java.awt.Color(60, 63, 65));
         jpButtons.setOpaque(false);
+        jpButtons.setPreferredSize(new java.awt.Dimension(250, 128));
 
         jbNorth.setBackground(new java.awt.Color(56, 86, 128));
         jbNorth.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
@@ -344,11 +350,6 @@ public class GameGUI extends javax.swing.JFrame {
         jtTypingField.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jtTypingField.setMaximumSize(new java.awt.Dimension(500, 40));
         jtTypingField.setMinimumSize(new java.awt.Dimension(500, 40));
-        jtTypingField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtTypingFieldActionPerformed(evt);
-            }
-        });
         jtTypingField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtTypingFieldKeyPressed(evt);
@@ -360,12 +361,12 @@ public class GameGUI extends javax.swing.JFrame {
         jspWrite.setBounds(43, 548, 520, 65);
 
         jlImage.setBackground(new java.awt.Color(0, 0, 0));
-        jlImage.setIcon(new javax.swing.ImageIcon("img//placeHolder.png"));
-        jlImage.setMaximumSize(new java.awt.Dimension(361, 450));
+        jlImage.setMaximumSize(new java.awt.Dimension(370, 410));
+        jlImage.setMinimumSize(new java.awt.Dimension(370, 410));
         jlImage.setOpaque(true);
-        jlImage.setPreferredSize(new java.awt.Dimension(361, 448));
+        jlImage.setPreferredSize(new java.awt.Dimension(370, 410));
         getContentPane().add(jlImage);
-        jlImage.setBounds(570, 50, 361, 410);
+        jlImage.setBounds(570, 50, 370, 410);
 
         jtpReadingArea.setEditable(false);
         jtpReadingArea.setBackground(new java.awt.Color(0, 0, 0));
@@ -454,10 +455,6 @@ public class GameGUI extends javax.swing.JFrame {
 
     }
 
-    private void jtTypingFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtTypingFieldActionPerformed
-        //Qui l'utente inserisce il suo testo
-    }//GEN-LAST:event_jtTypingFieldActionPerformed
-
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
 
         if (!jtTypingField.getText().isBlank()) {
@@ -474,13 +471,17 @@ public class GameGUI extends javax.swing.JFrame {
 
                     db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
                             gInteraction.getGameManager().getGame().getGameTime().getTime());
-                    
+
                 } catch (SQLException | ParseException e) {
                     JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
                 }
             }
 
         }
+        //Aggiorna l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
+
 
     }//GEN-LAST:event_jbSendActionPerformed
 
@@ -566,7 +567,7 @@ public class GameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiHelpActionPerformed
 
     private void jmiScoreboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiScoreboardActionPerformed
-        
+
         ScoreboardGUI sbGUI = new ScoreboardGUI(this, true, db);
         sbGUI.setVisible(true);
     }//GEN-LAST:event_jmiScoreboardActionPerformed
@@ -585,6 +586,7 @@ public class GameGUI extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {

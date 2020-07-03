@@ -3,6 +3,7 @@ package uni.mapadventureproject.type;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 
 public class Room implements Serializable {
 
@@ -18,6 +19,7 @@ public class Room implements Serializable {
     private Room down = null;
     private Inventory itemList;
     private String lockedBy = "";
+    private ImageIcon roomImage;
 
     public Room(int id, String name, String desc) {
         this.id = id;
@@ -118,6 +120,14 @@ public class Room implements Serializable {
         itemList.add(i);
     }
 
+    public ImageIcon getRoomImage() {
+        return roomImage;
+    }
+
+    public void setRoomImage(ImageIcon roomImage) {
+        this.roomImage = roomImage;
+    }
+      
     @Override
     public int hashCode() {
         int hash = 3;

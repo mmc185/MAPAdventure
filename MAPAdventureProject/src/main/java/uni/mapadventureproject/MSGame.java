@@ -70,7 +70,7 @@ public class MSGame extends GameManager {
                         output = "===========================================\n"
                                 + this.getGame().getCurrentRoom().getName() + "\n\n"
                                 + this.getGame().getCurrentRoom().getDesc();
-
+                        
                     } else {
                         output = "Questa stanza è chiusa!";
                     }
