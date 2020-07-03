@@ -7,24 +7,24 @@ import java.util.Set;
 
 public class ItemContainer extends Item implements Serializable {
 
-    private List<Item> cItemList;
+    private Inventory cItemList;
     private String lockedBy = "";
 
-    public ItemContainer(List<Item> cItemList, int id, String name, String desc) {
+    public ItemContainer(Inventory cItemList, int id, String name, String desc) {
         super(id, name, desc);
-        this.cItemList = new ArrayList<>();
+        this.cItemList = new Inventory();
     }
 
-    public ItemContainer(List<Item> cItemList, int id, String name, String desc, Set<String> alias) {
+    public ItemContainer(Inventory cItemList, int id, String name, String desc, Set<String> alias) {
         super(id, name, desc, alias);
-        this.cItemList = new ArrayList<>();
+        this.cItemList = new Inventory();
     }
 
-    public List<Item> getcItemList() {
+    public Inventory getcItemList() {
         return cItemList;
     }
 
-    public void setcItemList(List<Item> cItemList) {
+    public void setcItemList(Inventory cItemList) {
         this.cItemList = cItemList;
     }
 
@@ -59,11 +59,6 @@ public class ItemContainer extends Item implements Serializable {
 
     @Override
     public String toString() {
-
-        String cList = "";
-        for (Item i : cItemList) {
-            cList = cList + "\n- " + i.getName();
-        }
-        return cList;
+        return cItemList.toString(); //?????
     }
 }

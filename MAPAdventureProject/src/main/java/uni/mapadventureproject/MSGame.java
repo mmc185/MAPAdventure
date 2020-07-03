@@ -143,7 +143,7 @@ public class MSGame extends GameManager {
                         }
                     } else if (commandMap.size() == 3) { //apertura itemcontainer
                         ItemContainer iC = null; //contenitore
-                        
+
                         if (commandMap.containsKey(WordType.I_OBJ)) {
 
                             i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ)); // i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.I_OBJ));
@@ -155,11 +155,10 @@ public class MSGame extends GameManager {
                                 if (iC instanceof ItemContainer) {
 
                                     if (i.getConsumable() != 0 && iC.unlockContainer(i.getName())) {
-
-                                        if (iC.getcItemList().isEmpty()) {
+                                        if (iC.getcItemList().getInventoryList().isEmpty()) {
                                             output = "L'oggetto è stato aperto, ma è vuoto!";
                                         } else {
-                                            output = "Oggetto aperto! Ecco il suo contenuto:" + iC.toString();
+                                            output = "Hai aperto l'oggetto " + iC.getName() + "! Ecco il suo contenuto:" + iC.toString();
                                         }
                                         i.setConsumable((byte) (i.getConsumable() - 1));
 
