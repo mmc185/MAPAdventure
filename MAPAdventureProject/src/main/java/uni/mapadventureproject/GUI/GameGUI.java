@@ -52,9 +52,11 @@ public class GameGUI extends javax.swing.JFrame {
     private void init() {
 
         // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
+
         try (InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))) {
 
-            font = Font.createFont(Font.TRUETYPE_FONT, is);
+            font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
+
 
             fontMinecraft = font.deriveFont(Font.PLAIN, 14);
 
@@ -290,7 +292,7 @@ public class GameGUI extends javax.swing.JFrame {
         jpButtonsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbEast, jbNorth, jbSouth, jbWest});
 
         getContentPane().add(jpButtons);
-        jpButtons.setBounds(680, 495, 256, 133);
+        jpButtons.setBounds(680, 495, 250, 128);
 
         jlCommand.setBackground(new java.awt.Color(108, 202, 224));
         jlCommand.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -298,7 +300,7 @@ public class GameGUI extends javax.swing.JFrame {
         jlCommand.setText("Inserisci un comando:");
         jlCommand.setOpaque(true);
         getContentPane().add(jlCommand);
-        jlCommand.setBounds(53, 514, 200, 28);
+        jlCommand.setBounds(53, 514, 220, 28);
 
         jbInv.setBackground(new java.awt.Color(56, 86, 128));
         jbInv.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N

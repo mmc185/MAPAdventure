@@ -15,8 +15,16 @@ import uni.mapadventureproject.type.TriggeredRoom;
 
 public class MSGame extends GameManager {
 
-    public MSGame(Game g) {
+
+    private GameTimeTask gTime = new GameTimeTask();
+    private PlayMusic music=new PlayMusic(); //aggiunto
+
+    public MSGame(Game g) throws InterruptedException {
         super(g);
+        gTime.start();
+       
+        music.playSound("Musica//soundtrack.wav");
+
     }
 
     @Override
@@ -166,6 +174,7 @@ public class MSGame extends GameManager {
                     //output = "bad ending?";
 
                     output = "Hai scelto la via più semplice e questo non ti fa onore"
+
                             + "\n \n HAI COMPLETATO IL GIOCO IN : " + 
                             this.getGame().getGameTime().getTime();
                     
@@ -175,6 +184,7 @@ public class MSGame extends GameManager {
                     this.getGame().setCurrentRoom( r = new Room(0,"",""));
                     r.setLook("");
 
+
                     break;
             }
 
@@ -183,7 +193,9 @@ public class MSGame extends GameManager {
             //Triggera la stanza, se necessario
             if (r instanceof TriggeredRoom) {
 
+
                 if (((TriggeredRoom) r).isTriggerable()) { //Se la stanza è triggerabile
+
 
                     String triggerer = commandMap.get(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
 
