@@ -91,7 +91,7 @@ public class FileSaver {
                 + "\"Speriamo che il treno recuperi il ritardo\" senti il tuo amico che riflette ad alta voce.\n"
                 + "Tira fuori i suoi appunti e comincia a ripetere per conto suo, dovresti farlo anche tu!");
 
-        ((TriggeredRoom) wagon).addTriggerer("usa quaderno");
+        ((TriggeredRoom) wagon).addTriggerer("guarda quaderno");
         ((TriggeredRoom) wagon).addTriggerDesc("Cominci a rileggere gli appunti, ma le palpebre si fanno pesanti e crolli in un sonno profondo...\n"
                 + "...\n"
                 + "\"Il treno è in arrivo a destinazione con un ANTICIPO di 1 minuto.\"\n"
@@ -128,10 +128,6 @@ public class FileSaver {
         wagon.setLook("Il vagone è strapieno come sempre! ");
         wagon.addItem(buttonTrain);
         
-        wagon.setLockedBy("taralli");
-        taralli.setConsumable((byte) 1);
-        
-
         metaStation.setLook("Sul muro della stazione è affisso un grande poster con grandi scritte colorate e vicino al cancello di uscita\n"
                 + "c'è una strana creatura simile a un polpo che suona i tamburi con i suoi diversi tentacoli.");
         metaStation.addItem(poster);
