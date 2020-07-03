@@ -5,9 +5,9 @@
  */
 package uni.mapadventureproject;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-import uni.mapadventureproject.parser.InvalidStringException;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.CommandType;
 import uni.mapadventureproject.type.Item;
@@ -25,7 +25,7 @@ public class MSGame extends GameManager {
     }
 
     @Override
-    public String executeCommand(Map<WordType, String> commandMap) {
+    public String executeCommand(LinkedHashMap<WordType, String> commandMap) {
 
         CommandType command = this.getCommandType(commandMap.get(WordType.COMMAND));
         Room r = null;
@@ -142,7 +142,56 @@ public class MSGame extends GameManager {
                             output = "Non puoi aprire la stanza così!";
                         }
                     } else if (commandMap.size() == 3) { //apertura itemcontainer
+
                         ItemContainer iC = null; //contenitore
+                        i = null;
+                        byte index = 0;
+                        for (Map.Entry<WordType, String> entry : commandMap.entrySet()) {
+                            index++;
+                            System.out.println("index: " + index);
+                            System.out.println("Chiave entry:" + entry.getKey());
+
+                            if (index == 2) { //itemContainer. obbligatoriamente un oggetto della Room    
+                                if (entry.getKey().equals(WordType.R_OBJ)) {
+                                    //if (commandMap.containsKey(WordType.R_OBJ)) {
+                                    iC = (ItemContainer) this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
+                                }
+
+                            } else if (index == 3) { //Chiave. obbligatoriamente un oggetto dell'inv
+                                if (entry.getKey().equals(WordType.I_OBJ)) {
+                                    // if (commandMap.containsKey(WordType.I_OBJ)) {
+                                    i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ)); // i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.I_OBJ));
+                                }
+                            }
+
+                        }
+                        System.out.println("prima dell'instanceof");
+                        if (iC instanceof ItemContainer && i != null) {
+                            System.out.println("dentro l'instanceof");
+                            if (i.getConsumable() != 0 && iC.unlockContainer(i.getName())) {
+                                if (iC.getcItemList().getInventoryList().isEmpty()) {
+                                    output = "L'oggetto è stato aperto, ma è vuoto!";
+                                } else {
+                                    output = "Hai aperto l'oggetto " + iC.getName() + "! Ecco il suo contenuto:" + iC.toString();
+                                }
+                                i.setConsumable((byte) (i.getConsumable() - 1));
+
+                                if (i.getConsumable() == 0) {
+                                    this.getGame().getInventory().remove(i);
+                                    output += "\nL'oggetto " + i.getName() + "è stato rimosso.";
+                                }
+                            } else { //INUTILE?
+                                output = "Non puoi aprire quest'oggetto così!";
+                            }
+                        } else {
+                            // output = "Non è possibile effettuare un'apertura in questo modo!";
+                            output = "Non è possibile aprire con questo oggetto;\n"
+                                    + "prova a ricontrollare la sintassi della frase: "
+                                    + "\"Apri nomeContenitore con nomeChiave\" ";
+                        }
+                    }
+                    ////////////VECCHIA ROBA:
+                    /*       ItemContainer iC = null; //contenitore
 
                         if (commandMap.containsKey(WordType.I_OBJ)) {
 
@@ -176,7 +225,7 @@ public class MSGame extends GameManager {
                         // output = "Non è possibile effettuare un'apertura in questo modo!";
                         output = "Non è possibile aprire con questo oggetto";
                     }
-
+                     */
                     break;
 
                 case PUSH:

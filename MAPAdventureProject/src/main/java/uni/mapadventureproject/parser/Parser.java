@@ -1,6 +1,7 @@
 package uni.mapadventureproject.parser;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import uni.mapadventureproject.type.Command;
@@ -10,10 +11,10 @@ import uni.mapadventureproject.type.Room;
 
 public class Parser {
 
-    public Map<WordType, String> parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) throws InvalidStringException {
+    public LinkedHashMap<WordType, String> parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) throws InvalidStringException {
 
         // Formato da coppie di tipi di parola e stringa che lo identifica. (e.g. (OBJECT, "taralli") )
-        Map<WordType, String> parsedData = new HashMap<>();
+        LinkedHashMap<WordType, String> parsedData = new LinkedHashMap<>();
 
         // Rimuove anche punteggiatura e cifre
         String[] tokens = phrase.replaceAll("[^a-zA-Z]", " ").toLowerCase().split("\\s+");
@@ -61,7 +62,6 @@ public class Parser {
         return parsedData;
     }
 
-    
     private boolean isCommand(String s, Set<Command> commands) {
 
         for (Command c : commands) {
@@ -77,7 +77,9 @@ public class Parser {
         return false;
     }
 
-    /** Gli oggetti possono essere formati da una o due parole */
+    /**
+     * Gli oggetti possono essere formati da una o due parole
+     */
     private String isItem(String s, Inventory inv, String[] tokens, short counter) {
 
         try {
@@ -101,11 +103,11 @@ public class Parser {
             }
 
             return "";
-            
+
         } catch (ArrayIndexOutOfBoundsException e) {
-            
+
             return "";
-            
+
         }
 
     }

@@ -1,9 +1,11 @@
 package uni.mapadventureproject;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import uni.mapadventureproject.parser.Parser;
 import uni.mapadventureproject.parser.InvalidStringException;
+import uni.mapadventureproject.parser.WordType;
 
 public class GameInteraction {
 
@@ -21,7 +23,7 @@ public class GameInteraction {
 
     public String inputManager(String sInput) {
 
-        Map commandMap = new HashMap<>();
+        LinkedHashMap commandMap = new LinkedHashMap<>();
         String sOutput = "";
         
         try {
