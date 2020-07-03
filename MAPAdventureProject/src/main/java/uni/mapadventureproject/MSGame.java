@@ -117,60 +117,62 @@ public class MSGame extends GameManager {
                     break;
                 case OPEN:
 
-                    if (commandMap.containsKey(WordType.I_OBJ)) {
+                    if (commandMap.size() == 2) { //apertura stanze
 
-                        i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
+                        if (commandMap.containsKey(WordType.I_OBJ)) {
 
-                        //Apertura stanza
-                        if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
+                            i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ)); //Chiave
+                            //Apertura stanza
+                            if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
 
-                            output = "Hai sbloccato la stanza!";
+                                output = "Hai sbloccato la stanza!";
 
-                            i.setConsumable((byte) (i.getConsumable() - 1));
+                                i.setConsumable((byte) (i.getConsumable() - 1));
 
-                            if (i.getConsumable() == 0) {
-                                this.getGame().getInventory().remove(i);
-                                output += "\nL'oggetto " + i.getName() + "è stato rimosso.";
+                                if (i.getConsumable() == 0) {
+                                    this.getGame().getInventory().remove(i);
+                                    output += "\nL'oggetto " + i.getName() + "è stato rimosso.";
+                                }
+
+                            } else {
+                                output = "Non puoi aprire la stanza così!";
                             }
 
-                            //Se la chiave non corrisponde a quella di una stanza, controlla se può essere di un ItemContainer
-                        } else { //Apertura ItemContainer in stile: "Apri con **item**"
-                            //Apri itemcont con ogg
-                            //commandmap 2 og se apre la stanza e 3 se ci sono 2 ogg
+                        } else {
+                            output = "Non puoi aprire la stanza così!";
+                        }
+                    } else if (commandMap.size() == 3) { //apertura itemcontainer
+                        ItemContainer iC = null; //contenitore
+                        
+                        if (commandMap.containsKey(WordType.I_OBJ)) {
 
-                            //ricerca di un itemContainer
-                            for (Item iC : this.getGame().getCurrentRoom().getItemList().getInventoryList()) {
+                            i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ)); // i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.I_OBJ));
+
+                            if (commandMap.containsKey(WordType.R_OBJ)) {
+
+                                iC = (ItemContainer) this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
 
                                 if (iC instanceof ItemContainer) {
 
-                                    if (i.getConsumable() != 0 && ((ItemContainer) iC).unlockContainer(i.getName())) {
+                                    if (i.getConsumable() != 0 && iC.unlockContainer(i.getName())) {
 
-                                        if (((ItemContainer) iC).getcItemList().isEmpty()) {
-
+                                        if (iC.getcItemList().isEmpty()) {
                                             output = "L'oggetto è stato aperto, ma è vuoto!";
-
                                         } else {
-
-                                            output = "Oggetto aperto! Ecco il suo contenuto:" + ((ItemContainer) iC).toString();
-
-                                           
-                                        } 
+                                            output = "Oggetto aperto! Ecco il suo contenuto:" + iC.toString();
+                                        }
                                         i.setConsumable((byte) (i.getConsumable() - 1));
 
-                                            if (i.getConsumable() == 0) {
-
-                                                this.getGame().getInventory().remove(i);
-
-                                                output += "\nL'oggetto " + i.getName() + "è stato rimosso.";
-                                            }
+                                        if (i.getConsumable() == 0) {
+                                            this.getGame().getInventory().remove(i);
+                                            output += "\nL'oggetto " + i.getName() + "è stato rimosso.";
+                                        }
                                     } else { //INUTILE?
                                         output = "Non puoi aprire quest'oggetto così!";
                                     }
                                 }
                             }
-                        } /*else {//INUTILE?
-                            output = "Non puoi aprire la stanza così!";
-                        }*/
+                        }
                     } else {
                         // output = "Non è possibile effettuare un'apertura in questo modo!";
                         output = "Non è possibile aprire con questo oggetto";
@@ -180,7 +182,8 @@ public class MSGame extends GameManager {
 
                 case PUSH:
 
-                    if (i.isPushable() && !i.isPush()) {
+                    if (i.isPushable()
+                            && !i.isPush()) {
 
                         // Compie l'azione
                         i.setPush(true);
@@ -209,7 +212,9 @@ public class MSGame extends GameManager {
                     output = "Hai scelto la via più semplice e questo non ti fa onore"
                             + "\n \n HAI COMPLETATO IL GIOCO IN : " + gTime.getTime(gTime.getSecondPassed());
 
-                    gTime.getTimer().cancel();
+                    gTime.getTimer()
+                            .cancel();
+
                     break;
             }
 
