@@ -31,7 +31,7 @@ public class PlayMusic {
             JOptionPane.showMessageDialog(null," Music Error");
         }
     } */
-    public static synchronized void playSound(final String url) {
+    public synchronized void playSound(final String url) {
        Thread musicThread= new Thread(new Runnable() {
             // The wrapper thread is unnecessary, unless it blocks on the
             // Clip finishing; see comments.

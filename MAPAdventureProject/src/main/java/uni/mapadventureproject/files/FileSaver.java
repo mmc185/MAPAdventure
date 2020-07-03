@@ -57,6 +57,10 @@ public class FileSaver {
         buttonTrain.setAlias(new String[]{"pulsante"});
         buttonTrain.setPushable(true);
         buttonTrain.setConsumable((byte) 1);
+        
+        Item poster = new Item(55, "poster", "\"L'Agenzia di viaggi Artskjid ti dà il benvenuto alla Metastazione Centrale! \n"
+                + "Luogo da cui puoi raggiungere ogni dimensione immaginabile. \nPer informazioni, chiedere al personale in divisa.\"");
+        poster.setAlias(new String[]{"cartello", "cartellone", "manifesto", "affisso", "locandina"});
 
         Item note = new Item(56, "bigliettino", "\"Ho preso un oggetto per te importante, se vuoi averlo indietro devi portarmi degli oggetti altrettanto importanti per me:\n"
                 + "1) OggettoX dal portale nella direzione in cui sorge il sole,\n"
@@ -117,18 +121,13 @@ public class FileSaver {
                 + "(Non avevi un bigliettino prima!)");
         metaStationLobby.setRoomImage(new ImageIcon("img//stanze//metaStationLobby.png"));
 
-        //Items delle stanze 
-        Item poster = new Item(55, "poster", "L'Agenzia di viaggi Artskjid ti dà il benvenuto alla Metastazione Centrale! \n"
-                + "Luogo da cui puoi raggiungere ogni dimensione immaginabile. \nPer informazioni, chiedere al personale in divisa.\"");
-        poster.setAlias(new String[]{"cartello", "cartellone", "manifesto", "affisso", "locandina"});
-
         station.setUp(wagon);
         station.setLook("Ti trovi di fronte alle porte del treno. Dovresti muoverti prima che si chiudano!");
 
         wagon.setDown(metaStation);
         wagon.setLook("Il vagone è strapieno come sempre! ");
         wagon.addItem(buttonTrain);
-
+        
         metaStation.setLook("Sul muro della stazione è affisso un grande poster con grandi scritte colorate e vicino al cancello di uscita\n"
                 + "c'è una strana creatura simile a un polpo che suona i tamburi con i suoi diversi tentacoli.");
         metaStation.addItem(poster);
@@ -161,6 +160,8 @@ public class FileSaver {
         g.getCommands().add(pickup);
         Command open = new Command("apri", CommandType.OPEN);
         g.getCommands().add(open);
+        Command use = new Command("usa", CommandType.USE);
+        g.getCommands().add(use);
         Command push = new Command("premi", CommandType.PUSH);
         push.setAlias(new String[]{"spingi", "attiva"});
         g.getCommands().add(push);
