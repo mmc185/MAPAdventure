@@ -7,24 +7,33 @@ import java.util.Set;
 
 public class ItemContainer extends Item implements Serializable {
 
-    private List<Item> cItemList;
+    private Inventory cItemList;
+    private String lockedBy = "";
 
-    public ItemContainer(List<Item> cItemList, int id, String name, String desc) {
+    public ItemContainer(Inventory cItemList, int id, String name, String desc) {
         super(id, name, desc);
-        this.cItemList = new ArrayList<>();
+        this.cItemList = new Inventory();
     }
 
-    public ItemContainer(List<Item> cItemList, int id, String name, String desc, Set<String> alias) {
+    public ItemContainer(Inventory cItemList, int id, String name, String desc, Set<String> alias) {
         super(id, name, desc, alias);
-        this.cItemList = new ArrayList<>();
+        this.cItemList = new Inventory();
     }
 
-    public List<Item> getcItemList() {
+    public Inventory getcItemList() {
         return cItemList;
     }
 
-    public void setcItemList(List<Item> cItemList) {
+    public void setcItemList(Inventory cItemList) {
         this.cItemList = cItemList;
+    }
+
+    public String getLockedBy() {
+        return lockedBy;
+    }
+
+    public void setLockedBy(String lockedBy) {
+        this.lockedBy = lockedBy;
     }
 
     public void add(Item i) {
@@ -33,5 +42,23 @@ public class ItemContainer extends Item implements Serializable {
 
     public void remove(Item i) {
         this.cItemList.remove(i);
+    }
+
+    public boolean unlockContainer(String cName) {
+
+        boolean flag = false;
+
+        if (getLockedBy().equals(cName)) {
+            this.setLockedBy("");
+            flag = true;
+        }
+
+        return flag;
+
+    }
+
+    @Override
+    public String toString() {
+        return cItemList.toString(); //?????
     }
 }

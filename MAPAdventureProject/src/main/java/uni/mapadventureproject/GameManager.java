@@ -1,5 +1,6 @@
 package uni.mapadventureproject;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.Command;
@@ -21,7 +22,7 @@ public abstract class GameManager {
         this.game = game;
     }
 
-    protected abstract String executeCommand(Map<WordType, String> commandMap);
+    protected abstract String executeCommand(LinkedHashMap<WordType, String> commandMap);
 
     public CommandType getCommandType(String cName) {
 

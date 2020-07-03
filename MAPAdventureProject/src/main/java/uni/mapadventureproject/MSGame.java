@@ -5,6 +5,7 @@
  */
 package uni.mapadventureproject;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import uni.mapadventureproject.parser.WordType;
@@ -12,26 +13,26 @@ import uni.mapadventureproject.type.CommandType;
 import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.Room;
 import uni.mapadventureproject.type.TriggeredRoom;
+import uni.mapadventureproject.type.ItemContainer;
 
 public class MSGame extends GameManager {
 
-private PlayMusic music=new PlayMusic(); //aggiunto
+    private PlayMusic music = new PlayMusic(); //aggiunto
 
     public MSGame(Game g) throws InterruptedException {
         super(g);
-        
+
         music.playSound("Musica//soundtrack.wav");
 
     }
 
     @Override
-    public String executeCommand(Map<WordType, String> commandMap) {
+    public String executeCommand(LinkedHashMap<WordType, String> commandMap) {
 
         CommandType command = this.getCommandType(commandMap.get(WordType.COMMAND));
         Room r = null;
         Item i = null;
         StringBuilder output = new StringBuilder();
-
         /* Se l'azione sfrutta un oggetto salva l'oggetto e 
            lo rinomina nella Map per fare riferimento al suo nome principale
            e non a potenziali alias
@@ -66,29 +67,29 @@ private PlayMusic music=new PlayMusic(); //aggiunto
                         this.getGame().setCurrentRoom(r);
                         output.append("===========================================\n"
                                 + this.getGame().getCurrentRoom().getName() + "\n\n"
-                                + this.getGame().getCurrentRoom().getDesc() );
-                        
+                                + this.getGame().getCurrentRoom().getDesc());
+
                     } else {
-                        output.append( "Questa stanza è chiusa!");
+                        output.append("Questa stanza è chiusa!");
                     }
                     break;
                 case INV:
 
-                    output.append( "Oggetti presenti nell'inventario: " + this.getGame().getInventory().toString());
+                    output.append("Oggetti presenti nell'inventario: " + this.getGame().getInventory().toString());
                     break;
                 case LOOK:
 
                     if (commandMap.size() == 2) {
 
-                        output.append( i.getDesc());
+                        output.append(i.getDesc());
 
                     } else if (commandMap.size() == 1) {
 
-                        output.append( this.getGame().getCurrentRoom().getLook());
+                        output.append(this.getGame().getCurrentRoom().getLook());
 
                     } else if (commandMap.size() > 2) {
 
-                        output.append( "Uno alla volta, ho una certa età."); ///???? da rimuovere? throw eccezione?
+                        output.append("Uno alla volta, ho una certa età."); ///???? da rimuovere? throw eccezione?
 
                     }
                     break;
@@ -101,61 +102,103 @@ private PlayMusic music=new PlayMusic(); //aggiunto
                             this.getGame().getInventory().add(i);
                             this.getGame().getCurrentRoom().getItemList().remove(i);
 
-                            output.append( "L'oggetto è stato aggiunto al tuo inventario.");
+                            output.append("L'oggetto è stato aggiunto al tuo inventario.");
 
                         } else {
-                            output.append( "Non puoi prendere questo oggetto.");
+                            output.append("Non puoi prendere questo oggetto.");
                         }
                     } else if (commandMap.containsKey(WordType.I_OBJ)) {
 
-                        output.append( "Non puoi prendere qualcosa che hai già con te!");
+                        output.append("Non puoi prendere qualcosa che hai già con te!");
 
                     } else {
 
-                        output.append( "Prendere... cosa?");
+                        output.append("Prendere... cosa?");
 
                     }
                     break;
                 case USE: //? da far rientrare in apri?
                 case OPEN:
 
-                    if (commandMap.containsKey(WordType.I_OBJ)) {
+                    if (commandMap.size() == 2) { //apertura stanze
 
-                        i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
+                        if (commandMap.containsKey(WordType.I_OBJ)) {
 
-                        if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
+                            i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ)); //Chiave
+                            //Apertura stanza
+                            if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
+                                output.append("Hai sbloccato la stanza!");
 
-                            output.append( "Hai sbloccato la stanza!");
+                                i.setConsumable((byte) (i.getConsumable() - 1));
 
-                            i.setConsumable((byte) (i.getConsumable() - 1));
-
-                            if (i.getConsumable() == 0) {
-                                this.getGame().getInventory().remove(i);
-                                output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
+                                if (i.getConsumable() == 0) {
+                                    this.getGame().getInventory().remove(i);
+                                    output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
+                                }
+                            } else { //output.append("Non puoi aprire la stanza così!");
+                                output.append("Non puoi aprire con questo oggetto!");
                             }
 
-                        } else {
-                            output.append( "Non puoi aprire la stanza così!");
+                        } else { //output.append("Non puoi aprire la stanza così!");
+                            output.append("Non puoi aprire con questo oggetto!");
                         }
+                    } else if (commandMap.size() == 3) { //apertura itemcontainer
 
+                        ItemContainer iC = null; //contenitore
+                        i = null;
+                        byte index = 0;
+                        for (Map.Entry<WordType, String> entry : commandMap.entrySet()) {
+                            index++;
+                            if (index == 2) { //itemContainer. obbligatoriamente un oggetto della Room    
+                                if (entry.getKey().equals(WordType.R_OBJ)) {
+                                    iC = (ItemContainer) this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
+                                }
+
+                            } else if (index == 3) { //Chiave. obbligatoriamente un oggetto dell'inv
+                                if (entry.getKey().equals(WordType.I_OBJ)) {
+                                    i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ)); // i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.I_OBJ));
+                                }
+                            }
+                        }
+                        if (iC instanceof ItemContainer && i != null) {
+                            if (i.getConsumable() != 0 && iC.unlockContainer(i.getName())) {
+                                if (iC.getcItemList().getInventoryList().isEmpty()) {
+                                    output.append("L'oggetto è stato aperto, ma è vuoto!");
+                                } else {
+                                    output.append("Hai aperto l'oggetto " + iC.getName() + "! Ecco il suo contenuto:" + iC.toString());
+                                }
+                                i.setConsumable((byte) (i.getConsumable() - 1));
+
+                                if (i.getConsumable() == 0) {
+                                    this.getGame().getInventory().remove(i);
+                                    output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
+                                }
+                            } else { //INUTILE?
+                                output.append("Non puoi aprire quest'oggetto così!");
+                            }
+                        } else {
+                            output.append("Non puoi aprire quest'oggetto così!");
+                        }
                     } else {
-                        output.append( "Non puoi aprire la stanza così!");
+                        output.append("Non puoi aprire con quest'oggetto!");
                     }
 
                     break;
+
                 case PUSH:
 
-                    if (i.isPushable() && !i.isPush()) {
+                    if (i.isPushable()
+                            && !i.isPush()) {
 
                         // Compie l'azione
                         i.setPush(true);
-                        output.append( i.getName() + " premuto!");
+                        output.append(i.getName() + " premuto!");
 
                         // Controlla se il bottone apriva una stanza adiacente
                         this.unlockRoom(i.getName());
 
                     } else {
-                        output.append( "Non puoi premerlo!");
+                        output.append("Non puoi premerlo!");
 
                     }
 
@@ -163,7 +206,7 @@ private PlayMusic music=new PlayMusic(); //aggiunto
 
                 case RUN:
 
-                    output.append( "Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!");
+                    output.append("Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!");
                     break;
                 case EXIT:
                     //System.exit(0);
@@ -171,17 +214,15 @@ private PlayMusic music=new PlayMusic(); //aggiunto
                 case WAKE_UP:
                     //output = "bad ending?";
 
-                    output.append( "Hai scelto la via più semplice e questo non ti fa onore"
+                    output.append("Hai scelto la via più semplice e questo non ti fa onore"
+                            + "\n \n HAI COMPLETATO IL GIOCO IN : "
+                            + this.getGame().getGameTime().getTime());
 
-                            + "\n \n HAI COMPLETATO IL GIOCO IN : " + 
-                            this.getGame().getGameTime().getTime());
-                    
                     this.getGame().getGameTime().getTimer().cancel();
                     this.getGame().getGameTime().setActive(false);
-                    
-                    this.getGame().setCurrentRoom( r = new Room(0,"",""));
-                    r.setLook("");
 
+                    this.getGame().setCurrentRoom(r = new Room(0, "", ""));
+                    r.setLook("");
 
                     break;
             }
@@ -191,9 +232,7 @@ private PlayMusic music=new PlayMusic(); //aggiunto
             //Triggera la stanza, se necessario
             if (r instanceof TriggeredRoom) {
 
-
                 if (((TriggeredRoom) r).isTriggerable()) { //Se la stanza è triggerabile
-
 
                     String triggerer = commandMap.get(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
 
@@ -214,7 +253,7 @@ private PlayMusic music=new PlayMusic(); //aggiunto
                     if (triggerer.equals(((TriggeredRoom) r).getCurrentTriggerer())) {
 
                         ((TriggeredRoom) r).setTrigger(true);
-                        output.append( "\n\n" + r.getDesc());
+                        output.append("\n\n" + r.getDesc());
 
                     }
 
@@ -225,7 +264,7 @@ private PlayMusic music=new PlayMusic(); //aggiunto
 
         } catch (NullPointerException e) {
 
-            output.append( "Sembra esserci qualcosa di strano in questa richiesta..."); //boh da cambiare?
+            output.append("Sembra esserci qualcosa di strano in questa richiesta..."); //boh da cambiare?
 
         } finally {
 
