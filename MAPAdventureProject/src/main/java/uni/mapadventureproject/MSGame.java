@@ -135,12 +135,12 @@ public class MSGame extends GameManager {
                                     this.getGame().getInventory().remove(i);
                                     output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
                                 }
-                            } else {
-                                output.append("Non puoi aprire la stanza così!");
+                            } else { //output.append("Non puoi aprire la stanza così!");
+                                output.append("Non puoi aprire con questo oggetto!");
                             }
 
-                        } else {
-                            output.append("Non puoi aprire la stanza così!");
+                        } else { //output.append("Non puoi aprire la stanza così!");
+                            output.append("Non puoi aprire con questo oggetto!");
                         }
                     } else if (commandMap.size() == 3) { //apertura itemcontainer
 
@@ -179,7 +179,10 @@ public class MSGame extends GameManager {
                         } else {
                             output.append("Non puoi aprire quest'oggetto così!");
                         }
+                    } else {
+                        output.append("Non puoi aprire con quest'oggetto!");
                     }
+
                     break;
 
                 case PUSH:
