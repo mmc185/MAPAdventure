@@ -36,13 +36,13 @@ public class Inventory implements Serializable {
     @Override
     public String toString() {
 
-        String invList = "";
+        StringBuilder invList = new StringBuilder();
 
         for (Item i : inventoryList) {
-            invList = invList + "\n- " + i.getName();
+            invList.append("\n- " + i.getName());
         }
 
-        return invList;
+        return invList.toString();
     }
 
     public Item searchItem(String iName) {
