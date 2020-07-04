@@ -97,7 +97,7 @@ public class FileSaver {
         sacco.add(parchment);
         ItemContainer sack=new ItemContainer(sacco,60,"sacco","Sacco del pirata,potrebbe contenere qualcosa di utile");
         sack.setItemImage(new ImageIcon("img//inventario//sacco.jpg"));
-        sack.setOpenable(true); 
+        //sack.setOpenable(true); 
         
         Item key=new Item(61,"chiave","Chiave del capitano Kid");
         key.setItemImage(new ImageIcon("img//inventario//chiave.png"));
@@ -110,7 +110,7 @@ public class FileSaver {
         ItemContainer chest=new ItemContainer(new Inventory(),63,"forziere","Contiene il lingotto del capitano Kid");
         chest.setAlias(new String[]{"baule"});
         chest.add(bullion);
-        chest.setOpenable(true);
+       // chest.setOpenable(true);
         chest.setLockedBy("chiave");
         
 
