@@ -242,32 +242,7 @@ public class MSGame extends GameManager {
             //Triggera la stanza, se necessario
             if (r instanceof TriggeredRoom) {
 
-                if (((TriggeredRoom) r).isTriggerable()) { //Se la stanza è triggerabile
-
-                    String triggerer = pOutput.getString(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
-
-                    if (pOutput.size() == 2) {
-
-                        if (pOutput.containsWordType(WordType.R_OBJ)) {
-
-                            triggerer += " " + pOutput.getString(WordType.R_OBJ);
-
-                        } else if (pOutput.containsWordType(WordType.I_OBJ)) {
-
-                            triggerer += " " + pOutput.getString(WordType.I_OBJ);
-
-                        }
-                    }
-
-                    //se triggerer=triggerer attuale della stanza, si effettua il trigger
-                    if (triggerer.equals(((TriggeredRoom) r).getCurrentTriggerer())) {
-
-                        ((TriggeredRoom) r).setTrigger(true);
-                        output.append("\n\n" + r.getDesc());
-
-                    }
-
-                }
+                output.append(this.manageTriggers(pOutput, (TriggeredRoom) r));
             }
 
             this.advancePlot();
@@ -357,7 +332,7 @@ public class MSGame extends GameManager {
         return null;
     }
 
-    public boolean unlockRoom(String iName) {
+    private boolean unlockRoom(String iName) {
 
         boolean flag = false;
 
@@ -400,6 +375,40 @@ public class MSGame extends GameManager {
         }
 
         return flag;
+    }
+    
+    private String manageTriggers(ParserOutput pOutput, TriggeredRoom r) {
+        
+        String output = "";
+        
+        if ( r.isTriggerable() ) { //Se la stanza è triggerabile
+
+                    String triggerer = pOutput.getString(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
+
+                    if (pOutput.size() == 2) {
+
+                        if (pOutput.containsWordType(WordType.R_OBJ)) {
+
+                            triggerer += " " + pOutput.getString(WordType.R_OBJ);
+
+                        } else if (pOutput.containsWordType(WordType.I_OBJ)) {
+
+                            triggerer += " " + pOutput.getString(WordType.I_OBJ);
+
+                        }
+                    }
+
+                    //se triggerer=triggerer attuale della stanza, si effettua il trigger
+                    if (triggerer.equals( r.getCurrentTriggerer())) {
+
+                        r.setTrigger(true);
+                        output = "\n\n" + r.getDesc();
+
+                    }
+
+                }
+        
+        return output;
     }
 
     @Override
