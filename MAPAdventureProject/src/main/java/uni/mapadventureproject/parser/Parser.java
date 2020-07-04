@@ -7,6 +7,7 @@ import java.util.Set;
 import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.Inventory;
 import uni.mapadventureproject.type.Item;
+import uni.mapadventureproject.type.ItemContainer;
 import uni.mapadventureproject.type.Room;
 
 public class Parser {
@@ -97,6 +98,8 @@ public class Parser {
 
                     }
 
+                } else if (i instanceof ItemContainer) {
+                    return isItem(s, ((ItemContainer)i).getcItemList(), tokens, counter);
                 }
 
             }

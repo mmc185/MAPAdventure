@@ -35,21 +35,8 @@ public class MSGame extends GameManager {
         Room r = null;
         Item i = null;
         StringBuilder output = new StringBuilder();
-        /* Se l'azione sfrutta un oggetto salva l'oggetto e 
-           lo rinomina nella Map per fare riferimento al suo nome principale
-           e non a potenziali alias
-         */
-        if (pOutput.containsWordType(WordType.I_OBJ)) {
 
-            i = this.getGame().getInventory().searchItem(pOutput.getString(WordType.I_OBJ));
-            pOutput.add(WordType.I_OBJ, i.getName());
-
-        } else if (pOutput.containsWordType(WordType.R_OBJ)) {
-
-            i = this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
-            pOutput.add(WordType.R_OBJ, i.getName());
-
-        }
+        i = this.retrieveItem(pOutput);
 
         try {
 
@@ -173,7 +160,7 @@ public class MSGame extends GameManager {
                         if (iC instanceof ItemContainer) {
 
                             // Se trova l'oggetto per aprirlo ed è corretto oppure se l'oggetto non è bloccato lo apre
-                            if ( (i != null && i.getConsumable() != 0 && iC.unlockContainer(i.getName()))
+                            if ((i != null && i.getConsumable() != 0 && iC.unlockContainer(i.getName()))
                                     || (iC.getLockedBy().equals(""))) {
 
                                 if (iC.getcItemList().getInventoryList().isEmpty()) {
@@ -196,7 +183,7 @@ public class MSGame extends GameManager {
                             } else {
                                 output.append("Non puoi aprire quest'oggetto così!");
                             }
-                            
+
                         } else {
                             output.append("Non puoi aprire quest'oggetto così!");
                         }
@@ -297,7 +284,61 @@ public class MSGame extends GameManager {
 
     }
 
-    public Room move(CommandType c) {
+    private Item retrieveItem(ParserOutput pOutput) {
+
+        Item i = null;
+
+        /* Se l'azione sfrutta un oggetto salva l'oggetto e 
+           lo rinomina nella Map per fare riferimento al suo nome principale
+           e non a potenziali alias
+         */
+        if (pOutput.containsWordType(WordType.I_OBJ)) { // Per gli oggetti dell'inventario
+
+            i = this.getGame().getInventory().searchItem(pOutput.getString(WordType.I_OBJ));
+
+            if (!Objects.isNull(i)) {
+
+                pOutput.add(WordType.I_OBJ, i.getName());
+
+            } else {// Se non ha trovato l'oggetto lo cerca in un contenitore non bloccato
+
+                for (Item iC : this.getGame().getInventory().getInventoryList()) {
+
+                    if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
+                        i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.I_OBJ));
+                        pOutput.add(WordType.I_OBJ, i.getName());
+                    }
+
+                }
+
+            }
+
+        } else if (pOutput.containsWordType(WordType.R_OBJ)) { // Per gli oggetti della stanza
+
+            i = this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
+
+            if (!Objects.isNull(i)) {
+
+                pOutput.add(WordType.R_OBJ, i.getName());
+
+            } else {// Se non ha trovato l'oggetto lo cerca in un contenitore non bloccato
+
+                for (Item iC : this.getGame().getCurrentRoom().getItemList().getInventoryList()) {
+
+                    if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
+                        i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.R_OBJ));
+                        pOutput.add(WordType.R_OBJ, i.getName());
+                    }
+
+                }
+            }
+
+        }
+        
+        return i;
+    }
+
+    private Room move(CommandType c) {
 
         if (c.equals(CommandType.MOVE_S) && !Objects.isNull(this.getGame().getCurrentRoom().getSouth())) {
             return this.getGame().getCurrentRoom().getSouth();
