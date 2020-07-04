@@ -63,9 +63,19 @@ public class Item implements Serializable {
     public byte getConsumable() {
         return consumable;
     }
+    
+    public boolean isConsumed() {
+        return this.getConsumable() == 0;
+    }
 
     public void setConsumable(byte consumable) {
         this.consumable = consumable;
+    }
+    
+    public void consume() {
+        if (consumable > 0) {
+            this.setConsumable((byte) (consumable - 1));
+        } 
     }
  
     public boolean isPickupable() {

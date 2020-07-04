@@ -113,16 +113,16 @@ public class MSGame extends GameManager {
                     if (pOutput.size() == 2 && pOutput.containsWordType(WordType.I_OBJ)) {
 
                         //Apertura stanza
-                        if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
+                        if (!i.isConsumed() && this.unlockRoom(i.getName())) {
                             output.append("Hai sbloccato la stanza!");
 
-                            i.setConsumable((byte) (i.getConsumable() - 1));
+                            i.consume();
 
                             // Se l'oggetto è stato consumato, lo rimuove dall'inventario
-                            if (i.getConsumable() == 0) {
+                            if (i.isConsumed()) {
 
                                 this.getGame().getInventory().remove(i);
-                                output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
+                                output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
 
                             }
                         } else { //output.append("Non puoi aprire la stanza così!");
@@ -160,7 +160,7 @@ public class MSGame extends GameManager {
                         if (iC instanceof ItemContainer) {
 
                             // Se trova l'oggetto per aprirlo ed è corretto oppure se l'oggetto non è bloccato lo apre
-                            if ((i != null && i.getConsumable() != 0 && iC.unlockContainer(i.getName()))
+                            if ((i != null && !i.isConsumed() && iC.unlockContainer(i.getName()))
                                     || (iC.getLockedBy().equals(""))) {
 
                                 if (iC.getcItemList().getInventoryList().isEmpty()) {
@@ -172,12 +172,12 @@ public class MSGame extends GameManager {
 
                                 }
 
-                                i.setConsumable((byte) (i.getConsumable() - 1));
+                                i.consume();
 
                                 // Se l'oggetto è stato consumato, lo rimuove dall'inventario
-                                if (i.getConsumable() == 0) {
+                                if (i.isConsumed()) {
                                     this.getGame().getInventory().remove(i);
-                                    output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
+                                    output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
                                 }
 
                             } else {
