@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import uni.mapadventureproject.parser.Parser;
 import uni.mapadventureproject.parser.InvalidStringException;
+import uni.mapadventureproject.parser.ParserOutput;
 import uni.mapadventureproject.parser.WordType;
 
 public class GameInteraction {
@@ -23,12 +24,14 @@ public class GameInteraction {
 
     public String inputManager(String sInput) {
 
-        LinkedHashMap commandMap = new LinkedHashMap<>();
+        ParserOutput pOutput;
         String sOutput = "";
         
         try {
-            commandMap = p.parse(sInput, g.getGame().getCurrentRoom(), g.getGame().getInventory(), g.getGame().getCommands());
-            sOutput = g.executeCommand(commandMap);
+            
+            pOutput = p.parse(sInput, g.getGame().getCurrentRoom(), g.getGame().getInventory(), g.getGame().getCommands());
+            sOutput = g.executeCommand(pOutput);
+            
         } catch (InvalidStringException e) {
             sOutput = "Idea interessante... ma no.";
         }

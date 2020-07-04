@@ -9,15 +9,20 @@ public class ItemContainer extends Item implements Serializable {
 
     private Inventory cItemList;
     private String lockedBy = "";
-
-    public ItemContainer(Inventory cItemList, int id, String name, String desc) {
+    
+     public ItemContainer(int id, String name, String desc) {
         super(id, name, desc);
         this.cItemList = new Inventory();
     }
 
+    public ItemContainer(Inventory cItemList, int id, String name, String desc) {
+        super(id, name, desc);
+        this.cItemList = cItemList;
+    }
+
     public ItemContainer(Inventory cItemList, int id, String name, String desc, Set<String> alias) {
         super(id, name, desc, alias);
-        this.cItemList = new Inventory();
+        this.cItemList = cItemList;
     }
 
     public Inventory getcItemList() {

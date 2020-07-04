@@ -5,9 +5,11 @@
  */
 package uni.mapadventureproject;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+import uni.mapadventureproject.parser.ParserOutput;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.CommandType;
 import uni.mapadventureproject.type.Item;
@@ -27,27 +29,14 @@ public class MSGame extends GameManager {
     }
 
     @Override
-    public String executeCommand(LinkedHashMap<WordType, String> commandMap) {
+    public String executeCommand(ParserOutput pOutput) {
 
-        CommandType command = this.getCommandType(commandMap.get(WordType.COMMAND));
+        CommandType command = this.getCommandType(pOutput.getString(WordType.COMMAND));
         Room r = null;
         Item i = null;
         StringBuilder output = new StringBuilder();
-        /* Se l'azione sfrutta un oggetto salva l'oggetto e 
-           lo rinomina nella Map per fare riferimento al suo nome principale
-           e non a potenziali alias
-         */
-        if (commandMap.containsKey(WordType.I_OBJ)) {
 
-            i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ));
-            commandMap.put(WordType.I_OBJ, i.getName());
-
-        } else if (commandMap.containsKey(WordType.R_OBJ)) {
-
-            i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-            commandMap.put(WordType.R_OBJ, i.getName());
-
-        }
+        i = this.retrieveItem(pOutput);
 
         try {
 
@@ -79,15 +68,15 @@ public class MSGame extends GameManager {
                     break;
                 case LOOK:
 
-                    if (commandMap.size() == 2) {
+                    if (pOutput.size() == 2) {
 
                         output.append(i.getDesc());
 
-                    } else if (commandMap.size() == 1) {
+                    } else if (pOutput.size() == 1) {
 
                         output.append(this.getGame().getCurrentRoom().getLook());
 
-                    } else if (commandMap.size() > 2) {
+                    } else if (pOutput.size() > 2) {
 
                         output.append("Uno alla volta, ho una certa età."); ///???? da rimuovere? throw eccezione?
 
@@ -95,7 +84,7 @@ public class MSGame extends GameManager {
                     break;
                 case PICK_UP:
 
-                    if (commandMap.containsKey(WordType.R_OBJ)) {
+                    if (pOutput.containsWordType(WordType.R_OBJ)) {
 
                         if (!Objects.isNull(i) && i.isPickupable()) {
 
@@ -107,7 +96,7 @@ public class MSGame extends GameManager {
                         } else {
                             output.append("Non puoi prendere questo oggetto.");
                         }
-                    } else if (commandMap.containsKey(WordType.I_OBJ)) {
+                    } else if (pOutput.containsWordType(WordType.I_OBJ)) {
 
                         output.append("Non puoi prendere qualcosa che hai già con te!");
 
@@ -120,65 +109,85 @@ public class MSGame extends GameManager {
                 case USE: //? da far rientrare in apri?
                 case OPEN:
 
-                    if (commandMap.size() == 2) { //apertura stanze
+                    // Se si vuole aprire una stanza
+                    if (pOutput.size() == 2 && pOutput.containsWordType(WordType.I_OBJ)) {
 
-                        if (commandMap.containsKey(WordType.I_OBJ)) {
+                        //Apertura stanza
+                        if (!i.isConsumed() && this.unlockRoom(i.getName())) {
+                            output.append("Hai sbloccato la stanza!");
 
-                            i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ)); //Chiave
-                            //Apertura stanza
-                            if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
-                                output.append("Hai sbloccato la stanza!");
+                            i.consume();
 
-                                i.setConsumable((byte) (i.getConsumable() - 1));
+                            // Se l'oggetto è stato consumato, lo rimuove dall'inventario
+                            if (i.isConsumed()) {
 
-                                if (i.getConsumable() == 0) {
-                                    this.getGame().getInventory().remove(i);
-                                    output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
-                                }
-                            } else { //output.append("Non puoi aprire la stanza così!");
-                                output.append("Non puoi aprire con questo oggetto!");
+                                this.getGame().getInventory().remove(i);
+                                output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
+
                             }
-
                         } else { //output.append("Non puoi aprire la stanza così!");
                             output.append("Non puoi aprire con questo oggetto!");
                         }
-                    } else if (commandMap.size() == 3) { //apertura itemcontainer
+
+                    } else if (pOutput.containsWordType(WordType.R_OBJ)) { // Apertura di un contenitore da sbloccare
 
                         ItemContainer iC = null; //contenitore
                         i = null;
                         byte index = 0;
-                        for (Map.Entry<WordType, String> entry : commandMap.entrySet()) {
-                            index++;
-                            if (index == 2) { //itemContainer. obbligatoriamente un oggetto della Room    
-                                if (entry.getKey().equals(WordType.R_OBJ)) {
-                                    iC = (ItemContainer) this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.R_OBJ));
-                                }
 
-                            } else if (index == 3) { //Chiave. obbligatoriamente un oggetto dell'inv
-                                if (entry.getKey().equals(WordType.I_OBJ)) {
-                                    i = this.getGame().getInventory().searchItem(commandMap.get(WordType.I_OBJ)); // i = this.getGame().getCurrentRoom().getItemList().searchItem(commandMap.get(WordType.I_OBJ));
-                                }
+                        Iterator it = pOutput.iterator();
+                        it.next();
+
+                        // Salva gli oggetti che devono interagire nell'ordine prestabilito (e.g. "Apri baule con chiave")
+                        while (it.hasNext()) {
+
+                            //itemContainer. obbligatoriamente un oggetto della Room
+                            if (index == 1 && it.next().equals(WordType.R_OBJ)) {
+
+                                iC = (ItemContainer) this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
+
+                            } //Chiave. obbligatoriamente un oggetto dell'inv
+                            else if (index == 2 && it.next().equals(WordType.I_OBJ)) {
+
+                                i = this.getGame().getInventory().searchItem(pOutput.getString(WordType.I_OBJ));
+
                             }
+
+                            index++;
                         }
-                        if (iC instanceof ItemContainer && i != null) {
-                            if (i.getConsumable() != 0 && iC.unlockContainer(i.getName())) {
+
+                        // Se l'oggetto è effettivamente un contenitore
+                        if (iC instanceof ItemContainer) {
+
+                            // Se trova l'oggetto per aprirlo ed è corretto oppure se l'oggetto non è bloccato lo apre
+                            if ((i != null && !i.isConsumed() && iC.unlockContainer(i.getName()))
+                                    || (iC.getLockedBy().equals(""))) {
+
                                 if (iC.getcItemList().getInventoryList().isEmpty()) {
+
                                     output.append("L'oggetto è stato aperto, ma è vuoto!");
                                 } else {
-                                    output.append("Hai aperto l'oggetto " + iC.getName() + "! Ecco il suo contenuto:" + iC.toString());
-                                }
-                                i.setConsumable((byte) (i.getConsumable() - 1));
 
-                                if (i.getConsumable() == 0) {
-                                    this.getGame().getInventory().remove(i);
-                                    output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
+                                    output.append("Hai aperto l'oggetto " + iC.getName() + "! Ecco il suo contenuto:" + iC.toString());
+
                                 }
-                            } else { //INUTILE?
+
+                                i.consume();
+
+                                // Se l'oggetto è stato consumato, lo rimuove dall'inventario
+                                if (i.isConsumed()) {
+                                    this.getGame().getInventory().remove(i);
+                                    output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
+                                }
+
+                            } else {
                                 output.append("Non puoi aprire quest'oggetto così!");
                             }
+
                         } else {
                             output.append("Non puoi aprire quest'oggetto così!");
                         }
+
                     } else {
                         output.append("Non puoi aprire con quest'oggetto!");
                     }
@@ -198,6 +207,7 @@ public class MSGame extends GameManager {
                         this.unlockRoom(i.getName());
 
                     } else {
+
                         output.append("Non puoi premerlo!");
 
                     }
@@ -218,9 +228,8 @@ public class MSGame extends GameManager {
                             + "\n \n HAI COMPLETATO IL GIOCO IN : "
                             + this.getGame().getGameTime().getTime());
 
-                    this.getGame().getGameTime().getTimer().cancel();
-                    this.getGame().getGameTime().setActive(false);
-
+                    this.getGame().getGameTime().cancel();
+                    
                     this.getGame().setCurrentRoom(r = new Room(0, "", ""));
                     r.setLook("");
 
@@ -232,32 +241,7 @@ public class MSGame extends GameManager {
             //Triggera la stanza, se necessario
             if (r instanceof TriggeredRoom) {
 
-                if (((TriggeredRoom) r).isTriggerable()) { //Se la stanza è triggerabile
-
-                    String triggerer = commandMap.get(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
-
-                    if (commandMap.size() == 2) {
-
-                        if (commandMap.containsKey(WordType.R_OBJ)) {
-
-                            triggerer += " " + commandMap.get(WordType.R_OBJ);
-
-                        } else if (commandMap.containsKey(WordType.I_OBJ)) {
-
-                            triggerer += " " + commandMap.get(WordType.I_OBJ);
-
-                        }
-                    }
-
-                    //se triggerer=triggerer attuale della stanza, si effettua il trigger
-                    if (triggerer.equals(((TriggeredRoom) r).getCurrentTriggerer())) {
-
-                        ((TriggeredRoom) r).setTrigger(true);
-                        output.append("\n\n" + r.getDesc());
-
-                    }
-
-                }
+                output.append(this.manageTriggers(pOutput, (TriggeredRoom) r));
             }
 
             this.advancePlot();
@@ -274,7 +258,61 @@ public class MSGame extends GameManager {
 
     }
 
-    public Room move(CommandType c) {
+    private Item retrieveItem(ParserOutput pOutput) {
+
+        Item i = null;
+
+        /* Se l'azione sfrutta un oggetto salva l'oggetto e 
+           lo rinomina nella Map per fare riferimento al suo nome principale
+           e non a potenziali alias
+         */
+        if (pOutput.containsWordType(WordType.I_OBJ)) { // Per gli oggetti dell'inventario
+
+            i = this.getGame().getInventory().searchItem(pOutput.getString(WordType.I_OBJ));
+
+            if (!Objects.isNull(i)) {
+
+                pOutput.add(WordType.I_OBJ, i.getName());
+
+            } else {// Se non ha trovato l'oggetto lo cerca in un contenitore non bloccato
+
+                for (Item iC : this.getGame().getInventory().getInventoryList()) {
+
+                    if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
+                        i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.I_OBJ));
+                        pOutput.add(WordType.I_OBJ, i.getName());
+                    }
+
+                }
+
+            }
+
+        } else if (pOutput.containsWordType(WordType.R_OBJ)) { // Per gli oggetti della stanza
+
+            i = this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
+
+            if (!Objects.isNull(i)) {
+
+                pOutput.add(WordType.R_OBJ, i.getName());
+
+            } else {// Se non ha trovato l'oggetto lo cerca in un contenitore non bloccato
+
+                for (Item iC : this.getGame().getCurrentRoom().getItemList().getInventoryList()) {
+
+                    if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
+                        i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.R_OBJ));
+                        pOutput.add(WordType.R_OBJ, i.getName());
+                    }
+
+                }
+            }
+
+        }
+        
+        return i;
+    }
+
+    private Room move(CommandType c) {
 
         if (c.equals(CommandType.MOVE_S) && !Objects.isNull(this.getGame().getCurrentRoom().getSouth())) {
             return this.getGame().getCurrentRoom().getSouth();
@@ -293,7 +331,7 @@ public class MSGame extends GameManager {
         return null;
     }
 
-    public boolean unlockRoom(String iName) {
+    private boolean unlockRoom(String iName) {
 
         boolean flag = false;
 
@@ -336,6 +374,40 @@ public class MSGame extends GameManager {
         }
 
         return flag;
+    }
+    
+    private String manageTriggers(ParserOutput pOutput, TriggeredRoom r) {
+        
+        String output = "";
+        
+        if ( r.isTriggerable() ) { //Se la stanza è triggerabile
+
+                    String triggerer = pOutput.getString(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
+
+                    if (pOutput.size() == 2) {
+
+                        if (pOutput.containsWordType(WordType.R_OBJ)) {
+
+                            triggerer += " " + pOutput.getString(WordType.R_OBJ);
+
+                        } else if (pOutput.containsWordType(WordType.I_OBJ)) {
+
+                            triggerer += " " + pOutput.getString(WordType.I_OBJ);
+
+                        }
+                    }
+
+                    //se triggerer=triggerer attuale della stanza, si effettua il trigger
+                    if (triggerer.equals( r.getCurrentTriggerer())) {
+
+                        r.setTrigger(true);
+                        output = "\n\n" + r.getDesc();
+
+                    }
+
+                }
+        
+        return output;
     }
 
     @Override
