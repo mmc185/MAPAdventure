@@ -228,9 +228,8 @@ public class MSGame extends GameManager {
                             + "\n \n HAI COMPLETATO IL GIOCO IN : "
                             + this.getGame().getGameTime().getTime());
 
-                    this.getGame().getGameTime().getTimer().cancel();
-                    this.getGame().getGameTime().setActive(false);
-
+                    this.getGame().getGameTime().cancel();
+                    
                     this.getGame().setCurrentRoom(r = new Room(0, "", ""));
                     r.setLook("");
 
