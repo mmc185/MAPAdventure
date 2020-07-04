@@ -122,38 +122,27 @@ public class MSGame extends GameManager {
                 case USE: //? da far rientrare in apri?
                 case OPEN:
 
-                    // Se si vuole aprire una stanza o un contenitore di oggetti
+                    // Se si vuole aprire una stanza
                     if (pOutput.size() == 2 && pOutput.containsWordType(WordType.I_OBJ)) {
 
-                        // Se si vuole aprire un contenitore e non è chiuso (e.g. "Apri baule")
-                        if (i instanceof ItemContainer && ((ItemContainer) i).getLockedBy().equals("")) {
+                        //Apertura stanza
+                        if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
+                            output.append("Hai sbloccato la stanza!");
 
-                            // Stampa la lista di oggetti presenti all'interno
-                            output.append("Hai aperto l'oggetto " + i.getName() + "! Ecco il suo contenuto:" + i.toString());
+                            i.setConsumable((byte) (i.getConsumable() - 1));
 
-                        } else if (!(i instanceof ItemContainer)) { // Se si tratta di un comando per una stanza bloccata (e.g. "Apri con chiave")
+                            // Se l'oggetto è stato consumato, lo rimuove dall'inventario
+                            if (i.getConsumable() == 0) {
 
-                            //Apertura stanza
-                            if (i.getConsumable() != 0 && this.unlockRoom(i.getName())) {
-                                output.append("Hai sbloccato la stanza!");
+                                this.getGame().getInventory().remove(i);
+                                output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
 
-                                i.setConsumable((byte) (i.getConsumable() - 1));
-
-                                // Se l'oggetto è stato consumato, lo rimuove dall'inventario
-                                if (i.getConsumable() == 0) {
-
-                                    this.getGame().getInventory().remove(i);
-                                    output.append("\nL'oggetto " + i.getName() + "è stato rimosso.");
-
-                                }
-                            } else { //output.append("Non puoi aprire la stanza così!");
-                                output.append("Non puoi aprire con questo oggetto!");
                             }
-                        } else {
-                            output.append("L'oggetto è bloccato!");
+                        } else { //output.append("Non puoi aprire la stanza così!");
+                            output.append("Non puoi aprire con questo oggetto!");
                         }
 
-                    } else if (pOutput.size() == 3) { // Apertura di un contenitore da sbloccare
+                    } else if (pOutput.containsWordType(WordType.R_OBJ)) { // Apertura di un contenitore da sbloccare
 
                         ItemContainer iC = null; //contenitore
                         i = null;
@@ -173,24 +162,27 @@ public class MSGame extends GameManager {
                             } //Chiave. obbligatoriamente un oggetto dell'inv
                             else if (index == 2 && it.next().equals(WordType.I_OBJ)) {
 
-                                i = this.getGame().getInventory().searchItem(pOutput.getString(WordType.I_OBJ)); 
-                                
+                                i = this.getGame().getInventory().searchItem(pOutput.getString(WordType.I_OBJ));
+
                             }
 
                             index++;
                         }
 
-                        if (iC instanceof ItemContainer && i != null) {
+                        // Se l'oggetto è effettivamente un contenitore
+                        if (iC instanceof ItemContainer) {
 
-                            if (i.getConsumable() != 0 && iC.unlockContainer(i.getName())) {
+                            // Se trova l'oggetto per aprirlo ed è corretto oppure se l'oggetto non è bloccato lo apre
+                            if ( (i != null && i.getConsumable() != 0 && iC.unlockContainer(i.getName()))
+                                    || (iC.getLockedBy().equals(""))) {
 
                                 if (iC.getcItemList().getInventoryList().isEmpty()) {
-                                    
+
                                     output.append("L'oggetto è stato aperto, ma è vuoto!");
                                 } else {
-                                    
+
                                     output.append("Hai aperto l'oggetto " + iC.getName() + "! Ecco il suo contenuto:" + iC.toString());
-                                
+
                                 }
 
                                 i.setConsumable((byte) (i.getConsumable() - 1));
@@ -204,6 +196,7 @@ public class MSGame extends GameManager {
                             } else {
                                 output.append("Non puoi aprire quest'oggetto così!");
                             }
+                            
                         } else {
                             output.append("Non puoi aprire quest'oggetto così!");
                         }
