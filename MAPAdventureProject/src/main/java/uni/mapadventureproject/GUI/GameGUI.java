@@ -81,13 +81,19 @@ public class GameGUI extends javax.swing.JFrame {
         }
     }
 
-    public void initGame() {
+    private void initGame() {
+        
+        // Salva il nome del giocatore
+        gInteraction.getGameManager().getGame().setPlayer(JOptionPane.showInputDialog(this, "Inserisci il tuo nome:"));
+        
+        // Fa iniziare l'avventura stampando la descrizione della stanza iniziale
         jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
 
         //Imposta l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
 
+        // Fa partire il timer del tempo di gioco
         gInteraction.getGameManager().getGame().getGameTime().start();
 
     }
@@ -488,32 +494,55 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbNorthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNorthActionPerformed
         // L'utente si muove verso nord
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("nord") + "\n", Color.white);
-
+        
+        //Aggiorna l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
     }//GEN-LAST:event_jbNorthActionPerformed
 
     private void jbSouthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSouthActionPerformed
         // L'utente si muove verso sud
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("sud") + "\n", Color.white);
+        
+        //Aggiorna l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
     }//GEN-LAST:event_jbSouthActionPerformed
 
     private void jbWestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWestActionPerformed
         // L'utente si muove verso ovest
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("ovest") + "\n", Color.white);
+        
+        //Aggiorna l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
     }//GEN-LAST:event_jbWestActionPerformed
 
     private void jbEastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEastActionPerformed
         // L'utente si muove verso est
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("est") + "\n", Color.white);
+        
+        //Aggiorna l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
     }//GEN-LAST:event_jbEastActionPerformed
 
     private void jbUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpActionPerformed
         // L'utente si muove verso su
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("sali") + "\n", Color.white);
+        
+        //Aggiorna l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
     }//GEN-LAST:event_jbUpActionPerformed
 
     private void jbDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDownActionPerformed
         // L'utente si muove verso giù
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("scendi") + "\n", Color.white);
+        
+        //Aggiorna l'immagine della Room e il suo tooltip
+        jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
+        jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
     }//GEN-LAST:event_jbDownActionPerformed
 
     private void jtTypingFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTypingFieldKeyPressed
