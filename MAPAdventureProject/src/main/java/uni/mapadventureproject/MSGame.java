@@ -229,6 +229,9 @@ public class MSGame extends GameManager {
                     r.setLook("");
 
                     break;
+                case HELP:
+                    output.append(this.showHelp());
+                    break;
             } //boh da cambiare?
             r = this.getGame().getCurrentRoom();
 
