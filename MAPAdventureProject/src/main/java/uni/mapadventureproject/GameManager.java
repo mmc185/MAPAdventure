@@ -1,9 +1,6 @@
 package uni.mapadventureproject;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import uni.mapadventureproject.parser.ParserOutput;
-import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.CommandType;
 

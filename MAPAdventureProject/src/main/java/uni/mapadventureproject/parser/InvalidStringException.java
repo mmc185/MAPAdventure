@@ -5,10 +5,6 @@
  */
  package uni.mapadventureproject.parser;
 
-/**
- *
- * @author Admin
- */
 public class InvalidStringException extends Exception {
 
     public InvalidStringException() {

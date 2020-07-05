@@ -1,6 +1,5 @@
 package uni.mapadventureproject.files;
 
-import java.awt.Image;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import javax.swing.ImageIcon;
 import uni.mapadventureproject.Game;
-import uni.mapadventureproject.GameTimeTask;
 import uni.mapadventureproject.type.*;
 
 public class FileSaver {
@@ -419,7 +417,7 @@ public class FileSaver {
 
     public void saveFile(String path, Game g) throws FileNotFoundException, IOException {
 
-        FileOutputStream fOut = new FileOutputStream(path + "/Intro.dat");
+        FileOutputStream fOut = new FileOutputStream(path);
         ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 
         objOut.writeObject(g.getCommands());
