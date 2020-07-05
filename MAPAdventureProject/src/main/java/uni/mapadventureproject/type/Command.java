@@ -15,7 +15,7 @@ public class Command implements Serializable {
     public Command(String name, CommandType cType) {
         this.name = name;
         this.cType = cType;
-        this.alias = new HashSet<String>();
+        this.alias = new HashSet<>();
     }
 
     public Command(String name, CommandType cType, Set<String> alias) {

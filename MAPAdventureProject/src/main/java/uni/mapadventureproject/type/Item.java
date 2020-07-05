@@ -73,6 +73,7 @@ public class Item implements Serializable {
     }
     
     public void consume() {
+        // Se l'oggetto è consumabile, riduce di 1 il numero degli usi possibili
         if (consumable > 0) {
             this.setConsumable((byte) (consumable - 1));
         } 

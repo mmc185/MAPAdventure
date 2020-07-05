@@ -296,9 +296,6 @@ public class FileSaver {
         tent.setLook("Per andare nella foresta ci vorrà una fonte luminosa per farti strada \n"
         +"C'è un sacco,prendi tutto quello che trovi al suo interno,tanto è gratis!");
         tent.addItem(sack);
-        tent.addItem(sword);
-        tent.addItem(lamp);
-        tent.addItem(parchment);
         tent.setNorth(forest);
         
         forest.setLook(" Si sentono versi strani e ti senti osservato eppure non c'è nessuno,o almeno speri...tutto questo ti mette i brividi");
@@ -411,8 +408,6 @@ public class FileSaver {
         Command escape = new Command("scappa", CommandType.RUN);
         escape.setAlias(new String[]{"fuggi", "muori", "crepa"});
         g.getCommands().add(escape);
-        Command end = new Command("esci", CommandType.EXIT);
-        g.getCommands().add(end);
         Command wake = new Command("sveglia", CommandType.WAKE_UP);
         wake.setAlias(new String[]{"svegliati"});
         g.getCommands().add(wake);

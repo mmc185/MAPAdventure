@@ -8,9 +8,7 @@ package uni.mapadventureproject.parser;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
-//public class ParserOutput implements Iterable<Entry<WordType, String>> {
 public class ParserOutput implements Iterable<WordType> {
     
     /* Formato da coppie di tipi di parola e stringa che lo identifica. (e.g. (OBJECT, "taralli") )
@@ -38,31 +36,18 @@ public class ParserOutput implements Iterable<WordType> {
         return parsedData.size();
     }
     
-    /*public class ParserOutputIterator implements Iterator<WordType> {
-        
-        public ParserOutputIterator (ParserOutput p) {
-            p.
-        }
-        
-        public boolean hasNext() {
-            
-        }
-        
-        public WordType next() {
-            
-        }
-        
-        public void remove () {
-            
-        }
-    }*/
-    
     @Override
     public Iterator<WordType> iterator() {
         return parsedData.keySet().iterator();
     }
-    /*public Iterator<Entry<WordType, String>> iterator() {
-        return parsedData.entrySet().iterator();
-    }*/
+    
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        Iterator i = this.iterator();
+        while (i.hasNext()) {
+            s.append(parsedData.get(i.next()) + " ");
+        }
+        return s.toString();
+    }
     
 }
