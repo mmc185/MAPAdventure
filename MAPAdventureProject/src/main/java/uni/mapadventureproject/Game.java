@@ -60,7 +60,7 @@ public class Game {
     
     public void saveGame(String dirPath) throws IOException {
         FileSaver fs = new FileSaver(); 
-        fs.saveFile(dirPath, this);
+        fs.saveFile(dirPath + "//Save.dat", this);
     }
 
     public String getPlayer() {

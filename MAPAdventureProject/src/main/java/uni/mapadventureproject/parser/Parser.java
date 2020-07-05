@@ -1,8 +1,5 @@
 package uni.mapadventureproject.parser;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.Inventory;

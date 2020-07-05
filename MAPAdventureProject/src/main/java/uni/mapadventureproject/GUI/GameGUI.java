@@ -14,8 +14,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Timer;
-import javax.swing.ImageIcon;
 import java.sql.SQLException;
 import java.text.ParseException;
 import javax.swing.JFileChooser;
@@ -54,7 +52,7 @@ public class GameGUI extends javax.swing.JFrame {
     private void init() {
 
         // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
-        try (InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))) {
+        try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
 
             font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
 
@@ -160,7 +158,7 @@ public class GameGUI extends javax.swing.JFrame {
 
         jbNorth.setBackground(new java.awt.Color(56, 86, 128));
         jbNorth.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
-        jbNorth.setIcon(new javax.swing.ImageIcon("img//arrowNorthT.png"));
+        jbNorth.setIcon(new javax.swing.ImageIcon("resources//img//arrowNorthT.png"));
         jbNorth.setToolTipText("nord [n]");
         jbNorth.setAlignmentY(0.0F);
         jbNorth.setBorder(new javax.swing.border.MatteBorder(null));
@@ -177,7 +175,7 @@ public class GameGUI extends javax.swing.JFrame {
 
         jbSouth.setBackground(new java.awt.Color(56, 86, 128));
         jbSouth.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
-        jbSouth.setIcon(new javax.swing.ImageIcon("img//arrowSouthT.png"));
+        jbSouth.setIcon(new javax.swing.ImageIcon("resources//img//arrowSouthT.png"));
         jbSouth.setToolTipText("sud [s]");
         jbSouth.setAlignmentY(0.0F);
         jbSouth.setBorder(new javax.swing.border.MatteBorder(null));
@@ -194,7 +192,7 @@ public class GameGUI extends javax.swing.JFrame {
 
         jbWest.setBackground(new java.awt.Color(56, 86, 128));
         jbWest.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
-        jbWest.setIcon(new javax.swing.ImageIcon("img//arrowWestT.png"));
+        jbWest.setIcon(new javax.swing.ImageIcon("resources//img//arrowWestT.png"));
         jbWest.setToolTipText("ovest [o]");
         jbWest.setAlignmentY(0.0F);
         jbWest.setBorder(new javax.swing.border.MatteBorder(null));
@@ -211,7 +209,7 @@ public class GameGUI extends javax.swing.JFrame {
 
         jbEast.setBackground(new java.awt.Color(56, 86, 128));
         jbEast.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
-        jbEast.setIcon(new javax.swing.ImageIcon("img//arrowEastT.png"));
+        jbEast.setIcon(new javax.swing.ImageIcon("resources//img//arrowEastT.png"));
         jbEast.setToolTipText("est [e]");
         jbEast.setAlignmentY(0.0F);
         jbEast.setBorder(new javax.swing.border.MatteBorder(null));
@@ -318,7 +316,7 @@ public class GameGUI extends javax.swing.JFrame {
         jbInv.setBackground(new java.awt.Color(56, 86, 128));
         jbInv.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jbInv.setForeground(new java.awt.Color(255, 255, 255));
-        jbInv.setIcon(new javax.swing.ImageIcon("img//inv.png"));
+        jbInv.setIcon(new javax.swing.ImageIcon("resources//img//inv.png"));
         jbInv.setToolTipText("inventario [inv]");
         jbInv.setFocusable(false);
         jbInv.setMaximumSize(new java.awt.Dimension(80, 80));
@@ -386,7 +384,7 @@ public class GameGUI extends javax.swing.JFrame {
         getContentPane().add(jspRead2);
         jspRead2.setBounds(40, 30, 520, 450);
 
-        jlBackground.setIcon(new javax.swing.ImageIcon("img//background232.png"));
+        jlBackground.setIcon(new javax.swing.ImageIcon("resources//img//background232.png"));
         getContentPane().add(jlBackground);
         jlBackground.setBounds(0, 0, 1000, 660);
 
