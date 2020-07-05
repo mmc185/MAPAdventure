@@ -99,7 +99,7 @@ public class FileSaver {
         //sack.setItemImage(new ImageIcon("img//inventario//sacco.jpg"));
         //sack.setOpenable(true); 
         
-        Item key=new Item(61,"chiave","Chiave del capitano Kid");
+        Item key=new Item(61,"chiave pirata","Chiave del capitano Kid");
         key.setItemImage(new ImageIcon("img//inventario//chiave.png"));
         key.setPickupable(true);
         
@@ -111,7 +111,7 @@ public class FileSaver {
         chest.setAlias(new String[]{"baule"});
         chest.add(bullion);
        // chest.setOpenable(true);
-        chest.setLockedBy("chiave");
+        chest.setLockedBy("chiave pirata");
         
 
 //Stanze
@@ -165,22 +165,22 @@ public class FileSaver {
         
          //Stanze mondo pirata
          
-        Room ship=new Room(4,"Nave pirata","Sbuchi dal portale e ti ritrovi su nave enorme ,"
+        Room ship=new Room(4,"Nave pirata","Sbuchi dal portale e ti ritrovi su una nave enorme ,"
                 +"in cima sventola una bandiera nera raffigurante un teschio bianco,sei su una nave pirata! \n"
-                +"La nave è ormeggiata vicino ad un isola,da cui si nota una foresta e sulla spiaggia un piccolo falò.Potrebbe esserci qualcuno.\n" 
+                +"La nave è ormeggiata vicino ad un'isola,da cui si nota una foresta e sulla spiaggia un piccolo falò.Potrebbe esserci qualcuno.\n" 
                 +"Il tuo amico trova un biglietto attaccato sull'albero maestro e lo legge: \n"
                 + "Su quest'isola troverai il tesoro del capitano kid,un lingotto d'oro che mai nessuno è riuscito a trovare,trovalo e rispetta il nostro patto.\n"
-                +"Ah dimenticavo,dovrai raggiungere la caverna dopo aver attraversato la foresta,nella tenda vicino al falò troverai qualcosa per te.");
+                +"Ah dimenticavo,dovrai raggiungere la caverna dopo aver attraversato la foresta;nella tenda vicino al falò troverai qualcosa per te.");
         ship.setRoomImage(new ImageIcon("img//stanze//ship.png"));
         
         Room campFire=new Room(5,"Falo'","Tu e il tuo amico vi siete divisi per avere più probabilità di trovare il tesoro e setacciare meglio l'isola.\n"
-                +"vai avanti e trovi un piccolo falo che illumina a stento l area circostante circondato da tante bottiglie vuote.\n" 
+                +"Vai avanti e trovi un piccolo falò che illumina a stento l area circostante circondato da tante bottiglie vuote.\n" 
                 +"Sulla sabbia ci sono delle impronte che vanno verso est,impronte strane... un piede umano e un impronta circolare,ma dove sei finito?");
         campFire.setRoomImage(new ImageIcon("img//stanze//campFire.png"));
         
         Room tent=new TriggeredRoom(6,"Tenda","Che puzza di alcol!Un tizio con una  benda sull'occhio sinistro e una gamba di legno è  spaparanzato per terra tutto UBRIACO!"
                 +"Ecco di chi erano quelle bottiglie.\n"
-                +"\"per mille balene...\" farfuglia il pirata  nel sonno.\n" 
+                +"\"Per mille balene...\" farfuglia il pirata  nel sonno.\n" 
                 +"Dovresti trovare qualcosa di utile qui dentro, ma attento a non svegliarlo.");
         ((TriggeredRoom)tent).addTriggerer("prendi spada");
         ((TriggeredRoom)tent).addTriggerDesc("Ora hai la spada,spero non ti serva");
@@ -196,10 +196,10 @@ public class FileSaver {
         
         tent.setRoomImage(new ImageIcon("img//stanze//tent.jpg"));
         
-        Room forest=new Room(7,"Foresta","è notte inoltrata e sei in una fitta foresta,solo la luce emessa dalla lanterna ti fa vedere qualcosa,ma non più di tanto.\n");
+        Room forest=new Room(7,"Foresta","E' notte inoltrata e sei in una fitta foresta,solo la luce emessa dalla lanterna ti fa vedere qualcosa,ma non più di tanto.\n");
         forest.setRoomImage(new ImageIcon("img//stanze//forest.jpg"));
         
-        Room waterfall=new Room(8,"Cascata","Una cascata blocca il passaggio.Non c'e modo di passar da qui");
+        Room waterfall=new Room(8,"Cascata","Una cascata blocca il passaggio.Non c'è modo di passar da qui");
         waterfall.setRoomImage(new ImageIcon("img//stanze//waterfall.gif"));
         
         Room cliff=new Room(9,"Precipizio","Sei fuori dalla foresta  ma davanti a te c'è un precipizio,non vorrai farla finita vero?");
@@ -208,7 +208,7 @@ public class FileSaver {
         Room cave=new Room(10,"Caverna","Sei arrivato alla caverna,ma l'entrata è bloccata.E ora?");
         cave.setRoomImage(new ImageIcon("img//stanze//cave.jpg"));
         
-        Room cave1=new Room(11,"Caverna","Finalmente sei nella caverna,e appena sceso vieni attaccato da un branco di pipistelli!!\n"
+        Room cave1=new Room(11,"Caverna","Finalmente sei nella caverna,e appena sceso vieni attaccato da uno stormo di pipistelli!!\n"
                           +"AHAHAH scherzo volevo spaventarti!\n"
                           +"La caverna si dirama in piu vie,ed è piena di scheletri umani ,chissà quante persone ci hanno provato prima di te.\n"
                           +"Come fare per trovare un'uscita?");
@@ -223,7 +223,7 @@ public class FileSaver {
         Room cave4=new Room(14,"Caverna","Da qui non si può proseguire");
         cave4.setRoomImage(new ImageIcon("img//stanze//vicolo_cieco.png"));
         
-        Room cave5=new Room(15,"Caverna","Oh no ora devi scegliere tra tre direzioni");
+        Room cave5=new Room(15,"Caverna","Oh no! Ora devi scegliere tra tre direzioni");
         cave5.setRoomImage(new ImageIcon("img//stanze//cave.jpg"));
         
         Room cave6=new Room(16,"Caverna","Da qui non si può proseguire");
@@ -232,12 +232,12 @@ public class FileSaver {
         Room cave7=new Room(17,"Caverna","Da qui non si può proseguire");
         cave7.setRoomImage(new ImageIcon("img//stanze//vicolo_cieco.png"));
         
-        Room sunrise=new TriggeredRoom(18,"Alba","Finalmente sei riuscito ad uscire da quella maledetta caverna.Ormai è l alba e la luce non ti aiuterà a prendere il tesoro inosservato."
+        Room sunrise=new TriggeredRoom(18,"Alba","Finalmente sei riuscito ad uscire da quella maledetta caverna.Ormai è l' alba e la luce non ti aiuterà a prendere il tesoro inosservato."
                 +"Davanti a te trovi uno scheletro con un cappello da pirata e una pistola a canna focaia accanto ad esso.Provi a raccoglierlo ma mentre ci provi fai scattare una trappola.\n"
                 +"Lo scheletro si alza e se ne va ridendo,oltre al danno pure la beffa.\n"
                 +" Sei appeso come un salame in una fune.Questa giornata non poteva andare peggio di così...");
         ((TriggeredRoom)sunrise).addTriggerer("usa spada");
-        ((TriggeredRoom)sunrise).addTriggerDesc("Ti sei liberato,puoi scendere in acqua alla ricerca del tesoro ora");
+        ((TriggeredRoom)sunrise).addTriggerDesc("Ti sei liberato,puoi andare giù in acqua alla ricerca del tesoro ora");
         sunrise.setRoomImage(new ImageIcon("img//stanze//sunrise.jpg"));
         
         Room sea=new Room(19,"A mollo","Ti sei immerso, ci sono tanti pesci e  alghe ma la via per la nave è sgombra");
@@ -246,10 +246,11 @@ public class FileSaver {
         Room adventureGalley=new Room(20,"Adventure Galley","Davanti a te si trova la nave affondata del capitano Kid");
         adventureGalley.setRoomImage(new ImageIcon("img//stanze//adventureGalley.png"));
         
-        Room treasure=new Room(21,"Stanza del tesoro","La nave è semi distrutta,ma non si può non notare un gran forziere e tanti oggetti luccicanti,il forziere è chiuso ovviamente.ad est si trova la stanza del capitano");
+        Room treasure=new Room(21,"Stanza del tesoro","La nave è semi distrutta,ma non si può non notare un gran forziere e tanti oggetti luccicanti,il forziere è chiuso ovviamente.\n"
+                + "Ad ovest si trova la stanza del capitano");
         treasure.setRoomImage(new ImageIcon("img//stanze//treasure.png"));
         
-        Room captainRoom=new Room(22,"Stanza del capitano","La stanza non è molto grande  e vicino ad un tavolo giace il corpo di un pirata,con una chiave attacata alla sua cintura./n"
+        Room captainRoom=new Room(22,"Stanza del capitano","La stanza non è molto grande  e vicino ad un tavolo giace il corpo di un pirata,con una 'chiave pirata' attacata alla sua cintura.\n"
                 + "E' il corpo del leggendario capitano kid uno dei pirati più ricercati\n" 
                 +"che si suicidò perchè esausto di fuggire dalla condonna a morte del governo inglese nei suoi confronti.\n"
                 +"Questo non farà scattare una trappola  come per  lo scheletro di prima,si spera.");
@@ -258,7 +259,7 @@ public class FileSaver {
         Room boat=new Room(23,"Barchetta","Finalmente aria.Trovi una barchetta e ci sali sopra.");
         boat.setRoomImage(new ImageIcon("img//stanze//boat.png"));
         
-        Room shipPortal=new Room(21,"Il ritorno","Accanto alla nave cè una corda per poter salire e attraversare il portale /n"
+        Room shipPortal=new Room(21,"Il ritorno","Accanto alla nave cè una corda per poter salire e attraversare il portale \n"
                  +"Senti degli spari e delle esplosioni e vedi un tizio che corre verso il portale.\n"
                  +"E' il tuo amico che ha esagerato un po' con il distarre i pirati fantasma che ora vi stanno cercando,forse è meglio muoversi e tornare nella stanza dei portali con il nuovo tesoro!!\n"
                  +"Chissà che fine farà il pirata ubriacone che non troverà più il tesoro.\n"
@@ -279,13 +280,13 @@ public class FileSaver {
         metaStation.setLockedBy("bottone");
 
         metaStationLobby.setLook("Il grande atrio è costellato da portali variopinti, la tua attenzione viene catturata da tre portali:\n"
-                + "quello alla tua destra brilla di giallo,\n quello di fronte a te è scuro con tante luci lontane e\n"
+                + "quello alla tua destra brilla di giallo,\n quello di fronte a te è scuro con tante luci lontane e \n"
                 + "infine, quello alla tua sinistra è verde e il suono che proviene da lì ti affascina.");
         metaStationLobby.setSouth(metaStation);
         metaStationLobby.setEast(ship);
         metaStationLobby.addItem(note);
         
-        ship.setLook("A nord cè il falò,alle tue spalle  il portale dal quale sei arrivato,nelle altre direzioni cè solo il mare.");
+        ship.setLook("A nord cè il falò,alle tue spalle  il portale dal quale sei arrivato,nelle altre direzioni c'è solo il mare.");
         ship.setWest(metaStationLobby);
         ship.setNorth(campFire);
         
@@ -308,7 +309,7 @@ public class FileSaver {
         waterfall.setWest(forest);
         
         cliff.setLook("La vista è stupenda ,il riflesso della luna sul mare lo fa brillare in alcuni punti, ma dovresti muoverti invece di  guardare la luna,"
-                +"il pirata potrebbe rimprendersi da un momento all'altro e ");
+                +"il pirata potrebbe riprendersi da un momento all'altro.");
         cliff.setEast(forest);
         
         cave.setLook("Scusami non te l'ho detto??\n"
@@ -316,7 +317,7 @@ public class FileSaver {
           +"Volevo vedere se fossi attento...");
         cave.setDown(cave1);
         
-        cave1.setLook("Questa caverna sembra una specie di labirinto,ci sarà un modo per uscirne"
+        cave1.setLook("Questa caverna sembra una specie di labirinto,ci sarà un modo per uscirne \n"
                 + "C'è una via ad est e una a ovest");
         cave1.setEast(cave2);
         cave1.setWest(cave3);
@@ -347,7 +348,7 @@ public class FileSaver {
         sunrise.setLook("La corda che ti intrappola non sembra molto robusta,potresti usare qualcosa per tagliarla");
         sunrise.setDown(sea);
         
-        sea.setLook("Ad est si trova l' adventure Galley");
+        sea.setLook("Ad est si trova l' Adventure Galley");
         sea.setEast(adventureGalley);
         sea.setLockedBy("spada");
         
@@ -355,19 +356,19 @@ public class FileSaver {
         adventureGalley.setSouth(treasure);
         adventureGalley.setWest(sea);
         
-        treasure.setLook("Ad ovest c'è una stanza,invece sopra di te c'e una via per tornare a galla");
+        treasure.setLook("Ad ovest c'è una stanza,invece sopra di te c'è una via per tornare a galla \n"
+                + "Ricordati di prendere ciò per cui hai passato tutto questo,il LINGOTTO,prima di tornare a galla.");
         treasure.setWest(captainRoom);
         treasure.setNorth(adventureGalley);
         treasure.setUp(boat);
         treasure.addItem(chest);
         
-        captainRoom.setLook("Quella potrebbe essere la chiave del forziere");
+        captainRoom.setLook("Quella potrebbe essere la 'chiave pirata' del forziere");
         captainRoom.setEast(treasure);
         captainRoom.addItem(key);
         
         boat.setLook("A nord si trova la nave con il portale,dai ci sei quasi!");
         boat.setNorth(shipPortal);
-        boat.setLockedBy("lingotto");
         
         shipPortal.setLook("Sali così potrai attraversare il portale e tornare alla metastazione");
         shipPortal.setUp(metaStationLobby);
