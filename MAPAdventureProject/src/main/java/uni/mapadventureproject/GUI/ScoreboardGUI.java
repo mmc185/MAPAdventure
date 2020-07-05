@@ -38,7 +38,7 @@ public class ScoreboardGUI extends javax.swing.JDialog {
     
     private void initFont() {
         
-        try (InputStream is = new BufferedInputStream(new FileInputStream("resorurces//font//Minecraftia-Regular.ttf"))) {
+        try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
             fontBase = Font.createFont(Font.TRUETYPE_FONT, is);
             derivedFont = fontBase.deriveFont(Font.PLAIN, 30);
             
