@@ -198,7 +198,7 @@
               <Font name="Lucida Sans Unicode" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(&quot;img//arrowNorthT.png&quot;)" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(&quot;resources//img//arrowNorthT.png&quot;)" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="nord [n]"/>
             <Property name="alignmentY" type="float" value="0.0"/>
@@ -234,7 +234,7 @@
               <Font name="Lucida Sans Unicode" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(&quot;img//arrowSouthT.png&quot;)" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(&quot;resources//img//arrowSouthT.png&quot;)" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="sud [s]"/>
             <Property name="alignmentY" type="float" value="0.0"/>
@@ -270,7 +270,7 @@
               <Font name="Lucida Sans Unicode" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(&quot;img//arrowWestT.png&quot;)" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(&quot;resources//img//arrowWestT.png&quot;)" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="ovest [o]"/>
             <Property name="alignmentY" type="float" value="0.0"/>
@@ -306,7 +306,7 @@
               <Font name="Lucida Sans Unicode" size="14" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(&quot;img//arrowEastT.png&quot;)" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(&quot;resources//img//arrowEastT.png&quot;)" type="code"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="est [e]"/>
             <Property name="alignmentY" type="float" value="0.0"/>
@@ -439,7 +439,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.ImageIcon(&quot;img//inv.png&quot;)" type="code"/>
+          <Connection code="new javax.swing.ImageIcon(&quot;resources//img//inv.png&quot;)" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="inventario [inv]"/>
         <Property name="focusable" type="boolean" value="false"/>
@@ -593,7 +593,7 @@
     <Component class="javax.swing.JLabel" name="jlBackground">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.ImageIcon(&quot;img//background232.png&quot;)" type="code"/>
+          <Connection code="new javax.swing.ImageIcon(&quot;resources//img//background232.png&quot;)" type="code"/>
         </Property>
       </Properties>
       <Constraints>

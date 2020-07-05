@@ -22,7 +22,7 @@ public class MSGame extends GameManager {
     public MSGame(Game g) throws InterruptedException {
         super(g);
 
-        music.playSound("Musica//soundtrack.wav");
+        music.playSound("resources//Musica//soundtrack.wav");
 
     }
 

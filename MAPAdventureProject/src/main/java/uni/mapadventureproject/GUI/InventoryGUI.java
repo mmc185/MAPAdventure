@@ -116,7 +116,7 @@ public class InventoryGUI extends javax.swing.JDialog {
         jScrollPane1.setBounds(20, 20, 660, 660);
 
         jBackgroundLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jBackgroundLabel.setIcon(new javax.swing.ImageIcon("img//invBackground.png"));
+        jBackgroundLabel.setIcon(new javax.swing.ImageIcon("resources//img//invBackground.png"));
         jBackgroundLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jBackgroundLabel.setMaximumSize(new java.awt.Dimension(700, 700));
         jBackgroundLabel.setMinimumSize(new java.awt.Dimension(700, 700));
