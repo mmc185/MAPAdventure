@@ -1,9 +1,7 @@
 package uni.mapadventureproject.type;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import javax.swing.ImageIcon;
 import uni.mapadventureproject.type.ItemContainer;
 
@@ -124,10 +122,10 @@ public class Room implements Serializable {
 
     public boolean removeItem(Item i) {
 
-        // Se prova a rimuovere l'oggetto ma non lo trova
+        // Se prova a rimuovere l'oggetto dalla stanza ma non lo trova
         if (!itemList.remove(i)) {
             
-            //Cerca in un ItemContainer della stanza
+            // Cerca in un ItemContainer della stanza
             Iterator<Item> it = itemList.getInventoryList().iterator();
             Item item;
             
@@ -140,6 +138,7 @@ public class Room implements Serializable {
             }
 
         } else {
+            // Se l'ha trovato nella stanza allora l'ha rimosso
             return true;
         }
         return false;

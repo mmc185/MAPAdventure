@@ -6,7 +6,6 @@
 package uni.mapadventureproject.type;
 
 import java.util.ArrayDeque;
-import java.util.Objects;
 import java.util.Queue;
 
 /**
@@ -69,32 +68,6 @@ public class TriggeredRoom extends Room {
             return "";
         }
         
-    }
-
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.triggerDesc);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final TriggeredRoom other = (TriggeredRoom) obj;
-        if (!Objects.equals(this.triggerDesc, other.triggerDesc)) {
-            return false;
-        }
-        return true;
     }
 
 }

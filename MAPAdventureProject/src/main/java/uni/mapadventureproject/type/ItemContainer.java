@@ -1,8 +1,6 @@
 package uni.mapadventureproject.type;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class ItemContainer extends Item implements Serializable {
@@ -64,6 +62,6 @@ public class ItemContainer extends Item implements Serializable {
 
     @Override
     public String toString() {
-        return cItemList.toString(); //?????
+        return cItemList.toString();
     }
 }

@@ -13,5 +13,5 @@ import java.io.Serializable;
  */
 public enum CommandType implements Serializable {
     MOVE_N, MOVE_S, MOVE_E, MOVE_W, MOVE_U, MOVE_D, INV, LOOK, PICK_UP, OPEN, USE, 
-    PUSH, RUN, EXIT, WAKE_UP
+    PUSH, RUN, WAKE_UP
 }
