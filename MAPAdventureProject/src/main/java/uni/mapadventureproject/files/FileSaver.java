@@ -403,8 +403,6 @@ public class FileSaver {
         Command escape = new Command("scappa", CommandType.RUN);
         escape.setAlias(new String[]{"fuggi", "muori", "crepa"});
         g.getCommands().add(escape);
-        Command end = new Command("esci", CommandType.EXIT);
-        g.getCommands().add(end);
         Command wake = new Command("sveglia", CommandType.WAKE_UP);
         wake.setAlias(new String[]{"svegliati"});
         g.getCommands().add(wake);

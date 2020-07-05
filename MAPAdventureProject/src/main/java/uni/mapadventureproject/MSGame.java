@@ -219,9 +219,6 @@ public class MSGame extends GameManager {
 
                     output.append("Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!");
                     break;
-                case EXIT:
-                    //System.exit(0);
-                    break;
                 case WAKE_UP:
                     //output = "bad ending?";
 
