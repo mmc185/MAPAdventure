@@ -79,7 +79,7 @@ public class FileSaver {
         
         Item lamp=new Item(58,"lanterna","Una vecchia lanterna ,potrebbe essere utile");
         lamp.setAlias(new String[]{"lampada", "lumino"});
-        img =new ImageIcon("img//inventario//lanterna.jpg");
+        img =new ImageIcon("img//inventario//lanterna.png");
         lamp.setItemImage(img);
         lamp.setPickupable(true);
         
@@ -96,7 +96,7 @@ public class FileSaver {
         sacco.add(lamp);
         sacco.add(parchment);
         ItemContainer sack=new ItemContainer(sacco,60,"sacco","Sacco del pirata,potrebbe contenere qualcosa di utile");
-        sack.setItemImage(new ImageIcon("img//inventario//sacco.jpg"));
+        //sack.setItemImage(new ImageIcon("img//inventario//sacco.jpg"));
         //sack.setOpenable(true); 
         
         Item key=new Item(61,"chiave","Chiave del capitano Kid");
@@ -184,10 +184,15 @@ public class FileSaver {
                 +"Dovresti trovare qualcosa di utile qui dentro, ma attento a non svegliarlo.");
         ((TriggeredRoom)tent).addTriggerer("prendi spada");
         ((TriggeredRoom)tent).addTriggerDesc("Ora hai la spada,spero non ti serva");
+        
         ((TriggeredRoom)tent).addTriggerer("prendi lanterna");
         ((TriggeredRoom)tent).addTriggerDesc("Puoi usarla per andare in luoghi bui");
+        
         ((TriggeredRoom)tent).addTriggerer("prendi pergamena");
         ((TriggeredRoom)tent).addTriggerDesc("Sembra la soluzione di qualcosa...");
+        
+        ((TriggeredRoom)tent).addTriggerer("usa lanterna");
+        ((TriggeredRoom)tent).addTriggerDesc("Ora puoi andare nella foresta");
         
         tent.setRoomImage(new ImageIcon("img//stanze//tent.jpg"));
         
@@ -289,7 +294,7 @@ public class FileSaver {
         campFire.setSouth(ship);
         
         tent.setLook("Per andare nella foresta ci vorrà una fonte luminosa per farti strada \n"
-        +"Predi tutto quello che trovi!");
+        +"C'è un sacco,prendi tutto quello che trovi al suo interno,tanto è gratis!");
         tent.addItem(sack);
         tent.addItem(sword);
         tent.addItem(lamp);
