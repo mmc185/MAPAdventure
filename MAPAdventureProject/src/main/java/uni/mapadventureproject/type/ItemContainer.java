@@ -45,8 +45,8 @@ public class ItemContainer extends Item implements Serializable {
         this.cItemList.add(i);
     }
 
-    public void remove(Item i) {
-        this.cItemList.remove(i);
+    public boolean remove(Item i) {
+        return this.cItemList.remove(i);
     }
 
     public boolean unlockContainer(String cName) {

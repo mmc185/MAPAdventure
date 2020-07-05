@@ -2,8 +2,10 @@ package uni.mapadventureproject.type;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.ImageIcon;
+import uni.mapadventureproject.type.ItemContainer;
 
 public class Room implements Serializable {
 
@@ -120,6 +122,29 @@ public class Room implements Serializable {
         itemList.add(i);
     }
 
+    public boolean removeItem(Item i) {
+
+        // Se prova a rimuovere l'oggetto ma non lo trova
+        if (!itemList.remove(i)) {
+            
+            //Cerca in un ItemContainer della stanza
+            Iterator<Item> it = itemList.getInventoryList().iterator();
+            Item item;
+            
+            while (it.hasNext()) {
+                item = it.next();
+                // Se il contenitore contiene quell'elemento lo rimuove
+                if (item instanceof ItemContainer && ((ItemContainer) item).remove(i)) {
+                    return true;
+                }
+            }
+
+        } else {
+            return true;
+        }
+        return false;
+    }
+
     public ImageIcon getRoomImage() {
         return roomImage;
     }
@@ -127,7 +152,7 @@ public class Room implements Serializable {
     public void setRoomImage(ImageIcon roomImage) {
         this.roomImage = roomImage;
     }
-      
+
     @Override
     public int hashCode() {
         int hash = 3;

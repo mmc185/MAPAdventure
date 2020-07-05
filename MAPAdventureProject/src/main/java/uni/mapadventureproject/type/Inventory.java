@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Usata per Inventario del giocatore e Inventario nella stanza. (Da creare interfaccia?)
+ * Usata per Inventario del giocatore e Inventario nella stanza. (Da creare
+ * interfaccia?)
  */
 public class Inventory implements Serializable {
 
@@ -27,10 +28,10 @@ public class Inventory implements Serializable {
         inventoryList.add(i);
     }
 
-    public void remove(Item i) {
-        if (inventoryList.contains(i)) {
-            inventoryList.remove(i);
-        }
+    public boolean remove(Item i) {
+
+        return inventoryList.remove(i);
+
     }
 
     @Override
