@@ -6,19 +6,13 @@
 package uni.mapadventureproject;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 //import sun.audio.* ;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
 public class PlayMusic {
 
     /* public static void playMusic(String filePath){

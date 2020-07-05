@@ -38,7 +38,7 @@ public class ScoreboardGUI extends javax.swing.JDialog {
     
     private void initFont() {
         
-        try (InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"))) {
+        try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
             fontBase = Font.createFont(Font.TRUETYPE_FONT, is);
             derivedFont = fontBase.deriveFont(Font.PLAIN, 30);
             
@@ -82,7 +82,7 @@ public class ScoreboardGUI extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaHighScores = new javax.swing.JTextArea();
         jTrophy1 = new javax.swing.JLabel();
-        jTrophy3 = new javax.swing.JLabel();
+        jTrophy2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("High Scores");
@@ -123,15 +123,15 @@ public class ScoreboardGUI extends javax.swing.JDialog {
         jtaHighScores.setRows(2);
         jScrollPane1.setViewportView(jtaHighScores);
 
-        jTrophy1.setIcon(new ImageIcon("img//highscores.png"));
+        jTrophy1.setIcon(new ImageIcon("resources//img//highscores.png"));
         jTrophy1.setMaximumSize(new java.awt.Dimension(75, 75));
         jTrophy1.setMinimumSize(new java.awt.Dimension(75, 75));
         jTrophy1.setPreferredSize(new java.awt.Dimension(75, 75));
 
-        jTrophy3.setIcon(new ImageIcon("img//highscores.png"));
-        jTrophy3.setMaximumSize(new java.awt.Dimension(75, 75));
-        jTrophy3.setMinimumSize(new java.awt.Dimension(75, 75));
-        jTrophy3.setPreferredSize(new java.awt.Dimension(75, 75));
+        jTrophy2.setIcon(new ImageIcon("resources//img//highscores.png"));
+        jTrophy2.setMaximumSize(new java.awt.Dimension(75, 75));
+        jTrophy2.setMinimumSize(new java.awt.Dimension(75, 75));
+        jTrophy2.setPreferredSize(new java.awt.Dimension(75, 75));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,7 +147,7 @@ public class ScoreboardGUI extends javax.swing.JDialog {
                                 .addGap(12, 12, 12)
                                 .addComponent(jlHighScores, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTrophy3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTrophy2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(124, 124, 124)
@@ -163,7 +163,7 @@ public class ScoreboardGUI extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlHighScores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTrophy1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTrophy3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTrophy2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlTime, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,7 +233,7 @@ public class ScoreboardGUI extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jTrophy1;
-    private javax.swing.JLabel jTrophy3;
+    private javax.swing.JLabel jTrophy2;
     private javax.swing.JLabel jlHighScores;
     private javax.swing.JLabel jlPlayer;
     private javax.swing.JLabel jlTime;

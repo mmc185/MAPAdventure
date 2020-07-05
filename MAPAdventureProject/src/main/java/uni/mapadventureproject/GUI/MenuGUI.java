@@ -11,9 +11,7 @@ import java.io.File;
 import java.io.IOException; 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import uni.mapadventureproject.Game;
 import uni.mapadventureproject.GameManager;
-import uni.mapadventureproject.MSGame;
 import uni.mapadventureproject.Menu;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
@@ -136,21 +134,20 @@ public class MenuGUI extends javax.swing.JFrame {
         jpMenu.add(jTitolo2);
         jTitolo2.setBounds(0, 70, 700, 40);
 
-        jlOscuro.setIcon(new javax.swing.ImageIcon("img//portale oscuro.png"));
+        jlOscuro.setIcon(new javax.swing.ImageIcon("resources//img//portale oscuro.png"));
         jpMenu.add(jlOscuro);
         jlOscuro.setBounds(0, 0, 350, 250);
 
-        jlLuce.setIcon(new javax.swing.ImageIcon("img//portale luce.png"));
+        jlLuce.setIcon(new javax.swing.ImageIcon("resources//img//portale luce.png"));
         jpMenu.add(jlLuce);
         jlLuce.setBounds(0, 250, 350, 230);
 
-        jlVerde.setIcon(new javax.swing.ImageIcon("img//portale verde.png"));
+        jlVerde.setIcon(new javax.swing.ImageIcon("resources//img//portale verde.png"));
         jpMenu.add(jlVerde);
         jlVerde.setBounds(350, -20, 350, 500);
 
         jMenuBar.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jMenuBar.setForeground(new java.awt.Color(0, 0, 0));
         jMenuBar.setToolTipText("");
         jMenuBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -195,7 +192,7 @@ public class MenuGUI extends javax.swing.JFrame {
     
     private void init() {
         try {
-            InputStream is = new BufferedInputStream(new FileInputStream("font//Minecraftia-Regular.ttf"));
+            InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"));
             font = Font.createFont(Font.TRUETYPE_FONT, is);
             fontMinecraft = font.deriveFont(Font.PLAIN, 12);
             
