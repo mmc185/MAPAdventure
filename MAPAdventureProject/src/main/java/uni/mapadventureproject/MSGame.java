@@ -5,6 +5,7 @@
  */
 package uni.mapadventureproject;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -89,7 +90,7 @@ public class MSGame extends GameManager {
                         if (!Objects.isNull(i) && i.isPickupable()) {
 
                             this.getGame().getInventory().add(i);
-                            this.getGame().getCurrentRoom().getItemList().remove(i);
+                            this.getGame().getCurrentRoom().removeItem(i);
 
                             output.append("L'oggetto è stato aggiunto al tuo inventario.");
 
@@ -130,7 +131,7 @@ public class MSGame extends GameManager {
                         }
 
                     } else if (pOutput.containsWordType(WordType.R_OBJ)) { // Apertura di un contenitore da sbloccare
-
+                        
                         ItemContainer iC = null; //contenitore
                         i = null;
                         byte index = 0;
@@ -172,12 +173,14 @@ public class MSGame extends GameManager {
 
                                 }
 
-                                i.consume();
+                                if (i != null) {
+                                    i.consume();
 
-                                // Se l'oggetto è stato consumato, lo rimuove dall'inventario
-                                if (i.isConsumed()) {
-                                    this.getGame().getInventory().remove(i);
-                                    output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
+                                    // Se l'oggetto è stato consumato, lo rimuove dall'inventario
+                                    if (i.isConsumed()) {
+                                        this.getGame().getInventory().remove(i);
+                                        output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
+                                    }
                                 }
 
                             } else {
@@ -193,7 +196,6 @@ public class MSGame extends GameManager {
                     }
 
                     break;
-
                 case PUSH:
 
                     if (i.isPushable()
@@ -213,7 +215,6 @@ public class MSGame extends GameManager {
                     }
 
                     break;
-
                 case RUN:
 
                     output.append("Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!");
@@ -229,13 +230,12 @@ public class MSGame extends GameManager {
                             + this.getGame().getGameTime().getTime());
 
                     this.getGame().getGameTime().cancel();
-                    
+
                     this.getGame().setCurrentRoom(r = new Room(0, "", ""));
                     r.setLook("");
 
                     break;
-            }
-
+            } //boh da cambiare?
             r = this.getGame().getCurrentRoom();
 
             //Triggera la stanza, se necessario
@@ -308,7 +308,7 @@ public class MSGame extends GameManager {
             }
 
         }
-        
+
         return i;
     }
 
@@ -375,38 +375,38 @@ public class MSGame extends GameManager {
 
         return flag;
     }
-    
+
     private String manageTriggers(ParserOutput pOutput, TriggeredRoom r) {
-        
+
         String output = "";
-        
-        if ( r.isTriggerable() ) { //Se la stanza è triggerabile
 
-                    String triggerer = pOutput.getString(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
+        if (r.isTriggerable()) { //Se la stanza è triggerabile
 
-                    if (pOutput.size() == 2) {
+            String triggerer = pOutput.getString(WordType.COMMAND); //Stringa da confrontare con quella che causa il trigger
 
-                        if (pOutput.containsWordType(WordType.R_OBJ)) {
+            if (pOutput.size() == 2) {
 
-                            triggerer += " " + pOutput.getString(WordType.R_OBJ);
+                if (pOutput.containsWordType(WordType.R_OBJ)) {
 
-                        } else if (pOutput.containsWordType(WordType.I_OBJ)) {
+                    triggerer += " " + pOutput.getString(WordType.R_OBJ);
 
-                            triggerer += " " + pOutput.getString(WordType.I_OBJ);
+                } else if (pOutput.containsWordType(WordType.I_OBJ)) {
 
-                        }
-                    }
-
-                    //se triggerer=triggerer attuale della stanza, si effettua il trigger
-                    if (triggerer.equals( r.getCurrentTriggerer())) {
-
-                        r.setTrigger(true);
-                        output = "\n\n" + r.getDesc();
-
-                    }
+                    triggerer += " " + pOutput.getString(WordType.I_OBJ);
 
                 }
-        
+            }
+
+            //se triggerer=triggerer attuale della stanza, si effettua il trigger
+            if (triggerer.equals(r.getCurrentTriggerer())) {
+
+                r.setTrigger(true);
+                output = "\n\n" + r.getDesc();
+
+            }
+
+        }
+
         return output;
     }
 

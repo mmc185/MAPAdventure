@@ -65,4 +65,13 @@ public class ParserOutput implements Iterable<WordType> {
         return parsedData.entrySet().iterator();
     }*/
     
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        Iterator i = this.iterator();
+        while (i.hasNext()) {
+            s.append(parsedData.get(i.next()) + " ");
+        }
+        return s.toString();
+    }
+    
 }

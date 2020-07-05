@@ -291,9 +291,6 @@ public class FileSaver {
         tent.setLook("Per andare nella foresta ci vorrà una fonte luminosa per farti strada \n"
         +"Predi tutto quello che trovi!");
         tent.addItem(sack);
-        tent.addItem(sword);
-        tent.addItem(lamp);
-        tent.addItem(parchment);
         tent.setNorth(forest);
         
         forest.setLook(" Si sentono versi strani e ti senti osservato eppure non c'è nessuno,o almeno speri...tutto questo ti mette i brividi");
