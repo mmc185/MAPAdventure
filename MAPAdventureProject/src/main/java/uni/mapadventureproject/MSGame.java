@@ -425,7 +425,7 @@ public class MSGame extends GameManager {
                 + "- Osserva la bottiglia\n"
                 + "- Nord\n"
                 + "- Apri con chiave / Usa la chiave \n"
-                + "- Apri con la chiave dorata \n"
+                + "- Apri il baule con la chiave dorata \n"
                 + "- Premi il pulsante \n"
                 + "\n"
                 + "E' importante inserire solo un'azione alla volta!\n"

@@ -61,8 +61,8 @@ public class FileSaver {
         poster.setAlias(new String[]{"cartello", "cartellone", "manifesto", "affisso", "locandina"});
 
         Item note = new Item(56, "bigliettino", "\"Ho preso un oggetto per te importante, se vuoi averlo indietro devi portarmi degli oggetti altrettanto importanti per me:\n"
-                + "1) OggettoX dal portale nella direzione in cui sorge il sole,\n"
-                + "2) OggettoY dal portale più oscuro,\n"
+                + "1) Il lingotto dal portale nella direzione in cui sorge il sole,\n"
+                + "2) l'Ixora Septrifolia dal portale più oscuro,\n"
                 + "3) OggettoZ dal portale da cui sembra provenire una dolce musica.\n"
                 + "Portali qui nell'atrio e riavrai il tuo bene prezioso.\"\n"
                 + "\"Ah, bene!\" esclama il tuo amico \"Vuole che gli facciamo la spesa.\"");
@@ -70,10 +70,12 @@ public class FileSaver {
         img = new ImageIcon("resources//img//inventario//biglietto.png");
         note.setItemImage(img);
 
+        // Oggetti mondo pirata
         Item sword = new Item(57, "spada", "Una spada ben affilata,ogni pirata ne dovrebbe avere una così");
         img = new ImageIcon("resources//img//inventario//spada.png");
         sword.setItemImage(img);
         sword.setPickupable(true);
+        sword.setConsumable((byte) 1);
 
         Item lamp = new Item(58, "lanterna", "Una vecchia lanterna ,potrebbe essere utile");
         lamp.setAlias(new String[]{"lampada", "lumino"});
@@ -81,13 +83,12 @@ public class FileSaver {
         lamp.setItemImage(img);
         lamp.setPickupable(true);
 
-        Item parchment = new Item(59, "pergamena", "Est ,nord ed ancora est;nessun labirinto mi fermerà,"
-                + "il tesoro sarà mio,stasera si festeggia domani riprendo la ricerca.");
+        Item parchment = new Item(59, "pergamena", "Est, nord ed ancora est; nessun labirinto mi fermerà, "
+                + "il tesoro sarà mio, stasera si festeggia domani riprendo la ricerca.");
         img = new ImageIcon("resources//img//inventario//pergamena.png");
         parchment.setItemImage(img);
         parchment.setPickupable(true);
 
-        //da verificare se introdurre o meno (non si apre il sacco)
         Inventory sacco = new Inventory();
         sacco.add(sword);
         sacco.add(lamp);
@@ -96,6 +97,7 @@ public class FileSaver {
         Item key = new Item(61, "chiave pirata", "Chiave del capitano Kid");
         key.setItemImage(new ImageIcon("resources//img//inventario//chiave.png"));
         key.setPickupable(true);
+        key.setConsumable((byte) 1);
 
         Item bullion = new Item(62, "lingotto", "Il tesoro di kid e uno degli oggetti per la tua salvezza!");
         bullion.setItemImage(new ImageIcon("resources//img//inventario//lingotto.jpg"));
@@ -104,10 +106,62 @@ public class FileSaver {
         ItemContainer chest = new ItemContainer(new Inventory(), 63, "forziere", "Contiene il lingotto del capitano Kid");
         chest.setAlias(new String[]{"baule"});
         chest.add(bullion);
-        // chest.setOpenable(true);
         chest.setLockedBy("chiave pirata");
 
-//Stanze
+        // Oggetti mondo spaziale
+        Item window = new Item(64, "finestra", "La navicella sembra star orbitando attorno a un grande pianeta\n"
+                + "rosso e, in fondo, vi è l'ombra di uno più piccolo e azzurro.\n"
+                + "Che sia la Terra?");
+
+        Item panel = new Item(65, "pannello", "Una pubblicità scorre in tanti linguaggi differenti:\n"
+                + "\"Dolcezza assicurata dalle bacche di Xenon del quadrante 9231,\n"
+                + "bevi anche tu una fresca VoidCoke Pop! Qualità assicurata sin dal\n"
+                + "3043!\"");
+
+        ItemContainer box = new ItemContainer(66, "scatola", "Contiene diverse ed interessanti cianfrusaglie.\n"
+                + "Tra le varie cianfrusaglie noti uno strano cacciavite dalla\n"
+                + "punta verde ed arrotondata, e una chiave dalla forma strana.");
+
+        Item sonicScrewdriver = new Item(67, "cacciavite sonico", "Un cacciavite senza punta e con solo un bottone, emana una\n"
+                + "strana luce verde. Ti sembra familiare.");
+        sonicScrewdriver.setItemImage(new ImageIcon("resources//img//inventario//cacciaviteSonico.png"));
+        sonicScrewdriver.setConsumable((byte) 2);
+        sonicScrewdriver.setPickupable(true);
+        box.add(sonicScrewdriver);
+
+        Item cyberKey = new Item(68, "chiave strana", "Uno strano mix tra la tua tanto agognata usb e un giocattolo\n"
+                + "per bambini. Magari un progetto scritto in un linguaggio alieno\n"
+                + "potrebbe andare bene lo stesso...");
+        cyberKey.setItemImage(new ImageIcon("resources//img//inventario//chiaveCyber.png"));
+        cyberKey.setConsumable((byte) 1);
+        cyberKey.setPickupable(true);
+        box.add(cyberKey);
+
+        Item elevatorButton = new Item(69, "bottone", "Bottone per l'ascensore.");
+        elevatorButton.setPushable(true);
+        elevatorButton.setAlias(new String[]{"pulsante"});
+
+        Item table = new Item(70, "tavolo", "Guardando meglio vedi che c'è una tessera magnetica e un pacco di mentine.");
+        table.setAlias(new String[]{"superficie"});
+
+        Item keycard = new Item(71, "tessera magnetica", "Una tessera per il riconoscimento del personale, garantisce\n"
+                + "un accesso di livello \"??\"");
+        keycard.setItemImage(new ImageIcon("resources//img//inventario//tessera.png"));
+        keycard.setAlias(new String[]{"tessera"});
+        keycard.setPickupable(true);
+        keycard.setConsumable((byte) 1);
+
+        Item mints = new Item(72, "mentine", "Il pacco di mentine raffigura un piccolo alieno sorridente!");
+        mints.setItemImage(new ImageIcon("resources//img//inventario//mentine.png"));
+        mints.setAlias(new String[]{"menta", "mentos"});
+        mints.setPickupable(true);
+        mints.setConsumable((byte) 1);
+
+        Item machine = new Item(73, "macchina", "Oltre allo schermo, la macchina presenta uno strano braccio "
+                + "metallico e, sul retro, un pannello che appare essere fissato e non rimovibile a mano.");
+        machine.setAlias(new String[]{"marchingegno", "teletrasporto", "teletrasportatore"});
+
+        //Stanze dell'intro
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
                 + "\n\"Il treno regionale delle ore 9:00 diretto a Bari Centrale è in partenza dal binario 9 con un ritardo di 10 minuti!\""
                 + "\nSenti il fischio assordante del capotreno che ti sollecita a salire.");
@@ -134,7 +188,6 @@ public class FileSaver {
                 + "Senti il fischio dei freni e il treno si arresta completamente sui binari.\n"
                 + "Il tuo amico è già vicino alle porte e sollecita \"Dai, sbrigati, premi il bottone per aprirle le porte "
                 + "o arriveremo in ritardo.\"\n");
-        // trigger o locked per la metastation?
         wagon.setRoomImage(new ImageIcon("resources//img//stanze//wagon.png"));
 
         Room metaStation = new Room(2, "Metastazione", "Come sempre scendi dal treno stretto come una sardina in mezzo ad altri poveri pendolari.\n"
@@ -156,6 +209,26 @@ public class FileSaver {
                 + "(Non avevi un bigliettino prima!)");
         metaStationLobby.setRoomImage(new ImageIcon("resources//img//stanze//metaStationLobby.png"));
 
+        // Stanze Intro
+        station.setUp(wagon);
+        station.setLook("Ti trovi di fronte alle porte del treno. Dovresti muoverti prima che si chiudano!");
+
+        wagon.setDown(metaStation);
+        wagon.setLook("Il vagone è strapieno come sempre! ");
+        wagon.addItem(buttonTrain);
+
+        metaStation.setLook("Sul muro della stazione è affisso un grande poster con grandi scritte colorate e vicino al cancello di uscita\n"
+                + "c'è una strana creatura simile a un polpo che suona i tamburi con i suoi diversi tentacoli.");
+        metaStation.addItem(poster);
+        metaStation.setNorth(metaStationLobby);
+        metaStation.setLockedBy("bottone");
+
+        metaStationLobby.setLook("Il grande atrio è costellato da portali variopinti, la tua attenzione viene catturata da tre portali:\n"
+                + "quello alla tua destra brilla di giallo,\n quello di fronte a te è scuro con tante luci lontane e \n"
+                + "infine, quello alla tua sinistra è verde e il suono che proviene da lì ti affascina.");
+        metaStationLobby.setSouth(metaStation);
+        metaStationLobby.addItem(note);
+
         //Stanze mondo pirata
         Room ship = new Room(4, "Nave pirata", "Sbuchi dal portale e ti ritrovi su una nave enorme,"
                 + "in cima sventola una bandiera nera raffigurante un teschio bianco,sei su una nave pirata! \n"
@@ -164,6 +237,7 @@ public class FileSaver {
                 + "\"Su quest'isola troverai il tesoro del capitano kid, un lingotto d'oro che mai nessuno è riuscito a trovare, trovalo e rispetta il nostro patto.\n"
                 + "Ah dimenticavo,dovrai raggiungere la caverna dopo aver attraversato la foresta; nella tenda vicino al falò troverai qualcosa per te.\"");
         ship.setRoomImage(new ImageIcon("resources//img//stanze//ship.png"));
+        metaStationLobby.setEast(ship);
 
         Room campFire = new Room(5, "Falo'", "Tu e il tuo amico vi siete divisi per avere più probabilità di trovare il tesoro e setacciare meglio l'isola.\n"
                 + "Vai avanti e trovi un piccolo falò che illumina a stento l area circostante circondato da tante bottiglie vuote.\n"
@@ -259,26 +333,6 @@ public class FileSaver {
                 + "Chi dorme non piglia pesci dice un detto!");
         shipPortal.setRoomImage(new ImageIcon("resources//img//stanze//shipPortal.png"));
 
-        station.setUp(wagon);
-        station.setLook("Ti trovi di fronte alle porte del treno. Dovresti muoverti prima che si chiudano!");
-
-        wagon.setDown(metaStation);
-        wagon.setLook("Il vagone è strapieno come sempre! ");
-        wagon.addItem(buttonTrain);
-
-        metaStation.setLook("Sul muro della stazione è affisso un grande poster con grandi scritte colorate e vicino al cancello di uscita\n"
-                + "c'è una strana creatura simile a un polpo che suona i tamburi con i suoi diversi tentacoli.");
-        metaStation.addItem(poster);
-        metaStation.setNorth(metaStationLobby);
-        metaStation.setLockedBy("bottone");
-
-        metaStationLobby.setLook("Il grande atrio è costellato da portali variopinti, la tua attenzione viene catturata da tre portali:\n"
-                + "quello alla tua destra brilla di giallo,\n quello di fronte a te è scuro con tante luci lontane e \n"
-                + "infine, quello alla tua sinistra è verde e il suono che proviene da lì ti affascina.");
-        metaStationLobby.setSouth(metaStation);
-        metaStationLobby.setEast(ship);
-        metaStationLobby.addItem(note);
-
         ship.setLook("A nord cè il falò,alle tue spalle  il portale dal quale sei arrivato,nelle altre direzioni c'è solo il mare.");
         ship.setWest(metaStationLobby);
         ship.setNorth(campFire);
@@ -365,6 +419,140 @@ public class FileSaver {
 
         shipPortal.setLook("Sali così potrai attraversare il portale e tornare alla metastazione!");
         shipPortal.setUp(metaStationLobby);
+
+        // Stanze del mondo spaziale
+        Room broomCloset = new TriggeredRoom(22, "Sgabuzzino",
+                "Sbuchi dal portale e ti ritrovi in un freddo ed oscuro abisso. \n"
+                + "E se il portale vi avesse rigettato nello spazio siderale?\n"
+                + "E se in questo momento un buco nero vi stesse spaghettificando?\n"
+                + "Dannazione, finirai come il tuo codice!");
+        ((TriggeredRoom) broomCloset).addTriggerer("guarda");
+        ((TriggeredRoom) broomCloset).addTriggerDesc("Senti il tuo amico muoversi accanto a te e colpire qualcosa,\n"
+                + "un forte rumore metallico invade le vostre orecchie seguito\n"
+                + "dal tonfo di diversi oggetti.");
+
+        Room hallway = new Room(23, "Corridoio", "Trovata la maniglia del \"buco nero\" ti rendi conto che era\n"
+                + "solamente uno sgabuzzino pieno di secchi e strane scope.\n"
+                + "Wow! Anche per questa volta siete salvi...");
+        hallway.setRoomImage(new ImageIcon("resources//img//stanze//corridoio1.png"));
+
+        Room eastHallway = new Room(24, "Corridoio Est", "Il corridoio si ferma e non va oltre. Accanto a voi si trovano\n"
+                + "una porta ed alcuni pannelli con schermi e bottoni.\n"
+                + "\"E questo sarebbe il futuro?! Non c'è nemmeno il touch-screen!\" commenta il tuo amico, deluso.");
+        eastHallway.setRoomImage(new ImageIcon("resources//img//stanze//corridoio1.png"));
+
+        Room controlRoom = new Room(25, "Stanza di Controllo", "Una moltitudine di pannelli di controllo fanno flashare\n"
+                + "differenti video ed immagini, alcuni anche dello strano\n"
+                + "codice che sembra azionare autonomamente leve e pulsanti.");
+        controlRoom.setRoomImage(new ImageIcon("resources//img//stanze//ControlRoom.png"));
+
+        Room westHallway = new Room(26, "Corridoio Ovest", "Il corridoio prosegue e trovi quelli che puoi solo immaginare\n"
+                + "siano alieni intenti a parlare in uno strano linguaggio e\n"
+                + "bere un liquido fumante verde smeraldo. Meglio non farsi domande.");
+        westHallway.setRoomImage(new ImageIcon("resources//img//stanze//corriodio ovest.png"));
+
+        Room canteen = new Room(27, "Mensa", "Vi ritrovate in una sala affollata inondata dal chiasso di posate, "
+                + "chiacchiere in linguaggi strani e pubblicità olografiche proiettate "
+                + "da alcuni pannelli sul pavimento.\nDiverse persone vi adocchiano "
+                + "in maniera strana, forse per il vostro vestiario un po' \"vintage\"...");
+        canteen.setRoomImage(new ImageIcon("resources//img//stanze//mensa.png"));
+
+        Room upperHallway = new Room(28, "Corridoio Superiore", "Arrivi in un lungo corridoio le cui pareti di vetro si affacciano"
+                + " sull'area di attracco di diverse navicelle spaziali.\nIn fondo"
+                + " al corridoio noti delle figure che sembrano guardie, meglio "
+                + "non spingersi oltre. \n"
+                + "L'unica stanza raggiungibile sembra essere verso sud.");
+        upperHallway.setRoomImage(new ImageIcon("resources//img//stanze//corridoio superiore.png"));
+
+        Room teleporterRoom = new TriggeredRoom(29, "Stanza del Teletrasporto", "Appena entri vedi uno strano alieno colpire la macchina posta al "
+                + "centro della stanza con uno dei suoi tentacoli. Emettendo un suono "
+                + "di dissenso e cambiando vorticosamente colori delle squame, vi "
+                + "lascia da soli.");
+        teleporterRoom.setRoomImage(new ImageIcon("resources//img//stanze//teletrasporto.png"));
+
+        ((TriggeredRoom) teleporterRoom).addTriggerer("usa cacciavite sonico");
+        ((TriggeredRoom) teleporterRoom).addTriggerDesc("Ha funzionato! Il pannello viene via con un \"pop\" e rivela"
+                + "una serie di chip e transistor. Al lato vi è una fessura"
+                + "in cui sembra possibile inserire qualcosa.");
+
+        ((TriggeredRoom) teleporterRoom).addTriggerer("usa chiave strana");
+        ((TriggeredRoom) teleporterRoom).addTriggerDesc(
+                "La macchina comincia ad emettere un ronzio e il braccio meccanico sembra aver ripreso vita. E' arrivata l'ora "
+                + "di usare il teletrasporto e scoprire dove vi vorrà scaraventare questa volta.\n"
+                + "\"Basta viaggi interdimensionali... soffro di mal di teletrasporto!\" il tuo amico sembra sconsolato.");
+
+        Room cityStreet1 = new Room(30, "Strada Aliena", "Come prima esperienza con il teletrasporto sembra essere andato "
+                + "tutto a posto: hai ancora tutti gli arti nei posti giusti e non "
+                + "sembri esserti fuso in maniera strana con il tuo amico il quale, "
+                + "a proposito, sembra un po' verdino...\n\n"
+                + "Siete sbucati su una larga via movimentata dal via vai di diverse "
+                + "specie aliene. Meglio esplorare un po'.");
+        cityStreet1.setRoomImage(new ImageIcon("resources//img//stanze//city1.png"));
+
+        metaStationLobby.setNorth(broomCloset);
+        broomCloset.setSouth(hallway);
+        broomCloset.setLook("Non vedi nulla!");
+
+        hallway.setLook("Lo sgabuzzino sfocia su un grande corridoio dall'aspetto\n"
+                + "moderno e pulito. Una imponente finestra rivela un \n"
+                + "panorama mozzafiato.");
+        hallway.setNorth(broomCloset);
+        hallway.setEast(eastHallway);
+        hallway.setWest(westHallway);
+        hallway.addItem(window);
+
+        eastHallway.setLook("Accanto alla porta vi è uno slot in cui sembra possibile\n"
+                + "inserire una tessera.");
+        eastHallway.setWest(hallway);
+        eastHallway.setNorth(controlRoom);
+        eastHallway.addItem(panel);
+
+        controlRoom.setLook("Su una superficie alla tua sinistra vi è una scatola in cui\n"
+                + "sono disposti diversi gadget metallici ed oggetti. \n"
+                + "Che sia il caso di dare un'occhiata?");
+        controlRoom.setLockedBy("tessera magnetica");
+        controlRoom.setSouth(eastHallway);
+        controlRoom.addItem(box);
+
+        westHallway.setLook("Dietro l'interessante combriccola vi è quello che speri\n"
+                + "sia un ascensore e non una navicella di salvataggio che vi espellerà"
+                + "nello spazio siderale.\nChe sia il caso di premere il bottone?");
+        westHallway.addItem(elevatorButton);
+        westHallway.setUp(canteen);
+        westHallway.setEast(hallway);
+
+        canteen.setLook("Guardi meglio il cibo servito sui diversi vassoi e pensi che, dopotutto,"
+                + "forse la mensa universitaria non era tanto male!\n"
+                + "Noti nella stanza un unico tavolo libero con qualcosa sopra.");
+        canteen.setDown(westHallway);
+        canteen.setWest(upperHallway);
+        canteen.setLockedBy("bottone");
+        canteen.addItem(table);
+        canteen.addItem(keycard);
+        canteen.addItem(mints);
+
+        upperHallway.setLook("Astronavi di innumerevoli colori e forme costellano il panorama "
+                + "insieme ad alcuni meccanici fluttuanti grazie all'assenza di gravità.\n"
+                + "\"Guarda quella sembra il Bebop! E quell'altra il Millenium Falcon!\""
+                + "esclama il tuo amico con il naso appiccicato al vetro.");
+        upperHallway.setEast(canteen);
+        upperHallway.setSouth(teleporterRoom);
+
+        teleporterRoom.setLook("E' pieno di marchingegni strani tra cui spicca uno al centro, "
+                + "a cui tutti gli altri sembrano essere collegati.\n"
+                + "Sullo schermo della macchina riesci a selezionare la lingua "
+                + "Inglese e leggi: \"Teletrasporto per il quadrante 127.0.0.1\"\n"
+                + "\"Quell'alieno sembrava abbastanza incavolato, probabilmente "
+                + "non funziona\" commenta il tuo amico.");
+        teleporterRoom.setNorth(upperHallway);
+        teleporterRoom.setSouth(cityStreet1);
+        teleporterRoom.addItem(machine);
+
+        cityStreet1.setLook("La strada prosegue verso sud, mentre alla tua sinistra sembra "
+                + "esserci una biblioteca.\n\"Hey, forse possiamo trovare qualche informazione su quel "
+                + "coso strano che dobbiamo trovare... l'Ixora Sep...qualcosa!\" "
+                + "suggerisce il tuo amico.");
+        cityStreet1.setLockedBy("chiave strana");
 
         //Comandi
         Command north = new Command("nord", CommandType.MOVE_N);
