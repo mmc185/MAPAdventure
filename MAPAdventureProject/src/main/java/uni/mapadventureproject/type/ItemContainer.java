@@ -1,23 +1,26 @@
 package uni.mapadventureproject.type;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class ItemContainer extends Item implements Serializable {
 
     private Inventory cItemList;
     private String lockedBy = "";
-
-    public ItemContainer(Inventory cItemList, int id, String name, String desc) {
+    
+     public ItemContainer(int id, String name, String desc) {
         super(id, name, desc);
         this.cItemList = new Inventory();
     }
 
+    public ItemContainer(Inventory cItemList, int id, String name, String desc) {
+        super(id, name, desc);
+        this.cItemList = cItemList;
+    }
+
     public ItemContainer(Inventory cItemList, int id, String name, String desc, Set<String> alias) {
         super(id, name, desc, alias);
-        this.cItemList = new Inventory();
+        this.cItemList = cItemList;
     }
 
     public Inventory getcItemList() {
@@ -40,8 +43,8 @@ public class ItemContainer extends Item implements Serializable {
         this.cItemList.add(i);
     }
 
-    public void remove(Item i) {
-        this.cItemList.remove(i);
+    public boolean remove(Item i) {
+        return this.cItemList.remove(i);
     }
 
     public boolean unlockContainer(String cName) {
@@ -59,6 +62,6 @@ public class ItemContainer extends Item implements Serializable {
 
     @Override
     public String toString() {
-        return cItemList.toString(); //?????
+        return cItemList.toString();
     }
 }

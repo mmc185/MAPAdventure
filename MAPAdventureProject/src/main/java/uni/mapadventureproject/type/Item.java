@@ -13,10 +13,8 @@ public class Item implements Serializable {
     private String desc;
     private Set<String> alias;
     private byte consumable = -1; // indica il numero di usi possibili, -1 significa che non è consumabile
-    private boolean openable = false;
     private boolean pickupable = false;
     private boolean pushable = false;
-    private boolean open = false;
     private boolean push = false;
     private ImageIcon itemImage;
 
@@ -65,19 +63,22 @@ public class Item implements Serializable {
     public byte getConsumable() {
         return consumable;
     }
+    
+    public boolean isConsumed() {
+        return this.getConsumable() == 0;
+    }
 
     public void setConsumable(byte consumable) {
         this.consumable = consumable;
     }
+    
+    public void consume() {
+        // Se l'oggetto è consumabile, riduce di 1 il numero degli usi possibili
+        if (consumable > 0) {
+            this.setConsumable((byte) (consumable - 1));
+        } 
+    }
  
-    public boolean isOpenable() {
-        return openable;
-    }
-
-    public void setOpenable(boolean openable) {
-        this.openable = openable;
-    }
-
     public boolean isPickupable() {
         return pickupable;
     }
@@ -92,14 +93,6 @@ public class Item implements Serializable {
 
     public void setPushable(boolean pushable) {
         this.pushable = pushable;
-    }
-
-    public boolean isOpen() {
-        return open;
-    }
-
-    public void setOpen(boolean open) {
-        this.open = open;
     }
 
     public boolean isPush() {

@@ -34,6 +34,11 @@ public class GameTimeTask implements Serializable {
         time.scheduleAtFixedRate(task, 1000, 1000);
 
     }
+    
+    public boolean cancel() {
+        this.setActive(false);
+        return task.cancel();
+    }
 
     public int getSecondPassed() {
         return secondPassed;

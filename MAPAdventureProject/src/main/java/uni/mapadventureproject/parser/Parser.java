@@ -7,25 +7,25 @@ import java.util.Set;
 import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.Inventory;
 import uni.mapadventureproject.type.Item;
+import uni.mapadventureproject.type.ItemContainer;
 import uni.mapadventureproject.type.Room;
 
 public class Parser {
 
-    public LinkedHashMap<WordType, String> parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) throws InvalidStringException {
+    public ParserOutput parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) throws InvalidStringException {
 
-        // Formato da coppie di tipi di parola e stringa che lo identifica. (e.g. (OBJECT, "taralli") )
-        LinkedHashMap<WordType, String> parsedData = new LinkedHashMap<>();
+        ParserOutput pOutput = new ParserOutput();
 
         // Rimuove anche punteggiatura e cifre
         String[] tokens = phrase.replaceAll("[^a-zA-Z]", " ").toLowerCase().split("\\s+");
 
         for (String t : tokens) {
 
-            if (this.isCommand(t, commands) && parsedData.isEmpty()) {
+            if (this.isCommand(t, commands) && pOutput.isEmpty()) {
 
-                parsedData.put(WordType.COMMAND, t);
+                pOutput.add(WordType.COMMAND, t);
 
-            } else if (this.isCommand(t, commands) && !parsedData.isEmpty()) {
+            } else if (this.isCommand(t, commands) && !pOutput.isEmpty()) {
 
                 throw new InvalidStringException();
 
@@ -33,7 +33,7 @@ public class Parser {
 
         }
 
-        if (!parsedData.isEmpty()) {
+        if (!pOutput.isEmpty()) {
 
             String s;
 
@@ -43,13 +43,13 @@ public class Parser {
                 // Controlla se il token corrispondente è un oggetto dell'inventario o  della stanza
                 if (!(s = this.isItem(tokens[i], inv, tokens, i)).isEmpty()) {
 
-                    parsedData.put(WordType.I_OBJ, s);
+                    pOutput.add(WordType.I_OBJ, s);
 
                 }
 
                 if (!(s = this.isItem(tokens[i], currentRoom.getItemList(), tokens, i)).isEmpty()) {
 
-                    parsedData.put(WordType.R_OBJ, s);
+                    pOutput.add(WordType.R_OBJ, s);
 
                 }
 
@@ -59,7 +59,7 @@ public class Parser {
             throw new InvalidStringException();
         }
 
-        return parsedData;
+        return pOutput;
     }
 
     private boolean isCommand(String s, Set<Command> commands) {
@@ -98,6 +98,8 @@ public class Parser {
 
                     }
 
+                } else if (i instanceof ItemContainer) {
+                    return isItem(s, ((ItemContainer)i).getcItemList(), tokens, counter);
                 }
 
             }

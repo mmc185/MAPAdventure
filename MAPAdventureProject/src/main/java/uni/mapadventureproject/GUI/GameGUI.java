@@ -87,7 +87,8 @@ public class GameGUI extends javax.swing.JFrame {
         gInteraction.getGameManager().getGame().setPlayer(JOptionPane.showInputDialog(this, "Inserisci il tuo nome:"));
         
         // Fa iniziare l'avventura stampando la descrizione della stanza iniziale
-        jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
+        jtpReadingArea.setText(gInteraction.getGameManager().getGame().getCurrentRoom().getName() +"\n\n" 
+                + gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n");
 
         //Imposta l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());

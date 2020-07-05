@@ -2,6 +2,7 @@ package uni.mapadventureproject;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import uni.mapadventureproject.parser.ParserOutput;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.Command;
 import uni.mapadventureproject.type.CommandType;
@@ -22,7 +23,10 @@ public abstract class GameManager {
         this.game = game;
     }
 
-    protected abstract String executeCommand(LinkedHashMap<WordType, String> commandMap);
+    protected abstract String executeCommand(ParserOutput pOutput);
+    
+    public abstract String showHelp();
+    
 
     public CommandType getCommandType(String cName) {
 
@@ -39,7 +43,5 @@ public abstract class GameManager {
         return null;
 
     }
-
-    public abstract String showHelp();
 
 }
