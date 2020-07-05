@@ -29,7 +29,7 @@ public class MSGame extends GameManager {
     @Override
     public String executeCommand(ParserOutput pOutput) {
 
-        CommandType command = this.getCommandType(pOutput.getString(WordType.COMMAND));
+        CommandType command = this.getGame().getCommandType(pOutput.getString(WordType.COMMAND));
         Room r = null;
         Item i = null;
         StringBuilder output = new StringBuilder();

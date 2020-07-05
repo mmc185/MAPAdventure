@@ -24,21 +24,4 @@ public abstract class GameManager {
     
     public abstract String showHelp();
     
-
-    public CommandType getCommandType(String cName) {
-
-        for (Command c : this.getGame().getCommands()) {
-
-            if (c.getName().equals(cName) || c.getAlias().contains(cName)) {
-
-                return c.getcType();
-
-            }
-
-        }
-
-        return null;
-
-    }
-
 }
