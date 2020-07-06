@@ -125,6 +125,7 @@ public class FileSaver {
         Item sonicScrewdriver = new Item(67, "cacciavite sonico", "Un cacciavite senza punta e con solo un bottone, emana una\n"
                 + "strana luce verde. Ti sembra familiare.");
         sonicScrewdriver.setItemImage(new ImageIcon("resources//img//inventario//cacciaviteSonico.png"));
+        sonicScrewdriver.setAlias(new String[] {"cacciavite"});
         sonicScrewdriver.setConsumable((byte) 2);
         sonicScrewdriver.setPickupable(true);
         box.add(sonicScrewdriver);
@@ -185,13 +186,12 @@ public class FileSaver {
                 + "bibita gassata presente anche nei vostri tempi!");
         voidCoke.setItemImage(new ImageIcon("resources//img//inventario//voidcoke.png"));
         voidCoke.setAlias(new String[]{"bevanda", "cocacola"});
-        voidCoke.setConsumable((byte) 1);
         voidCoke.setPickupable(true);
         vendingMachine.add(voidCoke);
         
         Item alienFlower = new Item(78, "ixora septrifolia", "E' il fiore che vi permetterà di riavere la vostra chiavetta!");
         alienFlower.setItemImage(new ImageIcon("resources//img//inventario//FioreAlieno.png"));
-        alienFlower.setAlias(new String[] {"fiore alieno"});
+        alienFlower.setAlias(new String[] {"fiore"});
         alienFlower.setPickupable(true);
 
         //Stanze dell'intro
