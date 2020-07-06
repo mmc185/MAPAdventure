@@ -5,9 +5,12 @@
  */
  package uni.mapadventureproject.parser;
 
+ /**
+  * Classe per l'eccezione di stringa non valida incontrata nel Parser.
+  */
 public class InvalidStringException extends Exception {
 
     public InvalidStringException() {
-        super("Stringa non valida.");
+        super("Stringa non valida."); // Messaggio dell'eccezione
     }
 }
