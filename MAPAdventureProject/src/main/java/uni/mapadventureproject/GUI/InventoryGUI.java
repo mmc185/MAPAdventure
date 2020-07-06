@@ -17,9 +17,7 @@ public class InventoryGUI extends javax.swing.JDialog {
 
     Inventory inv;
 
-    /**
-     * Creates new form InventoryGUI
-     */
+    // Costruttore
     public InventoryGUI(Inventory inv) {
         initComponents();
         this.inv = inv;
@@ -30,6 +28,7 @@ public class InventoryGUI extends javax.swing.JDialog {
     /**
      * Per ogni elemento presente nell'inventario crea un bottone mettendogli come immagine
      * l'oggetto che rappresenta.
+     * E' possibile cliccare sul bottone per visualizzare nome e descrizione dell'oggetto.
      */
     public void init() {
 
@@ -43,6 +42,7 @@ public class InventoryGUI extends javax.swing.JDialog {
         try {
             for (Item i : inv.getInventoryList()) {
 
+                // Inizializza il bottone
                 JButton jbImage = new JButton();
                 jbImage.setBackground(Color.black);
                 jbImage.setFocusable(false);
@@ -52,6 +52,9 @@ public class InventoryGUI extends javax.swing.JDialog {
                 jbImage.setSize(75, 75);
                 jbImage.setToolTipText(i.getName());
 
+                /* Aggiunge l'ActionListener per il click sul bottone
+                 * che permette di visualizzare nome e descrizione dell'Item.
+                 */
                 jbImage.addActionListener(new java.awt.event.ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,7 +71,7 @@ public class InventoryGUI extends javax.swing.JDialog {
     }
 
     /**
-     * Se si clicca su un'immagine si aprirà unJDialog con nome de descrizione dell'oggetto
+     * Se si clicca su un'immagine si aprirà un JDialog con nome de descrizione dell'oggetto
      * @param evt ActionPerformed
      * @param ItemDesc descrizione dell'oggetto
      * @param ItemName nome dell'oggetto
@@ -134,40 +137,6 @@ public class InventoryGUI extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InventoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InventoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InventoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InventoryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new InventoryGUI().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jBackgroundLabel;
