@@ -79,4 +79,20 @@ public class Game {
         this.gTime = gTime;
     }
     
+    public CommandType getCommandType(String cName) {
+
+        for (Command c : commands ) {
+
+            if (c.getName().equals(cName) || c.getAlias().contains(cName)) {
+
+                return c.getcType();
+
+            }
+
+        }
+
+        return null;
+
+    }
+    
 }
