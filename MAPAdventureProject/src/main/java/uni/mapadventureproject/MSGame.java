@@ -7,6 +7,7 @@ package uni.mapadventureproject;
 
 import java.util.Iterator;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 import uni.mapadventureproject.parser.ParserOutput;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.CommandType;
@@ -266,6 +267,7 @@ public class MSGame extends GameManager {
 
                     this.getGame().setCurrentRoom(r = new Room(0, "", ""));
                     r.setLook("");
+                    r.setRoomImage(new ImageIcon("resources//img//stanze//congratulations.png"));
 
                     break;
 
@@ -479,8 +481,7 @@ public class MSGame extends GameManager {
     private void advancePlot() {
 
         Item i;
-        Room r;
-
+        
         // Se è nella stanza principale del gioco
         if (this.getGame().getCurrentRoom().getName().equals("Atrio della Metastazione")) {
 
@@ -512,8 +513,8 @@ public class MSGame extends GameManager {
                         + "\n\nHAI COMPLETATO IL GIOCO IN : " + this.getGame().getGameTime().getTime() + "\n");
 
                 this.getGame().getGameTime().cancel();
-                //this.getGame().setCurrentRoom(r = new Room(0, "", ""));
-                //r.setLook("");
+                this.getGame().getCurrentRoom().setRoomImage(new ImageIcon("resources//img//stanze//congratulations.png"));
+                
             }
 
         }

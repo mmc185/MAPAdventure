@@ -176,7 +176,8 @@ public class FileSaver {
         vendingMachine.setLockedBy("cacciavite sonico");
         
         Item vmPanel = new Item(77, "pannello", "Un pannello fissato al lato della macchinetta, molto simile "
-                + "a quello della stanza del teletrasporto...");
+                + "a quello della stanza del teletrasporto... Forse lo stesso strumento potrebbe servire per"
+                + "aprire il distributore.");
         
         Item vmButton = new Item(78, "bottone", "Questo bottone azionerà qualcosa della macchinetta.");
         vmButton.setPushable(true);
@@ -681,8 +682,6 @@ public class FileSaver {
         cityStreet2.addItem(vmPanel);
         cityStreet2.addItem(vmButton);
         cityStreet2.addItem(vendingMachine);
-        //cityStreet2.addItem(vmPanel);
-        //cityStreet2.addItem(vmButton);
         
         alleyway.setLook("Sembra che il robot stia facendo da guardia all'entrata di quella via laterale! \n"
                 + "I suoi grandi artigli e affilate zampe bioniche ti fanno pensare che sia meglio non affrontarlo "
@@ -699,8 +698,10 @@ public class FileSaver {
         market.setEast(volcanicWorld);
         market.setSouth(icyWorld);
         
+        volcanicWorld.setLook("Non ci pensi nemmeno a continuare su questo pianeta!");
         volcanicWorld.setWest(market);
         
+        icyWorld.setLook("Di sicuro non è qui che troverai il fiore desertico!");
         icyWorld.setNorth(market);
         
         desertPlanet.setLook("Guardando meglio il negozio, sembra un gift shop turistico "
