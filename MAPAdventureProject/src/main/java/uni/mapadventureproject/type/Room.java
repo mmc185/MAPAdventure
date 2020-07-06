@@ -5,21 +5,24 @@ import java.util.Iterator;
 import javax.swing.ImageIcon;
 import uni.mapadventureproject.type.ItemContainer;
 
+/**
+ * Classe utilizzate per realizzare le stanze
+ */
 public class Room implements Serializable {
 
     private final int id;
     private String name;
     private String desc;
-    private String look;
+    private String look;     //fornisce una decrizione più dettagliata della stanza
     private Room north = null;
     private Room south = null;
     private Room west = null;
     private Room east = null;
     private Room up = null;
     private Room down = null;
-    private Inventory itemList;
-    private String lockedBy = "";
-    private ImageIcon roomImage;
+    private Inventory itemList;  //lista di oggetti presenti nella stanza
+    private String lockedBy = "";  //indica l'oggetto che non permette di entrare nella stanza
+    private ImageIcon roomImage;   // immagine raffigurante la stanza che verrà visualizzata nell'interfaccia con l'utente
 
     public Room(int id, String name, String desc) {
         this.id = id;

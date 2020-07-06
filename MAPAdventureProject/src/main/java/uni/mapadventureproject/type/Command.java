@@ -5,7 +5,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
+/**
+ * Classe che implementa i comandi in cui ognuno è caratterizzato da un nome,dal tipo di comando e 
+ * da un insieme di sinonimi per quel comando
+ */
 public class Command implements Serializable {
 
     private final String name;

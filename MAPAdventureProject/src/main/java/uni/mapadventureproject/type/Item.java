@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.ImageIcon;
 
+/**
+ * Classe utilizzata per rappresentare gli oggetti che saranno presenti nel gioco
+ */
 public class Item implements Serializable {
 
     private final int id;
@@ -16,7 +19,7 @@ public class Item implements Serializable {
     private boolean pickupable = false;
     private boolean pushable = false;
     private boolean push = false;
-    private ImageIcon itemImage;
+    private ImageIcon itemImage;   //immagine raffigurante l'oggetto
 
     public Item(int id, String name, String desc) {
         this.id = id;
@@ -72,8 +75,10 @@ public class Item implements Serializable {
         this.consumable = consumable;
     }
     
+    /**
+     * Decrementa di uno il numero di utilizzi di un oggetto se esso è consumabile
+     */
     public void consume() {
-        // Se l'oggetto è consumabile, riduce di 1 il numero degli usi possibili
         if (consumable > 0) {
             this.setConsumable((byte) (consumable - 1));
         } 

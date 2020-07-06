@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package uni.mapadventureproject.GUI;
 
 import java.awt.Font;
@@ -20,8 +16,8 @@ import java.io.FileInputStream;
 
 
 /**
- *
- * @author Admin
+ * Intefaccia grafica che rappresenta il menù del gioco.
+ * 
  */
 public class MenuGUI extends javax.swing.JFrame {
 
@@ -189,7 +185,9 @@ public class MenuGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    /**
+     * Viene inizializzato il gioco con un determinato font per i caratteri
+     */
     private void init() {
         try {
             InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"));
@@ -214,6 +212,10 @@ public class MenuGUI extends javax.swing.JFrame {
         this.jbNuovoActionPerformed(evt);
     }//GEN-LAST:event_jmiNuovoActionPerformed
 
+    /**
+     * Chiude l'applicazione
+     * @param evt ActionPerformed
+     */
     private void jbEsciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEsciActionPerformed
         int option;
         option = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler chiudere il gioco?", "Sei sicuro di voler chiudere il gioco", JOptionPane.YES_NO_OPTION);
@@ -222,6 +224,10 @@ public class MenuGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbEsciActionPerformed
 
+    /**
+     * Fa iniziare una nuova partita e fa apparire l'interfaccia per giocare
+     * @param evt ActionPerformed
+     */
     private void jbNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuovoActionPerformed
 
         try {
@@ -240,6 +246,10 @@ public class MenuGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbNuovoActionPerformed
 
+    /**
+     * Carica una partita precedentemente salvata per poter continuare a giocare da quel punto
+     * @param evt ActionPerformed
+     */
     private void jbCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCaricaActionPerformed
         
         JFileChooser fChooser = new JFileChooser();

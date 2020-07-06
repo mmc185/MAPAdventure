@@ -9,13 +9,15 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
- *
- * @author Admin
+ *Classe utilizzata per rappresentare quelle stanze che dopo certe azioni subivano
+ * dei cambiamenti e ne modificavano la descrizione.
+ * Utilizzata per creare enigmi o per vincolare il giocatore a compiere una determinata
+ * azione prima di proseguire
  */
 public class TriggeredRoom extends Room {
 
-    private Queue<String> triggerDesc;
-    private Queue<String> triggerer;
+    private Queue<String> triggerDesc;  // coda che contiene le varie descrizioni di una stanza dopo un certo evento
+    private Queue<String> triggerer;    // coda che contiene le varie azioni che fanno variare le descrizioni della stanza
 
     public TriggeredRoom(int id, String name, String desc) {
         super(id, name, desc);

@@ -3,10 +3,14 @@ package uni.mapadventureproject.type;
 import java.io.Serializable;
 import java.util.Set;
 
+/**
+ * Classe utilizzate per rappresentare oggetti che contengono altri oggetti,
+ * ovvero per rappresentare dei contenitori 
+ */
 public class ItemContainer extends Item implements Serializable {
 
-    private Inventory cItemList;
-    private String lockedBy = "";
+    private Inventory cItemList;    //contenuto del contenitore
+    private String lockedBy = "";   //indica da cosa è bloccato,inizialmente da niente
     
      public ItemContainer(int id, String name, String desc) {
         super(id, name, desc);
@@ -47,6 +51,11 @@ public class ItemContainer extends Item implements Serializable {
         return this.cItemList.remove(i);
     }
 
+    /**
+     * Metodo per sbloccare un contenitore
+     * @param cName oggetto che blocca l'apertura di un contenitore
+     * @return flag indica se si può aprire o meno
+     */
     public boolean unlockContainer(String cName) {
 
         boolean flag = false;

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package uni.mapadventureproject.GUI;
 
 import java.awt.Color;
@@ -15,8 +11,7 @@ import uni.mapadventureproject.type.Inventory;
 import uni.mapadventureproject.type.Item;
 
 /**
- *
- * @author Admin
+ *Intefaccia che mostra gli oggetti presenti nell'inventario del giocatore
  */
 public class InventoryGUI extends javax.swing.JDialog {
 
@@ -32,9 +27,11 @@ public class InventoryGUI extends javax.swing.JDialog {
         this.setModalityType(ModalityType.APPLICATION_MODAL);
     }
 
+    /**
+     * Per ogni elemento presente nell'inventario crea un bottone mettendogli come immagine
+     * l'oggetto che rappresenta.
+     */
     public void init() {
-        //inventory.add(oggetto);
-        //jLabel2.setIcon(oggetto.path);
 
         this.setSize(712, 737);
 
@@ -70,6 +67,12 @@ public class InventoryGUI extends javax.swing.JDialog {
 
     }
 
+    /**
+     * Se si clicca su un'immagine si aprirà unJDialog con nome de descrizione dell'oggetto
+     * @param evt ActionPerformed
+     * @param ItemDesc descrizione dell'oggetto
+     * @param ItemName nome dell'oggetto
+     */
     private void jbImageActionPerformed(java.awt.event.ActionEvent evt, String ItemDesc, String ItemName) {
         JOptionPane.showMessageDialog(this, ItemDesc, ItemName, JOptionPane.PLAIN_MESSAGE);
     }
