@@ -8,6 +8,7 @@ package uni.mapadventureproject.parser;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Classe che imposta la struttura dell'output del Parser.
@@ -93,5 +94,32 @@ public class ParserOutput implements Iterable<WordType> {
         
         return s.toString();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.parsedData);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ParserOutput other = (ParserOutput) obj;
+        if (!Objects.equals(this.parsedData, other.parsedData)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
 }
