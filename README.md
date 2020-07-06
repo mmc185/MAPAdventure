@@ -11,35 +11,35 @@ MAPAdventureProject:
 
 |-resources
 
-|	|-Musica
+|                                           	|-Musica
 
-|	|-db
+|                                           	|-db
 
-|	|-font
+|                                           	|-font
 
-|	|-img
+|                                           	|-img
 
 |-src
 
-   |-main
+​                 |-main
 
-​      |-java
+​                               |-java
 
-​          |-uni
+​                                        |-uni
 
-​             |-mapadventureproject
+​                                             |-mapadventureproject
 
-​		|-GUI
+​	                                                   	|-GUI
 
-​		|-database
+​	                                                   	|-database
 
-​		|-files
+​	                                                   	|-files
 
-​		|-parser
+​	                                                   	|-parser
 
-​		|-type
+​	                                                   	|-type
 
-​		|-other classes
+​	                                                   	|-other classes
 
 
 
