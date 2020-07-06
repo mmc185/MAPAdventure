@@ -125,6 +125,7 @@ public class FileSaver {
         Item sonicScrewdriver = new Item(67, "cacciavite sonico", "Un cacciavite senza punta e con solo un bottone, emana una\n"
                 + "strana luce verde. Ti sembra familiare.");
         sonicScrewdriver.setItemImage(new ImageIcon("resources//img//inventario//cacciaviteSonico.png"));
+        sonicScrewdriver.setAlias(new String[]{"cacciavite"});
         sonicScrewdriver.setConsumable((byte) 2);
         sonicScrewdriver.setPickupable(true);
         box.add(sonicScrewdriver);
@@ -175,7 +176,8 @@ public class FileSaver {
         vendingMachine.setLockedBy("cacciavite sonico");
 
         Item vmPanel = new Item(77, "pannello", "Un pannello fissato al lato della macchinetta, molto simile "
-                + "a quello della stanza del teletrasporto...");
+                + "a quello della stanza del teletrasporto... Forse lo stesso strumento potrebbe servire per"
+                + "aprire il distributore.");
 
         Item vmButton = new Item(78, "bottone", "Questo bottone azionerà qualcosa della macchinetta.");
         vmButton.setPushable(true);
@@ -185,13 +187,12 @@ public class FileSaver {
                 + "bibita gassata presente anche nei vostri tempi!");
         voidCoke.setItemImage(new ImageIcon("resources//img//inventario//voidcoke.png"));
         voidCoke.setAlias(new String[]{"bevanda", "cocacola"});
-        voidCoke.setConsumable((byte) 1);
         voidCoke.setPickupable(true);
         vendingMachine.add(voidCoke);
 
         Item alienFlower = new Item(78, "ixora septrifolia", "E' il fiore che vi permetterà di riavere la vostra chiavetta!");
         alienFlower.setItemImage(new ImageIcon("resources//img//inventario//FioreAlieno.png"));
-        alienFlower.setAlias(new String[]{"fiore alieno"});
+        alienFlower.setAlias(new String[]{"fiore"});
         alienFlower.setPickupable(true);
 
         //Oggetti mondo medievale
@@ -720,8 +721,6 @@ public class FileSaver {
         cityStreet2.addItem(vmPanel);
         cityStreet2.addItem(vmButton);
         cityStreet2.addItem(vendingMachine);
-        //cityStreet2.addItem(vmPanel);
-        //cityStreet2.addItem(vmButton);
 
         alleyway.setLook("Sembra che il robot stia facendo da guardia all'entrata di quella via laterale! \n"
                 + "I suoi grandi artigli e affilate zampe bioniche ti fanno pensare che sia meglio non affrontarlo "
@@ -738,7 +737,10 @@ public class FileSaver {
         market.setEast(volcanicWorld);
         market.setSouth(icyWorld);
 
+        volcanicWorld.setLook("Non ci pensi nemmeno a continuare su questo pianeta!");
         volcanicWorld.setWest(market);
+
+        icyWorld.setLook("Di sicuro non è qui che troverai il fiore desertico!");
 
         icyWorld.setNorth(market);
 
@@ -807,7 +809,7 @@ public class FileSaver {
                 + "Ringraziate il musicista. Il tuo amico gli porge 50 centesimi e lo ringrazia... "
                 + "Lui, tutto euforico, inizia a saltellare di gioia, "
                 + "convinto di avere avuto una moneta d'oro e di essere diventato ricco..."
-                + "Lo salutate. Adesso sapete come proseguire! "); 
+                + "Lo salutate. Adesso sapete come proseguire! ");
         pathway.setRoomImage(new ImageIcon("resources//img//stanze//pathway.jpg"));
 
         Room pathwayUp = new Room(45, "Sentiero in salita", "Superati degli stretti scalini di legno, il sentiero torna lineare. "
@@ -913,13 +915,13 @@ public class FileSaver {
                 + "Esci, tiri un sospiro di sollievo. Sei pronto ad andare a salvare il tuo amico e recuperare il medaglione?"
                 + "La strada per il castello è a sud, verso la valle!");
 
-        
         glade.setLook("Dietro di te c’è il portale da cui sei arrivato; "
                 + "a est e ovest la foresta diventa più fitta... "
                 + "A sud, invece, vedi un lungo sentiero… ");
         glade.setEast(woodsEast);
         glade.setWest(woodsWest);
         glade.setUp(metaStationLobby);
+        glade.setSouth(pathway);
 
         woodsWest.setLook("A est c'è la radura con il portale, mentre, nelle altre direzioni, gli alberi sembrano tutti uguali..."
                 + "  Forse sarebbe meglio tornare indietro o rischierete di perdervi...");

@@ -335,6 +335,7 @@ public class GameGUI extends javax.swing.JFrame {
         jbSend.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jbSend.setForeground(new java.awt.Color(255, 255, 255));
         jbSend.setText("Invia");
+        jbSend.setFocusable(false);
         jbSend.setPreferredSize(new java.awt.Dimension(80, 38));
         jbSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -476,6 +477,7 @@ public class GameGUI extends javax.swing.JFrame {
 
                     db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
                             gInteraction.getGameManager().getGame().getGameTime().getTime());
+                    jtTypingField.setEnabled(false);
 
                 } catch (SQLException | ParseException e) {
                     JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);

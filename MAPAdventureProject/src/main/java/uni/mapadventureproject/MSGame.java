@@ -7,6 +7,7 @@ package uni.mapadventureproject;
 
 import java.util.Iterator;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 import uni.mapadventureproject.parser.ParserOutput;
 import uni.mapadventureproject.parser.WordType;
 import uni.mapadventureproject.type.CommandType;
@@ -15,23 +16,43 @@ import uni.mapadventureproject.type.Room;
 import uni.mapadventureproject.type.TriggeredRoom;
 import uni.mapadventureproject.type.ItemContainer;
 
+/**
+ * Classe che implementa i metodi astratti di GameManager per la gestione del
+ * gioco "MetaStation: the last exam"
+ */
 public class MSGame extends GameManager {
 
-    private PlayMusic music = new PlayMusic(); //aggiunto
+    // Musica di sottofondo del gioco
+    private PlayMusic music = new PlayMusic();
 
-    public MSGame(Game g) throws InterruptedException {
+    /**
+     * ostruttore, prende lo stato del gioco e fa partire la musica
+     *
+     * @param g entità di gioco
+     */
+    public MSGame(Game g) {
         super(g);
 
+        // Caricamento della musica
         music.playSound("resources//Musica//soundtrack.wav");
 
     }
 
     @Override
+    /**
+     * Metodo che implementa la logica del gioco. Gestisce il comando
+     * dell'utente in base alla validità dei comandi scritti rispetto allo stato
+     * attuale in cui si trova il gioco.
+     *
+     * @param pOutput l'output del Parser
+     *
+     * @return ritorna una stringa che descrive la risposta da dare all'utente.
+     */
     public String executeCommand(ParserOutput pOutput) {
 
         // Prende il tipo di comando in modo da gestire la richiesta
         CommandType command = this.getGame().getCommandType(pOutput.getString(WordType.COMMAND));
-        
+
         Room r = null;
         Item i = null;
         StringBuilder output = new StringBuilder();
@@ -42,7 +63,7 @@ public class MSGame extends GameManager {
         try {
 
             switch (command) {
-                
+
                 // Comandi per il movimento
                 case MOVE_S:
                 case MOVE_N:
@@ -53,32 +74,35 @@ public class MSGame extends GameManager {
 
                     // Controlla se ci si può spostare in quella direzione o meno
                     if (Objects.isNull(r = this.move(command))) {
-                        
+
                         output.append("Non puoi andare lì!");
 
-                    } 
-                    // Controlla che non sia bloccata
+                    } // Controlla che non sia bloccata
                     else if (r.getLockedBy().equals("")) {
 
                         // Si sposta nella stanza designata
                         this.getGame().setCurrentRoom(r);
+
+                        // Controlla se si è finito il gioco in maniera "lecita"
+                        this.advancePlot();
+
                         output.append("===========================================\n"
                                 + this.getGame().getCurrentRoom().getName() + "\n\n"
                                 + this.getGame().getCurrentRoom().getDesc());
 
                     } else {
-                        
+
                         // Nel caso la stanza sia bloccata
                         output.append("Questa stanza è chiusa!");
                     }
                     break;
-                    
+
                 // Comando per l'inventario, ne stampa il contenuto
                 case INV:
 
                     output.append("Oggetti presenti nell'inventario: " + this.getGame().getInventory().toString());
                     break;
-                    
+
                 // Comando per guardare
                 case LOOK:
 
@@ -91,13 +115,13 @@ public class MSGame extends GameManager {
 
                         output.append(this.getGame().getCurrentRoom().getLook());
 
-                    } else if (pOutput.size() > 2) {
+                    } else if (pOutput.size() > 2) { // Se si vogliono guardare troppi oggetti alla volta
 
                         output.append("Uno alla volta, ho una certa età.");
 
                     }
                     break;
-                    
+
                 // Comando per raccogliere oggetti
                 case PICK_UP:
 
@@ -114,9 +138,9 @@ public class MSGame extends GameManager {
                             output.append("L'oggetto è stato aggiunto al tuo inventario.");
 
                         } else {
-                            
+
                             output.append("Non puoi prendere questo oggetto.");
-                            
+
                         }
                     } else if (pOutput.containsWordType(WordType.I_OBJ)) {
 
@@ -128,9 +152,9 @@ public class MSGame extends GameManager {
 
                     }
                     break;
-                    
+
                 // Comandi per sbloccare stanze o contenitori
-                case USE: 
+                case USE:
                 case OPEN:
 
                     // Se si vuole aprire una stanza con un oggetto dell'inventario
@@ -149,13 +173,13 @@ public class MSGame extends GameManager {
                                 output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
 
                             }
-                            
-                        } else { 
+
+                        } else {
                             output.append("Non puoi aprire con questo oggetto!");
                         }
 
                     } else if (pOutput.containsWordType(WordType.R_OBJ)) { // Apertura di un contenitore da sbloccare
-                        
+
                         ItemContainer iC = null; //contenitore
                         i = null;
                         byte index = 0;
@@ -192,15 +216,16 @@ public class MSGame extends GameManager {
                                 if (iC.getcItemList().getInventoryList().isEmpty()) {
 
                                     output.append("L'oggetto è stato aperto, ma è vuoto!");
-                                    
+
                                 } else {
 
-                                    output.append("Hai aperto l'oggetto " + iC.getName() + "! Ecco il suo contenuto:" + iC.toString());
+                                    output.append("Hai aperto l'oggetto " + iC.getName()
+                                            + "! Ecco il suo contenuto:" + iC.toString());
 
                                 }
 
                                 if (i != null) {
-                                    
+
                                     i.consume();
 
                                     // Se l'oggetto è stato consumato, lo rimuove dall'inventario
@@ -223,7 +248,7 @@ public class MSGame extends GameManager {
                     }
 
                     break;
-                    
+
                 // Comando per spingere oggetti
                 case PUSH:
 
@@ -244,43 +269,41 @@ public class MSGame extends GameManager {
                     }
 
                     break;
-                    
+
                 // Comando per "scappare"
                 case RUN:
 
                     output.append("Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!");
                     break;
-                    
+
                 // Comando per "svegliarsi" fa partire un finale nascosto
                 case WAKE_UP:
-                    //output = "bad ending?";
 
                     output.append("Hai scelto la via più semplice e questo non ti fa onore"
                             + "\n \n HAI COMPLETATO IL GIOCO IN : "
                             + this.getGame().getGameTime().getTime());
 
+                    // Ferma il timer che tiene traccia del tempo di completamento del gioco
                     this.getGame().getGameTime().cancel();
 
-                    this.getGame().setCurrentRoom(r = new Room(0, "", ""));
-                    r.setLook("");
+                    // Mostra all'utente una immagine di congratulazioni
+                    r = this.getGame().getCurrentRoom();
+                    r.setRoomImage(new ImageIcon("resources//img//stanze//congrats.jpg"));
 
                     break;
-                    
+
                 // Comando per stampare la guida di gioco
                 case HELP:
                     output.append(this.showHelp());
                     break;
-            } 
-            
+            }
+
             // Controlla se la stanza è triggerabile dal comando dell'utente
-            r = this.getGame().getCurrentRoom();            
+            r = this.getGame().getCurrentRoom();
             if (r instanceof TriggeredRoom) {
 
                 output.append(this.manageTriggers(pOutput, (TriggeredRoom) r));
             }
-
-            // Controlla se si è finito il gioco in maniera "lecita"
-            output.append(this.advancePlot());
 
         } catch (NullPointerException e) {
 
@@ -294,29 +317,40 @@ public class MSGame extends GameManager {
 
     }
 
+    /**
+     * Funzione che prende il nome dell'oggetto, se presente, dal ParserOutput e
+     * ne ritorna l'Item.
+     *
+     * @param pOutput output del parser
+     * @return Item il cui nome o alias si trova nel ParserOutput
+     */
     private Item retrieveItem(ParserOutput pOutput) {
 
         Item i = null;
 
         /* Se l'azione sfrutta un oggetto salva l'oggetto e 
-           lo rinomina nella Map per fare riferimento al suo nome principale
-           e non a potenziali alias
+           lo rinomina nel ParserOutput per fare riferimento al suo nome principale
+           e non a potenziali alias, così da uniformare la gestione del comando.
          */
         if (pOutput.containsWordType(WordType.I_OBJ)) { // Per gli oggetti dell'inventario
 
+            // Cerca l'item
             i = this.getGame().getInventory().searchItem(pOutput.getString(WordType.I_OBJ));
 
+            // Se lo trova, lo rinomina nel ParserOutput
             if (!Objects.isNull(i)) {
 
                 pOutput.add(WordType.I_OBJ, i.getName());
 
-            } else {// Se non ha trovato l'oggetto lo cerca in un contenitore non bloccato
+            } else {// Se non ha trovato l'oggetto lo cerca in un contenitore non bloccato dell'inventario
 
                 for (Item iC : this.getGame().getInventory().getInventoryList()) {
 
                     if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
+
                         i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.I_OBJ));
                         pOutput.add(WordType.I_OBJ, i.getName());
+
                     }
 
                 }
@@ -327,17 +361,20 @@ public class MSGame extends GameManager {
 
             i = this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
 
+            // Se lo trova, lo rinomina nel ParserOutput
             if (!Objects.isNull(i)) {
 
                 pOutput.add(WordType.R_OBJ, i.getName());
 
-            } else {// Se non ha trovato l'oggetto lo cerca in un contenitore non bloccato
+            } else {// Se non ha trovato l'oggetto lo cerca in un contenitore non bloccato della stanza
 
                 for (Item iC : this.getGame().getCurrentRoom().getItemList().getInventoryList()) {
 
                     if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
+
                         i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.R_OBJ));
                         pOutput.add(WordType.R_OBJ, i.getName());
+
                     }
 
                 }
@@ -348,8 +385,15 @@ public class MSGame extends GameManager {
         return i;
     }
 
+    /**
+     * Funzione per spostarsi tra le stanze
+     *
+     * @param c tipo di comando che indica il movimento da compiere
+     * @return stanza in cui spostarsi, se trovata, altrimenti null
+     */
     private Room move(CommandType c) {
 
+        // Se il comando corrisponde a quel movimento e la stanza in quella direzione esiste
         if (c.equals(CommandType.MOVE_S) && !Objects.isNull(this.getGame().getCurrentRoom().getSouth())) {
             return this.getGame().getCurrentRoom().getSouth();
         } else if (c.equals(CommandType.MOVE_N) && !Objects.isNull(this.getGame().getCurrentRoom().getNorth())) {
@@ -367,10 +411,22 @@ public class MSGame extends GameManager {
         return null;
     }
 
+    /**
+     * Funzione per sbloccare le stanze chiuse, cerca tra tutte le stanze
+     * adiacenti alla stanza attuale.
+     *
+     * @param iName nome dell'oggetto "chiave"
+     * @return booleano, true se la stanza è stata sbloccata dall'item, false
+     * altrimenti
+     */
     private boolean unlockRoom(String iName) {
 
         boolean flag = false;
 
+        /* Controlla se esiste una stanza in quella direzione, per ogni direzione
+         * e controlla se è bloccata dall'item passato in input.
+         * In caso affermativo, la sblocca e imposta il flag a true.
+         */
         if (!Objects.isNull(this.getGame().getCurrentRoom().getSouth())
                 && this.getGame().getCurrentRoom().getSouth().getLockedBy().equals(iName)) {
 
@@ -412,6 +468,15 @@ public class MSGame extends GameManager {
         return flag;
     }
 
+    /**
+     * Funzione per gestire le stanze TriggeredRoom in relazione con il comando
+     * scritto dall'utente.
+     *
+     * @param pOutput output del Parser
+     * @param r stanza attuale, TriggeredRoom
+     * @return stringa che contiene il nuovo "stato" della stanza, ovvero la sua
+     * descrizione
+     */
     private String manageTriggers(ParserOutput pOutput, TriggeredRoom r) {
 
         String output = "";
@@ -447,6 +512,11 @@ public class MSGame extends GameManager {
     }
 
     @Override
+    /**
+     * Funzione che restituisce la guida del gioco "MetaStation: the last exam"
+     *
+     * @return stringa con la guida
+     */
     public String showHelp() {
         return "===========================================\n"
                 + "GUIDA\n"
@@ -476,10 +546,13 @@ public class MSGame extends GameManager {
                 + "===========================================";
     }
 
-    private String advancePlot() {
+    /**
+     * Procedura che fa avanzare la narrazione della storia, basandosi sulla
+     * stanza pivotale per lo svolgimento degli eventi.
+     */
+    private void advancePlot() {
 
         Item i;
-        String s = "";
 
         // Se è nella stanza principale del gioco
         if (this.getGame().getCurrentRoom().getName().equals("Atrio della Metastazione")) {
@@ -494,29 +567,35 @@ public class MSGame extends GameManager {
                  */
                 this.getGame().getCurrentRoom().addItem(i);
                 this.getGame().getInventory().getInventoryList().remove(i);
+
+                // Inserisce il bigliettino di "ricatto" nell'inventario del giocatore
                 i = this.getGame().getCurrentRoom().getItemList().searchItem("bigliettino");
                 this.getGame().getInventory().add(i);
                 this.getGame().getCurrentRoom().getItemList().remove(i);
 
-            }
-            // Se il giocatore ha terminato il gioco e ha collezionato tutti gli oggetti
-            else if ( !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("lingotto"))
-                    && !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("ixora septrifolia"))
-                    /*&& !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("lingotto")*/) {
-                
+            } // Se il giocatore ha terminato il gioco e ha collezionato tutti gli oggetti
+            else if (!Objects.isNull(this.getGame().getInventory().searchItem("lingotto"))
+                    && !Objects.isNull(this.getGame().getInventory().searchItem("ixora septrifolia")) /*&& !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("lingotto")*/) {
+
                 // Gli viene restituita la chiavetta
+                i = this.getGame().getCurrentRoom().getItemList().searchItem("pendrive");
                 this.getGame().getCurrentRoom().getItemList().remove(i);
                 this.getGame().getInventory().add(i);
-                
+
                 // Viene descritto il finale del gioco
-                s = "\nHai completato il gioco";
-                
+                this.getGame().getCurrentRoom().setDesc("\n\n[finale] "
+                        + "\n\nHAI COMPLETATO IL GIOCO IN : " + this.getGame().getGameTime().getTime() + "\n");
+
+                // Ferma il timer che tiene traccia del tempo di completamento del gioco
+                this.getGame().getGameTime().cancel();
+
+                // Mostra all'utente una immagine di congratulazioni
+                this.getGame().getCurrentRoom().setRoomImage(new ImageIcon("resources//img//stanze//congrats.jpg"));
+
             }
-             
 
         }
-        
-        return s;
+
     }
 
 }
