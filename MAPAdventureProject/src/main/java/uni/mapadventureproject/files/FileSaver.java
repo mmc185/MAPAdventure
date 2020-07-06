@@ -208,12 +208,15 @@ public class FileSaver {
         Item greenKey = new Item(82, "chiave verde", "Una chiave verde con dei richiami argentati");
         greenKey.setPickupable(true);
         greenKey.setItemImage(new ImageIcon("resources//img//inventario//greenKey.png"));
+
         Item redKey = new Item(83, "chiave rossa", "Una chiave rossa con dei richiami argentati");
         redKey.setPickupable(true);
         redKey.setItemImage(new ImageIcon("resources//img//inventario//redKey.png"));
+
         Item blueKey = new Item(84, "chiave blu", "Una chiave verde con dei richiami argentati");
         blueKey.setPickupable(true);
         blueKey.setItemImage(new ImageIcon("resources//img//inventario//blueKey.png"));
+
         Item scroll = new Item(85, "pergamena", "La pergamena antimaledizioni che stavi cercando.");
         scroll.setPickupable(true);
         scroll.setItemImage(new ImageIcon("resources//img//inventario//scroll.png"));
@@ -223,16 +226,21 @@ public class FileSaver {
         wardrobe.setAlias(new String[]{"armadio", "scaffale", "guardaroba"});
         wardrobe.setLockedBy("chiave verde");
         wardrobe.add(scroll);//Non c'è bisogno di mostrarlo
+        ////DA TOGLIERE
+        wardrobe.setItemImage(new ImageIcon("resources//img//inventario//scroll.png"));
+///////////////
         ItemContainer littleBox = new ItemContainer(81, "scatola", "Una piccola scatolina socchiusa. Chissà cosa c'è dentro...");
         littleBox.setAlias(new String[]{"scatolina"});
         littleBox.add(greenKey);
         littleBox.add(redKey);
         littleBox.add(blueKey); //Non c'è bisogno di mostrarla
-
+        ///////////////DA TOGLIERE
+        littleBox.setItemImage(new ImageIcon("resources//img//inventario//scroll.png"));
+///////////////
         Item medallion = new Item(86, "medaglione", "E' il prezioso medaglione che, con gli altri due oggetti, vi permetterà di rientrare in possesso della vostra chiavetta!");
-        medallion.setItemImage(new ImageIcon("resources//img//inventario//medallion.png"));
         medallion.setAlias(new String[]{"collana", "pendente", "gioiello"});
         medallion.setPickupable(true);
+        medallion.setItemImage(new ImageIcon("resources//img//inventario//medallion.png"));
 
         //Stanze dell'intro
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
@@ -776,7 +784,6 @@ public class FileSaver {
         Room glade = new Room(41, "Radura", "Sbuchi dal portale e ti ritrovi in mezzo a un bosco. \n"
                 + "C’è anche il tuo amico con te che esclama: “Ma dove siamo finiti??"); //Comandi
         glade.setRoomImage(new ImageIcon("resources//img//stanze//glade.png"));
-        metaStationLobby.setWest(glade);
 
         Room woodsWest = new Room(42, "Foresta", "Qui la foresta è molto fitta...");
         woodsWest.setRoomImage(new ImageIcon("resources//img//stanze//woodsWest.png"));
@@ -814,7 +821,7 @@ public class FileSaver {
 
         Room pathwayUp = new Room(45, "Sentiero in salita", "Superati degli stretti scalini di legno, il sentiero torna lineare. "
                 + "Accanto ad esso, scorre un ruscello. ");
-        pathwayUp.setRoomImage(new ImageIcon("resources//img//stanze//pathwayUp.jpg"));
+        pathwayUp.setRoomImage(new ImageIcon("resources//img//stanze//pathwayUp.png"));
 
         Room pathwayDown = new Room(46, "Sentiero in discesa", "Percorri un tratto ripidissimo, inciampi e rischi di cadere, ma,"
                 + "per fortuna, c'è il tuo amico che riesce a salvarti in tempo");
@@ -867,7 +874,7 @@ public class FileSaver {
         ((TriggeredRoom) mountain).addTriggerDesc("Riesci a rialzarti in piedi. "
                 + "Davanti a te, verso ovest, senti una voce disperata:"
                 + "\"Il mio bastone è andato perduto!!! Sono rovinato!\"");
-        mountain.setRoomImage(new ImageIcon("resources//img//stanze//castle.png"));
+        mountain.setRoomImage(new ImageIcon("resources//img//stanze//mountain.png"));
 
         Room house = new TriggeredRoom(51, "Casa di Astor il druido", "Arrivi davanti a una casetta. "
                 + "Fuori c'è un uomo alquanto strano che, seduto sul gradino della porta, si sta disperando."
@@ -878,7 +885,7 @@ public class FileSaver {
                 + "Permettimi di sdebitarmi offrendoti il pranzo! "
                 + "Entriamo, su, puoi utilizzare il mio bastone per aprire la porta!"
                 + "Senza lasciarti il tempo di parlare, il vecchio ti spinge verso casa sua.");
-        house.setRoomImage(new ImageIcon("resources//img//inventario//druidHouse.png"));
+        house.setRoomImage(new ImageIcon("resources//img//stanze//druidHouse.png"));
         house.setLockedBy("bastone");
         ((TriggeredRoom) house).addTriggerer("usa bastone");
         ((TriggeredRoom) house).addTriggerDesc("Agitando il bastone, "
@@ -899,10 +906,6 @@ public class FileSaver {
                 + "ed esce dalla casa in fretta e furia."
                 + "\nSei rimasto solo… Potrebbe essere una buona occasione per guardarti intorno, "
                 + "quel vecchio non sembrava sincero riguardo la pergamena… ");
-        house.setLook("La casa è piccola e disordinata: un camino spento da poco con sopra un calderone, "
-                + "il tavolo su cui state pranzando, una scrivania con sopra mille scartoffie e una piccola scatola, "
-                + "un letto e un mobile che forse potrebbe contenere qualcosa di utile..."
-                + "A nord c’è la porta d’ingresso.");
         ((TriggeredRoom) house).addTriggerer("usa chiave verde");
         ((TriggeredRoom) house).addTriggerDesc("Nel frattempo, senti urlare dall’esterno “DANNATI FAGIOLIIIIIIIII!!\" "
                 + "La voce del druido è sempre più vicina, dovresti muoverti a prendere la pergamena e chiudere tutto!");
@@ -915,13 +918,18 @@ public class FileSaver {
                 + "Esci, tiri un sospiro di sollievo. Sei pronto ad andare a salvare il tuo amico e recuperare il medaglione?"
                 + "La strada per il castello è a sud, verso la valle!");
 
+        Room crossroad = new Room(52, "Un bivio", "Siete ad un bivio: una strada prosegue verso la salita e l'altra verso la discesa.");
+        crossroad.setRoomImage(new ImageIcon("resources//img//stanze//pathway1.jpg"));
+
+        metaStationLobby.setWest(glade);
         glade.setLook("Dietro di te c’è il portale da cui sei arrivato; "
                 + "a est e ovest la foresta diventa più fitta... "
                 + "A sud, invece, vedi un lungo sentiero… ");
+        glade.setSouth(pathway);
+
         glade.setEast(woodsEast);
         glade.setWest(woodsWest);
         glade.setUp(metaStationLobby);
-        glade.setSouth(pathway);
 
         woodsWest.setLook("A est c'è la radura con il portale, mentre, nelle altre direzioni, gli alberi sembrano tutti uguali..."
                 + "  Forse sarebbe meglio tornare indietro o rischierete di perdervi...");
@@ -932,10 +940,16 @@ public class FileSaver {
                 + " Forse è il caso di tornare alla radura!");
         woodsEast.setWest(glade);
 
-        pathway.setLook("Siete ad un bivio: una strada prosegue verso la salita e l'altra verso la discesa."
+        pathway.setLook("La strada continua verso est. A nord, invece, c'è la radura del portale.");
+        pathway.setNorth(glade);
+        pathway.setEast(crossroad);
+
+        crossroad.setLook("Siete ad un bivio: una strada prosegue verso la salita e l'altra verso la discesa."
                 + "Facendo più attenzione, verso l'alto senti il rumore di un ruscello."
                 + "A nord vedi la radura del portale da cui sei sbucato con il tuo amico. ");
-        pathway.setNorth(glade);
+        crossroad.setWest(pathway);
+        crossroad.setUp(pathwayUp);
+        crossroad.setDown(pathwayDown);
 
         pathwayUp.setLook("Percorrete degli scalini di legno e finalmente vedete il ruscello, che scorre verso nord."
                 + " Cerchi di ricordarti cosa aveva detto quel musicista...");
@@ -964,9 +978,13 @@ public class FileSaver {
         castle.setNorth(mountain);
 
         mountain.addItem(stick);
-        mountain.setWest(house);
         mountain.setSouth(castle);
+        mountain.setWest(house);
 
+        house.setLook("La casa è piccola e disordinata: un camino spento da poco con sopra un calderone, "
+                + "il tavolo su cui state pranzando, una scrivania con sopra mille scartoffie e una piccola scatola, "
+                + "un letto e un mobile che forse potrebbe contenere qualcosa di utile..."
+                + "A nord c’è la porta d’ingresso.");
         house.addItem(greenKey);
         house.addItem(redKey);
         house.addItem(blueKey);
