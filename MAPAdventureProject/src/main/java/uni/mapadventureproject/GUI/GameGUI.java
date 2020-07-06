@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package uni.mapadventureproject.GUI;
 
 import java.awt.Color;
@@ -26,8 +22,7 @@ import uni.mapadventureproject.GameInteraction;
 import uni.mapadventureproject.database.DBManager;
 
 /**
- *
- * @author Admin
+ *Interfaccia grafica che permetterà all'utente di giocare
  */
 public class GameGUI extends javax.swing.JFrame {
 
@@ -49,14 +44,15 @@ public class GameGUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Inizializza il gioco settando il font dei caratteri
+     */
     private void init() {
 
         // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
         try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
 
-            font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
-
-
+            font = Font.createFont(Font.TRUETYPE_FONT, is); 
             fontMinecraft = font.deriveFont(Font.PLAIN, 14);
 
             this.setFont(fontMinecraft);
@@ -79,6 +75,9 @@ public class GameGUI extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Inizializza il gioco con l'interfaccia iniziale con cui l'utente interagirà
+     */
     private void initGame() {
         
         // Salva il nome del giocatore
@@ -97,6 +96,9 @@ public class GameGUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Connessione al database che conterrà  il nome del giocatore e il tempo che ha impiegato per concludere il gioco
+     */
     private void initDB() {
         try {
             db.connect();
@@ -442,6 +444,13 @@ public class GameGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Le varie descrizioni appariranno neljTextPane e per ogni interazione dell'utente
+     * verra concatenata la risposta al testo già presente
+     * @param tp jTextPane in cui verranno concatenati i messaggi
+     * @param msg messaggio di risposta all'utente
+     * @param c colore con cui verrà visualizzato il messaggio
+     */
     private void appendToPane(JTextPane tp, String msg, Color c) {
 
         try {
@@ -461,6 +470,10 @@ public class GameGUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Invia il comando scritto dall'utente 
+     * @param evt actionPerformed
+     */
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
 
         if (!jtTypingField.getText().isBlank()) {
@@ -552,6 +565,10 @@ public class GameGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtTypingFieldKeyPressed
 
+    /**
+     * Permette di tornare al menù principale dopo aver chiesto conferma
+     * @param evt ActionPerformed
+     */
     private void jmiBackMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackMenuActionPerformed
 
         int yesOption;
@@ -564,6 +581,10 @@ public class GameGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jmiBackMenuActionPerformed
 
+    /**
+     * Permette di salvare i progressi attuali
+     * @param evt ActionPerformed
+     */
     private void jmiSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveGameActionPerformed
 
         JFileChooser fChooser = new JFileChooser();
@@ -586,16 +607,28 @@ public class GameGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jmiSaveGameActionPerformed
 
+    /**
+     * Permette di visualizzare l'inventario
+     * @param evt ActionPerformed
+     */
     private void jbInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInvActionPerformed
         InventoryGUI inventory = new InventoryGUI(gInteraction.getGameManager().getGame().getInventory());
         inventory.setVisible(true);
     }//GEN-LAST:event_jbInvActionPerformed
 
+    /**
+     * Fa visualizzare una guida per il gioco con i vari comandi possibili
+     * @param evt Action Performed
+     */
     private void jmiHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHelpActionPerformed
         appendToPane(jtpReadingArea, "\n" + gInteraction.getGameManager().showHelp() + "\n", new Color(108, 202, 224));
 
     }//GEN-LAST:event_jmiHelpActionPerformed
 
+    /**
+     * Schermata che mostra i miglior punteggi del gioco
+     * @param evt ActionPerformed
+     */
     private void jmiScoreboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiScoreboardActionPerformed
 
         ScoreboardGUI sbGUI = new ScoreboardGUI(this, true, db);

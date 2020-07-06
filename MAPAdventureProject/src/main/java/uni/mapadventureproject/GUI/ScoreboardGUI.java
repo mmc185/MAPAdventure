@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package uni.mapadventureproject.GUI;
 
 import java.awt.Font;
@@ -17,8 +13,7 @@ import javax.swing.JOptionPane;
 import uni.mapadventureproject.database.DBManager;
 
 /**
- *
- * @author marta
+ *Interfaccia grafica per la visualizzazione dei miglior punteggi
  */
 public class ScoreboardGUI extends javax.swing.JDialog {
 
@@ -36,6 +31,9 @@ public class ScoreboardGUI extends javax.swing.JDialog {
         initScores();
     }
     
+    /**
+     * Imposta il font per i caratteri
+     */
     private void initFont() {
         
         try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
@@ -56,6 +54,9 @@ public class ScoreboardGUI extends javax.swing.JDialog {
         }
     }
     
+    /**
+     * Contiene i punteggi migliori prendendoli dal database
+     */
     private void initScores() {
         try {
             
@@ -104,12 +105,12 @@ public class ScoreboardGUI extends javax.swing.JDialog {
         jlPlayer.setForeground(new java.awt.Color(255, 51, 0));
         jlPlayer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlPlayer.setText("Player");
-        jlPlayer.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 153)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(0, 0, 153))); // NOI18N
+        jlPlayer.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 153)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 153))); // NOI18N
 
         jlTime.setForeground(new java.awt.Color(255, 51, 0));
         jlTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlTime.setText("Completion Time");
-        jlTime.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 153)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 13), new java.awt.Color(0, 0, 153))); // NOI18N
+        jlTime.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 153)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 153))); // NOI18N
 
         jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setBorder(null);
