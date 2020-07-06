@@ -13,14 +13,18 @@ public class Item implements Serializable {
 
     private final int id;
     private String name;
-    private String desc;
-    private Set<String> alias;
-    private byte consumable = -1; // indica il numero di usi possibili, -1 significa che non è consumabile
-    private boolean pickupable = false;
-    private boolean pushable = false;
-    private boolean push = false;
+    private String desc; // descrizione dell'oggetto
+    private Set<String> alias; // sinonimi dell'oggetto
+    
+    private byte consumable = -1; // indica il numero di usi possibili, -1 significa che ha infiniti usi
+    private boolean pickupable = false; //indica se si può raccogliere
+    private boolean pushable = false; // indica se si può spingere
+    private boolean push = false; // indica se è già stato spinto/premuto
+    
     private ImageIcon itemImage;   //immagine raffigurante l'oggetto
 
+    // Costruttori
+    
     public Item(int id, String name, String desc) {
         this.id = id;
         this.name = name;
@@ -35,6 +39,8 @@ public class Item implements Serializable {
         this.alias = alias;
     }
 
+    // Metodi di get, set, equals e hash code
+    
     public String getName() {
         return name;
     }
@@ -67,6 +73,11 @@ public class Item implements Serializable {
         return consumable;
     }
     
+    /**
+     * Indica se l'oggetto non ha più usi possibili
+     * @return booleano, true se l'oggetto è consumato e non più usabile
+     *          falso altrimenti
+     */
     public boolean isConsumed() {
         return this.getConsumable() == 0;
     }
