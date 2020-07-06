@@ -163,7 +163,7 @@ public class FileSaver {
         
         Item translatorBook = new Item(74, "libro traduttore", "Sfogliando il libro trovi diversi vocaboli: "
                 + "\"essere = rffrer | mangiare = znatvner | crescere = perfprer | "
-                + "casa = pnfn | in = va | deserto = qrfregb | fiore = svber | deserto = qrfregb\"");
+                + "casa = pnfn | in = va | deserto = qrfregb | fiore = svber \"");
         
         Item book = new Item(75, "libro particolare", "\"Ixora Septrifolia r' ha svber pur perfpr va mbar qrfregvpur.\"\n"
                 + "Meglio confrontarlo con il traduttore per capire cosa dice...");
@@ -504,8 +504,8 @@ public class FileSaver {
         teleporterRoom.setRoomImage(new ImageIcon("resources//img//stanze//teletrasporto.png"));
         
         ((TriggeredRoom) teleporterRoom).addTriggerer("usa cacciavite sonico");
-        ((TriggeredRoom) teleporterRoom).addTriggerDesc("Ha funzionato! Il pannello viene via con un \"pop\" e rivela"
-                + "una serie di chip e transistor. Al lato vi è una fessura"
+        ((TriggeredRoom) teleporterRoom).addTriggerDesc("Ha funzionato! Il pannello viene via con un \"pop\" e rivela "
+                + "una serie di chip e transistor. Al lato vi è una fessura "
                 + "in cui sembra possibile inserire qualcosa.");
         
         ((TriggeredRoom) teleporterRoom).addTriggerer("usa chiave strana");
@@ -675,7 +675,7 @@ public class FileSaver {
         bookshop.addItem(book);
         
         cityStreet2.setLook("La strada continua verso sud. L'unico oggetto che sembra "
-                + "essere più interessante è un distributore di bevande.");
+                + "essere più interessante è un distributore di bevande. Ti avvicini e cominci ad ispezionarlo.");
         cityStreet2.setNorth(cityStreet1);
         cityStreet2.setSouth(alleyway);
         cityStreet2.addItem(vmPanel);

@@ -29,16 +29,21 @@ public class MSGame extends GameManager {
     @Override
     public String executeCommand(ParserOutput pOutput) {
 
+        // Prende il tipo di comando in modo da gestire la richiesta
         CommandType command = this.getGame().getCommandType(pOutput.getString(WordType.COMMAND));
+        
         Room r = null;
         Item i = null;
         StringBuilder output = new StringBuilder();
 
+        // Se un singolo item viene sfruttato nella richiesta lo salva
         i = this.retrieveItem(pOutput);
 
         try {
 
             switch (command) {
+                
+                // Comandi per il movimento
                 case MOVE_S:
                 case MOVE_N:
                 case MOVE_E:
@@ -46,53 +51,72 @@ public class MSGame extends GameManager {
                 case MOVE_U:
                 case MOVE_D:
 
+                    // Controlla se ci si può spostare in quella direzione o meno
                     if (Objects.isNull(r = this.move(command))) {
+                        
                         output.append("Non puoi andare lì!");
 
-                    } else if (r.getLockedBy().equals("")) {
+                    } 
+                    // Controlla che non sia bloccata
+                    else if (r.getLockedBy().equals("")) {
 
+                        // Si sposta nella stanza designata
                         this.getGame().setCurrentRoom(r);
                         output.append("===========================================\n"
                                 + this.getGame().getCurrentRoom().getName() + "\n\n"
                                 + this.getGame().getCurrentRoom().getDesc());
 
                     } else {
+                        
+                        // Nel caso la stanza sia bloccata
                         output.append("Questa stanza è chiusa!");
                     }
                     break;
+                    
+                // Comando per l'inventario, ne stampa il contenuto
                 case INV:
 
                     output.append("Oggetti presenti nell'inventario: " + this.getGame().getInventory().toString());
                     break;
+                    
+                // Comando per guardare
                 case LOOK:
 
+                    // Se si vuole guardare un oggetto
                     if (pOutput.size() == 2) {
 
                         output.append(i.getDesc());
 
-                    } else if (pOutput.size() == 1) {
+                    } else if (pOutput.size() == 1) { // Se si vuole guardare la stanza
 
                         output.append(this.getGame().getCurrentRoom().getLook());
 
                     } else if (pOutput.size() > 2) {
 
-                        output.append("Uno alla volta, ho una certa età."); ///???? da rimuovere? throw eccezione?
+                        output.append("Uno alla volta, ho una certa età.");
 
                     }
                     break;
+                    
+                // Comando per raccogliere oggetti
                 case PICK_UP:
 
+                    // Controlla che l'oggetto sia della stanza e non presente nell'inventario
                     if (pOutput.containsWordType(WordType.R_OBJ)) {
 
+                        // Controlla che l'oggetto si possa raccogliere
                         if (!Objects.isNull(i) && i.isPickupable()) {
 
+                            // Aggiunge l'oggetto all'inventario e lo rimuove dalla stanza
                             this.getGame().getInventory().add(i);
                             this.getGame().getCurrentRoom().removeItem(i);
 
                             output.append("L'oggetto è stato aggiunto al tuo inventario.");
 
                         } else {
+                            
                             output.append("Non puoi prendere questo oggetto.");
+                            
                         }
                     } else if (pOutput.containsWordType(WordType.I_OBJ)) {
 
@@ -104,10 +128,12 @@ public class MSGame extends GameManager {
 
                     }
                     break;
-                case USE: //? da far rientrare in apri?
+                    
+                // Comandi per sbloccare stanze o contenitori
+                case USE: 
                 case OPEN:
 
-                    // Se si vuole aprire una stanza
+                    // Se si vuole aprire una stanza con un oggetto dell'inventario
                     if (pOutput.size() == 2 && pOutput.containsWordType(WordType.I_OBJ)) {
 
                         //Apertura stanza
@@ -123,7 +149,8 @@ public class MSGame extends GameManager {
                                 output.append("\nL'oggetto " + i.getName() + " è stato rimosso.");
 
                             }
-                        } else { //output.append("Non puoi aprire la stanza così!");
+                            
+                        } else { 
                             output.append("Non puoi aprire con questo oggetto!");
                         }
 
@@ -133,8 +160,9 @@ public class MSGame extends GameManager {
                         i = null;
                         byte index = 0;
 
+                        // Iteratore per ciclare sul ParserOutput
                         Iterator it = pOutput.iterator();
-                        it.next();
+                        it.next(); // Salta il comando iniziale, già conosciuto
 
                         // Salva gli oggetti che devono interagire nell'ordine prestabilito (e.g. "Apri baule con chiave")
                         while (it.hasNext()) {
@@ -157,13 +185,14 @@ public class MSGame extends GameManager {
                         // Se l'oggetto è effettivamente un contenitore
                         if (iC instanceof ItemContainer) {
 
-                            // Se trova l'oggetto per aprirlo ed è corretto oppure se l'oggetto non è bloccato lo apre
+                            // Se trova l'oggetto per aprirlo ed è corretto oppure se il contenitore non è bloccato lo apre
                             if ((i != null && !i.isConsumed() && iC.unlockContainer(i.getName()))
                                     || (iC.getLockedBy().equals(""))) {
 
                                 if (iC.getcItemList().getInventoryList().isEmpty()) {
 
                                     output.append("L'oggetto è stato aperto, ma è vuoto!");
+                                    
                                 } else {
 
                                     output.append("Hai aperto l'oggetto " + iC.getName() + "! Ecco il suo contenuto:" + iC.toString());
@@ -171,6 +200,7 @@ public class MSGame extends GameManager {
                                 }
 
                                 if (i != null) {
+                                    
                                     i.consume();
 
                                     // Se l'oggetto è stato consumato, lo rimuove dall'inventario
@@ -193,16 +223,18 @@ public class MSGame extends GameManager {
                     }
 
                     break;
+                    
+                // Comando per spingere oggetti
                 case PUSH:
 
-                    if (i.isPushable()
-                            && !i.isPush()) {
+                    // Se si può spingere e non è già stato spinto
+                    if (i.isPushable() && !i.isPush()) {
 
                         // Compie l'azione
                         i.setPush(true);
                         output.append(i.getName() + " premuto!");
 
-                        // Controlla se il bottone apriva una stanza adiacente
+                        // Controlla se l'oggetto sblocca una stanza adiacente
                         this.unlockRoom(i.getName());
 
                     } else {
@@ -212,10 +244,14 @@ public class MSGame extends GameManager {
                     }
 
                     break;
+                    
+                // Comando per "scappare"
                 case RUN:
 
                     output.append("Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!");
                     break;
+                    
+                // Comando per "svegliarsi" fa partire un finale nascosto
                 case WAKE_UP:
                     //output = "bad ending?";
 
@@ -229,23 +265,26 @@ public class MSGame extends GameManager {
                     r.setLook("");
 
                     break;
+                    
+                // Comando per stampare la guida di gioco
                 case HELP:
                     output.append(this.showHelp());
                     break;
-            } //boh da cambiare?
-            r = this.getGame().getCurrentRoom();
-
-            //Triggera la stanza, se necessario
+            } 
+            
+            // Controlla se la stanza è triggerabile dal comando dell'utente
+            r = this.getGame().getCurrentRoom();            
             if (r instanceof TriggeredRoom) {
 
                 output.append(this.manageTriggers(pOutput, (TriggeredRoom) r));
             }
 
-            this.advancePlot();
+            // Controlla se si è finito il gioco in maniera "lecita"
+            output.append(this.advancePlot());
 
         } catch (NullPointerException e) {
 
-            output.append("Sembra esserci qualcosa di strano in questa richiesta..."); //boh da cambiare?
+            output.append("Sembra esserci qualcosa di strano in questa richiesta...");
 
         } finally {
 
@@ -437,15 +476,16 @@ public class MSGame extends GameManager {
                 + "===========================================";
     }
 
-    private void advancePlot() {
+    private String advancePlot() {
 
         Item i;
+        String s = "";
 
         // Se è nella stanza principale del gioco
         if (this.getGame().getCurrentRoom().getName().equals("Atrio della Metastazione")) {
 
             // Se ha con sè l'oggetto pendrive ovvero se è parte iniziale dell'avventura
-            if (this.getGame().getInventory().getInventoryList().contains(i = new Item(54, "", ""))) {
+            if (!Objects.isNull(i = this.getGame().getInventory().searchItem("pendrive"))) {
 
                 /*
                     Il cattivo "ruba" la pendrive al protagonista quindi si rimuove
@@ -459,15 +499,24 @@ public class MSGame extends GameManager {
                 this.getGame().getCurrentRoom().getItemList().remove(i);
 
             }
-            /*
-            else if ( this.getGame().getInventory().getInventoryList().contains(tre oggetti chiave) {
+            // Se il giocatore ha terminato il gioco e ha collezionato tutti gli oggetti
+            else if ( !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("lingotto"))
+                    && !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("ixora septrifolia"))
+                    /*&& !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("lingotto")*/) {
+                
+                // Gli viene restituita la chiavetta
                 this.getGame().getCurrentRoom().getItemList().remove(i);
                 this.getGame().getInventory().add(i);
+                
+                // Viene descritto il finale del gioco
+                s = "\nHai completato il gioco";
+                
             }
-             */
+             
 
         }
-
+        
+        return s;
     }
 
 }
