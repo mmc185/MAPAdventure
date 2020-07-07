@@ -61,6 +61,17 @@ public class ParserOutput implements Iterable<WordType> {
     }
     
     /**
+     * Rimuove chiave e valore dalla lista se sono presenti
+     * in un'unica entry
+     * @param w WordType, chiave da eliminare
+     * @param s Stringa, valore associato alla chiave
+     * @return booleano, true se è stato rimosso, false altrimenti
+     */
+    public boolean remove(WordType w, String s) {
+        return parsedData.remove(w, s);
+    }
+    
+    /**
      * Indica la grandezza del ParserOutput
      * @return intero
      */

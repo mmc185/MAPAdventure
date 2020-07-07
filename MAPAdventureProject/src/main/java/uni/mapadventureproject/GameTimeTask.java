@@ -10,20 +10,25 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- *Classe realizzata per calcolare il tempo impiegato dal giocatore per concludere il gioco
+ * Classe realizzata per calcolare il tempo impiegato dal giocatore per
+ * concludere il gioco
  */
 public class GameTimeTask implements Serializable {
 
-    private int secondPassed = 0;
-    private Timer time;
-    private TimerTask task;
-    private boolean active = false;
+    private int secondPassed = 0; // Tempo passato in secondi
+    private Timer time;           // Timer per lo scorrere del tempo
+    private TimerTask task;       // Task che fa avanzare il Timer
+    private boolean active = false; // Indica se il timer è attivo o meno
 
+    /**
+     * Istanzia timer e task, imposta lo stato ad attivo e fa partire il timer
+     */
     public void start() {
         time = new Timer();
         task = new TimerTask() {
             @Override
             public void run() {
+                // ad ogni secondo il contatore dovrà incrementarsi
                 secondPassed++;
 
             }
@@ -33,16 +38,26 @@ public class GameTimeTask implements Serializable {
         time.scheduleAtFixedRate(task, 1000, 1000);    //avvia il task dopo 1 secondo e lo ripete ogni secondo
 
     }
-   
+
     /**
      * Ferma il contatore del tempo
-     * @return 
+     *
+     * @return booleano che indica se si è fermato correttamente
      */
     public boolean cancel() {
-        this.setActive(false);
-        return task.cancel();
+
+        // Se l'ha fermato correttamente
+        if (task.cancel()) {
+            
+            this.setActive(false); // lo stato non è più attivo
+            return true;
+        
+        }
+        return false;
     }
 
+    // Metodi get e set
+    
     public int getSecondPassed() {
         return secondPassed;
     }
@@ -76,8 +91,10 @@ public class GameTimeTask implements Serializable {
     }
 
     /**
-     * Conversione del tempo calcolato in secondi nel formato ore(h),minuti(m),secondi(s)
-     * @return 
+     * Conversione del tempo calcolato in secondi nel formato
+     * ore(h),minuti(m),secondi(s)
+     *
+     * @return Stringa che indica il tempo 
      */
     public String getTime() {
 
