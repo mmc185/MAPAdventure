@@ -22,20 +22,14 @@ import uni.mapadventureproject.type.ItemContainer;
  */
 public class MSGame extends GameManager {
 
-    // Musica di sottofondo del gioco
-    private PlayMusic music = new PlayMusic();
-
     /**
      * Costruttore, prende lo stato del gioco e fa partire la musica
      *
      * @param g entità di gioco
+     * @param url path per caricare la musica
      */
-    public MSGame(Game g) {
-        super(g);
-
-        // Caricamento della musica
-        music.playSound("resources//Musica//soundtrack.wav");
-
+    public MSGame(Game g, String url) {
+        super(g, url);
     }
 
     @Override

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
@@ -139,6 +140,10 @@ public class GameGUI extends javax.swing.JFrame {
         jmiScoreboard = new javax.swing.JMenuItem();
         jmHelp = new javax.swing.JMenu();
         jmiHelp = new javax.swing.JMenuItem();
+        jmAlza = new javax.swing.JMenu();
+        jmAbbassa = new javax.swing.JMenu();
+        jmMax = new javax.swing.JMenu();
+        jmMuta = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Metastation: the last exam");
@@ -439,6 +444,42 @@ public class GameGUI extends javax.swing.JFrame {
 
         jmbOptions.add(jmHelp);
 
+        jmAlza.setIcon(new ImageIcon("resources//img//alza.jpg"));
+        jmAlza.setToolTipText("alza volume");
+        jmAlza.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAlzaMouseClicked(evt);
+            }
+        });
+        jmbOptions.add(jmAlza);
+
+        jmAbbassa.setIcon(new ImageIcon("resources//img//abbassa.jpg"));
+        jmAbbassa.setToolTipText("abbassa volume");
+        jmAbbassa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAbbassaMouseClicked(evt);
+            }
+        });
+        jmbOptions.add(jmAbbassa);
+
+        jmMax.setIcon(new ImageIcon("resources//img//massimo.jpg"));
+        jmMax.setToolTipText("volume massimo");
+        jmMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMaxMouseClicked(evt);
+            }
+        });
+        jmbOptions.add(jmMax);
+
+        jmMuta.setIcon(new ImageIcon("resources//img//muto.jpg"));
+        jmMuta.setToolTipText("muta");
+        jmMuta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMutaMouseClicked(evt);
+            }
+        });
+        jmbOptions.add(jmMuta);
+
         setJMenuBar(jmbOptions);
 
         pack();
@@ -647,6 +688,42 @@ public class GameGUI extends javax.swing.JFrame {
         sbGUI.setVisible(true);
     }//GEN-LAST:event_jmiScoreboardActionPerformed
 
+     /**
+     * Alza il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmAlzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAlzaMouseClicked
+        gInteraction.getGameManager().getMusic().volumeUpDownControl(0.1);
+    }//GEN-LAST:event_jmAlzaMouseClicked
+
+    /**
+     * Abbassa il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmAbbassaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAbbassaMouseClicked
+        gInteraction.getGameManager().getMusic().volumeUpDownControl(-0.1);
+    }//GEN-LAST:event_jmAbbassaMouseClicked
+
+    /**
+     * Alza al massimo il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMaxMouseClicked
+        gInteraction.getGameManager().getMusic().volumeAbsoluteControl(1.0);
+    }//GEN-LAST:event_jmMaxMouseClicked
+
+    /**
+     * Muta la musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmMutaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMutaMouseClicked
+        gInteraction.getGameManager().getMusic().volumeAbsoluteControl(0.0);
+    }//GEN-LAST:event_jmMutaMouseClicked
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbDown;
@@ -660,7 +737,11 @@ public class GameGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlBackground;
     private javax.swing.JLabel jlCommand;
     private javax.swing.JLabel jlImage;
+    private javax.swing.JMenu jmAbbassa;
+    private javax.swing.JMenu jmAlza;
     private javax.swing.JMenu jmHelp;
+    private javax.swing.JMenu jmMax;
+    private javax.swing.JMenu jmMuta;
     private javax.swing.JMenu jmOptions;
     private javax.swing.JMenuBar jmbOptions;
     private javax.swing.JMenuItem jmiBackMenu;

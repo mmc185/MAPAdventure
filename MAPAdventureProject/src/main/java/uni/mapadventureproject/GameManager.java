@@ -10,10 +10,21 @@ import uni.mapadventureproject.parser.ParserOutput;
 public abstract class GameManager {
 
     Game game; // entità di gioco
+    
+    // Musica di sottofondo del gioco
+    private PlayMusic music = new PlayMusic();
 
-    // Costruttore
+    // Costruttori
+    
     GameManager(Game g) {
         this.game = g;
+    }
+    
+    GameManager(Game g, String url ) {
+        this.game = g;
+        
+        // Caricamento della musica
+        music.playSound(url);
     }
 
     // Metodi di get e set
@@ -26,6 +37,14 @@ public abstract class GameManager {
         this.game = game;
     }
 
+    public PlayMusic getMusic() {
+        return music;
+    }
+
+    public void setMusic(PlayMusic music) {
+        this.music = music;
+    }
+    
     /**
      * Esegue il comando dell'utente, se corretto rispetto
      * alla logica dello stato attuale del gioco.
