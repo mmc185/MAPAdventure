@@ -14,7 +14,7 @@
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursore predefinito"/>
+          <Color id="Default Cursor"/>
         </Property>
       </Properties>
       <SubComponents>
@@ -40,6 +40,38 @@
               </Events>
             </MenuItem>
           </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jmAlza">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\resources\img\alza.jpg"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="alza volume"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jmAbbassa">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\resources\img\abbassa.jpg"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="abbassa volume"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jmMax">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\resources\img\massimo.jpg"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="volume massimo"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jmMuta">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\Admin\Documents\NetBeansProjects\MAPAdventure\MAPAdventureProject\resources\img\muto.jpg"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="muta "/>
+          </Properties>
         </Menu>
       </SubComponents>
     </Menu>

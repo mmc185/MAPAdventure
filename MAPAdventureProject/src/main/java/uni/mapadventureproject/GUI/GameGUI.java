@@ -139,6 +139,10 @@ public class GameGUI extends javax.swing.JFrame {
         jmiScoreboard = new javax.swing.JMenuItem();
         jmHelp = new javax.swing.JMenu();
         jmiHelp = new javax.swing.JMenuItem();
+        jmAlza = new javax.swing.JMenu();
+        jmAbbassa = new javax.swing.JMenu();
+        jmMax = new javax.swing.JMenu();
+        jmMuta = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Metastation: the last exam");
@@ -439,6 +443,22 @@ public class GameGUI extends javax.swing.JFrame {
 
         jmbOptions.add(jmHelp);
 
+        jmAlza.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\alza.jpg")); // NOI18N
+        jmAlza.setToolTipText("alza volume");
+        jmbOptions.add(jmAlza);
+
+        jmAbbassa.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\abbassa.jpg")); // NOI18N
+        jmAbbassa.setToolTipText("abbassa volume");
+        jmbOptions.add(jmAbbassa);
+
+        jmMax.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\massimo.jpg")); // NOI18N
+        jmMax.setToolTipText("volume massimo");
+        jmbOptions.add(jmMax);
+
+        jmMuta.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\muto.jpg")); // NOI18N
+        jmMuta.setToolTipText("muta");
+        jmbOptions.add(jmMuta);
+
         setJMenuBar(jmbOptions);
 
         pack();
@@ -660,7 +680,11 @@ public class GameGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlBackground;
     private javax.swing.JLabel jlCommand;
     private javax.swing.JLabel jlImage;
+    private javax.swing.JMenu jmAbbassa;
+    private javax.swing.JMenu jmAlza;
     private javax.swing.JMenu jmHelp;
+    private javax.swing.JMenu jmMax;
+    private javax.swing.JMenu jmMuta;
     private javax.swing.JMenu jmOptions;
     private javax.swing.JMenuBar jmbOptions;
     private javax.swing.JMenuItem jmiBackMenu;

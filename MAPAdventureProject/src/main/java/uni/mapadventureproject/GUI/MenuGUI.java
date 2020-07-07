@@ -57,6 +57,10 @@ public class MenuGUI extends javax.swing.JFrame {
         jmOpzioni = new javax.swing.JMenu();
         jmiNuovo = new javax.swing.JMenuItem();
         jmiCarica = new javax.swing.JMenuItem();
+        jmAlza = new javax.swing.JMenu();
+        jmAbbassa = new javax.swing.JMenu();
+        jmMax = new javax.swing.JMenu();
+        jmMuta = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Metastation: the last exam");
@@ -166,6 +170,22 @@ public class MenuGUI extends javax.swing.JFrame {
         jmOpzioni.add(jmiCarica);
 
         jMenuBar.add(jmOpzioni);
+
+        jmAlza.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\alza.jpg")); // NOI18N
+        jmAlza.setToolTipText("alza volume");
+        jMenuBar.add(jmAlza);
+
+        jmAbbassa.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\abbassa.jpg")); // NOI18N
+        jmAbbassa.setToolTipText("abbassa volume");
+        jMenuBar.add(jmAbbassa);
+
+        jmMax.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\massimo.jpg")); // NOI18N
+        jmMax.setToolTipText("volume massimo");
+        jMenuBar.add(jmMax);
+
+        jmMuta.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\muto.jpg")); // NOI18N
+        jmMuta.setToolTipText("muta ");
+        jMenuBar.add(jmMuta);
 
         setJMenuBar(jMenuBar);
 
@@ -303,6 +323,10 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlLuce;
     private javax.swing.JLabel jlOscuro;
     private javax.swing.JLabel jlVerde;
+    private javax.swing.JMenu jmAbbassa;
+    private javax.swing.JMenu jmAlza;
+    private javax.swing.JMenu jmMax;
+    private javax.swing.JMenu jmMuta;
     private javax.swing.JMenu jmOpzioni;
     private javax.swing.JMenuItem jmiCarica;
     private javax.swing.JMenuItem jmiNuovo;
