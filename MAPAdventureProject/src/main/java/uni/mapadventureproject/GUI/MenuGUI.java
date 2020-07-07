@@ -1,10 +1,9 @@
-
 package uni.mapadventureproject.GUI;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.File;
-import java.io.IOException; 
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import uni.mapadventureproject.GameManager;
@@ -12,22 +11,20 @@ import uni.mapadventureproject.Menu;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-
-
+import javax.swing.ImageIcon;
 
 /**
  * Intefaccia grafica che rappresenta il menù del gioco.
- * 
+ *
  */
 public class MenuGUI extends javax.swing.JFrame {
 
     Menu gMenu; // Entità che controlla il Menu
-    
+
     // Font per la grafica
     Font font;
     Font fontMinecraft;
-    
-    
+
     // Costruttore
     public MenuGUI(GameManager gManager) {
         initComponents();
@@ -57,6 +54,10 @@ public class MenuGUI extends javax.swing.JFrame {
         jmOpzioni = new javax.swing.JMenu();
         jmiNuovo = new javax.swing.JMenuItem();
         jmiCarica = new javax.swing.JMenuItem();
+        jmAlza = new javax.swing.JMenu();
+        jmAbbassa = new javax.swing.JMenu();
+        jmMax = new javax.swing.JMenu();
+        jmMuta = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Metastation: the last exam");
@@ -167,6 +168,42 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jMenuBar.add(jmOpzioni);
 
+        jmAlza.setIcon(new ImageIcon("resources//img//alza.jpg"));
+        jmAlza.setToolTipText("alza volume");
+        jmAlza.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAlzaMouseClicked(evt);
+            }
+        });
+        jMenuBar.add(jmAlza);
+
+        jmAbbassa.setIcon(new ImageIcon("resources//img//abbassa.jpg"));
+        jmAbbassa.setToolTipText("abbassa volume");
+        jmAbbassa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAbbassaMouseClicked(evt);
+            }
+        });
+        jMenuBar.add(jmAbbassa);
+
+        jmMax.setIcon(new ImageIcon("resources//img//massimo.jpg"));
+        jmMax.setToolTipText("volume massimo");
+        jmMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMaxMouseClicked(evt);
+            }
+        });
+        jMenuBar.add(jmMax);
+
+        jmMuta.setIcon(new ImageIcon("resources//img//muto.jpg"));
+        jmMuta.setToolTipText("muta ");
+        jmMuta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMutaMouseClicked(evt);
+            }
+        });
+        jMenuBar.add(jmMuta);
+
         setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,14 +223,15 @@ public class MenuGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Viene inizializzato il gioco con un determinato font per i caratteri, caricato da file.
+     * Viene inizializzato il gioco con un determinato font per i caratteri,
+     * caricato da file.
      */
     private void init() {
         try {
             InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"));
             font = Font.createFont(Font.TRUETYPE_FONT, is);
             fontMinecraft = font.deriveFont(Font.PLAIN, 12);
-            
+
             this.setFont(fontMinecraft);
             jbNuovo.setFont(fontMinecraft);
             jbCarica.setFont(fontMinecraft);
@@ -206,18 +244,20 @@ public class MenuGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     /**
      * Carica una nuova partita
+     *
      * @param evt ActionPerformed
      */
     private void jmiNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuovoActionPerformed
-        
+
         this.jbNuovoActionPerformed(evt);
     }//GEN-LAST:event_jmiNuovoActionPerformed
 
     /**
      * Chiude l'applicazione
+     *
      * @param evt ActionPerformed
      */
     private void jbEsciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEsciActionPerformed
@@ -230,6 +270,7 @@ public class MenuGUI extends javax.swing.JFrame {
 
     /**
      * Fa iniziare una nuova partita e fa apparire l'interfaccia per giocare
+     *
      * @param evt ActionPerformed
      */
     private void jbNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuovoActionPerformed
@@ -237,7 +278,7 @@ public class MenuGUI extends javax.swing.JFrame {
         try {
 
             gMenu.newGame(); // Carica la nuova partita
-            
+
             //Per iniziare il gioco si passa al GameGUI
             GameGUI g = new GameGUI(gMenu.getgInteraction());
             g.setVisible(true);
@@ -251,48 +292,89 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNuovoActionPerformed
 
     /**
-     * Carica una partita precedentemente salvata per poter continuare a giocare da quel punto.
+     * Carica una partita precedentemente salvata per poter continuare a giocare
+     * da quel punto.
+     *
      * @param evt ActionPerformed
      */
     private void jbCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCaricaActionPerformed
-        
+
         // Creazione del JFileChooser per selezionare il file
         JFileChooser fChooser = new JFileChooser();
         fChooser.setMultiSelectionEnabled(false);
         fChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fChooser.setCurrentDirectory(new File(".")); // Parte dalla cartella del progetto
-        
+
         try {
-            
-        if ( fChooser.showOpenDialog(this) == (JFileChooser.APPROVE_OPTION)) {
-            
-            // Carica il gioco con il file di partita selezionato
-            gMenu.loadGame(fChooser.getSelectedFile().getAbsolutePath());
-            
-            //Per iniziare il gioco si passa al GameGUI
-            GameGUI g = new GameGUI(gMenu.getgInteraction());
-            g.setVisible(true);
-            this.dispose();
-        }
-        
+
+            if (fChooser.showOpenDialog(this) == (JFileChooser.APPROVE_OPTION)) {
+
+                // Carica il gioco con il file di partita selezionato
+                gMenu.loadGame(fChooser.getSelectedFile().getAbsolutePath());
+
+                //Per iniziare il gioco si passa al GameGUI
+                GameGUI g = new GameGUI(gMenu.getgInteraction());
+                g.setVisible(true);
+                this.dispose();
+            }
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), "Errore nell'apertura del file", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Errore: File non valido\n " + e.getMessage(), "File non valido", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jbCaricaActionPerformed
 
     /**
-     * Carica una partita precedentemente salvata per poter continuare a giocare da quel punto.
+     * Carica una partita precedentemente salvata per poter continuare a giocare
+     * da quel punto.
+     *
      * @param evt ActionPerformed
      */
     private void jmiCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCaricaActionPerformed
-        
+
         this.jbCaricaActionPerformed(evt);
     }//GEN-LAST:event_jmiCaricaActionPerformed
 
-  
+    /**
+     * Alza il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmAlzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAlzaMouseClicked
+        gMenu.getgInteraction().getGameManager().getMusic().volumeUpDownControl(0.1);
+        
+    }//GEN-LAST:event_jmAlzaMouseClicked
+
+    /**
+     * Abbassa il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmAbbassaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAbbassaMouseClicked
+        gMenu.getgInteraction().getGameManager().getMusic().volumeUpDownControl(-0.1);
+    }//GEN-LAST:event_jmAbbassaMouseClicked
+
+    /**
+     * Alza al massimo il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMaxMouseClicked
+        gMenu.getgInteraction().getGameManager().getMusic().volumeAbsoluteControl(1.0);
+    }//GEN-LAST:event_jmMaxMouseClicked
+
+    /**
+     * Muta la musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmMutaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMutaMouseClicked
+        gMenu.getgInteraction().getGameManager().getMusic().volumeAbsoluteControl(0.0);
+    }//GEN-LAST:event_jmMutaMouseClicked
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JLabel jTitolo1;
@@ -303,6 +385,10 @@ public class MenuGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jlLuce;
     private javax.swing.JLabel jlOscuro;
     private javax.swing.JLabel jlVerde;
+    private javax.swing.JMenu jmAbbassa;
+    private javax.swing.JMenu jmAlza;
+    private javax.swing.JMenu jmMax;
+    private javax.swing.JMenu jmMuta;
     private javax.swing.JMenu jmOpzioni;
     private javax.swing.JMenuItem jmiCarica;
     private javax.swing.JMenuItem jmiNuovo;

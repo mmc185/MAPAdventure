@@ -18,7 +18,7 @@ public class Main {
         Game game = new Game();
         
         // Gestore specifico del MetaStationGame
-        GameManager gManager = new MSGame(game); 
+        GameManager gManager = new MSGame(game, "resources//Musica//soundtrack.wav"); 
         
         // Avvia l'interfaccia grafica per il Menu
         MenuGUI gMenuGUI = new MenuGUI(gManager);
