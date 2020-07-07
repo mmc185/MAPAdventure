@@ -446,18 +446,38 @@ public class GameGUI extends javax.swing.JFrame {
 
         jmAlza.setIcon(new ImageIcon("resources//img//alza.jpg"));
         jmAlza.setToolTipText("alza volume");
+        jmAlza.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAlzaMouseClicked(evt);
+            }
+        });
         jmbOptions.add(jmAlza);
 
         jmAbbassa.setIcon(new ImageIcon("resources//img//abbassa.jpg"));
         jmAbbassa.setToolTipText("abbassa volume");
+        jmAbbassa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAbbassaMouseClicked(evt);
+            }
+        });
         jmbOptions.add(jmAbbassa);
 
         jmMax.setIcon(new ImageIcon("resources//img//massimo.jpg"));
         jmMax.setToolTipText("volume massimo");
+        jmMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMaxMouseClicked(evt);
+            }
+        });
         jmbOptions.add(jmMax);
 
         jmMuta.setIcon(new ImageIcon("resources//img//muto.jpg"));
         jmMuta.setToolTipText("muta");
+        jmMuta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMutaMouseClicked(evt);
+            }
+        });
         jmbOptions.add(jmMuta);
 
         setJMenuBar(jmbOptions);
@@ -667,6 +687,42 @@ public class GameGUI extends javax.swing.JFrame {
         ScoreboardGUI sbGUI = new ScoreboardGUI(this, true, db);
         sbGUI.setVisible(true);
     }//GEN-LAST:event_jmiScoreboardActionPerformed
+
+     /**
+     * Alza il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmAlzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAlzaMouseClicked
+        gInteraction.getGameManager().getMusic().volumeUpDownControl(0.1);
+    }//GEN-LAST:event_jmAlzaMouseClicked
+
+    /**
+     * Abbassa il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmAbbassaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAbbassaMouseClicked
+        gInteraction.getGameManager().getMusic().volumeUpDownControl(-0.1);
+    }//GEN-LAST:event_jmAbbassaMouseClicked
+
+    /**
+     * Alza al massimo il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMaxMouseClicked
+        gInteraction.getGameManager().getMusic().volumeAbsoluteControl(1.0);
+    }//GEN-LAST:event_jmMaxMouseClicked
+
+    /**
+     * Muta la musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmMutaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMutaMouseClicked
+        gInteraction.getGameManager().getMusic().volumeAbsoluteControl(0.0);
+    }//GEN-LAST:event_jmMutaMouseClicked
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

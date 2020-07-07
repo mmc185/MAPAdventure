@@ -53,8 +53,12 @@ public class PlayMusic {
 
     }
 
+    /**
+     * Metodo per alzare o abbassare il volume della musica
+     * @param valueToPlusMinus indica di quanto aumentare o diminuire il volume della musica
+     */
     public void volumeUpDownControl(Double valueToPlusMinus) {
-        
+        //Legge le informazioni del Mixer dal sistema audio
         Mixer.Info[] mixers = AudioSystem.getMixerInfo();
         
         for (Mixer.Info mixerInfo : mixers) {
@@ -76,12 +80,15 @@ public class PlayMusic {
                         line.open();
                     }
                     
+                    //fa un controllo sul float
                     FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    //vede il volume attuale
                     float currentVolume = volControl.getValue();
                     
                     Double volumeToCut = valueToPlusMinus;
+                    //aumenta il volume se il valore di volumeToCut è positivo,altrimenti decrementa se è negativo
                     float changedCalc = (float) ((float) currentVolume + (double) volumeToCut);
-                    volControl.setValue(changedCalc);
+                    volControl.setValue(changedCalc);    //imposta il volume della musica
                     
                 } catch (LineUnavailableException | IllegalArgumentException e) {
                     //JOptionPane.showMessageDialog(null, " Music Error");
@@ -96,6 +103,10 @@ public class PlayMusic {
 
     }
 
+    /**
+     * Metodo per mettere al massimo il volume della musica o per mutarla
+     * @param valueToPlusMinus indica a quanto sarà settato il volume della musica
+     */
     public void volumeAbsoluteControl(Double valueToPlusMinus) {
         
         Mixer.Info[] mixers = AudioSystem.getMixerInfo();
@@ -122,8 +133,9 @@ public class PlayMusic {
                     float currentVolume = volControl.getValue();
                     
                     Double volumeToCut = valueToPlusMinus;
-                    float changedCalc = (float) ((double) volumeToCut);
-                    volControl.setValue(changedCalc);
+                    //se volumeToCut è 0.0 allora la musica verrà mutata,se è 1.0 la musica verrà aumentata al massimo
+                    float changedCalc = (float) ((double) volumeToCut);  
+                    volControl.setValue(changedCalc);  //imposta il volume della musica
                     
                 } catch (LineUnavailableException | IllegalArgumentException e) {
                     //JOptionPane.showMessageDialog(null, " Music Error");
