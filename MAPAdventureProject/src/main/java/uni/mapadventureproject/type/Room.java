@@ -3,7 +3,6 @@ package uni.mapadventureproject.type;
 import java.io.Serializable;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
-import uni.mapadventureproject.type.ItemContainer;
 
 /**
  * Classe utilizzate per realizzare le stanze

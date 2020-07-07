@@ -29,7 +29,7 @@ public class Item implements Serializable {
         this.id = id;
         this.name = name;
         this.desc = desc;
-        this.alias = new HashSet<String>();
+        this.alias = new HashSet<>();
     }
 
     public Item(int id, String name, String desc, Set<String> alias) {

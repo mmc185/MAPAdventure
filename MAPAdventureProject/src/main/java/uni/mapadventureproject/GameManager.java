@@ -1,8 +1,6 @@
 package uni.mapadventureproject;
 
 import uni.mapadventureproject.parser.ParserOutput;
-import uni.mapadventureproject.type.Command;
-import uni.mapadventureproject.type.CommandType;
 
 /**
  * Classe astratta che definisce il gestore di gioco.

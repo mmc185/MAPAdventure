@@ -26,7 +26,7 @@ public class MSGame extends GameManager {
     private PlayMusic music = new PlayMusic();
 
     /**
-     * ostruttore, prende lo stato del gioco e fa partire la musica
+     * Costruttore, prende lo stato del gioco e fa partire la musica
      *
      * @param g entità di gioco
      */
@@ -276,7 +276,7 @@ public class MSGame extends GameManager {
                     output.append("Non puoi \"foldare\" proprio adesso, ti sei impegnato tanto per questo progetto!");
                     break;
 
-                // Comando per "svegliarsi" fa partire un finale nascosto
+                // Comando per "svegliarsi", fa partire un finale nascosto
                 case WAKE_UP:
 
                     output.append("Hai scelto la via più semplice e questo non ti fa onore"

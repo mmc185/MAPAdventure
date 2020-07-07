@@ -10,15 +10,17 @@ import java.io.FileInputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-//import sun.audio.* ;
 import javax.swing.JOptionPane;
 
 /**
- * Classe per inserire la musica nel gioco 
+ * Classe per inserire la musica  
  */
 public class PlayMusic {
 
-    
+    /**
+     * Fa partire un thread che riproduce la musica, caricandola da file
+     * @param url path del file
+     */
     public synchronized void playSound(final String url) {
        Thread musicThread= new Thread(new Runnable() {
             
@@ -28,6 +30,7 @@ public class PlayMusic {
                     Clip clip = AudioSystem.getClip();
                     AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                            new BufferedInputStream(new FileInputStream(url)));
+                    
                     clip.open(inputStream);   //acquisizione della risorsa di input
                     Thread.sleep(3000);  //thread fermo per 3 secondi
                     clip.start();        //parte la musica
@@ -39,6 +42,7 @@ public class PlayMusic {
                 }
             }
         });
+       
        musicThread.setDaemon(true);
        musicThread.start();
        
