@@ -48,7 +48,7 @@ public class MSGame extends GameManager {
      *
      * @return ritorna una stringa che descrive la risposta da dare all'utente.
      */
-    public String executeCommand(ParserOutput pOutput) {
+    protected String executeCommand(ParserOutput pOutput) {
 
         // Prende il tipo di comando in modo da gestire la richiesta
         CommandType command = this.getGame().getCommandType(pOutput.getString(WordType.COMMAND));
