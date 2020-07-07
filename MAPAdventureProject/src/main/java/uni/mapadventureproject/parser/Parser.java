@@ -7,22 +7,47 @@ import uni.mapadventureproject.type.Item;
 import uni.mapadventureproject.type.ItemContainer;
 import uni.mapadventureproject.type.Room;
 
+/**
+ * Classe per il Parser, utilizzata per i comandi presi in input dall'utente.
+ */
 public class Parser {
 
+    /**
+     * Prende la stringa dell'utente e le diverse entità che compongono il
+     * gioco, come ad esempio l'inventario del giocatore e la stanza attuale, e
+     * ritorna un ParserOutput in cui vengono associate alle diverse parole
+     * "rilevanti" per il gioco un enumerativo che definisce se sono comandi,
+     * oggetti dell'inventario oppure oggetti della stanza.
+     *
+     * Il Parser salta gli articoli, gli aggettivi e gli avverbi non rilevanti e
+     * rimuove qualunque carattere speciale o numero.
+     *
+     * @param phrase comando preso in input dall'utente
+     * @param currentRoom stanza attuale in cui si trova il giocatore
+     * @param inv inventario del giocatore
+     * @param commands comandi del gioco
+     * @return oggetto di tipo ParserOutput
+     *
+     * @throws InvalidStringException se trova una stringa non valida ad esempio
+     * composta da 0 o 2+ comandi
+     */
     public ParserOutput parse(String phrase, Room currentRoom, Inventory inv, Set<Command> commands) throws InvalidStringException {
 
         ParserOutput pOutput = new ParserOutput();
 
-        // Rimuove anche punteggiatura e cifre
-        String[] tokens = phrase.replaceAll("[^a-zA-Z]", " ").toLowerCase().split("\\s+");
+        // Rimuove punteggiatura, caratteri speciali e cifre e tokenizza la stringa in base agli spazi
+        String[] tokens = phrase.replaceAll("[^a-zA-Zùìèéàò]", " ").toLowerCase().split("\\s+");
 
+        // Cerca un comando
         for (String t : tokens) {
 
+            // Se è il primo e unico comando che trova, lo salva
             if (this.isCommand(t, commands) && pOutput.isEmpty()) {
 
                 pOutput.add(WordType.COMMAND, t);
 
-            } else if (this.isCommand(t, commands) && !pOutput.isEmpty()) {
+            } // Se trova un secondo comando, la stringa non è valida
+            else if (this.isCommand(t, commands) && !pOutput.isEmpty()) {
 
                 throw new InvalidStringException();
 
@@ -30,6 +55,7 @@ public class Parser {
 
         }
 
+        // Se ha trovato un comando, cerco gli oggetti con cui si vuole interagire, se presenti
         if (!pOutput.isEmpty()) {
 
             String s;
@@ -37,13 +63,14 @@ public class Parser {
             // Ciclo con indice poiché serve mantenere il contatore
             for (short i = 0; i < tokens.length; i++) {
 
-                // Controlla se il token corrispondente è un oggetto dell'inventario o  della stanza
+                // Controlla se il token corrispondente è un oggetto dell'inventario 
                 if (!(s = this.isItem(tokens[i], inv, tokens, i)).isEmpty()) {
 
                     pOutput.add(WordType.I_OBJ, s);
 
                 }
 
+                // Controlla se il token corrispondente è un oggetto della stanza
                 if (!(s = this.isItem(tokens[i], currentRoom.getItemList(), tokens, i)).isEmpty()) {
 
                     pOutput.add(WordType.R_OBJ, s);
@@ -52,13 +79,20 @@ public class Parser {
 
             }
 
-        } else {
+        } else { // Se non ha trovato nemmeno un comando
             throw new InvalidStringException();
         }
 
         return pOutput;
     }
 
+    /**
+     * Controlla se il token è un comando valido per il gioco
+     *
+     * @param s token
+     * @param commands comandi del gioco
+     * @return booleano, true se è un comando, false altrimenti
+     */
     private boolean isCommand(String s, Set<Command> commands) {
 
         for (Command c : commands) {
@@ -75,7 +109,19 @@ public class Parser {
     }
 
     /**
-     * Gli oggetti possono essere formati da una o due parole
+     * Controlla se il token passato è un oggetto dell'inventario ( dell'utente,
+     * della stanza o di un contenitore ).
+     *
+     * Riconosce oggetti formati da una o due parole, ad esempio anche "chiave
+     * rossa".
+     *
+     * @param s token
+     * @param inv inventario
+     * @param tokens insieme di tokens della stringa scritta dall'utente
+     * @param counter indica a che punto della frase si è arrivati, è utilizzato
+     * per il riconoscimento di oggetti il cui nome è formato da due parole.
+     *
+     * @return stringa che indica il nome dell'item
      */
     private String isItem(String s, Inventory inv, String[] tokens, short counter) {
 
@@ -83,27 +129,40 @@ public class Parser {
 
             for (Item i : inv.getInventoryList()) {
 
+                // Se il nome corrisponde precisamente al nome di i o è presente negli alias
                 if (i.getName().equals(s) || i.getAlias().contains(s)) {
 
                     return s;
 
-                } else if (i.getName().startsWith(s) /*|| i.getAlias().contains(s)*/) {
+                } // Altrimenti se il nome di i inizia con il token, controlla se anche il successivo combacia
+                else if (i.getName().startsWith(s)) {
 
-                    if (i.getName().contains(tokens[counter + 1]) /*|| i.getAlias().contains(tokens[counter + 1])*/) {
+                    // Controlla il token successivo
+                    if (i.getName().contains(tokens[counter + 1])) {
 
+                        // Ritorna la stringa formata dalla parte inziale del nome e dalla seconda 
+                        // (e.g. "chiave" + " " + "rossa")
                         return s + " " + tokens[counter + 1];
 
                     }
 
-                } else if (i instanceof ItemContainer) {
-                    return isItem(s, ((ItemContainer)i).getcItemList(), tokens, counter);
+                } /* Altrimenti se l'oggetto i è un contenitore controlla che 
+                    il token non sia di un oggetto contenuto al suo interno
+                 */ 
+                else if (i instanceof ItemContainer) {
+                    
+                    // Chiamata ricorsiva sul contenitore
+                    return isItem(s, ((ItemContainer) i).getcItemList(), tokens, counter);
+                
                 }
 
             }
 
             return "";
 
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } 
+        // Se si cerca la parola successiva a quella di fine stringa si genera l'eccezione
+        catch (ArrayIndexOutOfBoundsException e) { 
 
             return "";
 

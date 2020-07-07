@@ -3,10 +3,19 @@ package uni.mapadventureproject.type;
 import java.io.Serializable;
 import java.util.Set;
 
+/**
+ * Classe utilizzata per rappresentare oggetti che contengono altri oggetti,
+ * ovvero per rappresentare dei contenitori.
+ * 
+ * ItemContainer estende Item, poiché sono anch'essi oggetti.
+ * 
+ */
 public class ItemContainer extends Item implements Serializable {
 
-    private Inventory cItemList;
-    private String lockedBy = "";
+    private Inventory cItemList;    //contenuto del contenitore
+    private String lockedBy = "";   //indica da cosa è bloccato, se vuoto "" non è bloccato
+    
+    // Costruttori
     
      public ItemContainer(int id, String name, String desc) {
         super(id, name, desc);
@@ -22,6 +31,8 @@ public class ItemContainer extends Item implements Serializable {
         super(id, name, desc, alias);
         this.cItemList = cItemList;
     }
+    
+    // Metodi di get, set, equals e hash code
 
     public Inventory getcItemList() {
         return cItemList;
@@ -39,21 +50,39 @@ public class ItemContainer extends Item implements Serializable {
         this.lockedBy = lockedBy;
     }
 
+    /**
+     * Aggiunge un oggetto al contenitore
+     * @param i item da aggiungere
+     */
     public void add(Item i) {
         this.cItemList.add(i);
     }
 
+    /**
+     * Rimuove un oggetto dal contenitore
+     * @param i item da rimuovere
+     * @return booleano, true se l'oggetto è stato rimosso, false altrimenti
+     */
     public boolean remove(Item i) {
         return this.cItemList.remove(i);
     }
 
+    /**
+     * Metodo per sbloccare un contenitore.
+     * @param cName oggetto che blocca l'apertura di un contenitore
+     * @return flag indica se si può aprire o meno con l'oggetto identificato da cName
+     */
     public boolean unlockContainer(String cName) {
 
         boolean flag = false;
 
+        // Se cName è la chiave del contenitore
         if (getLockedBy().equals(cName)) {
+            
+            // Sblocca il contenitore
             this.setLockedBy("");
             flag = true;
+            
         }
 
         return flag;

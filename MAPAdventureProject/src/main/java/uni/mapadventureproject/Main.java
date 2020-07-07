@@ -12,14 +12,15 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         
         // Si crea l'istanza di gioco e il suo gestore
         Game game = new Game();
         
         // Gestore specifico del MetaStationGame
-        GameManager gManager = new MSGame(game); 
+        GameManager gManager = new MSGame(game, "resources//Musica//soundtrack.wav"); 
         
+        // Avvia l'interfaccia grafica per il Menu
         MenuGUI gMenuGUI = new MenuGUI(gManager);
         gMenuGUI.setVisible(true);
 

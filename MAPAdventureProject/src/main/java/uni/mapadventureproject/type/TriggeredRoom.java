@@ -9,14 +9,18 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
- *
- * @author Admin
+ * Classe utilizzata per rappresentare quelle stanze che dopo certe azioni subivano
+ * dei cambiamenti e ne modificavano la descrizione.
+ * Utilizzata per creare enigmi o per vincolare il giocatore a compiere una determinata
+ * azione prima di proseguire.
  */
 public class TriggeredRoom extends Room {
 
-    private Queue<String> triggerDesc;
-    private Queue<String> triggerer;
+    private Queue<String> triggerDesc;  // coda che contiene le varie descrizioni di una stanza dopo un certo evento
+    private Queue<String> triggerer;    // coda che contiene le varie azioni che fanno variare le descrizioni della stanza
 
+    // Costruttori
+    
     public TriggeredRoom(int id, String name, String desc) {
         super(id, name, desc);
         triggerDesc = new ArrayDeque<>();
@@ -28,15 +32,26 @@ public class TriggeredRoom extends Room {
         this.triggerer = triggerer;
         this.triggerDesc = triggerDesc;
     }
+    
+    // Metodi get e set
 
-    // Se ci sono ancora trigger la stanza è triggerabile
+    /**
+     * Indica se la stanza è triggerabile
+     * @return booleano, true se è triggerabile, false altrimenti
+     */
     public boolean isTriggerable() {
+        
+        // Se ci sono ancora trigger la stanza è triggerabile
         return !triggerer.isEmpty();
     }
 
-    // se il trigger è positivo, avanza nelle code
+    /**
+     * Imposta se il trigger è stato attivato o meno
+     * @param trigger booleano che attiva la stanza se positivo
+     */
     public void setTrigger(boolean trigger) {
         
+        // se il trigger è positivo, avanza nelle code
         if (trigger) {
         setDesc(triggerDesc.poll());
         triggerer.poll();
@@ -60,6 +75,10 @@ public class TriggeredRoom extends Room {
         this.triggerer.offer(triggerer);
     }
     
+    /**
+     * Restituisce il trigger attuale che attiva la stanza
+     * @return stringa trigger
+     */
     public String getCurrentTriggerer() {
         
         if (this.isTriggerable()) {
