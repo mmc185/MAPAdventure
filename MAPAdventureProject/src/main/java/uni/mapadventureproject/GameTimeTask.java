@@ -10,8 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- *
- * @author Admin
+ *Classe realizzata per calcolare il tempo impiegato dal giocatore per concludere il gioco
  */
 public class GameTimeTask implements Serializable {
 
@@ -31,10 +30,14 @@ public class GameTimeTask implements Serializable {
 
         };
         active = true;
-        time.scheduleAtFixedRate(task, 1000, 1000);
+        time.scheduleAtFixedRate(task, 1000, 1000);    //avvia il task dopo 1 secondo e lo ripete ogni secondo
 
     }
-    
+   
+    /**
+     * Ferma il contatore del tempo
+     * @return 
+     */
     public boolean cancel() {
         this.setActive(false);
         return task.cancel();
@@ -72,6 +75,10 @@ public class GameTimeTask implements Serializable {
         this.active = active;
     }
 
+    /**
+     * Conversione del tempo calcolato in secondi nel formato ore(h),minuti(m),secondi(s)
+     * @return 
+     */
     public String getTime() {
 
         int hours = 0;

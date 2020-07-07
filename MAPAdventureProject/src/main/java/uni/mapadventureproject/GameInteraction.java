@@ -4,6 +4,9 @@ import uni.mapadventureproject.parser.Parser;
 import uni.mapadventureproject.parser.InvalidStringException;
 import uni.mapadventureproject.parser.ParserOutput;
 
+/**
+ * Classe che si occupa delle risposte da dare all'utente dopo il comando inserito
+ */
 public class GameInteraction {
 
     private GameManager g;
@@ -18,6 +21,11 @@ public class GameInteraction {
         return g;
     }
 
+    /**
+     * Si occupa di dare delle risposte ai comandi inseriti dal giocatore
+     * @param sInput comando preso in input
+     * @return risposta al giocatore
+     */
     public String inputManager(String sInput) {
 
         ParserOutput pOutput;
