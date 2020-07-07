@@ -11,12 +11,7 @@ import uni.mapadventureproject.Menu;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.Mixer;
+import javax.swing.ImageIcon;
 
 /**
  * Intefaccia grafica che rappresenta il menù del gioco.
@@ -173,7 +168,7 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jMenuBar.add(jmOpzioni);
 
-        jmAlza.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\alza.jpg")); // NOI18N
+        jmAlza.setIcon(new ImageIcon("resources//img//alza.jpg"));
         jmAlza.setToolTipText("alza volume");
         jmAlza.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -182,7 +177,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         jMenuBar.add(jmAlza);
 
-        jmAbbassa.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\abbassa.jpg")); // NOI18N
+        jmAbbassa.setIcon(new ImageIcon("resources//img//abbassa.jpg"));
         jmAbbassa.setToolTipText("abbassa volume");
         jmAbbassa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -191,7 +186,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         jMenuBar.add(jmAbbassa);
 
-        jmMax.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\massimo.jpg")); // NOI18N
+        jmMax.setIcon(new ImageIcon("resources//img//massimo.jpg"));
         jmMax.setToolTipText("volume massimo");
         jmMax.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -200,7 +195,7 @@ public class MenuGUI extends javax.swing.JFrame {
         });
         jMenuBar.add(jmMax);
 
-        jmMuta.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\muto.jpg")); // NOI18N
+        jmMuta.setIcon(new ImageIcon("resources//img//muto.jpg"));
         jmMuta.setToolTipText("muta ");
         jmMuta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -247,98 +242,6 @@ public class MenuGUI extends javax.swing.JFrame {
             jmiNuovo.setFont(fontMinecraft);
         } catch (FontFormatException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void volumeDownControl(Double valueToPlusMinus) {
-        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
-        for (Mixer.Info mixerInfo : mixers) {
-            Mixer mixer = AudioSystem.getMixer(mixerInfo);
-            Line.Info[] lineInfos = mixer.getTargetLineInfo();
-            for (Line.Info lineInfo : lineInfos) {
-                Line line = null;
-                boolean opened = true;
-                try {
-                    line = mixer.getLine(lineInfo);
-                    opened = line.isOpen() || line instanceof Clip;
-                    if (!opened) {
-                        line.open();
-                    }
-                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
-                    float currentVolume = volControl.getValue();
-                    System.out.println(currentVolume);
-                    Double volumeToCut = valueToPlusMinus;
-                    float changedCalc = (float) ((float) currentVolume - (double) volumeToCut);
-                    volControl.setValue(changedCalc);
-                } catch (LineUnavailableException lineException) {
-                } catch (IllegalArgumentException illException) {
-                } finally {
-                    if (line != null && !opened) {
-                        line.close();
-                    }
-                }
-            }
-        }
-    }
-    
-     private void volumeUpControl(Double valueToPlusMinus){
-      Mixer.Info[] mixers= AudioSystem.getMixerInfo();
-       for(Mixer.Info mixerInfo :mixers){
-           Mixer mixer=AudioSystem.getMixer(mixerInfo);
-           Line.Info[] lineInfos=mixer.getTargetLineInfo();
-           for(Line.Info  lineInfo :lineInfos){
-               Line line= null;
-               boolean opened=true;
-               try{
-                   line=mixer.getLine(lineInfo);
-                   opened=line.isOpen() || line instanceof Clip;
-                   if(!opened){
-                       line.open();
-                   }
-                   FloatControl volControl=(FloatControl) line.getControl(FloatControl.Type.VOLUME);
-                   float currentVolume=volControl.getValue();
-                   Double volumeToCut=valueToPlusMinus;
-                   float changedCalc=(float)((float)currentVolume+(double)volumeToCut);
-                   volControl.setValue(changedCalc);
-               }catch(LineUnavailableException lineException){
-               }catch(IllegalArgumentException illException){   
-               }finally{
-                   if(line!=null && !opened){
-                       line.close();
-                   }
-               }
-           }
-        }
-
-     }
-
-    private void volumeControl(Double valueToPlusMinus) {
-        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
-        for (Mixer.Info mixerInfo : mixers) {
-            Mixer mixer = AudioSystem.getMixer(mixerInfo);
-            Line.Info[] lineInfos = mixer.getTargetLineInfo();
-            for (Line.Info lineInfo : lineInfos) {
-                Line line = null;
-                boolean opened = true;
-                try {
-                    line = mixer.getLine(lineInfo);
-                    opened = line.isOpen() || line instanceof Clip;
-                    if (!opened) {
-                        line.open();
-                    }
-                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
-                    float currentVolume = volControl.getValue();
-                    Double volumeToCut = valueToPlusMinus;
-                    float changedCalc = (float) ((double) volumeToCut);
-                    volControl.setValue(changedCalc);
-                } catch (LineUnavailableException lineException) {
-                } catch (IllegalArgumentException illException) {
-                } finally {
-                    if (line != null && !opened) {
-                        line.close();
-                    }
-                }
-            }
         }
     }
 
@@ -440,7 +343,8 @@ public class MenuGUI extends javax.swing.JFrame {
      * @param evt MouseClicked
      */
     private void jmAlzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAlzaMouseClicked
-        volumeUpControl(0.1);
+        gMenu.getgInteraction().getGameManager().getMusic().volumeUpDownControl(0.1);
+        
     }//GEN-LAST:event_jmAlzaMouseClicked
 
     /**
@@ -449,7 +353,7 @@ public class MenuGUI extends javax.swing.JFrame {
      * @param evt MouseClicked
      */
     private void jmAbbassaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAbbassaMouseClicked
-        volumeDownControl(0.1);
+        gMenu.getgInteraction().getGameManager().getMusic().volumeUpDownControl(-0.1);
     }//GEN-LAST:event_jmAbbassaMouseClicked
 
     /**
@@ -458,7 +362,7 @@ public class MenuGUI extends javax.swing.JFrame {
      * @param evt MouseClicked
      */
     private void jmMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMaxMouseClicked
-        volumeControl(1.0);
+        gMenu.getgInteraction().getGameManager().getMusic().volumeAbsoluteControl(1.0);
     }//GEN-LAST:event_jmMaxMouseClicked
 
     /**
@@ -467,7 +371,7 @@ public class MenuGUI extends javax.swing.JFrame {
      * @param evt MouseClicked
      */
     private void jmMutaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMutaMouseClicked
-        volumeControl(0.0);
+        gMenu.getgInteraction().getGameManager().getMusic().volumeAbsoluteControl(0.0);
     }//GEN-LAST:event_jmMutaMouseClicked
 
 

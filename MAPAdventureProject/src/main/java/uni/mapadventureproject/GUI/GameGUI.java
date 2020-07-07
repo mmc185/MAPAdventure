@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
@@ -443,19 +444,19 @@ public class GameGUI extends javax.swing.JFrame {
 
         jmbOptions.add(jmHelp);
 
-        jmAlza.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\alza.jpg")); // NOI18N
+        jmAlza.setIcon(new ImageIcon("resources//img//alza.jpg"));
         jmAlza.setToolTipText("alza volume");
         jmbOptions.add(jmAlza);
 
-        jmAbbassa.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\abbassa.jpg")); // NOI18N
+        jmAbbassa.setIcon(new ImageIcon("resources//img//abbassa.jpg"));
         jmAbbassa.setToolTipText("abbassa volume");
         jmbOptions.add(jmAbbassa);
 
-        jmMax.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\massimo.jpg")); // NOI18N
+        jmMax.setIcon(new ImageIcon("resources//img//massimo.jpg"));
         jmMax.setToolTipText("volume massimo");
         jmbOptions.add(jmMax);
 
-        jmMuta.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\muto.jpg")); // NOI18N
+        jmMuta.setIcon(new ImageIcon("resources//img//muto.jpg"));
         jmMuta.setToolTipText("muta");
         jmbOptions.add(jmMuta);
 
