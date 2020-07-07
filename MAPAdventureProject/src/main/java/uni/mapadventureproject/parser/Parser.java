@@ -125,6 +125,8 @@ public class Parser {
      */
     private String isItem(String s, Inventory inv, String[] tokens, short counter) {
 
+        String s1;
+
         try {
 
             for (Item i : inv.getInventoryList()) {
@@ -148,21 +150,20 @@ public class Parser {
 
                 } /* Altrimenti se l'oggetto i è un contenitore controlla che 
                     il token non sia di un oggetto contenuto al suo interno
-                 */ 
-                else if (i instanceof ItemContainer) {
-                    
+                 */ else if (i instanceof ItemContainer) {
+
                     // Chiamata ricorsiva sul contenitore
-                    return isItem(s, ((ItemContainer) i).getcItemList(), tokens, counter);
-                
+                    if (!(s1 = isItem(s, ((ItemContainer) i).getcItemList(), tokens, counter)).isEmpty()) {
+                        return isItem(s, ((ItemContainer) i).getcItemList(), tokens, counter);
+                    }
                 }
 
             }
 
             return "";
 
-        } 
-        // Se si cerca la parola successiva a quella di fine stringa si genera l'eccezione
-        catch (ArrayIndexOutOfBoundsException e) { 
+        } // Se si cerca la parola successiva a quella di fine stringa si genera l'eccezione
+        catch (ArrayIndexOutOfBoundsException e) {
 
             return "";
 
