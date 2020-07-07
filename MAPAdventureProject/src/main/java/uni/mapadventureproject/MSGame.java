@@ -310,7 +310,7 @@ public class MSGame extends GameManager {
         }
 
     }
-    
+
     @Override
     /**
      * Funzione che restituisce la guida del gioco "MetaStation: the last exam"
@@ -569,7 +569,9 @@ public class MSGame extends GameManager {
 
             } // Se il giocatore ha terminato il gioco e ha collezionato tutti gli oggetti
             else if (!Objects.isNull(this.getGame().getInventory().searchItem("lingotto"))
-                    && !Objects.isNull(this.getGame().getInventory().searchItem("ixora septrifolia")) /*&& !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("lingotto")*/) {
+                    && !Objects.isNull(this.getGame().getInventory().searchItem("ixora septrifolia"))
+                    // && !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("medaglione"))  {
+                    && !Objects.isNull(this.getGame().getInventory().searchItem("medaglione"))) {
 
                 // Gli viene restituita la chiavetta
                 i = this.getGame().getCurrentRoom().getItemList().searchItem("pendrive");
