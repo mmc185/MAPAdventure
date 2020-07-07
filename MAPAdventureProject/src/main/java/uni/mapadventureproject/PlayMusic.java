@@ -10,57 +10,42 @@ import java.io.FileInputStream;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-//import sun.audio.* ;
 import javax.swing.JOptionPane;
 
+/**
+ * Classe per inserire la musica  
+ */
 public class PlayMusic {
 
-    /* public static void playMusic(String filePath){
-        InputStream music;
-        try{
-            music=new FileInputStream(new File(filePath));
-            AudioStream audio= new AudioStream(music);
-            AudioPlayer.player.start(audio);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null," Music Error");
-        }
-    } */
+    /**
+     * Fa partire un thread che riproduce la musica, caricandola da file
+     * @param url path del file
+     */
     public synchronized void playSound(final String url) {
        Thread musicThread= new Thread(new Runnable() {
-            // The wrapper thread is unnecessary, unless it blocks on the
-            // Clip finishing; see comments.
+            
             public void run() {
                 try {
                      
                     Clip clip = AudioSystem.getClip();
                     AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                            new BufferedInputStream(new FileInputStream(url)));
-                    clip.open(inputStream);
-                    Thread.sleep(3000);
-                    clip.start();
-                   clip.loop(50);
-                   
-                   
-                   
                     
+                    clip.open(inputStream);   //acquisizione della risorsa di input
+                    Thread.sleep(3000);  //thread fermo per 3 secondi
+                    clip.start();        //parte la musica
+                   clip.loop(clip.LOOP_CONTINUOUSLY);   //musica in loop all'infinito
+                       
                 } catch (Exception e) {
-                   // System.err.println(e.getMessage());
+                   
                    JOptionPane.showMessageDialog(null," Music Error");
                 }
             }
         });
+       
        musicThread.setDaemon(true);
        musicThread.start();
        
     } 
     
-   /* public static void playMusic(String filepath){
-        try{
-            AudioData data = new AudioStream(new FileInputStream(filepath).getData);
-            ContinuousAudioDataStream sound= new ContinuousAudioDataStream(data);
-            AudioPlayer.player.start(sound);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null," Music Error");
-        }
-    } */
 }

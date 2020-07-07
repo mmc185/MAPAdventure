@@ -5,13 +5,17 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
+/**
+ * Classe che rappresenta l'entità di Comando
+ */
 public class Command implements Serializable {
 
-    private final String name;
-    private final CommandType cType;
-    private Set<String> alias;
+    private final String name; // Nome del comando
+    private final CommandType cType; // Tipo di comando
+    private Set<String> alias; // Sinonimi del comando
 
+    // Costruttori
+    
     public Command(String name, CommandType cType) {
         this.name = name;
         this.cType = cType;
@@ -24,6 +28,8 @@ public class Command implements Serializable {
         this.alias = alias;
     }
 
+    // Metodi di get, set, equals e hash code
+    
     public String getName() {
         return name;
     }

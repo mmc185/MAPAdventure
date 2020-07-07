@@ -6,15 +6,19 @@ import java.util.HashSet;
 import java.util.Set;
 import uni.mapadventureproject.type.*;
 
+/**
+ * Classe che rappresenta l'entità di gioco
+ */
 public class Game {
 
-    //private final List<Room> map; //Dovrebbe essere inutile
-    private Set<Command> commands;
-    private Inventory inventory; //inventario del protagonista
-    private Room currentRoom;
+    private Set<Command> commands; // Comandi del gioco
+    private Inventory inventory; // Inventario del protagonista
+    private Room currentRoom; // stanza in cui si trova il giocatore
     
-    private String player = "";
-    private GameTimeTask gTime = new GameTimeTask();
+    private String player = ""; // nome del giocatore
+    private GameTimeTask gTime = new GameTimeTask(); // tempo di completamento
+    
+    // Costruttori
     
     public Game() {
         this.commands = new HashSet<>();
@@ -26,6 +30,8 @@ public class Game {
         this.inventory = inventory;
         this.currentRoom = currentRoom;
     }
+    
+    // Metodi di get e set
     
     public Set<Command> getCommands() {
         return commands;
@@ -51,6 +57,12 @@ public class Game {
         this.commands = commands;
     }
     
+    /**
+     * Carica le informazioni del gioco da file
+     * @param filePath path del file da caricare
+     * @throws IOException
+     * @throws ClassNotFoundException 
+     */
     public void init(String filePath) throws IOException, ClassNotFoundException {
         
         FileSaver fs = new FileSaver();
@@ -58,9 +70,16 @@ public class Game {
         
     }
     
+    /**
+     * Salva le informazioni del gioco su un file
+     * @param dirPath path della cartella in cui salvare il gioco
+     * @throws IOException 
+     */
     public void saveGame(String dirPath) throws IOException {
+        
         FileSaver fs = new FileSaver(); 
         fs.saveFile(dirPath + "//Save.dat", this);
+        
     }
 
     public String getPlayer() {
@@ -79,6 +98,11 @@ public class Game {
         this.gTime = gTime;
     }
     
+    /**
+     * In base al nome del comando, ne restituisce il tipo
+     * @param cName nome del possibile comando
+     * @return tipo di comando, se presente nell'insieme dei comandi, null altrimenti
+     */
     public CommandType getCommandType(String cName) {
 
         for (Command c : commands ) {

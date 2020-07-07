@@ -20,6 +20,7 @@ public class Main {
         // Gestore specifico del MetaStationGame
         GameManager gManager = new MSGame(game); 
         
+        // Avvia l'interfaccia grafica per il Menu
         MenuGUI gMenuGUI = new MenuGUI(gManager);
         gMenuGUI.setVisible(true);
 

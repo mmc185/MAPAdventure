@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package uni.mapadventureproject.GUI;
 
 import java.awt.Color;
@@ -26,19 +22,18 @@ import uni.mapadventureproject.GameInteraction;
 import uni.mapadventureproject.database.DBManager;
 
 /**
- *
- * @author Admin
+ *Interfaccia grafica che permetterà all'utente di giocare
  */
 public class GameGUI extends javax.swing.JFrame {
 
-    private GameInteraction gInteraction;
-    private DBManager db = new DBManager();
+    private GameInteraction gInteraction; // Gestore di Interazione col gioco e parser
+    private DBManager db = new DBManager(); // database per i punteggi
+    
+    // Font per la grafica
     private Font font;
     private Font fontMinecraft;
 
-    /**
-     * Creates new form GameGUI
-     */
+    // Costruttore
     public GameGUI(GameInteraction gInteraction) {
 
         initComponents();
@@ -49,14 +44,15 @@ public class GameGUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Inizializza il gioco settando il font dei caratteri prendendoli da file.
+     */
     private void init() {
 
         // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
         try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
 
-            font = Font.createFont(Font.TRUETYPE_FONT, is); //GameGUI.class.getResourceAsStream("font//Minecraftia-Regular.ttf");
-
-
+            font = Font.createFont(Font.TRUETYPE_FONT, is); 
             fontMinecraft = font.deriveFont(Font.PLAIN, 14);
 
             this.setFont(fontMinecraft);
@@ -79,6 +75,9 @@ public class GameGUI extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Inizializza il gioco con l'interfaccia iniziale con cui l'utente interagirà.
+     */
     private void initGame() {
         
         // Salva il nome del giocatore
@@ -97,6 +96,9 @@ public class GameGUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Connessione al database ( che conterrà il nome del giocatore e il tempo che ha impiegato per concludere il gioco).
+     */
     private void initDB() {
         try {
             db.connect();
@@ -442,6 +444,13 @@ public class GameGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Le varie descrizioni appariranno nel jTextPane e per ogni interazione dell'utente
+     * verra concatenata la risposta al testo già presente.
+     * @param tp jTextPane in cui verranno concatenati i messaggi
+     * @param msg messaggio di risposta all'utente
+     * @param c colore con cui verrà visualizzato il messaggio
+     */
     private void appendToPane(JTextPane tp, String msg, Color c) {
 
         try {
@@ -461,22 +470,33 @@ public class GameGUI extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Metodo che invia il comando scritto dall'utente e ne stampa la risposta
+     * attraverso l'uso dell'interfaccia grafica.
+     * @param evt actionPerformed
+     */
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
 
         if (!jtTypingField.getText().isBlank()) {
 
+            // Prende il testo scritto dall'utente e lo stampa sul jTextPane
             String s = jtTypingField.getText();
             appendToPane(jtpReadingArea, "\n> " + s + "\n", new Color(104, 140, 189));
 
             jtTypingField.setText("");
 
+            // Una volta inviato il comando al gestore di interazione, ne stampa la risposta sul jTextPane
             appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager(s) + "\n", Color.white);
 
+            // Se il comando ha fatto terminare il gioco ( ovvero se il tempo di completamento si è bloccato )
             if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
                 try {
 
+                    // Inserisce il nome del giocatore e il suo tempo nel DB
                     db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
                             gInteraction.getGameManager().getGame().getGameTime().getTime());
+                    
+                    // Disabilita l'uso del typing field
                     jtTypingField.setEnabled(false);
 
                 } catch (SQLException | ParseException e) {
@@ -485,6 +505,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
 
         }
+        
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -546,12 +567,20 @@ public class GameGUI extends javax.swing.JFrame {
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
     }//GEN-LAST:event_jbDownActionPerformed
 
+    /**
+     * Se l'utente preme invio equivale allo spingere il bottone "Invia"
+     * @param evt KeyEvent
+     */
     private void jtTypingFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTypingFieldKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             jbSend.doClick();
         }
     }//GEN-LAST:event_jtTypingFieldKeyPressed
 
+    /**
+     * Permette di tornare al menù principale dopo aver chiesto conferma
+     * @param evt ActionPerformed
+     */
     private void jmiBackMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackMenuActionPerformed
 
         int yesOption;
@@ -564,12 +593,17 @@ public class GameGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jmiBackMenuActionPerformed
 
+    /**
+     * Permette di salvare i progressi attuali in una cartella scelta dall'utente.
+     * @param evt ActionPerformed
+     */
     private void jmiSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveGameActionPerformed
 
+        // Inizializza il jFileChooser per scegliere la cartella dove salvare
         JFileChooser fChooser = new JFileChooser();
         fChooser.setMultiSelectionEnabled(false);
         fChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fChooser.setCurrentDirectory(new File("."));
+        fChooser.setCurrentDirectory(new File(".")); // parte dalla cartella del progetto
 
         try {
 
@@ -580,68 +614,40 @@ public class GameGUI extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), "Errore nel salvataggio del file", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            /*???*/
             JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jmiSaveGameActionPerformed
 
+    /**
+     * Permette di visualizzare l'inventario, richiamando l'interfaccia grafica.
+     * @param evt ActionPerformed
+     */
     private void jbInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInvActionPerformed
         InventoryGUI inventory = new InventoryGUI(gInteraction.getGameManager().getGame().getInventory());
         inventory.setVisible(true);
     }//GEN-LAST:event_jbInvActionPerformed
 
+    /**
+     * Fa visualizzare una guida per il gioco con i vari comandi possibili.
+     * @param evt Action Performed
+     */
     private void jmiHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHelpActionPerformed
         appendToPane(jtpReadingArea, "\n" + gInteraction.getGameManager().showHelp() + "\n", new Color(108, 202, 224));
 
     }//GEN-LAST:event_jmiHelpActionPerformed
 
+    /**
+     * Schermata che mostra i miglior punteggi del gioco attraverso l'opportuno jDialog
+     * @param evt ActionPerformed
+     */
     private void jmiScoreboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiScoreboardActionPerformed
 
         ScoreboardGUI sbGUI = new ScoreboardGUI(this, true, db);
         sbGUI.setVisible(true);
     }//GEN-LAST:event_jmiScoreboardActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GameGUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GameGUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GameGUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GameGUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new GameGUI().setVisible(true);
-            }
-        });
-    }
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbDown;
     private javax.swing.JButton jbEast;

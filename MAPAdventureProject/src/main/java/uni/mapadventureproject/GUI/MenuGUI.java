@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package uni.mapadventureproject.GUI;
 
 import java.awt.Font;
@@ -20,19 +16,19 @@ import java.io.FileInputStream;
 
 
 /**
- *
- * @author Admin
+ * Intefaccia grafica che rappresenta il menù del gioco.
+ * 
  */
 public class MenuGUI extends javax.swing.JFrame {
 
-    Menu gMenu;
+    Menu gMenu; // Entità che controlla il Menu
+    
+    // Font per la grafica
     Font font;
     Font fontMinecraft;
     
     
-    /**
-     * Creates new form MenuGUI
-     */
+    // Costruttore
     public MenuGUI(GameManager gManager) {
         initComponents();
         init();
@@ -189,7 +185,9 @@ public class MenuGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    /**
+     * Viene inizializzato il gioco con un determinato font per i caratteri, caricato da file.
+     */
     private void init() {
         try {
             InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"));
@@ -209,11 +207,19 @@ public class MenuGUI extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Carica una nuova partita
+     * @param evt ActionPerformed
+     */
     private void jmiNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuovoActionPerformed
         
         this.jbNuovoActionPerformed(evt);
     }//GEN-LAST:event_jmiNuovoActionPerformed
 
+    /**
+     * Chiude l'applicazione
+     * @param evt ActionPerformed
+     */
     private void jbEsciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEsciActionPerformed
         int option;
         option = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler chiudere il gioco?", "Sei sicuro di voler chiudere il gioco", JOptionPane.YES_NO_OPTION);
@@ -222,11 +228,15 @@ public class MenuGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbEsciActionPerformed
 
+    /**
+     * Fa iniziare una nuova partita e fa apparire l'interfaccia per giocare
+     * @param evt ActionPerformed
+     */
     private void jbNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuovoActionPerformed
 
         try {
 
-            gMenu.newGame();
+            gMenu.newGame(); // Carica la nuova partita
             
             //Per iniziare il gioco si passa al GameGUI
             GameGUI g = new GameGUI(gMenu.getgInteraction());
@@ -236,20 +246,27 @@ public class MenuGUI extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), "Errore nell'apertura del file", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            /*???*/JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbNuovoActionPerformed
 
+    /**
+     * Carica una partita precedentemente salvata per poter continuare a giocare da quel punto.
+     * @param evt ActionPerformed
+     */
     private void jbCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCaricaActionPerformed
         
+        // Creazione del JFileChooser per selezionare il file
         JFileChooser fChooser = new JFileChooser();
         fChooser.setMultiSelectionEnabled(false);
         fChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fChooser.setCurrentDirectory(new File("."));
+        fChooser.setCurrentDirectory(new File(".")); // Parte dalla cartella del progetto
         
         try {
             
         if ( fChooser.showOpenDialog(this) == (JFileChooser.APPROVE_OPTION)) {
+            
+            // Carica il gioco con il file di partita selezionato
             gMenu.loadGame(fChooser.getSelectedFile().getAbsolutePath());
             
             //Per iniziare il gioco si passa al GameGUI
@@ -261,51 +278,21 @@ public class MenuGUI extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), "Errore nell'apertura del file", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            /*???*/JOptionPane.showMessageDialog(this, "Errore: File non valido\n " + e.getMessage(), "File non valido", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Errore: File non valido\n " + e.getMessage(), "File non valido", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_jbCaricaActionPerformed
 
+    /**
+     * Carica una partita precedentemente salvata per poter continuare a giocare da quel punto.
+     * @param evt ActionPerformed
+     */
     private void jmiCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCaricaActionPerformed
         
         this.jbCaricaActionPerformed(evt);
     }//GEN-LAST:event_jmiCaricaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new MenuGUI().setVisible(true);
-            }
-        });
-    }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JLabel jTitolo1;
