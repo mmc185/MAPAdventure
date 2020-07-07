@@ -1,10 +1,9 @@
-
 package uni.mapadventureproject.GUI;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.File;
-import java.io.IOException; 
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import uni.mapadventureproject.GameManager;
@@ -12,22 +11,25 @@ import uni.mapadventureproject.Menu;
 import java.io.InputStream;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-
-
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.Mixer;
 
 /**
  * Intefaccia grafica che rappresenta il menù del gioco.
- * 
+ *
  */
 public class MenuGUI extends javax.swing.JFrame {
 
     Menu gMenu; // Entità che controlla il Menu
-    
+
     // Font per la grafica
     Font font;
     Font fontMinecraft;
-    
-    
+
     // Costruttore
     public MenuGUI(GameManager gManager) {
         initComponents();
@@ -173,18 +175,38 @@ public class MenuGUI extends javax.swing.JFrame {
 
         jmAlza.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\alza.jpg")); // NOI18N
         jmAlza.setToolTipText("alza volume");
+        jmAlza.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAlzaMouseClicked(evt);
+            }
+        });
         jMenuBar.add(jmAlza);
 
         jmAbbassa.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\abbassa.jpg")); // NOI18N
         jmAbbassa.setToolTipText("abbassa volume");
+        jmAbbassa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmAbbassaMouseClicked(evt);
+            }
+        });
         jMenuBar.add(jmAbbassa);
 
         jmMax.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\massimo.jpg")); // NOI18N
         jmMax.setToolTipText("volume massimo");
+        jmMax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMaxMouseClicked(evt);
+            }
+        });
         jMenuBar.add(jmMax);
 
         jmMuta.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Documents\\NetBeansProjects\\MAPAdventure\\MAPAdventureProject\\resources\\img\\muto.jpg")); // NOI18N
         jmMuta.setToolTipText("muta ");
+        jmMuta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmMutaMouseClicked(evt);
+            }
+        });
         jMenuBar.add(jmMuta);
 
         setJMenuBar(jMenuBar);
@@ -206,14 +228,15 @@ public class MenuGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Viene inizializzato il gioco con un determinato font per i caratteri, caricato da file.
+     * Viene inizializzato il gioco con un determinato font per i caratteri,
+     * caricato da file.
      */
     private void init() {
         try {
             InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"));
             font = Font.createFont(Font.TRUETYPE_FONT, is);
             fontMinecraft = font.deriveFont(Font.PLAIN, 12);
-            
+
             this.setFont(fontMinecraft);
             jbNuovo.setFont(fontMinecraft);
             jbCarica.setFont(fontMinecraft);
@@ -226,18 +249,112 @@ public class MenuGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Font non caricato correttamente; e'stato impostato un font di default.", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void volumeDownControl(Double valueToPlusMinus) {
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        for (Mixer.Info mixerInfo : mixers) {
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            for (Line.Info lineInfo : lineInfos) {
+                Line line = null;
+                boolean opened = true;
+                try {
+                    line = mixer.getLine(lineInfo);
+                    opened = line.isOpen() || line instanceof Clip;
+                    if (!opened) {
+                        line.open();
+                    }
+                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    float currentVolume = volControl.getValue();
+                    System.out.println(currentVolume);
+                    Double volumeToCut = valueToPlusMinus;
+                    float changedCalc = (float) ((float) currentVolume - (double) volumeToCut);
+                    volControl.setValue(changedCalc);
+                } catch (LineUnavailableException lineException) {
+                } catch (IllegalArgumentException illException) {
+                } finally {
+                    if (line != null && !opened) {
+                        line.close();
+                    }
+                }
+            }
+        }
+    }
     
+     private void volumeUpControl(Double valueToPlusMinus){
+      Mixer.Info[] mixers= AudioSystem.getMixerInfo();
+       for(Mixer.Info mixerInfo :mixers){
+           Mixer mixer=AudioSystem.getMixer(mixerInfo);
+           Line.Info[] lineInfos=mixer.getTargetLineInfo();
+           for(Line.Info  lineInfo :lineInfos){
+               Line line= null;
+               boolean opened=true;
+               try{
+                   line=mixer.getLine(lineInfo);
+                   opened=line.isOpen() || line instanceof Clip;
+                   if(!opened){
+                       line.open();
+                   }
+                   FloatControl volControl=(FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                   float currentVolume=volControl.getValue();
+                   Double volumeToCut=valueToPlusMinus;
+                   float changedCalc=(float)((float)currentVolume+(double)volumeToCut);
+                   volControl.setValue(changedCalc);
+               }catch(LineUnavailableException lineException){
+               }catch(IllegalArgumentException illException){   
+               }finally{
+                   if(line!=null && !opened){
+                       line.close();
+                   }
+               }
+           }
+        }
+
+     }
+
+    private void volumeControl(Double valueToPlusMinus) {
+        Mixer.Info[] mixers = AudioSystem.getMixerInfo();
+        for (Mixer.Info mixerInfo : mixers) {
+            Mixer mixer = AudioSystem.getMixer(mixerInfo);
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            for (Line.Info lineInfo : lineInfos) {
+                Line line = null;
+                boolean opened = true;
+                try {
+                    line = mixer.getLine(lineInfo);
+                    opened = line.isOpen() || line instanceof Clip;
+                    if (!opened) {
+                        line.open();
+                    }
+                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                    float currentVolume = volControl.getValue();
+                    Double volumeToCut = valueToPlusMinus;
+                    float changedCalc = (float) ((double) volumeToCut);
+                    volControl.setValue(changedCalc);
+                } catch (LineUnavailableException lineException) {
+                } catch (IllegalArgumentException illException) {
+                } finally {
+                    if (line != null && !opened) {
+                        line.close();
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Carica una nuova partita
+     *
      * @param evt ActionPerformed
      */
     private void jmiNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNuovoActionPerformed
-        
+
         this.jbNuovoActionPerformed(evt);
     }//GEN-LAST:event_jmiNuovoActionPerformed
 
     /**
      * Chiude l'applicazione
+     *
      * @param evt ActionPerformed
      */
     private void jbEsciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEsciActionPerformed
@@ -250,6 +367,7 @@ public class MenuGUI extends javax.swing.JFrame {
 
     /**
      * Fa iniziare una nuova partita e fa apparire l'interfaccia per giocare
+     *
      * @param evt ActionPerformed
      */
     private void jbNuovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuovoActionPerformed
@@ -257,7 +375,7 @@ public class MenuGUI extends javax.swing.JFrame {
         try {
 
             gMenu.newGame(); // Carica la nuova partita
-            
+
             //Per iniziare il gioco si passa al GameGUI
             GameGUI g = new GameGUI(gMenu.getgInteraction());
             g.setVisible(true);
@@ -271,48 +389,88 @@ public class MenuGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jbNuovoActionPerformed
 
     /**
-     * Carica una partita precedentemente salvata per poter continuare a giocare da quel punto.
+     * Carica una partita precedentemente salvata per poter continuare a giocare
+     * da quel punto.
+     *
      * @param evt ActionPerformed
      */
     private void jbCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCaricaActionPerformed
-        
+
         // Creazione del JFileChooser per selezionare il file
         JFileChooser fChooser = new JFileChooser();
         fChooser.setMultiSelectionEnabled(false);
         fChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fChooser.setCurrentDirectory(new File(".")); // Parte dalla cartella del progetto
-        
+
         try {
-            
-        if ( fChooser.showOpenDialog(this) == (JFileChooser.APPROVE_OPTION)) {
-            
-            // Carica il gioco con il file di partita selezionato
-            gMenu.loadGame(fChooser.getSelectedFile().getAbsolutePath());
-            
-            //Per iniziare il gioco si passa al GameGUI
-            GameGUI g = new GameGUI(gMenu.getgInteraction());
-            g.setVisible(true);
-            this.dispose();
-        }
-        
+
+            if (fChooser.showOpenDialog(this) == (JFileChooser.APPROVE_OPTION)) {
+
+                // Carica il gioco con il file di partita selezionato
+                gMenu.loadGame(fChooser.getSelectedFile().getAbsolutePath());
+
+                //Per iniziare il gioco si passa al GameGUI
+                GameGUI g = new GameGUI(gMenu.getgInteraction());
+                g.setVisible(true);
+                this.dispose();
+            }
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), "Errore nell'apertura del file", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Errore: File non valido\n " + e.getMessage(), "File non valido", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_jbCaricaActionPerformed
 
     /**
-     * Carica una partita precedentemente salvata per poter continuare a giocare da quel punto.
+     * Carica una partita precedentemente salvata per poter continuare a giocare
+     * da quel punto.
+     *
      * @param evt ActionPerformed
      */
     private void jmiCaricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCaricaActionPerformed
-        
+
         this.jbCaricaActionPerformed(evt);
     }//GEN-LAST:event_jmiCaricaActionPerformed
 
-  
+    /**
+     * Alza il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmAlzaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAlzaMouseClicked
+        volumeUpControl(0.1);
+    }//GEN-LAST:event_jmAlzaMouseClicked
+
+    /**
+     * Abbassa il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmAbbassaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmAbbassaMouseClicked
+        volumeDownControl(0.1);
+    }//GEN-LAST:event_jmAbbassaMouseClicked
+
+    /**
+     * Alza al massimo il volume della musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmMaxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMaxMouseClicked
+        volumeControl(1.0);
+    }//GEN-LAST:event_jmMaxMouseClicked
+
+    /**
+     * Muta la musica
+     *
+     * @param evt MouseClicked
+     */
+    private void jmMutaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmMutaMouseClicked
+        volumeControl(0.0);
+    }//GEN-LAST:event_jmMutaMouseClicked
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JLabel jTitolo1;
