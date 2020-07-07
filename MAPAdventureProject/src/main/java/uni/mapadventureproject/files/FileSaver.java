@@ -220,18 +220,18 @@ public class FileSaver {
         scroll.setPickupable(true);
         scroll.setItemImage(new ImageIcon("resources//img//inventario//scroll.png"));
 
-        ItemContainer wardrobe = new ItemContainer(80, "mobile", "Il mobile è chiuso a chiave."
+        ItemContainer wardrobe = new ItemContainer(80, "mobile", "Il mobile è chiuso a chiave. "
                 + "La serratura è argentata con dei simboli verdi");
         wardrobe.setAlias(new String[]{"guardaroba", "armadio"});
         wardrobe.add(scroll);
         wardrobe.setLockedBy("chiave verde");
 
-        ItemContainer littleBox = new ItemContainer(81, "scatola", "Una piccola scatolina socchiusa. Chissà cosa c'è dentro...");
+     /*   ItemContainer littleBox = new ItemContainer(81, "scatola", "Una piccola scatolina socchiusa. Chissà cosa c'è dentro...");
         littleBox.setAlias(new String[]{"scatolina"});
         littleBox.add(greenKey);
         littleBox.add(redKey);
         littleBox.add(blueKey);
-
+*/
         Item medallion = new Item(86, "medaglione", "E' il prezioso medaglione che, con gli altri due oggetti, vi permetterà di rientrare in possesso della vostra chiavetta!");
         medallion.setAlias(new String[]{"collana", "pendente", "gioiello"});
         medallion.setPickupable(true);
@@ -857,8 +857,6 @@ public class FileSaver {
                 + "\"U-u-u-un d-d-dddrago?!” esclama il tuo amico, visibilmente spaventato.\n"
                 + "Atterra sulle mura del castello e, con un tono infuriato, vi chiede: "
                 + "\"Come osate avvicinarvi al mio castello? Non è aperto a visite.\""
-                /* + "Il tuo amico cerca di spiegare la situazione, parlando del medaglione, "
-                + "balbettando per la paura." */
                 + "Prende il tuo amico fra le zampe e si alza in volo.\n"
                 + "\"AAAAH AIUTOOOOO SOFFRO DI VERTIGINII! METTIMI GIUUUUUU'\"\n"
                 + "Mentre il tuo amico continua a urlare e a cercare di dimenarsi, il drago ti dice: "
@@ -871,13 +869,7 @@ public class FileSaver {
                 + "che chiacchierano e ridacchiano. Il tuo amico ti viene incontro e "
                 + "ti dice che il drago gli ha raccontato la sua storia: "
                 + "per una maledizione di Astor, è rimasto vincolato al castello negli ultimi 500 anni."
-                + "Adesso, usando la pergamena, si potrà rompere la maledizione."); //verrà finalmente liberato e potrà tornare a volare in giro per il mondo."                
-        /*   + "che il drago in realtà è il re Erin, trasformato dal druido Astor per via di un vecchio litigio."
-                + "Tutti erano scappati, vedendo il drago e pensando che avesse ucciso Erin. "
-                + "Per via di questa maledizione, non poteva allontanarsi dal castello "
-                + "e nessuno aveva il coraggio di avvicinarsi a lui."
-                + "Il re ti dice che dev’essere un’altra persona"
-                + "a usare la pergamena per lui e chiede a te di farlo."*/
+                + "Adesso, usando la pergamena, si potrà rompere la maledizione.");
         ((TriggeredRoom) castle).addTriggerer("usa pergamena");
         ((TriggeredRoom) castle).addTriggerDesc("Dopo aver pronunciato le parole magiche scritte sulla pergamena, questa si autodistrugge."
                 //  + "il drago si trasforma in un uomo dai folti capelli rossi."
@@ -910,7 +902,7 @@ public class FileSaver {
                 + "\"Hai trovato il mio bastone!! Sono salvo! Grazie, straniero, grazie! "
                 + "Permettimi di sdebitarmi offrendoti il pranzo!\"\n"
                 + "Il vecchio esclama \"Ah, che maleducato... Non mi sono presentato! Io sono Astor il druido!\n"
-                + "Grazie ancora paer aver ritrovato il mio bastone!"
+                + "Grazie ancora per aver ritrovato il mio bastone!"
                 + "A proposito, una volta arrivati, "
                 + "potresti usarlo al posto mio per aprire la porta di casa? Ho le mani occupate...\""
                 + "e solleva un cesto pieno di funghi."
@@ -949,13 +941,14 @@ public class FileSaver {
                 + "quel vecchio non sembrava sincero riguardo la pergamena… ");
         druidHouse.setLockedBy("bastone");
         druidHouse.setLook("La casa è piccola e disordinata: un camino, spento da poco, un calderone, "
-                + "il tavolo su cui state pranzando... Guardandoti intorno, vedi anche una piccola scatola, "
+                + "il tavolo su cui state pranzando... Guardandoti intorno, vedi anche un comodino "
+                + "con tre chiavi di colore diverso (una blu, una rossa e una verde), "
                 + "un letto e un mobile che forse potrebbe contenere qualcosa di utile..."
                 + "Dietro di te invece, c’è la porta d’ingresso con gli scalini per scendere e uscire.");
         druidHouse.setRoomImage(new ImageIcon("resources//img//stanze//druidHouseInside.png"));
-        ((TriggeredRoom) druidHouse).addTriggerer("con chiave verde");
+        ((TriggeredRoom) druidHouse).addTriggerer("chiave verde");
         ((TriggeredRoom) druidHouse).addTriggerDesc("Nel frattempo, senti Astor che canticchia nel giardino; "
-                + "la sua voce è sempre più vicina... Dovresti muoverti a prendere la pergamena e chiudere tutto!");
+                + "la sua voce è sempre più vicina... Dovresti muoverti o verrai scoperto!!" /*a prendere la pergamena e chiudere tutto!*/);
         ((TriggeredRoom) druidHouse).addTriggerer("prendi pergamena");
         ((TriggeredRoom) druidHouse).addTriggerDesc("Senti il druido che sta per rientrare."
                 + "Riesci a rimettere tutto a posto e a sederti giusto in tempo."
@@ -967,8 +960,7 @@ public class FileSaver {
         Room shortcutPortal = new Room(54, "In groppa al drago",
                 "Dall'alto è tutto così piccolo! Vedi il castello, la casa di Astor, la cascata, i sentieri..."
                 + "Arrivate alla radura dove c'è portale. "
-                + "Salutate il drago per l'ultima volta. "
-                + "Ora dovete solo scendere dal suo dorso e salire verso il portale!");
+                + "Salutate il drago per l'ultima volta. ");
         shortcutPortal.setDown(glade);
         shortcutPortal.setLockedBy("pergamena");
 
@@ -1040,12 +1032,14 @@ public class FileSaver {
         druidGarden.setUp(druidHouse);
 
         druidHouse.addItem(wardrobe);
-        /*druidHouse.addItem(greenKey);
+        druidHouse.addItem(greenKey);
         druidHouse.addItem(redKey);
-        druidHouse.addItem(blueKey);*/
-        druidHouse.addItem(littleBox);
+        druidHouse.addItem(blueKey);
+        //druidHouse.addItem(littleBox);
         druidGarden.setEast(mountain);
         druidHouse.setDown(druidGarden);
+
+        shortcutPortal.setLook("Ora dovete solo scendere dal suo dorso e salire verso il portale!");
 
         //Comandi
         Command north = new Command("nord", CommandType.MOVE_N);
