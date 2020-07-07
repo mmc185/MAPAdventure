@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 
 /**
  * Classe che gestisce il jdbc per tenere traccia dei giocatori e i loro punteggi
- * @author marta
  */
 public class DBManager {
 

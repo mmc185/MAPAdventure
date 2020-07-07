@@ -316,6 +316,41 @@ public class MSGame extends GameManager {
         }
 
     }
+    
+    @Override
+    /**
+     * Funzione che restituisce la guida del gioco "MetaStation: the last exam"
+     *
+     * @return stringa con la guida
+     */
+    public String showHelp() {
+        return "===========================================\n"
+                + "GUIDA\n"
+                + "\n"
+                + "* Inserisci un comando nel rettangolo in basso e premi \"Invia\" o il tasto Invio.\n"
+                + "\n"
+                + "* Per spostarti, puoi premere le frecce o \"su\", \"giù\", oppure scriverlo nel rettangolo.\n"
+                + "\n"
+                + "* Per visualizzare il contenuto dell'inventario, premi l'icona dello zaino, oppure digita comandi come \"inventario\", \"inv\", \"borsa\"...\n"
+                + "\n"
+                + "* Quelli descritti in questa guida sono solo alcuni dei comandi disponibili, scommetto che sarai capace di scoprire gli altri senza ulteriori aiuti...\n"
+                + "\n"
+                + "* Sei in difficoltà? Prova a guardarti intorno con il comando \"guarda\" e fa' attenzione agli indizi che ti vengono suggeriti!\n"
+                + "\n"
+                + "Esempi di frasi accettate:\n"
+                + "- Raccogli la bottiglia / Prendi bottiglia\n"
+                + "- Guarda\n"
+                + "- Osserva la bottiglia\n"
+                + "- Nord\n"
+                + "- Apri con chiave / Usa la chiave \n"
+                + "- Apri il baule con la chiave dorata \n"
+                + "- Premi il pulsante \n"
+                + "\n"
+                + "E' importante inserire solo un'azione alla volta!\n"
+                + "Esempio di frase NON accettata:\n"
+                + "- Prendi la bottiglia e prendi l'ombrello \n"
+                + "===========================================";
+    }
 
     /**
      * Funzione che prende il nome dell'oggetto, se presente, dal ParserOutput e
@@ -509,41 +544,6 @@ public class MSGame extends GameManager {
         }
 
         return output;
-    }
-
-    @Override
-    /**
-     * Funzione che restituisce la guida del gioco "MetaStation: the last exam"
-     *
-     * @return stringa con la guida
-     */
-    public String showHelp() {
-        return "===========================================\n"
-                + "GUIDA\n"
-                + "\n"
-                + "* Inserisci un comando nel rettangolo in basso e premi \"Invia\" o il tasto Invio.\n"
-                + "\n"
-                + "* Per spostarti, puoi premere le frecce o \"su\", \"giù\", oppure scriverlo nel rettangolo.\n"
-                + "\n"
-                + "* Per visualizzare il contenuto dell'inventario, premi l'icona dello zaino, oppure digita comandi come \"inventario\", \"inv\", \"borsa\"...\n"
-                + "\n"
-                + "* Quelli descritti in questa guida sono solo alcuni dei comandi disponibili, scommetto che sarai capace di scoprire gli altri senza ulteriori aiuti...\n"
-                + "\n"
-                + "* Sei in difficoltà? Prova a guardarti intorno con il comando \"guarda\" e fa' attenzione agli indizi che ti vengono suggeriti!\n"
-                + "\n"
-                + "Esempi di frasi accettate:\n"
-                + "- Raccogli la bottiglia / Prendi bottiglia\n"
-                + "- Guarda\n"
-                + "- Osserva la bottiglia\n"
-                + "- Nord\n"
-                + "- Apri con chiave / Usa la chiave \n"
-                + "- Apri il baule con la chiave dorata \n"
-                + "- Premi il pulsante \n"
-                + "\n"
-                + "E' importante inserire solo un'azione alla volta!\n"
-                + "Esempio di frase NON accettata:\n"
-                + "- Prendi la bottiglia e prendi l'ombrello \n"
-                + "===========================================";
     }
 
     /**
