@@ -20,7 +20,7 @@ import uni.mapadventureproject.type.TriggeredRoom;
  */
 public class MSGameInit {
 
-    Game g = new Game(); // Entità in cui caricare il gioco MetaStation
+    private Game g = new Game(); // Entità in cui caricare il gioco MetaStation
 
     public Game getGame() {
         return g;
