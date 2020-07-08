@@ -247,7 +247,8 @@ public class MSGameInit {
         medallion.setAlias(new String[]{"collana", "pendente", "gioiello"});
         medallion.setPickupable(true);
         medallion.setItemImage(new ImageIcon("resources//img//inventario//medallion.png"));
-
+        
+        //Stanze intro
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
                 + "\n\"Il treno regionale delle ore 9:00 diretto a Bari Centrale è in partenza dal binario 9 con un ritardo di 10 minuti!\""
                 + "\nSenti il fischio assordante del capotreno che ti sollecita a salire.");
@@ -295,7 +296,6 @@ public class MSGameInit {
                 + "(Non avevi un bigliettino prima!)");
         metaStationLobby.setRoomImage(new ImageIcon("resources//img//stanze//metaStationLobby.png"));
 
-        // Stanze Intro
         station.setUp(wagon);
         station.setLook("Ti trovi di fronte alle porte del treno. Dovresti muoverti prima che si chiudano!");
 
@@ -428,7 +428,7 @@ public class MSGameInit {
         campFire.setSouth(ship);
 
         tent.setLook("Per andare nella foresta ci vorrà una fonte luminosa per farti strada. \n"
-                + "C'è un sacco, prendi tutto quello che trovi al suo interno, tanto è gratis!");
+                + "C'è un sacco e puoi aprirlo, prendi tutto quello che trovi al suo interno, tanto è gratis!");
         tent.addItem(sack);
         tent.setNorth(forest);
 
@@ -660,8 +660,8 @@ public class MSGameInit {
         broomCloset.setLook("Non vedi nulla!");
 
         hallway.setLook("Lo sgabuzzino sfocia su un grande corridoio dall'aspetto\n"
-                + "moderno e pulito. Una imponente finestra rivela un \n"
-                + "panorama mozzafiato.");
+                + "moderno e pulito. Il corridoio si dirama verso est e verso ovest.\n "
+                + "Una imponente finestra rivela un panorama mozzafiato.");
         hallway.setNorth(broomCloset);
         hallway.setEast(eastHallway);
         hallway.setWest(westHallway);
@@ -766,14 +766,14 @@ public class MSGameInit {
 
         desert1.setLook("Vi avvicinate alla navicella, ma sembra essere vuota. L'unica "
                 + "sostanza presente vicino ad essa è uno strano liquido denso e verde.\n"
-                + "Speri vivamente di non incontrare l'essere che l'abbia prodotto.");
+                + "Speri vivamente di non incontrare l'essere che l'abbia prodotto.Puoi continuare ad andare verso est..");
         desert1.setWest(desertPlanet);
         desert1.setEast(desert2);
 
         desert2.setLook("Quell'essere alieno ha definitivamente troppe zampe e denti "
                 + "per essere legale. La sua bocca si estende come una voragine "
                 + "piena di spuntoni aguzzi che ti fanno impallidire...\n"
-                + "\n\"Forse ci puoi lanciare qualcosa!\" ti esorta il tuo amico.\n"
+                + "\n\"Forse gli puoi lanciare qualcosa!\" ti esorta il tuo amico.\n"
                 + "Quale luogo più appropriato per tirare fuori il tuo allenamento alla Space Jam di un pianeta sperduto nel cosmo?!");
         desert2.setWest(desert1);
         desert2.setNorth(floweryDesert);
@@ -1053,7 +1053,7 @@ public class MSGameInit {
         druidHouse.addItem(redKey);
         druidHouse.addItem(blueKey);
 
-        shortcutPortal.setLook("Ora che siete scesi dal suo dorso, non vi basta che entrare nel portale salendoci sopra!");
+        shortcutPortal.setLook("Ora che siete scesi dal suo dorso, non vi basta che entrare nel portale andando su per una collina!");
         shortcutPortal.setUp(metaStationLobby);
         shortcutPortal.setDown(glade);
 
