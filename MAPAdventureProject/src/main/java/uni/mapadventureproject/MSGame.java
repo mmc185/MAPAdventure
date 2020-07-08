@@ -42,7 +42,7 @@ public class MSGame extends GameManager {
      *
      * @return ritorna una stringa che descrive la risposta da dare all'utente.
      */
-    public String executeCommand(ParserOutput pOutput) {
+    protected String executeCommand(ParserOutput pOutput) {
 
         // Prende il tipo di comando in modo da gestire la richiesta
         CommandType command = this.getGame().getCommandType(pOutput.getString(WordType.COMMAND));
@@ -311,6 +311,41 @@ public class MSGame extends GameManager {
 
     }
 
+    @Override
+    /**
+     * Funzione che restituisce la guida del gioco "MetaStation: the last exam"
+     *
+     * @return stringa con la guida
+     */
+    public String showHelp() {
+        return "===========================================\n"
+                + "GUIDA\n"
+                + "\n"
+                + "* Inserisci un comando nel rettangolo in basso e premi \"Invia\" o il tasto Invio.\n"
+                + "\n"
+                + "* Per spostarti, puoi premere le frecce o \"su\", \"giù\", oppure scriverlo nel rettangolo.\n"
+                + "\n"
+                + "* Per visualizzare il contenuto dell'inventario, premi l'icona dello zaino, oppure digita comandi come \"inventario\", \"inv\", \"borsa\"...\n"
+                + "\n"
+                + "* Quelli descritti in questa guida sono solo alcuni dei comandi disponibili, scommetto che sarai capace di scoprire gli altri senza ulteriori aiuti...\n"
+                + "\n"
+                + "* Sei in difficoltà? Prova a guardarti intorno con il comando \"guarda\" e fa' attenzione agli indizi che ti vengono suggeriti!\n"
+                + "\n"
+                + "Esempi di frasi accettate:\n"
+                + "- Raccogli la bottiglia / Prendi bottiglia\n"
+                + "- Guarda\n"
+                + "- Osserva la bottiglia\n"
+                + "- Nord\n"
+                + "- Apri con chiave / Usa la chiave \n"
+                + "- Apri il baule con la chiave dorata \n"
+                + "- Premi il pulsante \n"
+                + "\n"
+                + "E' importante inserire solo un'azione alla volta!\n"
+                + "Esempio di frase NON accettata:\n"
+                + "- Prendi la bottiglia e prendi l'ombrello \n"
+                + "===========================================";
+    }
+
     /**
      * Funzione che prende il nome dell'oggetto, se presente, dal ParserOutput e
      * ne ritorna l'Item.
@@ -505,41 +540,6 @@ public class MSGame extends GameManager {
         return output;
     }
 
-    @Override
-    /**
-     * Funzione che restituisce la guida del gioco "MetaStation: the last exam"
-     *
-     * @return stringa con la guida
-     */
-    public String showHelp() {
-        return "===========================================\n"
-                + "GUIDA\n"
-                + "\n"
-                + "* Inserisci un comando nel rettangolo in basso e premi \"Invia\" o il tasto Invio.\n"
-                + "\n"
-                + "* Per spostarti, puoi premere le frecce o \"su\", \"giù\", oppure scriverlo nel rettangolo.\n"
-                + "\n"
-                + "* Per visualizzare il contenuto dell'inventario, premi l'icona dello zaino, oppure digita comandi come \"inventario\", \"inv\", \"borsa\"...\n"
-                + "\n"
-                + "* Quelli descritti in questa guida sono solo alcuni dei comandi disponibili, scommetto che sarai capace di scoprire gli altri senza ulteriori aiuti...\n"
-                + "\n"
-                + "* Sei in difficoltà? Prova a guardarti intorno con il comando \"guarda\" e fa' attenzione agli indizi che ti vengono suggeriti!\n"
-                + "\n"
-                + "Esempi di frasi accettate:\n"
-                + "- Raccogli la bottiglia / Prendi bottiglia\n"
-                + "- Guarda\n"
-                + "- Osserva la bottiglia\n"
-                + "- Nord\n"
-                + "- Apri con chiave / Usa la chiave \n"
-                + "- Apri il baule con la chiave dorata \n"
-                + "- Premi il pulsante \n"
-                + "\n"
-                + "E' importante inserire solo un'azione alla volta!\n"
-                + "Esempio di frase NON accettata:\n"
-                + "- Prendi la bottiglia e prendi l'ombrello \n"
-                + "===========================================";
-    }
-
     /**
      * Procedura che fa avanzare la narrazione della storia, basandosi sulla
      * stanza pivotale per lo svolgimento degli eventi.
@@ -569,7 +569,9 @@ public class MSGame extends GameManager {
 
             } // Se il giocatore ha terminato il gioco e ha collezionato tutti gli oggetti
             else if (!Objects.isNull(this.getGame().getInventory().searchItem("lingotto"))
-                    && !Objects.isNull(this.getGame().getInventory().searchItem("ixora septrifolia")) /*&& !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("lingotto")*/) {
+                    && !Objects.isNull(this.getGame().getInventory().searchItem("ixora septrifolia"))
+                    // && !Objects.isNull(this.getGame().getInventory().getInventoryList().contains("medaglione"))  {
+                    && !Objects.isNull(this.getGame().getInventory().searchItem("medaglione"))) {
 
                 // Gli viene restituita la chiavetta
                 i = this.getGame().getCurrentRoom().getItemList().searchItem("pendrive");

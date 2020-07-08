@@ -487,7 +487,7 @@ public class GameGUI extends javax.swing.JFrame {
 
     /**
      * Le varie descrizioni appariranno nel jTextPane e per ogni interazione dell'utente
-     * verra concatenata la risposta al testo già presente.
+     * verrà concatenata la risposta al testo già presente.
      * @param tp jTextPane in cui verranno concatenati i messaggi
      * @param msg messaggio di risposta all'utente
      * @param c colore con cui verrà visualizzato il messaggio

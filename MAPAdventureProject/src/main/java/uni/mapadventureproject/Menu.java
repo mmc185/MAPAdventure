@@ -8,12 +8,10 @@ import uni.mapadventureproject.parser.InvalidStringException;
  */
 public class Menu {
 
-    private GameManager g; // Gestore di gioco
     private GameInteraction gInteraction; // Gestore di interazione di gioco
 
     // Costruttore
     public Menu(GameManager g) {
-        this.g = g;
         this.gInteraction = new GameInteraction(g);
     }
 
@@ -24,7 +22,7 @@ public class Menu {
      * @throws ClassNotFoundException 
      */
     public void newGame() throws IOException, InvalidStringException, ClassNotFoundException {
-        g.getGame().init("NewGame//Intro.dat"); 
+        gInteraction.getGameManager().getGame().init("NewGame//Intro.dat"); 
     }
 
     /**
@@ -35,7 +33,7 @@ public class Menu {
      * @throws ClassNotFoundException 
      */
     public void loadGame(String path) throws IOException, InvalidStringException, ClassNotFoundException {
-        g.getGame().init(path); 
+        gInteraction.getGameManager().getGame().init(path); 
     }
 
     /**
