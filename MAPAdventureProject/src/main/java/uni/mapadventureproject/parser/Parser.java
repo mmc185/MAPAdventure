@@ -154,7 +154,7 @@ public class Parser {
 
                     // Chiamata ricorsiva sul contenitore
                     if (!(s1 = isItem(s, ((ItemContainer) i).getcItemList(), tokens, counter)).isEmpty()) {
-                        return isItem(s, ((ItemContainer) i).getcItemList(), tokens, counter);
+                        return s1;
                     }
                 }
 

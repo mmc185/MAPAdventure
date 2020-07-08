@@ -518,7 +518,7 @@ public class GameGUI extends javax.swing.JFrame {
      */
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
 
-        if (!jtTypingField.getText().isBlank()) {
+        if (!jtTypingField.getText().matches("\\s+")) {
 
             // Prende il testo scritto dall'utente e lo stampa sul jTextPane
             String s = jtTypingField.getText();
