@@ -401,8 +401,10 @@ public class MSGame extends GameManager {
 
                     if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
 
-                        i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.R_OBJ));
-                        pOutput.add(WordType.R_OBJ, i.getName());
+                       if (!Objects.isNull(i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.R_OBJ)))) {
+                            pOutput.add(WordType.R_OBJ, i.getName());
+                            break;
+                        }
 
                     }
 
