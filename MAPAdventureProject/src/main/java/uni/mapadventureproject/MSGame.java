@@ -310,7 +310,7 @@ public class MSGame extends GameManager {
         }
 
     }
-    
+
     @Override
     /**
      * Funzione che restituisce la guida del gioco "MetaStation: the last exam"
