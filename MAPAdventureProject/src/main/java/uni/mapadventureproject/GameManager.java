@@ -9,7 +9,7 @@ import uni.mapadventureproject.parser.ParserOutput;
  */
 public abstract class GameManager {
 
-    Game game; // entità di gioco
+    private Game game; // entità di gioco
     
     // Musica di sottofondo del gioco
     private PlayMusic music = new PlayMusic();

@@ -19,11 +19,11 @@ import javax.swing.ImageIcon;
  */
 public class MenuGUI extends javax.swing.JFrame {
 
-    Menu gMenu; // Entità che controlla il Menu
+    private Menu gMenu; // Entità che controlla il Menu
 
     // Font per la grafica
-    Font font;
-    Font fontMinecraft;
+    private Font font;
+    private Font fontMinecraft;
 
     // Costruttore
     public MenuGUI(GameManager gManager) {

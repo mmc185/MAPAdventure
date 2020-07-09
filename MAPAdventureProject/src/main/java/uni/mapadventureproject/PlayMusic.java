@@ -91,8 +91,7 @@ public class PlayMusic {
                     volControl.setValue(changedCalc);    //imposta il volume della musica
                     
                 } catch (LineUnavailableException | IllegalArgumentException e) {
-                    //JOptionPane.showMessageDialog(null, " Music Error");
-                } finally {
+                    } finally {
                     
                     if (line != null && !opened) {
                         line.close();
@@ -138,8 +137,7 @@ public class PlayMusic {
                     volControl.setValue(changedCalc);  //imposta il volume della musica
                     
                 } catch (LineUnavailableException | IllegalArgumentException e) {
-                    //JOptionPane.showMessageDialog(null, " Music Error");
-                } finally {
+                   } finally {
                     
                     if (line != null && !opened) {
                         line.close();

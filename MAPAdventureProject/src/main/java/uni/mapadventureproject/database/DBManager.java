@@ -17,16 +17,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
- * Classe che gestisce il jdbc per tenere traccia dei giocatori e i loro punteggi
+ * Classe che gestisce il jdbc per tenere traccia dei giocatori e i loro
+ * punteggi
  */
 public class DBManager {
 
-    Connection con;
+    private Connection con;
     private final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS scores (name VARCHAR(25), time TIME)";
 
     /**
      * Si connette al db locale
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     public void connect() throws SQLException {
 
@@ -39,7 +41,8 @@ public class DBManager {
 
     /**
      * Si riconnette, se la connessione è caduta
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     public void reconnect() throws SQLException {
         if (con != null && !con.isValid(0)) {
@@ -49,10 +52,11 @@ public class DBManager {
 
     /**
      * Inserisce il punteggio di un nuovo giocatore
+     *
      * @param s nome del giocatore
      * @param t punteggio del giocatore ( in questo caso il tempo )
      * @throws SQLException
-     * @throws ParseException 
+     * @throws ParseException
      */
     public void insertScore(String s, String t) throws SQLException, ParseException {
         reconnect();
@@ -70,8 +74,9 @@ public class DBManager {
 
     /**
      * restituisce il risultato della query per i migliori 3 punteggi
+     *
      * @return stringa
-     * @throws SQLException 
+     * @throws SQLException
      */
     public String topScores() throws SQLException {
         reconnect();
@@ -79,13 +84,13 @@ public class DBManager {
         String results = "";
         Statement stm = con.createStatement();
         ResultSet resSet = stm.executeQuery("SELECT name, time FROM scores ORDER BY time LIMIT 3");
-        
+
         while (resSet.next()) {
 
             results += resSet.getString(1) + "\t\t\t" + resSet.getTime(2) + "\n\n";
         }
 
-       resSet.close();
+        resSet.close();
         stm.close();
 
         return results;

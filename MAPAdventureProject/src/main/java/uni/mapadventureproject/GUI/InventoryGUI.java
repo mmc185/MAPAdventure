@@ -15,7 +15,7 @@ import uni.mapadventureproject.type.Item;
  */
 public class InventoryGUI extends javax.swing.JDialog {
 
-    Inventory inv;
+    private Inventory inv;
 
     // Costruttore
     public InventoryGUI(Inventory inv) {
