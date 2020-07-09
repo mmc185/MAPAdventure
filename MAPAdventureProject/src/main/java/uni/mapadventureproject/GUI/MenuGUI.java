@@ -227,8 +227,9 @@ public class MenuGUI extends javax.swing.JFrame {
      * caricato da file.
      */
     private void init() {
-        try {
-            InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"));
+        
+        // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
+        try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
             font = Font.createFont(Font.TRUETYPE_FONT, is);
             fontMinecraft = font.deriveFont(Font.PLAIN, 12);
 

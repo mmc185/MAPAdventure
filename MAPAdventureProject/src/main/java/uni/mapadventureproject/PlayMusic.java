@@ -29,6 +29,7 @@ public class PlayMusic {
     public synchronized void playSound(final String url) {
         Thread musicThread = new Thread(new Runnable() {
 
+            @Override
             public void run() {
                 try {
 
@@ -39,7 +40,9 @@ public class PlayMusic {
                     clip.open(inputStream);   //acquisizione della risorsa di input
                     Thread.sleep(3000);  //thread fermo per 3 secondi
                     clip.start();        //parte la musica
-                    clip.loop(clip.LOOP_CONTINUOUSLY);   //musica in loop all'infinito
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);   //musica in loop all'infinito
+                    
+                    inputStream.close();
 
                 } catch (Exception e) {
 
