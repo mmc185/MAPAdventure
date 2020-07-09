@@ -179,7 +179,7 @@ public class MSGame extends GameManager {
                         byte index = 0;
 
                         // Iteratore per ciclare sul ParserOutput
-                        Iterator it = pOutput.iterator();
+                        Iterator<WordType> it = pOutput.iterator();
                         it.next(); // Salta il comando iniziale, già conosciuto
 
                         // Salva gli oggetti che devono interagire nell'ordine prestabilito (e.g. "Apri baule con chiave")

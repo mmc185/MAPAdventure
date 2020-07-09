@@ -132,7 +132,6 @@ public class PlayMusic {
                     }
                     
                     FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
-                    float currentVolume = volControl.getValue();
                     
                     Double volumeToCut = valueToPlusMinus;
                     //se volumeToCut è 0.0 allora la musica verrà mutata,se è 1.0 la musica verrà aumentata al massimo

@@ -96,7 +96,7 @@ public class ParserOutput implements Iterable<WordType> {
     public String toString() {
         
         StringBuilder s = new StringBuilder();
-        Iterator i = this.iterator();
+        Iterator<WordType> i = this.iterator();
         
         // Finchè ci sono elementi, li concatena
         while (i.hasNext()) {
