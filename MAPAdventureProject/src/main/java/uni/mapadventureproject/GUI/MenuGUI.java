@@ -227,8 +227,7 @@ public class MenuGUI extends javax.swing.JFrame {
      * caricato da file.
      */
     private void init() {
-        try {
-            InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"));
+        try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
             font = Font.createFont(Font.TRUETYPE_FONT, is);
             fontMinecraft = font.deriveFont(Font.PLAIN, 12);
 
