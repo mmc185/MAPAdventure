@@ -139,7 +139,7 @@ public class MSGameInit {
         box.add(sonicScrewdriver);
 
         Item cyberKey = new Item(68, "chiave strana", "Uno strano mix tra la tua tanto agognata usb e un giocattolo\n"
-                + "per bambini. Magari un progetto scritto in un linguaggio alieno\n"
+                + "per bambini. Magari un progetto scritto in un linguaggio alieno "
                 + "potrebbe andare bene lo stesso...");
         cyberKey.setItemImage(new ImageIcon("resources//img//inventario//chiaveCyber.png"));
         cyberKey.setConsumable((byte) 1);
@@ -514,7 +514,7 @@ public class MSGameInit {
                 + "Dannazione, finirai come il tuo codice!");
         ((TriggeredRoom) broomCloset).addTriggerer("guarda");
         ((TriggeredRoom) broomCloset).addTriggerDesc("Senti il tuo amico muoversi accanto a te e colpire qualcosa,\n"
-                + "un forte rumore metallico invade le vostre orecchie seguito\n"
+                + "un forte rumore metallico invade le vostre orecchie seguito "
                 + "dal tonfo di diversi oggetti.");
 
         Room hallway = new Room(23, "Corridoio", "Trovata la maniglia del \"buco nero\" ti rendi conto che era\n"
@@ -760,7 +760,8 @@ public class MSGameInit {
         desertPlanet.setLook("Guardando meglio il negozio, sembra un gift shop turistico "
                 + "per chi si ritrova su questo strano pianeta! Dici che i tuoi amici apprezzerebbero una cartolina da \"Arj Ynf Irtnf\"?\n"
                 + "\nDietro il negozio, andando verso sud, noti un portale molto simile a quello usato per entrare in questo universo bizzarro.\n"
-                + "Dovrebbe essere la via per tornare alla MetaStazione!");
+                + "Dovrebbe essere la via per tornare alla MetaStazione!\n"
+                + "Ad est il deserto sembra percorribile...");
         desertPlanet.setSouth(metaStationLobby);
         desertPlanet.setEast(desert1);
 

@@ -87,7 +87,7 @@ public class GameGUI extends javax.swing.JFrame {
         // Fa iniziare l'avventura stampando la descrizione della stanza iniziale
         appendToPane(jtpReadingArea, "Trovi la guida ai comandi in \"?\" o puoi richiamarla durante il "+
                "gioco con il comando \"guida\" oppure \"aiuto\" \n "+
-               "==========================================\n",Color.GREEN);
+               "==========================================\n", new Color(108, 202, 224));
         appendToPane(jtpReadingArea, "\n" + gInteraction.getGameManager().getGame().getCurrentRoom().getName() +"\n\n" 
                 + gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n" + "\n", Color.white);
                
