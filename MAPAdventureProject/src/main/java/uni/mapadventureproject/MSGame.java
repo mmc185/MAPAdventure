@@ -273,16 +273,23 @@ public class MSGame extends GameManager {
                 // Comando per "svegliarsi", fa partire un finale nascosto
                 case WAKE_UP:
 
-                    output.append("Hai scelto la via più semplice e questo non ti fa onore"
-                            + "\n \n HAI COMPLETATO IL GIOCO IN : "
-                            + this.getGame().getGameTime().getTime());
+                    output.append("Ti guardi intorno e controlli l'orario: sono le 12! Non è suonata la sveglia... \n"
+                            + "L'esame era alle 9. Ti sei giocato l'ultimo appello della sessione...\n"
+                            + "Ora dovrai farlo a settembre... Ti sei rovinato le vacanze! "
+                            + "\n \n HAI SCOPERTO IL FINALE ALTERNATIVO DEL GIOCO IN : "
+                            + this.getGame().getGameTime().getTime()
+                            + "\nNon avendo concluso il gioco portando a termine gli obiettivi, "
+                            + "nella scoreboard avrai una penitenza. ");
 
                     // Ferma il timer che tiene traccia del tempo di completamento del gioco
                     this.getGame().getGameTime().cancel();
 
+                    // La penitenza è pari al tempo di completamento + 3 ore (10800 secondi)                    
+                    this.getGame().getGameTime().setSecondPassed(this.getGame().getGameTime().getSecondPassed() + 10800);
+
                     // Mostra all'utente una immagine di congratulazioni
                     r = this.getGame().getCurrentRoom();
-                    r.setRoomImage(new ImageIcon("resources//img//stanze//congrats.jpg"));
+                    r.setRoomImage(new ImageIcon("resources//img//stanze//congratulations.jpg"));
 
                     break;
 
@@ -401,7 +408,7 @@ public class MSGame extends GameManager {
 
                     if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
 
-                       if (!Objects.isNull(i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.R_OBJ)))) {
+                        if (!Objects.isNull(i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.R_OBJ)))) {
                             pOutput.add(WordType.R_OBJ, i.getName());
                             break;
                         }
@@ -571,7 +578,7 @@ public class MSGame extends GameManager {
 
             } // Se il giocatore ha terminato il gioco e ha collezionato tutti gli oggetti
             else if (!Objects.isNull(this.getGame().getInventory().searchItem("lingotto"))
-                    && !Objects.isNull(this.getGame().getInventory().searchItem("ixora septrifolia")) 
+                    && !Objects.isNull(this.getGame().getInventory().searchItem("ixora septrifolia"))
                     && !Objects.isNull(this.getGame().getInventory().searchItem("medaglione"))) {
 
                 // Gli viene restituita la chiavetta
@@ -580,7 +587,24 @@ public class MSGame extends GameManager {
                 this.getGame().getInventory().add(i);
 
                 // Viene descritto il finale del gioco
-                this.getGame().getCurrentRoom().setDesc("\n\n[finale] "
+                this.getGame().getCurrentRoom().setDesc("\n\n"
+                        + "Tornati alla metastazione, una scimmia con un piccolo cappello vi si avvicina:\n"
+                        + "\"Datemi la roba! So che ce l'avete...\"\n"
+                        + "\"Se vuoi un po' di erba pipa, vai nel mondo medievale e cerca Astor\" gli rispondi.\n"
+                        + "Il tuo amico ti lancia un'occhiataccia.\n"
+                        + "\"No, intendo gli oggetti che hai preso nei tre mondi! "
+                        + "Mi servono per l'esame di Metodi Avanzati Di Portalologia.\" \n"
+                        + "Ha  fatto fare a te il lavoro sporco per il suo esame? \n"
+                        + "Indignato, effettuate lo scambio... Avete assolutamente bisogno di quella pendrive.\n"
+                        + "All'improvviso, suona un allarme...\n\n"
+                        + "===========================================\n"
+                        + "La tua camera \n\n"
+                        + "La sveglia sta suonando: sono le 7:00. Fra un paio d'ore dovrai sostenere l'esame. \n"
+                        + "Oddio, era tutto un sogno! "
+                        + "Un po' sconvolto, ti alzi di scatto e cerchi la chiavetta usb.\n"
+                        + "Dopo svariati minuti, ti rendi conto che la prova è online e non ti serve alcuna pendrive!\n\n"
+                        + "Sei pronto per l'esame? \n"
+                        + "Buona fortuna!"
                         + "\n\nHAI COMPLETATO IL GIOCO IN : " + this.getGame().getGameTime().getTime() + "\n");
 
                 // Ferma il timer che tiene traccia del tempo di completamento del gioco

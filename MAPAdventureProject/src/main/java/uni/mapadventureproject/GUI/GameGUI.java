@@ -256,8 +256,8 @@ public class GameGUI extends javax.swing.JFrame {
         jbDown.setBackground(new java.awt.Color(56, 86, 128));
         jbDown.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
         jbDown.setForeground(new java.awt.Color(255, 255, 255));
-        jbDown.setText("giu'");
-        jbDown.setToolTipText("giu'");
+        jbDown.setText("giù");
+        jbDown.setToolTipText("giù");
         jbDown.setAlignmentY(0.0F);
         jbDown.setBorder(new javax.swing.border.MatteBorder(null));
         jbDown.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
