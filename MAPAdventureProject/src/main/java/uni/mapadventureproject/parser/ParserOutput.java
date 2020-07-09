@@ -93,6 +93,7 @@ public class ParserOutput implements Iterable<WordType> {
      * Crea una stringa formata dagli elementi che compongono la struttura del ParserOutput
      * @return stringa
      */
+    @Override
     public String toString() {
         
         StringBuilder s = new StringBuilder();

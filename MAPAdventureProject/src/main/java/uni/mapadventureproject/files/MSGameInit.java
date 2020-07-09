@@ -602,7 +602,7 @@ public class MSGameInit {
         ((TriggeredRoom) cityStreet2).addTriggerDesc("Senti un tonfo provenire dal distributore e noti che "
                 + "ha erogato un bevanda chiamata \"VoidCoke Pop\".");
 
-        Room alleyway = new TriggeredRoom(33, "Vicolo", "La strada si interrmpe verso sud, tuttavia sembra proseguire "
+        Room alleyway = new TriggeredRoom(33, "Vicolo", "La strada si interrompe verso sud, tuttavia sembra proseguire "
                 + "verso la tua destra. Quando provi ad avvicinarti, un robot dal fare minaccioso ti sbarra la via!");
         alleyway.setRoomImage(new ImageIcon("resources//img//stanze//cityalley.png"));
 
@@ -1131,7 +1131,6 @@ public class MSGameInit {
         } catch (Exception e) {
             
             System.out.println("Eccezione: " + e.getMessage());
-            e.printStackTrace();
             
         }
     }

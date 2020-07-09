@@ -541,8 +541,15 @@ public class GameGUI extends javax.swing.JFrame {
                     db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
                             gInteraction.getGameManager().getGame().getGameTime().getTime());
                     
-                    // Disabilita l'uso del typing field
+                    // Disabilita l'uso di typing field e bottoni
                     jtTypingField.setEnabled(false);
+                    jbSend.setEnabled(false);
+                    jbSouth.setEnabled(false);
+                    jbNorth.setEnabled(false);
+                    jbEast.setEnabled(false);
+                    jbWest.setEnabled(false);
+                    jbUp.setEnabled(false);
+                    jbDown.setEnabled(false);
 
                 } catch (SQLException | ParseException e) {
                     JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
