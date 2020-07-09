@@ -227,7 +227,7 @@ public class MSGameInit {
         blueKey.setItemImage(new ImageIcon("resources//img//inventario//blueKey.png"));
         blueKey.setConsumable((byte) 1);
 
-        Item scroll = new Item(85, "pergamena", "La pergamena antimaledizioni che stavi cercando.");
+        Item scroll = new Item(85, "pergamena antimaledizioni", "La pergamena che stavi cercando per salvare il tuo amico.");
         scroll.setPickupable(true);
         scroll.setItemImage(new ImageIcon("resources//img//inventario//scroll.png"));
         scroll.setConsumable((byte) 1);
