@@ -16,11 +16,11 @@ public abstract class GameManager {
 
     // Costruttori
     
-    GameManager(Game g) {
+    public GameManager(Game g) {
         this.game = g;
     }
     
-    GameManager(Game g, String url ) {
+    public GameManager(Game g, String url ) {
         this.game = g;
         
         // Caricamento della musica

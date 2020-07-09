@@ -122,15 +122,15 @@ public class MSGameInit {
                 + "Che sia la Terra?");
 
         Item panel = new Item(65, "pannello", "Una pubblicità scorre in tanti linguaggi differenti:\n"
-                + "\"Dolcezza assicurata dalle bacche di Xenon del quadrante 9231,\n"
-                + "bevi anche tu una fresca VoidCoke Pop! Qualità assicurata sin dal\n"
+                + "\"Dolcezza assicurata dalle bacche di Xenon del quadrante 9231, "
+                + "bevi anche tu una fresca VoidCoke Pop! Qualità assicurata sin dal "
                 + "3043!\"");
 
         ItemContainer box = new ItemContainer(66, "scatola", "Contiene diverse ed interessanti cianfrusaglie.\n"
-                + "Tra le varie cianfrusaglie noti uno strano cacciavite dalla\n"
+                + "Tra le varie cianfrusaglie noti uno strano cacciavite dalla "
                 + "punta verde ed arrotondata, e una chiave dalla forma strana.");
 
-        Item sonicScrewdriver = new Item(67, "cacciavite sonico", "Un cacciavite senza punta e con solo un bottone, emana una\n"
+        Item sonicScrewdriver = new Item(67, "cacciavite sonico", "Un cacciavite senza punta e con solo un bottone, emana una "
                 + "strana luce verde. Ti sembra familiare.");
         sonicScrewdriver.setItemImage(new ImageIcon("resources//img//inventario//cacciaviteSonico.png"));
         sonicScrewdriver.setAlias(new String[]{"cacciavite"});
@@ -138,7 +138,7 @@ public class MSGameInit {
         sonicScrewdriver.setPickupable(true);
         box.add(sonicScrewdriver);
 
-        Item cyberKey = new Item(68, "chiave strana", "Uno strano mix tra la tua tanto agognata usb e un giocattolo\n"
+        Item cyberKey = new Item(68, "chiave strana", "Uno strano mix tra la tua tanto agognata usb e un giocattolo "
                 + "per bambini. Magari un progetto scritto in un linguaggio alieno "
                 + "potrebbe andare bene lo stesso...");
         cyberKey.setItemImage(new ImageIcon("resources//img//inventario//chiaveCyber.png"));
@@ -513,26 +513,26 @@ public class MSGameInit {
                 + "E se in questo momento un buco nero vi stesse spaghettificando?\n"
                 + "Dannazione, finirai come il tuo codice!");
         ((TriggeredRoom) broomCloset).addTriggerer("guarda");
-        ((TriggeredRoom) broomCloset).addTriggerDesc("Senti il tuo amico muoversi accanto a te e colpire qualcosa,\n"
+        ((TriggeredRoom) broomCloset).addTriggerDesc("Senti il tuo amico muoversi accanto a te e colpire qualcosa, "
                 + "un forte rumore metallico invade le vostre orecchie seguito "
                 + "dal tonfo di diversi oggetti.");
 
-        Room hallway = new Room(23, "Corridoio", "Trovata la maniglia del \"buco nero\" ti rendi conto che era\n"
+        Room hallway = new Room(23, "Corridoio", "Trovata la maniglia del \"buco nero\" ti rendi conto che era "
                 + "solamente uno sgabuzzino pieno di secchi e strane scope.\n"
                 + "Wow! Anche per questa volta siete salvi...");
         hallway.setRoomImage(new ImageIcon("resources//img//stanze//corridoio1.png"));
 
-        Room eastHallway = new Room(24, "Corridoio Est", "Il corridoio si ferma e non va oltre. Accanto a voi si trovano\n"
+        Room eastHallway = new Room(24, "Corridoio Est", "Il corridoio si ferma e non va oltre. Accanto a voi si trovano "
                 + "una porta ed alcuni pannelli con schermi e bottoni.\n"
                 + "\"E questo sarebbe il futuro?! Non c'è nemmeno il touch-screen!\" commenta il tuo amico, deluso.");
         eastHallway.setRoomImage(new ImageIcon("resources//img//stanze//corridoio1.png"));
 
-        Room controlRoom = new Room(25, "Stanza di Controllo", "Una moltitudine di pannelli di controllo fanno flashare\n"
-                + "differenti video ed immagini, alcuni anche dello strano\n"
+        Room controlRoom = new Room(25, "Stanza di Controllo", "Una moltitudine di pannelli di controllo fanno flashare "
+                + "differenti video ed immagini, alcuni anche dello strano "
                 + "codice che sembra azionare autonomamente leve e pulsanti.");
         controlRoom.setRoomImage(new ImageIcon("resources//img//stanze//ControlRoom.png"));
 
-        Room westHallway = new Room(26, "Corridoio Ovest", "Il corridoio prosegue e trovi quelli che puoi solo immaginare\n"
+        Room westHallway = new Room(26, "Corridoio Ovest", "Il corridoio prosegue e trovi quelli che puoi solo immaginare "
                 + "siano alieni intenti a parlare in uno strano linguaggio e\n"
                 + "bere un liquido fumante verde smeraldo. Meglio non farsi domande.");
         westHallway.setRoomImage(new ImageIcon("resources//img//stanze//corriodio ovest.png"));
@@ -602,7 +602,7 @@ public class MSGameInit {
         ((TriggeredRoom) cityStreet2).addTriggerDesc("Senti un tonfo provenire dal distributore e noti che "
                 + "ha erogato un bevanda chiamata \"VoidCoke Pop\".");
 
-        Room alleyway = new TriggeredRoom(33, "Vicolo", "La strada si interrmpe verso sud, tuttavia sembra proseguire "
+        Room alleyway = new TriggeredRoom(33, "Vicolo", "La strada si interrompe verso sud, tuttavia sembra proseguire "
                 + "verso la tua destra. Quando provi ad avvicinarti, un robot dal fare minaccioso ti sbarra la via!");
         alleyway.setRoomImage(new ImageIcon("resources//img//stanze//cityalley.png"));
 
@@ -659,7 +659,7 @@ public class MSGameInit {
         broomCloset.setSouth(hallway);
         broomCloset.setLook("Non vedi nulla!");
 
-        hallway.setLook("Lo sgabuzzino sfocia su un grande corridoio dall'aspetto\n"
+        hallway.setLook("Lo sgabuzzino sfocia su un grande corridoio dall'aspetto "
                 + "moderno e pulito. Il corridoio si dirama verso est e verso ovest.\n "
                 + "Una imponente finestra rivela un panorama mozzafiato.");
         hallway.setNorth(broomCloset);
@@ -1131,7 +1131,6 @@ public class MSGameInit {
         } catch (Exception e) {
             
             System.out.println("Eccezione: " + e.getMessage());
-            e.printStackTrace();
             
         }
     }

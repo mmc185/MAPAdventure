@@ -30,7 +30,7 @@ public class InventoryGUI extends javax.swing.JDialog {
      * l'oggetto che rappresenta.
      * E' possibile cliccare sul bottone per visualizzare nome e descrizione dell'oggetto.
      */
-    public void init() {
+    private void init() {
 
         this.setSize(712, 737);
 
