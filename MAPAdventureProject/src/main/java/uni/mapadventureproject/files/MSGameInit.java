@@ -968,7 +968,7 @@ public class MSGameInit {
                 "Dall'alto è tutto così piccolo! Vedi il castello, la casa di Astor, la cascata, i sentieri... \n"
                 + "Arrivate al portale e salutate il drago per l'ultima volta.");
         shortcutPortal.setRoomImage(new ImageIcon("resources//img//stanze//dragon.png"));
-        shortcutPortal.setLockedBy("pergamena");
+        shortcutPortal.setLockedBy("pergamena antimaledizioni");
 
         Room castleDoor = new Room(55, "Portone del castello", "Hai superato il ponte e sei arrivato davanti al portone del castello, ma è chiuso!");
         castleDoor.setRoomImage(new ImageIcon("resources//img//stanze//castleDoor.png"));
