@@ -384,8 +384,10 @@ public class MSGame extends GameManager {
 
                     if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
 
-                        i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.I_OBJ));
-                        pOutput.add(WordType.I_OBJ, i.getName());
+                       if (!Objects.isNull(i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.I_OBJ)))) {
+                            pOutput.add(WordType.I_OBJ, i.getName());
+                            break;
+                        }
 
                     }
 
@@ -536,7 +538,7 @@ public class MSGame extends GameManager {
                 }
             }
 
-            //se triggerer=triggerer attuale della stanza, si effettua il trigger
+            //se il comando dell'utente (stringa triggerer) = triggerer attuale della stanza, si effettua il trigger
             if (triggerer.equals(r.getCurrentTriggerer())) {
 
                 r.setTrigger(true);
@@ -550,7 +552,7 @@ public class MSGame extends GameManager {
     }
 
     /**
-     * Procedura che fa avanzare la narrazione della storia, basandosi sulla
+     * Metodo che fa avanzare la narrazione della storia, basandosi sulla
      * stanza pivotale per lo svolgimento degli eventi.
      */
     private void advancePlot() {
