@@ -128,7 +128,7 @@ public class MSGameInit {
 
         ItemContainer box = new ItemContainer(66, "scatola", "Contiene diverse ed interessanti cianfrusaglie.\n"
                 + "Tra le varie cianfrusaglie noti uno strano cacciavite dalla "
-                + "punta verde ed arrotondata, e una chiave dalla forma strana.");
+                + "punta verde ed arrotondata, e una \'chiave strana \'.");
 
         Item sonicScrewdriver = new Item(67, "cacciavite sonico", "Un cacciavite senza punta e con solo un bottone, emana una "
                 + "strana luce verde. Ti sembra familiare.");
@@ -227,7 +227,7 @@ public class MSGameInit {
         blueKey.setItemImage(new ImageIcon("resources//img//inventario//blueKey.png"));
         blueKey.setConsumable((byte) 1);
 
-        Item scroll = new Item(85, "pergamena", "La pergamena antimaledizioni che stavi cercando.");
+        Item scroll = new Item(85, "pergamena antimaledizioni", "La pergamena che stavi cercando per salvare il tuo amico.");
         scroll.setPickupable(true);
         scroll.setItemImage(new ImageIcon("resources//img//inventario//scroll.png"));
         scroll.setConsumable((byte) 1);
@@ -878,7 +878,7 @@ public class MSGameInit {
                 + "dicendo che il drago gli ha raccontato la sua storia: "
                 + "per una maledizione di Astor, è rimasto vincolato al castello negli ultimi 500 anni."
                 + "Adesso, usando la pergamena, si potrà rompere la maledizione.");
-        ((TriggeredRoom) castle).addTriggerer("usa pergamena");
+        ((TriggeredRoom) castle).addTriggerer("usa pergamena antimaledizioni");
         ((TriggeredRoom) castle).addTriggerDesc("Dopo aver pronunciato le parole magiche scritte sulla pergamena, questa si autodistrugge;\n"
                 + "il drago è finalmente libero e potrà tornare a volare in giro per il mondo.\n"
                 + "\"Simpatico 'sto tizio! Abbiamo giocato a degli indovinelli, ne conosce di interessanti! "
@@ -950,9 +950,9 @@ public class MSGameInit {
         druidHouse.setRoomImage(new ImageIcon("resources//img//stanze//druidHouseInside.png"));
         druidHouse.setLockedBy("bastone");
         ((TriggeredRoom) druidHouse).addTriggerer("prendi chiave verde");
-        ((TriggeredRoom) druidHouse).addTriggerDesc("Mentre cerchi la pergamena, senti Astor che canticchia nel giardino; "
+        ((TriggeredRoom) druidHouse).addTriggerDesc("Mentre cerchi la \'pergamena antimaledizioni \', senti Astor che canticchia nel giardino; "
                 + "la sua voce è sempre più vicina... \nDovresti muoverti o verrai scoperto!!"); //a prendere la pergamena e chiudere tutto!
-        ((TriggeredRoom) druidHouse).addTriggerer("prendi pergamena");
+        ((TriggeredRoom) druidHouse).addTriggerer("prendi pergamena antimaledizioni");
         ((TriggeredRoom) druidHouse).addTriggerDesc("Senti Astor che sta per rientrare. \n"
                 + "Riesci a rimettere tutto a posto e a sederti giusto in tempo. \n"
                 + "\"Scusa per l'attesa!! Ecco qui\"\n "
@@ -968,7 +968,7 @@ public class MSGameInit {
                 "Dall'alto è tutto così piccolo! Vedi il castello, la casa di Astor, la cascata, i sentieri... \n"
                 + "Arrivate al portale e salutate il drago per l'ultima volta.");
         shortcutPortal.setRoomImage(new ImageIcon("resources//img//stanze//dragon.png"));
-        shortcutPortal.setLockedBy("pergamena");
+        shortcutPortal.setLockedBy("pergamena antimaledizioni");
 
         Room castleDoor = new Room(55, "Portone del castello", "Hai superato il ponte e sei arrivato davanti al portone del castello, ma è chiuso!");
         castleDoor.setRoomImage(new ImageIcon("resources//img//stanze//castleDoor.png"));
