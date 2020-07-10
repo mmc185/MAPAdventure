@@ -1,4 +1,3 @@
-
 package uni.mapadventureproject.GUI;
 
 import java.awt.Color;
@@ -23,13 +22,13 @@ import uni.mapadventureproject.GameInteraction;
 import uni.mapadventureproject.database.DBManager;
 
 /**
- *Interfaccia grafica che permetterà all'utente di giocare
+ * Interfaccia grafica che permetterà all'utente di giocare
  */
 public class GameGUI extends javax.swing.JFrame {
 
     private GameInteraction gInteraction; // Gestore di Interazione col gioco e parser
     private DBManager db = new DBManager(); // database per i punteggi
-    
+
     // Font per la grafica
     private Font font;
     private Font fontMinecraft;
@@ -53,7 +52,7 @@ public class GameGUI extends javax.swing.JFrame {
         // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
         try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
 
-            font = Font.createFont(Font.TRUETYPE_FONT, is); 
+            font = Font.createFont(Font.TRUETYPE_FONT, is);
             fontMinecraft = font.deriveFont(Font.PLAIN, 14);
 
             this.setFont(fontMinecraft);
@@ -77,20 +76,20 @@ public class GameGUI extends javax.swing.JFrame {
     }
 
     /**
-     * Inizializza il gioco con l'interfaccia iniziale con cui l'utente interagirà.
+     * Inizializza il gioco con l'interfaccia iniziale con cui l'utente
+     * interagirà.
      */
     private void initGame() {
-        
+
         // Salva il nome del giocatore
         gInteraction.getGameManager().getGame().setPlayer(JOptionPane.showInputDialog(this, "Inserisci il tuo nome:"));
-        
+
         // Fa iniziare l'avventura stampando la descrizione della stanza iniziale
-        appendToPane(jtpReadingArea, "Trovi la guida ai comandi in \"?\" o puoi richiamarla durante il "+
-               "gioco con il comando \"guida\" oppure \"aiuto\" \n "+
-               "==========================================\n", new Color(108, 202, 224));
-        appendToPane(jtpReadingArea, "\n" + gInteraction.getGameManager().getGame().getCurrentRoom().getName() +"\n\n" 
+        appendToPane(jtpReadingArea, "Trovi la guida ai comandi in \"?\" o puoi richiamarla durante il "
+                + "gioco con il comando \"guida\" oppure \"aiuto\" \n "
+                + "==========================================\n", new Color(108, 202, 224));
+        appendToPane(jtpReadingArea, "\n" + gInteraction.getGameManager().getGame().getCurrentRoom().getName() + "\n\n"
                 + gInteraction.getGameManager().getGame().getCurrentRoom().getDesc() + "\n" + "\n", Color.white);
-               
 
         //Imposta l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
@@ -102,7 +101,8 @@ public class GameGUI extends javax.swing.JFrame {
     }
 
     /**
-     * Connessione al database ( che conterrà il nome del giocatore e il tempo che ha impiegato per concludere il gioco).
+     * Connessione al database ( che conterrà il nome del giocatore e il tempo
+     * che ha impiegato per concludere il gioco).
      */
     private void initDB() {
         try {
@@ -161,6 +161,11 @@ public class GameGUI extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1000, 700));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 700));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jpButtons.setForeground(new java.awt.Color(60, 63, 65));
@@ -490,8 +495,9 @@ public class GameGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Le varie descrizioni appariranno nel jTextPane e per ogni interazione dell'utente
-     * verrà concatenata la risposta al testo già presente.
+     * Le varie descrizioni appariranno nel jTextPane e per ogni interazione
+     * dell'utente verrà concatenata la risposta al testo già presente.
+     *
      * @param tp jTextPane in cui verranno concatenati i messaggi
      * @param msg messaggio di risposta all'utente
      * @param c colore con cui verrà visualizzato il messaggio
@@ -518,6 +524,7 @@ public class GameGUI extends javax.swing.JFrame {
     /**
      * Metodo che invia il comando scritto dall'utente e ne stampa la risposta
      * attraverso l'uso dell'interfaccia grafica.
+     *
      * @param evt actionPerformed
      */
     private void jbSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSendActionPerformed
@@ -540,7 +547,7 @@ public class GameGUI extends javax.swing.JFrame {
                     // Inserisce il nome del giocatore e il suo tempo nel DB
                     db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
                             gInteraction.getGameManager().getGame().getGameTime().getTime());
-                    
+
                     // Disabilita l'uso di typing field e bottoni
                     jtTypingField.setEnabled(false);
                     jbSend.setEnabled(false);
@@ -557,7 +564,7 @@ public class GameGUI extends javax.swing.JFrame {
             }
 
         }
-        
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -568,7 +575,7 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbNorthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNorthActionPerformed
         // L'utente si muove verso nord
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("nord") + "\n", Color.white);
-        
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -577,7 +584,7 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbSouthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSouthActionPerformed
         // L'utente si muove verso sud
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("sud") + "\n", Color.white);
-        
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -586,7 +593,7 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbWestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWestActionPerformed
         // L'utente si muove verso ovest
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("ovest") + "\n", Color.white);
-        
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -595,7 +602,7 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbEastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEastActionPerformed
         // L'utente si muove verso est
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("est") + "\n", Color.white);
-        
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -604,7 +611,7 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUpActionPerformed
         // L'utente si muove verso su
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("sali") + "\n", Color.white);
-        
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -613,7 +620,7 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDownActionPerformed
         // L'utente si muove verso giù
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("scendi") + "\n", Color.white);
-        
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -621,6 +628,7 @@ public class GameGUI extends javax.swing.JFrame {
 
     /**
      * Se l'utente preme invio equivale allo spingere il bottone "Invia"
+     *
      * @param evt KeyEvent
      */
     private void jtTypingFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTypingFieldKeyPressed
@@ -631,6 +639,7 @@ public class GameGUI extends javax.swing.JFrame {
 
     /**
      * Permette di tornare al menù principale dopo aver chiesto conferma
+     *
      * @param evt ActionPerformed
      */
     private void jmiBackMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackMenuActionPerformed
@@ -646,7 +655,9 @@ public class GameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiBackMenuActionPerformed
 
     /**
-     * Permette di salvare i progressi attuali in una cartella scelta dall'utente.
+     * Permette di salvare i progressi attuali in una cartella scelta
+     * dall'utente.
+     *
      * @param evt ActionPerformed
      */
     private void jmiSaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSaveGameActionPerformed
@@ -673,6 +684,7 @@ public class GameGUI extends javax.swing.JFrame {
 
     /**
      * Permette di visualizzare l'inventario, richiamando l'interfaccia grafica.
+     *
      * @param evt ActionPerformed
      */
     private void jbInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInvActionPerformed
@@ -682,6 +694,7 @@ public class GameGUI extends javax.swing.JFrame {
 
     /**
      * Fa visualizzare una guida per il gioco con i vari comandi possibili.
+     *
      * @param evt Action Performed
      */
     private void jmiHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHelpActionPerformed
@@ -690,7 +703,9 @@ public class GameGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiHelpActionPerformed
 
     /**
-     * Schermata che mostra i miglior punteggi del gioco attraverso l'opportuno jDialog
+     * Schermata che mostra i miglior punteggi del gioco attraverso l'opportuno
+     * jDialog
+     *
      * @param evt ActionPerformed
      */
     private void jmiScoreboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiScoreboardActionPerformed
@@ -699,7 +714,7 @@ public class GameGUI extends javax.swing.JFrame {
         sbGUI.setVisible(true);
     }//GEN-LAST:event_jmiScoreboardActionPerformed
 
-     /**
+    /**
      * Alza il volume della musica
      *
      * @param evt MouseClicked
@@ -735,7 +750,19 @@ public class GameGUI extends javax.swing.JFrame {
         gInteraction.getGameManager().getMusic().volumeAbsoluteControl(0.0);
     }//GEN-LAST:event_jmMutaMouseClicked
 
-   
+    /**
+     * Disconnette il database prima di chiudere il frame
+     * @param evt evento di chiusura del frame
+     */
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            db.disconnect();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbDown;
     private javax.swing.JButton jbEast;
