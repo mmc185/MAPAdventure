@@ -227,10 +227,10 @@ public class MSGameInit {
         blueKey.setItemImage(new ImageIcon("resources//img//inventario//blueKey.png"));
         blueKey.setConsumable((byte) 1);
 
-        Item scroll = new Item(85, "pergamena antimaledizioni", "La pergamena che stavi cercando per salvare il tuo amico.");
-        scroll.setPickupable(true);
-        scroll.setItemImage(new ImageIcon("resources//img//inventario//scroll.png"));
-        scroll.setConsumable((byte) 1);
+        Item wand = new Item(85, "bacchetta", "La bacchetta antimaledizioni che stavi cercando per salvare il tuo amico.");
+        wand.setPickupable(true);
+        wand.setItemImage(new ImageIcon("resources//img//inventario//wand.png"));
+        wand.setConsumable((byte) 1);
 
         Item mapNote = new Item(87, "mappa", "La mappa per raggiungere il castello. C'è un sentiero, poi un ruscello, una cascata, una valle e infine il castello. Sembra semplice");
         mapNote.setAlias(new String[]{"percorso", "strada"});
@@ -240,14 +240,14 @@ public class MSGameInit {
         ItemContainer wardrobe = new ItemContainer(80, "mobile", "Il mobile è chiuso a chiave. "
                 + "La serratura è argentata con dei simboli verdi");
         wardrobe.setAlias(new String[]{"guardaroba", "armadio"});
-        wardrobe.add(scroll);
+        wardrobe.add(wand);
         wardrobe.setLockedBy(greenKey.getName());
 
         Item medallion = new Item(86, "medaglione", "E' il prezioso medaglione che, con gli altri due oggetti, vi permetterà di rientrare in possesso della vostra chiavetta!");
         medallion.setAlias(new String[]{"collana", "pendente", "gioiello"});
         medallion.setPickupable(true);
         medallion.setItemImage(new ImageIcon("resources//img//inventario//medallion.png"));
-        
+
         //Stanze intro
         Room station = new Room(0, "Stazione ferroviaria", "Una voce metallica gracchia dall'altoparlante:"
                 + "\n\"Il treno regionale delle ore 9:00 diretto a Bari Centrale è in partenza dal binario 9 con un ritardo di 10 minuti!\""
@@ -867,7 +867,7 @@ public class MSGameInit {
                 + "\"AAAAH AIUTOOOOO SOFFRO DI VERTIGINII! METTIMI GIUUUUUU'\"\n"
                 + "Mentre il tuo amico continua a urlare e a cercare di dimenarsi, il drago ti dice: \n"
                 + "\"Libererò il tuo compagno solo se mi porterai "
-                + "la pergamena antimaledizioni del druido Astor. "
+                + "la bacchetta antimaledizioni del druido Astor. "
                 + "È lì, verso la montagna.\" Ti guardi intorno per vedere dove si trova la montagna. ");
         castle.setRoomImage(new ImageIcon("resources//img//stanze//castle.png"));
         ((TriggeredRoom) castle).addTriggerer("guarda");
@@ -877,9 +877,9 @@ public class MSGameInit {
                 + "che chiacchierano e ridacchiano. \nIl tuo amico ti viene incontro, "
                 + "dicendo che il drago gli ha raccontato la sua storia: "
                 + "per una maledizione di Astor, è rimasto vincolato al castello negli ultimi 500 anni."
-                + "Adesso, usando la pergamena, si potrà rompere la maledizione.");
-        ((TriggeredRoom) castle).addTriggerer("usa pergamena antimaledizioni");
-        ((TriggeredRoom) castle).addTriggerDesc("Dopo aver pronunciato le parole magiche scritte sulla pergamena, questa si autodistrugge;\n"
+                + "Adesso, usando la bacchetta, si potrà rompere la maledizione.");
+        ((TriggeredRoom) castle).addTriggerer("usa bacchetta");
+        ((TriggeredRoom) castle).addTriggerDesc("Dopo aver agitato la bacchetta, questa si autodistrugge;\n"
                 + "il drago è finalmente libero e potrà tornare a volare in giro per il mondo.\n"
                 + "\"Simpatico 'sto tizio! Abbiamo giocato a degli indovinelli, ne conosce di interessanti! "
                 + "E mi ha raccontato diverse cose, adesso ho tante nuove idee per la prossima sessione di D&D...\" "
@@ -941,18 +941,18 @@ public class MSGameInit {
                 + "con un cappuccio che gli copre la testa  (riesci ad intravedere delle orecchie a punta) .\n "
                 + "Sembra un incrocio tra Gandalf e Bilbo Baggins. \n"
                 + "Astor prepara il pranzo e vi mettete a mangiare. "
-                + "Inizi a raccontargli la tua storia, del tuo amico e gli chiedi della pergamena. "
-                + "Lui sbianca in viso e ti risponde \"Pergamena antimaledizioni?!? No, non ne ho mai sentito parlare...\" "
+                + "Inizi a raccontargli la tua storia, del tuo amico e gli chiedi della bacchetta. "
+                + "Lui sbianca in viso e ti risponde \"Bacchetta antimaledizioni?!? No, non ne ho mai sentito parlare...\" "
                 + "e cambia subito discorso: \"Ahh, dimenticavo... Vorrei farti provare la mia erba pipa... "
                 + "Torno subito!\" ed esce in giardino.\n"
                 + "\nSei rimasto solo… Potrebbe essere una buona occasione per guardarti intorno... "
-                + "In fondo, quel vecchio non sembrava sincero riguardo la pergamena…");
+                + "In fondo, quel vecchio non sembrava sincero riguardo la bacchetta…");
         druidHouse.setRoomImage(new ImageIcon("resources//img//stanze//druidHouseInside.png"));
         druidHouse.setLockedBy("bastone");
         ((TriggeredRoom) druidHouse).addTriggerer("prendi chiave verde");
-        ((TriggeredRoom) druidHouse).addTriggerDesc("Mentre cerchi la \'pergamena antimaledizioni \', senti Astor che canticchia nel giardino; "
-                + "la sua voce è sempre più vicina... \nDovresti muoverti o verrai scoperto!!"); //a prendere la pergamena e chiudere tutto!
-        ((TriggeredRoom) druidHouse).addTriggerer("prendi pergamena antimaledizioni");
+        ((TriggeredRoom) druidHouse).addTriggerDesc("Mentre cerchi la \'bacchetta antimaledizioni \', senti Astor che canticchia nel giardino; "
+                + "la sua voce è sempre più vicina... \nDovresti muoverti o verrai scoperto!!");
+        ((TriggeredRoom) druidHouse).addTriggerer("prendi bacchetta");
         ((TriggeredRoom) druidHouse).addTriggerDesc("Senti Astor che sta per rientrare. \n"
                 + "Riesci a rimettere tutto a posto e a sederti giusto in tempo. \n"
                 + "\"Scusa per l'attesa!! Ecco qui\"\n "
@@ -968,7 +968,7 @@ public class MSGameInit {
                 "Dall'alto è tutto così piccolo! Vedi il castello, la casa di Astor, la cascata, i sentieri... \n"
                 + "Arrivate al portale e salutate il drago per l'ultima volta.");
         shortcutPortal.setRoomImage(new ImageIcon("resources//img//stanze//dragon.png"));
-        shortcutPortal.setLockedBy("pergamena antimaledizioni");
+        shortcutPortal.setLockedBy("bacchetta");
 
         Room castleDoor = new Room(55, "Portone del castello", "Hai superato il ponte e sei arrivato davanti al portone del castello, ma è chiuso!");
         castleDoor.setRoomImage(new ImageIcon("resources//img//stanze//castleDoor.png"));
@@ -1124,14 +1124,14 @@ public class MSGameInit {
         mInit.init();
 
         try {
-            
+
             // Scrive il file di "nuova partita" con il gioco creato
             fs.saveFile("NewGame//Intro.dat", mInit.getGame());
-            
+
         } catch (Exception e) {
-            
+
             System.out.println("Eccezione: " + e.getMessage());
-            
+
         }
     }
 
