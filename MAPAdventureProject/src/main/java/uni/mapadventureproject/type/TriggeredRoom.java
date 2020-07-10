@@ -9,10 +9,10 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
- * Classe utilizzata per rappresentare quelle stanze che dopo certe azioni subivano
- * dei cambiamenti e ne modificavano la descrizione.
- * Utilizzata per creare enigmi o per vincolare il giocatore a compiere una determinata
- * azione prima di proseguire.
+ * Classe utilizzata per rappresentare quelle stanze che dopo certe azioni
+ * subivano dei cambiamenti e ne modificavano la descrizione. Utilizzata per
+ * creare enigmi o per vincolare il giocatore a compiere una determinata azione
+ * prima di proseguire.
  */
 public class TriggeredRoom extends Room {
 
@@ -26,43 +26,45 @@ public class TriggeredRoom extends Room {
         triggerDesc = new ArrayDeque<>();
         triggerer = new ArrayDeque<>();
     }
-    
+
     public TriggeredRoom(int id, String name, String desc, Queue<String> triggerer, Queue<String> triggerDesc) {
         super(id, name, desc);
         this.triggerer = triggerer;
         this.triggerDesc = triggerDesc;
     }
-    
-    // Metodi get e set
 
+    // Metodi get e set
+    
     /**
      * Indica se la stanza è triggerabile
+     *
      * @return booleano, true se è triggerabile, false altrimenti
      */
     public boolean isTriggerable() {
-        
+
         // Se ci sono ancora trigger la stanza è triggerabile
         return !triggerer.isEmpty();
     }
 
     /**
      * Imposta se il trigger è stato attivato o meno
+     *
      * @param trigger booleano che attiva la stanza se positivo
      */
     public void setTrigger(boolean trigger) {
-        
+
         // se il trigger è positivo, avanza nelle code
         if (trigger) {
-        setDesc(triggerDesc.poll());
-        triggerer.poll();
+            setDesc(triggerDesc.poll());
+            triggerer.poll();
         }
-        
+
     }
 
     public Queue<String> getTriggerDesc() {
         return triggerDesc;
     }
-   
+
     public void addTriggerDesc(String triggerDesc) {
         this.triggerDesc.offer(triggerDesc);
     }
@@ -74,19 +76,20 @@ public class TriggeredRoom extends Room {
     public void addTriggerer(String triggerer) {
         this.triggerer.offer(triggerer);
     }
-    
+
     /**
      * Restituisce il trigger attuale che attiva la stanza
+     *
      * @return stringa trigger
      */
     public String getCurrentTriggerer() {
-        
+
         if (this.isTriggerable()) {
             return triggerer.peek();
         } else {
             return "";
         }
-        
+
     }
 
 }

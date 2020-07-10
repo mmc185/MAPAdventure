@@ -38,6 +38,7 @@ public class ScoreboardGUI extends javax.swing.JDialog {
      */
     private void initFont() {
         
+        // La risorsa del try with resource si chiuderà da sola poiché implementa l'interfaccia AutoCloseable
         try (InputStream is = new BufferedInputStream(new FileInputStream("resources//font//Minecraftia-Regular.ttf"))) {
             
             fontBase = Font.createFont(Font.TRUETYPE_FONT, is);
