@@ -120,7 +120,7 @@ public class MSGame extends GameManager {
                 case PICK_UP:
 
                     // Controlla che l'oggetto sia della stanza e non presente nell'inventario
-                    if (pOutput.containsWordType(WordType.R_OBJ)) {
+                    if (pOutput.containsWordType(WordType.R_OBJ) && pOutput.size() == 2) {
 
                         // Controlla che l'oggetto si possa raccogliere
                         if (!Objects.isNull(i) && i.isPickupable()) {
