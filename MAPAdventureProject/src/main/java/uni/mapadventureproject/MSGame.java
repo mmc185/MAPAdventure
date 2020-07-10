@@ -174,7 +174,7 @@ public class MSGame extends GameManager {
 
                     } else if (pOutput.containsWordType(WordType.R_OBJ)) { // Apertura di un contenitore da sbloccare
 
-                        ItemContainer iC = null; //contenitore
+                        Item iC = null; //contenitore
                         i = null;
                         byte index = 0;
 
@@ -188,7 +188,7 @@ public class MSGame extends GameManager {
                             //itemContainer. obbligatoriamente un oggetto della Room
                             if (index == 1 && it.next().equals(WordType.R_OBJ)) {
 
-                                iC = (ItemContainer) this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
+                                iC = this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
 
                             } //Chiave. obbligatoriamente un oggetto dell'inv
                             else if (index == 2 && it.next().equals(WordType.I_OBJ)) {
@@ -204,10 +204,10 @@ public class MSGame extends GameManager {
                         if (iC instanceof ItemContainer) {
 
                             // Se trova l'oggetto per aprirlo ed è corretto oppure se il contenitore non è bloccato lo apre
-                            if ((i != null && !i.isConsumed() && iC.unlockContainer(i.getName()))
-                                    || (iC.getLockedBy().equals(""))) {
+                            if ((i != null && !i.isConsumed() && ((ItemContainer)iC).unlockContainer(i.getName()))
+                                    || (((ItemContainer)iC).getLockedBy().equals(""))) {
 
-                                if (iC.getcItemList().getInventoryList().isEmpty()) {
+                                if (((ItemContainer)iC).getcItemList().getInventoryList().isEmpty()) {
 
                                     output.append("L'oggetto è stato aperto, ma è vuoto!");
 

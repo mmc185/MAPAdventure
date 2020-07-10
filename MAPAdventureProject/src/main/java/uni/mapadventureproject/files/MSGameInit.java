@@ -134,7 +134,7 @@ public class MSGameInit {
                 + "strana luce verde. Ti sembra familiare.");
         sonicScrewdriver.setItemImage(new ImageIcon("resources//img//inventario//cacciaviteSonico.png"));
         sonicScrewdriver.setAlias(new String[]{"cacciavite"});
-        sonicScrewdriver.setConsumable((byte) 2);
+        sonicScrewdriver.setConsumable((byte) 1);
         sonicScrewdriver.setPickupable(true);
         box.add(sonicScrewdriver);
 
@@ -594,7 +594,7 @@ public class MSGameInit {
         ((TriggeredRoom) bookshop).addTriggerDesc("Non avendo soldi alieni e per evitare di diventare dei ricercati "
                 + "intergalattici, decidete di lasciare i libri lì.");
 
-        Room cityStreet2 = new TriggeredRoom(32, "Strada Aliena Coperta", "Ora la strada è coperta da alcune infrastrutture e da diverse\n"
+        Room cityStreet2 = new TriggeredRoom(32, "Strada Aliena Coperta", "Ora la strada è coperta da alcune infrastrutture e da diverse "
                 + "grate sul pavimento sembra uscire del fumo! ");
         cityStreet2.setRoomImage(new ImageIcon("resources//img//stanze//city2.png"));
 
