@@ -37,7 +37,7 @@ public class MSGameInit {
         ImageIcon img = new ImageIcon("resources//img//inventario//taralli.png");
         taralli.setItemImage(img);
         g.getInventory().add(taralli);
-        Item notes = new Item(51, "quaderno", "Quaderno con gli appunti di MAP pieno di \"pippottoni\"");
+        Item notes = new Item(51, "quaderno", "Quaderno con gli appunti di MAP pieno di \"pippottoni\".");
         notes.setAlias(new String[]{"appunti", "riassunti", "block-notes", "fogli"});
         img = new ImageIcon("resources//img//inventario//appunti.png");
         notes.setItemImage(img);
@@ -59,12 +59,12 @@ public class MSGameInit {
         g.getInventory().add(pendrive);
 
         //Oggetti non inventario
-        Item buttonTrain = new Item(55, "bottone", "Bottone per far aprire le porte del treno");
+        Item buttonTrain = new Item(55, "bottone", "Bottone per far aprire le porte del treno.");
         buttonTrain.setAlias(new String[]{"pulsante"});
         buttonTrain.setPushable(true);
         buttonTrain.setConsumable((byte) 1);
 
-        Item poster = new Item(55, "poster", "\"L'Agenzia di viaggi Artskjid ti dà il benvenuto alla Metastazione Centrale! \n"
+        Item poster = new Item(55, "poster", "\"L'Agenzia di viaggi Artskjid ti dà il benvenuto alla Metastazione Centrale!\n"
                 + "Luogo da cui puoi raggiungere ogni dimensione immaginabile. \nPer informazioni, chiedere al personale in divisa.\"");
         poster.setAlias(new String[]{"cartello", "cartellone", "manifesto", "affisso", "locandina"});
 
@@ -79,13 +79,13 @@ public class MSGameInit {
         note.setItemImage(img);
 
         // Oggetti mondo pirata
-        Item sword = new Item(57, "spada", "Una spada ben affilata,ogni pirata ne dovrebbe avere una così");
+        Item sword = new Item(57, "spada", "Una spada ben affilata, ogni pirata ne dovrebbe avere una così.");
         img = new ImageIcon("resources//img//inventario//spada.png");
         sword.setItemImage(img);
         sword.setPickupable(true);
         sword.setConsumable((byte) 1);
 
-        Item lamp = new Item(58, "lanterna", "Una vecchia lanterna ,potrebbe essere utile");
+        Item lamp = new Item(58, "lanterna", "Una vecchia lanterna, potrebbe essere utile.");
         lamp.setAlias(new String[]{"lampada", "lumino"});
         img = new ImageIcon("resources//img//inventario//lanterna.jpg");
         lamp.setItemImage(img);
@@ -101,17 +101,17 @@ public class MSGameInit {
         sacco.add(sword);
         sacco.add(lamp);
         sacco.add(parchment);
-        ItemContainer sack = new ItemContainer(sacco, 60, "sacco", "Sacco del pirata,potrebbe contenere qualcosa di utile");
+        ItemContainer sack = new ItemContainer(sacco, 60, "sacco", "Sacco del pirata, potrebbe contenere qualcosa di utile.");
         Item key = new Item(61, "chiave pirata", "Chiave del capitano Kid");
         key.setItemImage(new ImageIcon("resources//img//inventario//chiave.png"));
         key.setPickupable(true);
         key.setConsumable((byte) 1);
 
-        Item bullion = new Item(62, "lingotto", "Il tesoro di kid e uno degli oggetti per la tua salvezza!");
+        Item bullion = new Item(62, "lingotto", "Il tesoro di Kid e uno degli oggetti per la tua salvezza!");
         bullion.setItemImage(new ImageIcon("resources//img//inventario//lingotto.jpg"));
         bullion.setPickupable(true);
 
-        ItemContainer chest = new ItemContainer(new Inventory(), 63, "forziere", "Contiene il lingotto del capitano Kid");
+        ItemContainer chest = new ItemContainer(new Inventory(), 63, "forziere", "Contiene il lingotto del capitano Kid.");
         chest.setAlias(new String[]{"baule"});
         chest.add(bullion);
         chest.setLockedBy("chiave pirata");
@@ -203,26 +203,26 @@ public class MSGameInit {
         alienFlower.setAlias(new String[]{"fiore"});
         alienFlower.setPickupable(true);
 
-        //Oggetti mondo medievale
+        // Oggetti mondo medievale
         Item stick = new Item(79, "bastone", "Un bastone di legno con una specie di fiamma luminosa all'estremo superiore. \n"
-                + "Su di esso sono intagliati simboli strani e una scritta:\"Astor\"\n "
+                + "Su di esso sono intagliati simboli strani e una scritta: \"Astor\"\n "
                 + "Questa parola non ti è nuova...");
         stick.setItemImage(new ImageIcon("resources//img//inventario//druidStick.png"));
         stick.setAlias(new String[]{"mazza", "legno", "asta"});
         stick.setPickupable(true);
         stick.setConsumable((byte) 1);
 
-        Item greenKey = new Item(82, "chiave verde", "Una chiave verde con dei richiami argentati");
+        Item greenKey = new Item(82, "chiave verde", "Una chiave verde con dei richiami argentati.");
         greenKey.setPickupable(true);
         greenKey.setItemImage(new ImageIcon("resources//img//inventario//greenKey.png"));
         greenKey.setConsumable((byte) 1);
 
-        Item redKey = new Item(83, "chiave rossa", "Una chiave rossa con dei richiami argentati");
+        Item redKey = new Item(83, "chiave rossa", "Una chiave rossa con dei richiami argentati.");
         redKey.setPickupable(true);
         redKey.setItemImage(new ImageIcon("resources//img//inventario//redKey.png"));
         redKey.setConsumable((byte) 1);
 
-        Item blueKey = new Item(84, "chiave blu", "Una chiave blu con dei richiami argentati");
+        Item blueKey = new Item(84, "chiave blu", "Una chiave blu con dei richiami argentati.");
         blueKey.setPickupable(true);
         blueKey.setItemImage(new ImageIcon("resources//img//inventario//blueKey.png"));
         blueKey.setConsumable((byte) 1);
@@ -232,19 +232,19 @@ public class MSGameInit {
         wand.setItemImage(new ImageIcon("resources//img//inventario//wand.png"));
         wand.setConsumable((byte) 1);
 
-        Item mapNote = new Item(87, "mappa", "La mappa per raggiungere il castello. C'è un sentiero, poi un ruscello, una cascata, una valle e infine il castello. Sembra semplice");
+        Item mapNote = new Item(87, "mappa", "La mappa per raggiungere il castello. C'è un sentiero, poi un ruscello, una cascata, una valle e infine il castello. Sembra semplice!");
         mapNote.setAlias(new String[]{"percorso", "strada"});
         mapNote.setPickupable(true);
         mapNote.setItemImage(new ImageIcon("resources//img//inventario//mapCastle.png"));
 
         ItemContainer wardrobe = new ItemContainer(80, "mobile", "Il mobile è chiuso a chiave. "
-                + "La serratura è argentata con dei simboli verdi");
+                + "La serratura è argentata con dei simboli verdi.");
         wardrobe.setAlias(new String[]{"guardaroba", "armadio"});
         wardrobe.add(wand);
         wardrobe.setLockedBy(greenKey.getName());
 
         Item medallion = new Item(86, "medaglione", "E' il prezioso medaglione che, con gli altri due oggetti, vi permetterà di rientrare in possesso della vostra chiavetta!");
-        medallion.setAlias(new String[]{"collana", "pendente", "gioiello"});
+        medallion.setAlias(new String[]{"collana", "pendente", "gioiello", "ciondolo"});
         medallion.setPickupable(true);
         medallion.setItemImage(new ImageIcon("resources//img//inventario//medallion.png"));
 
@@ -293,7 +293,7 @@ public class MSGameInit {
                 + "Il tuo amico, non gentilmente, esclama \"Oh no! Come dannazione hai fatto?! La chiavetta con su il progetto è scomparsa!\"\n"
                 + "Gli premi di controllare meglio e comincia ad elencare il contenuto dello zaino.\n"
                 + "\"Borraccia, i tuoi immancabili taralli, ombrello, quaderno e un fogliettino sparso. Cos'è vuoi copiare all'esame?\"\n"
-                + "(Non avevi un bigliettino prima!)");
+                + "( Non avevi un bigliettino prima! )");
         metaStationLobby.setRoomImage(new ImageIcon("resources//img//stanze//metaStationLobby.png"));
 
         station.setUp(wagon);
@@ -316,23 +316,23 @@ public class MSGameInit {
         metaStationLobby.addItem(note);
 
         //Stanze mondo pirata
-        Room ship = new Room(4, "Nave pirata", "Sbuchi dal portale e ti ritrovi su una nave enorme,"
-                + "in cima sventola una bandiera nera raffigurante un teschio bianco,sei su una nave pirata! \n"
+        Room ship = new Room(4, "Nave pirata", "Sbuchi dal portale e ti ritrovi su una nave enorme, "
+                + "in cima sventola una bandiera nera raffigurante un teschio bianco, sei su una nave pirata!\n"
                 + "La nave è ormeggiata vicino ad un'isola, da cui si nota una foresta e sulla spiaggia un piccolo falò. Potrebbe esserci qualcuno.\n"
                 + "Il tuo amico trova un biglietto attaccato sull'albero maestro e lo legge: \n"
-                + "\"Su quest'isola troverai il tesoro del capitano kid, un lingotto d'oro che mai nessuno è riuscito a trovare, trovalo e rispetta il nostro patto.\n"
-                + "Ah dimenticavo,dovrai raggiungere la caverna dopo aver attraversato la foresta; nella tenda vicino al falò troverai qualcosa per te.\"");
+                + "\"Su quest'isola troverai il tesoro del capitano Kid, un lingotto d'oro che mai nessuno è riuscito a trovare, trovalo e rispetta il nostro patto.\n"
+                + "Ah dimenticavo, dovrai raggiungere la caverna dopo aver attraversato la foresta; nella tenda vicino al falò troverai qualcosa per te.\"");
         ship.setRoomImage(new ImageIcon("resources//img//stanze//ship.png"));
         metaStationLobby.setEast(ship);
 
         Room campFire = new Room(5, "Falo'", "Tu e il tuo amico vi siete divisi per avere più probabilità di trovare il tesoro e setacciare meglio l'isola.\n"
-                + "Vai avanti e trovi un piccolo falò che illumina a stento l area circostante circondato da tante bottiglie vuote.\n"
-                + "Sulla sabbia ci sono delle impronte che vanno verso est, impronte strane... un piede umano e un impronta circolare, ma dove sei finito?");
+                + "Vai avanti e trovi un piccolo falò che illumina a stento l'area circostante circondato da tante bottiglie vuote.\n"
+                + "Sulla sabbia ci sono delle impronte che vanno verso est, impronte strane... un piede umano e un'impronta circolare, ma dove sei finito?");
         campFire.setRoomImage(new ImageIcon("resources//img//stanze//campFire.png"));
 
-        Room tent = new TriggeredRoom(6, "Tenda", "Che puzza di alcol! Un tizio con una benda sull'occhio sinistro e una gamba di legno è  spaparanzato per terra tutto UBRIACO!"
+        Room tent = new TriggeredRoom(6, "Tenda", "Che puzza di alcol! Un tizio con una benda sull'occhio sinistro e una gamba di legno è spaparanzato per terra tutto UBRIACO!"
                 + "Ecco di chi erano quelle bottiglie.\n"
-                + "\"Per mille balene...\" farfuglia il pirata  nel sonno.\n"
+                + "\"Per mille balene...\" farfuglia il pirata nel sonno.\n"
                 + "Dovresti trovare qualcosa di utile qui dentro, ma attento a non svegliarlo.");
         ((TriggeredRoom) tent).addTriggerer("prendi spada");
         ((TriggeredRoom) tent).addTriggerDesc("Ora hai la spada, spero non ti serva.");
@@ -360,13 +360,13 @@ public class MSGameInit {
         Room cave = new Room(10, "Caverna", "Sei arrivato alla caverna, ma l'entrata è bloccata. E ora?");
         cave.setRoomImage(new ImageIcon("resources//img//stanze//cave.jpg"));
 
-        Room cave1 = new Room(11, "Caverna", "Finalmente sei nella caverna, e appena sceso vieni attaccato da uno stormo di pipistelli!!\n"
+        Room cave1 = new Room(11, "Caverna", "Finalmente sei nella caverna, e appena sceso vieni attaccato da uno stormo di pipistrelli!!\n"
                 + "AHAHAH scherzo volevo spaventarti!\n"
-                + "La caverna si dirama in piu vie, ed è piena di scheletri umani, chissà quante persone ci hanno provato prima di te.\n"
+                + "La caverna si dirama in più vie, ed è piena di scheletri umani, chissà quante persone ci hanno provato prima di te.\n"
                 + "Come fare per trovare un'uscita?");
         cave1.setRoomImage(new ImageIcon("resources//img//stanze//cave.jpg"));
 
-        Room cave2 = new Room(12, "Caverna", "Bene, ora un'altro bivio");
+        Room cave2 = new Room(12, "Caverna", "Bene, ora un altro bivio.");
         cave2.setRoomImage(new ImageIcon("resources//img//stanze//cave.jpg"));
 
         Room cave3 = new Room(13, "Caverna", "Da qui non si può proseguire.");
@@ -384,7 +384,7 @@ public class MSGameInit {
         Room cave7 = new Room(17, "Caverna", "Da qui non si può proseguire.");
         cave7.setRoomImage(new ImageIcon("resources//img//stanze//vicolo_cieco.png"));
 
-        Room sunrise = new TriggeredRoom(18, "Alba", "Finalmente sei riuscito ad uscire da quella maledetta caverna. Ormai è l' alba e la luce non ti aiuterà a prendere il tesoro inosservato."
+        Room sunrise = new TriggeredRoom(18, "Alba", "Finalmente sei riuscito ad uscire da quella maledetta caverna. Ormai è l'alba e la luce non ti aiuterà a prendere il tesoro inosservato. "
                 + "Davanti a te trovi uno scheletro con un cappello da pirata e una pistola a canna focaia accanto ad esso. Provi a raccoglierlo ma mentre ci provi fai scattare una trappola.\n"
                 + "Lo scheletro si alza e se ne va ridendo, oltre al danno pure la beffa.\n"
                 + " Sei appeso come un salame in una fune. Questa giornata non poteva andare peggio di così...");
@@ -392,20 +392,20 @@ public class MSGameInit {
         ((TriggeredRoom) sunrise).addTriggerDesc("Ti sei liberato, puoi andare giù in acqua alla ricerca del tesoro ora.");
         sunrise.setRoomImage(new ImageIcon("resources/img//stanze//sunrise.jpg"));
 
-        Room sea = new Room(19, "A mollo", "Ti sei immerso, ci sono tanti pesci e  alghe ma la via per la nave è sgombra");
+        Room sea = new Room(19, "A mollo", "Ti sei immerso, ci sono tanti pesci e alghe ma la via per la nave è sgombra.");
         sea.setRoomImage(new ImageIcon("resources//img//stanze//sea.png"));
 
-        Room adventureGalley = new Room(20, "Adventure Galley", "Davanti a te si trova la nave affondata del capitano Kid");
+        Room adventureGalley = new Room(20, "Adventure Galley", "Davanti a te si trova la nave affondata del capitano Kid.");
         adventureGalley.setRoomImage(new ImageIcon("resources//img//stanze//adventureGalley.png"));
 
         Room treasure = new Room(21, "Stanza del tesoro", "La nave è semi distrutta, ma non si può non notare un gran forziere e tanti oggetti luccicanti, il forziere è chiuso ovviamente.\n"
                 + "Ad ovest si trova la stanza del capitano.");
         treasure.setRoomImage(new ImageIcon("resources//img//stanze//treasure.png"));
 
-        Room captainRoom = new Room(22, "Stanza del capitano", "La stanza non è molto grande e vicino ad un tavolo giace il corpo di un pirata con una 'chiave pirata' attacata alla sua cintura.\n"
-                + "E' il corpo del leggendario capitano kid uno dei pirati più ricercati\n"
-                + "che si suicidò perchè esausto di fuggire dalla condonna a morte del governo inglese nei suoi confronti.\n"
-                + "Questo non farà scattare una trappola  come per  lo scheletro di prima,si spera.");
+        Room captainRoom = new Room(22, "Stanza del capitano", "La stanza non è molto grande e vicino ad un tavolo giace il corpo di un pirata con una 'chiave pirata' attaccata alla sua cintura.\n"
+                + "E' il corpo del leggendario capitano Kid, uno dei pirati più ricercati "
+                + "che si suicidò perchè esausto di fuggire dalla condanna a morte del governo inglese nei suoi confronti.\n"
+                + "Questo non farà scattare una trappola come per lo scheletro di prima, si spera.");
         captainRoom.setRoomImage(new ImageIcon("resources//img//stanze//captainRoom.png"));
 
         Room boat = new Room(23, "Barchetta", "Finalmente aria. Trovi una barchetta e ci sali sopra.");
@@ -413,17 +413,17 @@ public class MSGameInit {
 
         Room shipPortal = new Room(21, "Il ritorno", "Accanto alla nave c'è una corda per poter salire e attraversare il portale. \n"
                 + "Senti degli spari e delle esplosioni e vedi un tizio che corre verso il portale.\n"
-                + "E' il tuo amico che ha esagerato un po' con il distarre i pirati fantasma che ora vi stanno cercando, "
+                + "E' il tuo amico che ha esagerato un po' con il distrarre i pirati fantasma che ora vi stanno cercando, "
                 + "forse è meglio muoversi e tornare nella stanza dei portali con il nuovo tesoro!!\n"
                 + "Chissà che fine farà il pirata ubriacone che non troverà più il tesoro.\n"
                 + "Chi dorme non piglia pesci dice un detto!");
         shipPortal.setRoomImage(new ImageIcon("resources//img//stanze//shipPortal.png"));
 
-        ship.setLook("A nord cè il falò,alle tue spalle  il portale dal quale sei arrivato,nelle altre direzioni c'è solo il mare.");
+        ship.setLook("A nord c'è il falò, alle tue spalle il portale dal quale sei arrivato, nelle altre direzioni c'è solo il mare.");
         ship.setWest(metaStationLobby);
         ship.setNorth(campFire);
 
-        campFire.setLook("Le impronte portano ad una tenda,è quella a cui faceva riferimento il biglietto trovato sulla nave?");
+        campFire.setLook("Le impronte portano ad una tenda, è quella a cui faceva riferimento il biglietto trovato sulla nave?");
         campFire.setEast(tent);
         campFire.setSouth(ship);
 
@@ -432,7 +432,7 @@ public class MSGameInit {
         tent.addItem(sack);
         tent.setNorth(forest);
 
-        forest.setLook(" Si sentono versi strani e ti senti osservato eppure non c'è nessuno, o almeno speri...tutto questo ti mette i brividi!");
+        forest.setLook("Si sentono versi strani e ti senti osservato, eppure non c'è nessuno, o almeno speri... tutto questo ti mette i brividi!");
         forest.setEast(waterfall);
         forest.setWest(cliff);
         forest.setNorth(cave);
@@ -481,7 +481,7 @@ public class MSGameInit {
         sunrise.setLook("La corda che ti intrappola non sembra molto robusta, potresti usare qualcosa per tagliarla.");
         sunrise.setDown(sea);
 
-        sea.setLook("Ad est si trova l' Adventure Galley!");
+        sea.setLook("Ad est si trova l'Adventure Galley!");
         sea.setEast(adventureGalley);
         sea.setLockedBy("spada");
 
@@ -533,7 +533,7 @@ public class MSGameInit {
         controlRoom.setRoomImage(new ImageIcon("resources//img//stanze//ControlRoom.png"));
 
         Room westHallway = new Room(26, "Corridoio Ovest", "Il corridoio prosegue e trovi quelli che puoi solo immaginare "
-                + "siano alieni intenti a parlare in uno strano linguaggio e\n"
+                + "siano alieni intenti a parlare in uno strano linguaggio e "
                 + "bere un liquido fumante verde smeraldo. Meglio non farsi domande.");
         westHallway.setRoomImage(new ImageIcon("resources//img//stanze//corriodio ovest.png"));
 
@@ -629,7 +629,7 @@ public class MSGameInit {
         Room volcanicWorld = new Room(36, "Mondo Vulcanico", "Appena saliti sulla piattaforma, siete stati teletrasportati "
                 + "in un mondo pieno di lava e detriti! Respirare è reso "
                 + "difficile da tutto il fumo emesso dai vulcani.\n"
-                + "Meglio tornare indietro prima di diventare sculture umane\n"
+                + "Meglio tornare indietro prima di diventare sculture umane"
                 + "composte da lapilli!");
         volcanicWorld.setRoomImage(new ImageIcon("resources//img//stanze//MondoVulcanico.png"));
 
@@ -767,7 +767,7 @@ public class MSGameInit {
 
         desert1.setLook("Vi avvicinate alla navicella, ma sembra essere vuota. L'unica "
                 + "sostanza presente vicino ad essa è uno strano liquido denso e verde.\n"
-                + "Speri vivamente di non incontrare l'essere che l'abbia prodotto.Puoi continuare ad andare verso est..");
+                + "Speri vivamente di non incontrare l'essere che l'abbia prodotto. Puoi continuare ad andare verso est..");
         desert1.setWest(desertPlanet);
         desert1.setEast(desert2);
 
@@ -787,7 +787,7 @@ public class MSGameInit {
 
         //Stanze del mondo medievale
         Room glade = new Room(41, "Radura", "Sbuchi dal portale e ti ritrovi in mezzo a un bosco. \n"
-                + "C’è anche il tuo amico con te che esclama: “Ma dove siamo finiti??"); //Comandi
+                + "C’è anche il tuo amico con te che esclama: \"Ma dove siamo finiti??\""); 
         glade.setRoomImage(new ImageIcon("resources//img//stanze//glade.png"));
 
         Room woodsWest = new Room(42, "Foresta", "Qui la foresta è molto fitta...");
@@ -803,7 +803,7 @@ public class MSGameInit {
                 + "La dolce melodia che proviene dallo strumento è la stessa che avevi sentito nella stazione dei portali.\n"
                 + "Il tuo amico esclama: \"Moo bella questa canzonee! "
                 + "Sembra una di quelle che ascoltiamo quando facciamo sessione di D&D!\n"
-                + "Forse dovremmo parlargli e chiedergli se sa qualcosa dell'oggetto. Com'è che si chiamava?"
+                + "Forse dovremmo parlargli e chiedergli se sa qualcosa dell'oggetto. Com'è che si chiamava? "
                 + "Non mi ricordo, forse dovremmo dare un'occhiata al bigliettino…\"");
         pathway.setRoomImage(new ImageIcon("resources//img//stanze//pathway.jpg"));
         ((TriggeredRoom) pathway).addTriggerer("guarda bigliettino");
@@ -819,12 +819,12 @@ public class MSGameInit {
                 + "attraversate la piccola cascata e vi ritroverete in una valle, nei pressi del vecchio castello.\n"
                 + "Secondo la leggenda, il drago non vi lascerà passare facilmente: "
                 + "si dice che sia gelosissimo del castello e non permetta a nessuno di entrare.\"\n"
-                + "Ringraziate il musicista. \nIl tuo amico porge 50 centesimi... "
+                + "Ringraziate il musicista. \nIl tuo amico gli porge 50 centesimi... "
                 + "Lui, tutto euforico, inizia a saltellare di gioia, "
                 + "convinto di avere avuto una moneta d'oro e di essere diventato ricco...\n"
                 + "Povero illuso... Lo salutate e se ne va. "
-                + "Il tuo amico scrive una piccola mappa e te la porge dicendo: "
-                + "\"In questo modo, non ci dimenticheremo il tragitto da percorrere!\"");
+                + "Il tuo amico disegna una piccola mappa e te la porge dicendo: "
+                + "\"Prendila tu! In questo modo, non ci dimenticheremo il tragitto da percorrere!\"");
         ((TriggeredRoom) pathway).addTriggerer("prendi mappa");
         ((TriggeredRoom) pathway).addTriggerDesc("Siete sul sentiero dove avete incontrato il musicista. Adesso è deserto...");
 
@@ -857,7 +857,7 @@ public class MSGameInit {
         valley.setLockedBy("ombrello");
 
         Room castle = new TriggeredRoom(49, "Un vecchio castello", "Siete finalmente giunti al castello. "
-                + "Sara' quello di cui ha parlato il musicista? "
+                + "Sarà quello di cui ha parlato il musicista? "
                 + "Vedi l'aquila di prima che si avvicina e diventa sempre più grande...\n"
                 + "Aspetta, ma è... \n"
                 + "\"U-u-u-un d-d-dddrago?!” esclama il tuo amico, visibilmente spaventato.\n"
@@ -894,7 +894,7 @@ public class MSGameInit {
 
         Room mountain = new TriggeredRoom(50, "Verso la montagna", "Proseguendo verso la montagna,"
                 + "senti qualcuno a ovest, che, disperato, urla:\n"
-                + "\"Il mio bastone è andato perduto!!! Sono rovinato!\"\n"
+                + "\"Il mio bastone è andato perduto, sono rovinato!\"\n"
                 + "Fai spallucce e continui a camminare. "
                 + "A un tratto, inciampi in un sassolino e cadi per terra. Stavolta non c'è il tuo amico ad aiutarti! \n"
                 + "Mentre ti rialzi, noti accanto a te uno strano bastone incustodito. Sembra magico... "
@@ -903,16 +903,16 @@ public class MSGameInit {
         ((TriggeredRoom) mountain).addTriggerer("prendi bastone");
         ((TriggeredRoom) mountain).addTriggerDesc("Continui a camminare. Strada facendo, "
                 + "incontri un uomo alquanto strano che si sta disperando. \n"
-                + "\"Come farò, come farò??? Il mio bastone è scomparso! Chissà dove sarà!!!\" "
-                + "Poi alza lo sguardo e incrocia il tuo. \"Ehi tu, hai per caso visto il mio bastone???\" ti chiede. \n"
-                + "Starà forse parlando di quel bastone magico che hai appena preso?"
+                + "\"Come farò, come farò??? Il mio bastone è scomparso, chissà dove sarà!\" "
+                + "Poi alza lo sguardo e incrocia il tuo. \"Ehi tu, hai per caso visto il mio bastone?\" ti chiede. \n"
+                + "Starà forse parlando di quel bastone magico che hai appena preso? "
                 + "Glielo mostri e lui ti dice che è proprio quello!\n"
                 + "\"Hai trovato il mio bastone!! Sono salvo! Grazie, straniero, grazie! "
                 + "Permettimi di sdebitarmi offrendoti il pranzo!\"\n"
-                + "Il vecchio esclama \"Ah, che maleducato... Non mi sono presentato! Io sono Astor il druido!\n"
-                + "Grazie ancora per aver ritrovato il mio bastone!"
+                + "Ah, che maleducato... Non mi sono presentato! Io sono Astor il druido!\n"
+                + "Grazie ancora per aver ritrovato il mio bastone! "
                 + "A proposito, una volta arrivati, "
-                + "potresti usarlo al posto mio per aprire la porta di casa? Ho le mani occupate...\""
+                + "potresti usarlo al posto mio per aprire la porta di casa? Ho le mani occupate...\" "
                 + "e solleva un cesto pieno di funghi. \nPrima che tu risponda, "
                 + "Astor si incammina verso il sentiero, aspettandosi che lo segua.");
         ((TriggeredRoom) mountain).addTriggerer("guarda");
@@ -926,20 +926,20 @@ public class MSGameInit {
         ((TriggeredRoom) druidGarden).addTriggerer("usa bastone");
         ((TriggeredRoom) druidGarden).addTriggerDesc("Agitando il bastone, "
                 + "l'estremità si illumina di verde e riesci ad aprire la porta. \n"
-                + "Il vecchio entra, poggia il cesto sul tavolo, prende il bastone dalle tue mani e ti invita in casa sua. ");
+                + "Il vecchio entra, poggia il cesto sul tavolo, prende il bastone dalle tue mani e ti invita in casa sua.");
         ((TriggeredRoom) druidGarden).addTriggerer("guarda");
         ((TriggeredRoom) druidGarden).addTriggerDesc("Per entrare nella casa del druido, ti basta salire gli scalini.");
         ((TriggeredRoom) druidGarden).addTriggerer("giu");
         ((TriggeredRoom) druidGarden).addTriggerDesc("Sei pronto ad andare a salvare il tuo amico e recuperare il medaglione?\n"
                 + "Ti ricordi la strada per il castello? Basta tornare indietro, verso est!");
 
-        Room crossroad = new Room(52, "Un bivio", "Siete ad un bivio: una strada prosegue verso la salita e l'altra verso la discesa. ");
+        Room crossroad = new Room(52, "Un bivio", "Siete ad un bivio: una strada prosegue verso la salita e l'altra verso la discesa.");
         crossroad.setRoomImage(new ImageIcon("resources//img//stanze//pathway1.jpg"));
 
         Room druidHouse = new TriggeredRoom(53, "Casa di Astor il druido", "Osservi meglio il druido: "
                 + "sarà alto sì e no un metro, ha una barba lunghissima e una veste verde scuro "
-                + "con un cappuccio che gli copre la testa  (riesci ad intravedere delle orecchie a punta) .\n "
-                + "Sembra un incrocio tra Gandalf e Bilbo Baggins. \n"
+                + "con un cappuccio che gli copre la testa ( riesci ad intravedere delle orecchie a punta ) .\n "
+                + "Sembra un incrocio tra Gandalf e Bilbo Baggins.\n"
                 + "Astor prepara il pranzo e vi mettete a mangiare. "
                 + "Inizi a raccontargli la tua storia, del tuo amico e gli chiedi della bacchetta. "
                 + "Lui sbianca in viso e ti risponde \"Bacchetta antimaledizioni?!? No, non ne ho mai sentito parlare...\" "
@@ -950,16 +950,16 @@ public class MSGameInit {
         druidHouse.setRoomImage(new ImageIcon("resources//img//stanze//druidHouseInside.png"));
         druidHouse.setLockedBy("bastone");
         ((TriggeredRoom) druidHouse).addTriggerer("prendi chiave verde");
-        ((TriggeredRoom) druidHouse).addTriggerDesc("Mentre cerchi la \'bacchetta antimaledizioni \', senti Astor che canticchia nel giardino; "
+        ((TriggeredRoom) druidHouse).addTriggerDesc("Mentre cerchi la \'bacchetta antimaledizioni\', senti Astor che canticchia nel giardino; "
                 + "la sua voce è sempre più vicina... \nDovresti muoverti o verrai scoperto!!");
         ((TriggeredRoom) druidHouse).addTriggerer("prendi bacchetta");
         ((TriggeredRoom) druidHouse).addTriggerDesc("Senti Astor che sta per rientrare. \n"
                 + "Riesci a rimettere tutto a posto e a sederti giusto in tempo. \n"
-                + "\"Scusa per l'attesa!! Ecco qui\"\n "
+                + "\"Scusa per l'attesa!! Ecco qui!\"\n "
                 + "Ti offre  un po' della sua erba pipa e tu accetti. \n"
-                + "Dopo qualche minuto, ti senti un po' intontito, ma sembra davvero buona! "
+                + "Dopo qualche minuto, ti senti un po' intontito, ma sembra davvero buona!\n"
                 + "Terminato il pranzo, il druido ti congeda dicendo: "
-                + "\"Giovanotto, ho una certa eta' e ora ho bisogno di riposare..."
+                + "\"Giovanotto, ho una certa età e ora ho bisogno di riposare..."
                 + "Torna ancora a trovarmi! "
                 + "La porta di casa è aperta, ti basta scendere gli scalini.\n"
                 + "Buona fortuna per la tua avventura!\"");
@@ -983,13 +983,13 @@ public class MSGameInit {
         glade.setWest(woodsWest);
         glade.setUp(metaStationLobby);
 
-        woodsWest.setLook("A est c'è la radura con il portale, mentre, nelle altre direzioni, gli alberi sembrano tutti uguali... "
-                + "  Forse sarebbe meglio tornare indietro o rischierete di perdervi... ");
+        woodsWest.setLook("A est c'è la radura con il portale, mentre, nelle altre direzioni, gli alberi sembrano tutti uguali...\n"
+                + "Forse sarebbe meglio tornare indietro o rischierete di perdervi... ");
         woodsWest.setEast(glade);
 
         woodsEast.setLook("A ovest c'è la radura con il portale, mentre nelle altre direzioni la foresta si infittisce. "
-                + " I versi sembrano sempre più vicini e a te iniziano a tremare le gambe per la paura... "
-                + " Forse è il caso di tornare alla radura!");
+                + "I versi sembrano sempre più vicini e a te iniziano a tremare le gambe per la paura... "
+                + "Forse è il caso di tornare alla radura!");
         woodsEast.setWest(glade);
 
         pathway.setLook("La strada continua verso est. A nord, invece, c'è la radura del portale. ");
@@ -998,7 +998,7 @@ public class MSGameInit {
         pathway.addItem(mapNote);
 
         crossroad.setLook("Facendo più attenzione, verso l'alto senti il rumore di un ruscello. "
-                + "A nord vedi la radura del portale da cui sei sbucato con il tuo amico. ");
+                + "A nord vedi la radura del portale da cui sei sbucato con il tuo amico.");
         crossroad.setWest(pathway);
         crossroad.setUp(pathwayUp);
         crossroad.setDown(pathwayDown);
@@ -1010,7 +1010,7 @@ public class MSGameInit {
         pathwayUp.setSouth(pathWaterfall);
 
         pathwayDown.setLook("\"Il sentiero è interrotto da un grosso tronco e non  riuscite a proseguire. "
-                + " L'unica strada percorribile è la salita che vi fa tornare al bivio. ");
+                + "L'unica strada percorribile è la salita che vi fa tornare al bivio.");
         pathwayDown.setUp(crossroad);
 
         pathWaterfall.setLook("Sembra che il sentiero venga interrotto dalla cascata... Forse bisogna passarci sotto?");
@@ -1038,16 +1038,16 @@ public class MSGameInit {
 
         druidGarden.setLook("La casa è piccolissima; fuori c'è un piccolo orto, con delle strane erbe coltivate. "
                 + "Salendo gli scalini, puoi entrare in casa. "
-                + "A est vedi la strada del ritorno, mentre a nord c'è un piccolo fiume. ");
+                + "A est vedi la strada del ritorno, mentre a nord c'è un piccolo fiume.");
         druidGarden.setUp(druidHouse);
         druidGarden.setEast(mountain);
 
         druidHouse.setLook("La casa è abbastanza disordinata: un camino, spento da poco, un calderone, "
                 + "il tavolo su cui state pranzando, il letto di Astor, cianfrusaglie varie e un mobile "
-                + "(che potrebbe contenere qualcosa di utile, chissà!)... "
+                + "( che potrebbe contenere qualcosa di utile, chissà! )... \n"
                 + "Guardandoti intorno, non puoi fare a meno di notare "
-                + "tre chiavi di diverso colore (una verde, una rossa e una blu ) sul comodino.\n"
-                + "Dietro di te invece, c’è la porta d’ingresso con gli scalini per scendere e uscire. ");
+                + "tre chiavi di diverso colore ( una verde, una rossa e una blu ) sul comodino.\n"
+                + "Dietro di te, invece, c’è la porta d’ingresso con gli scalini per scendere e uscire. ");
         druidHouse.setDown(druidGarden);
         druidHouse.addItem(wardrobe);
         druidHouse.addItem(greenKey);
