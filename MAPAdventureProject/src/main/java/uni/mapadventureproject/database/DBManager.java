@@ -95,5 +95,13 @@ public class DBManager {
 
         return results;
     }
+    
+    /**
+     * Chiude la connessione del database
+     * @throws SQLException 
+     */
+    public void disconnect() throws SQLException {
+        con.close();
+    }
 
 }

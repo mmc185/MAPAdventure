@@ -5,7 +5,7 @@ import java.util.Iterator;
 import javax.swing.ImageIcon;
 
 /**
- * Classe utilizzate per realizzare le stanze
+ * Classe utilizzata per realizzare le stanze
  */
 public class Room implements Serializable {
 

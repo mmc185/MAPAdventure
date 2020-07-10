@@ -69,7 +69,7 @@ public class Inventory implements Serializable {
      * attraverso il nome passato in input
      * 
      * @param iName nome oggetto
-     * @return i nel caso l'oggetto è presente nella lista e null altrimenti
+     * @return i nel caso l'oggetto sia presente nella lista e null altrimenti
      */
     public Item searchItem(String iName) {
         

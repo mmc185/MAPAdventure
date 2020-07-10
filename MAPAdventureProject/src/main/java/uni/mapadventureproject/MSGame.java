@@ -120,7 +120,7 @@ public class MSGame extends GameManager {
                 case PICK_UP:
 
                     // Controlla che l'oggetto sia della stanza e non presente nell'inventario
-                    if (pOutput.containsWordType(WordType.R_OBJ)) {
+                    if (pOutput.containsWordType(WordType.R_OBJ) && pOutput.size() == 2) {
 
                         // Controlla che l'oggetto si possa raccogliere
                         if (!Objects.isNull(i) && i.isPickupable()) {
@@ -174,12 +174,12 @@ public class MSGame extends GameManager {
 
                     } else if (pOutput.containsWordType(WordType.R_OBJ)) { // Apertura di un contenitore da sbloccare
 
-                        ItemContainer iC = null; //contenitore
+                        Item iC = null; //contenitore
                         i = null;
                         byte index = 0;
 
                         // Iteratore per ciclare sul ParserOutput
-                        Iterator it = pOutput.iterator();
+                        Iterator<WordType> it = pOutput.iterator();
                         it.next(); // Salta il comando iniziale, già conosciuto
 
                         // Salva gli oggetti che devono interagire nell'ordine prestabilito (e.g. "Apri baule con chiave")
@@ -188,7 +188,7 @@ public class MSGame extends GameManager {
                             //itemContainer. obbligatoriamente un oggetto della Room
                             if (index == 1 && it.next().equals(WordType.R_OBJ)) {
 
-                                iC = (ItemContainer) this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
+                                iC = this.getGame().getCurrentRoom().getItemList().searchItem(pOutput.getString(WordType.R_OBJ));
 
                             } //Chiave. obbligatoriamente un oggetto dell'inv
                             else if (index == 2 && it.next().equals(WordType.I_OBJ)) {
@@ -204,10 +204,10 @@ public class MSGame extends GameManager {
                         if (iC instanceof ItemContainer) {
 
                             // Se trova l'oggetto per aprirlo ed è corretto oppure se il contenitore non è bloccato lo apre
-                            if ((i != null && !i.isConsumed() && iC.unlockContainer(i.getName()))
-                                    || (iC.getLockedBy().equals(""))) {
+                            if ((i != null && !i.isConsumed() && ((ItemContainer)iC).unlockContainer(i.getName()))
+                                    || (((ItemContainer)iC).getLockedBy().equals(""))) {
 
-                                if (iC.getcItemList().getInventoryList().isEmpty()) {
+                                if (((ItemContainer)iC).getcItemList().getInventoryList().isEmpty()) {
 
                                     output.append("L'oggetto è stato aperto, ma è vuoto!");
 
@@ -384,8 +384,10 @@ public class MSGame extends GameManager {
 
                     if (iC instanceof ItemContainer && ((ItemContainer) iC).getLockedBy().equals("")) {
 
-                        i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.I_OBJ));
-                        pOutput.add(WordType.I_OBJ, i.getName());
+                       if (!Objects.isNull(i = ((ItemContainer) iC).getcItemList().searchItem(pOutput.getString(WordType.I_OBJ)))) {
+                            pOutput.add(WordType.I_OBJ, i.getName());
+                            break;
+                        }
 
                     }
 
@@ -536,7 +538,7 @@ public class MSGame extends GameManager {
                 }
             }
 
-            //se triggerer=triggerer attuale della stanza, si effettua il trigger
+            //se il comando dell'utente (stringa triggerer) = triggerer attuale della stanza, si effettua il trigger
             if (triggerer.equals(r.getCurrentTriggerer())) {
 
                 r.setTrigger(true);
@@ -550,7 +552,7 @@ public class MSGame extends GameManager {
     }
 
     /**
-     * Procedura che fa avanzare la narrazione della storia, basandosi sulla
+     * Metodo che fa avanzare la narrazione della storia, basandosi sulla
      * stanza pivotale per lo svolgimento degli eventi.
      */
     private void advancePlot() {
@@ -587,8 +589,8 @@ public class MSGame extends GameManager {
                 this.getGame().getInventory().add(i);
 
                 // Viene descritto il finale del gioco
-                this.getGame().getCurrentRoom().setDesc("\n\n"
-                        + "Tornati alla metastazione, una scimmia con un piccolo cappello vi si avvicina:\n"
+                this.getGame().getCurrentRoom().setDesc(
+                          "Tornati alla metastazione, una scimmia con un piccolo cappello vi si avvicina:\n"
                         + "\"Datemi la roba! So che ce l'avete...\"\n"
                         + "\"Se vuoi un po' di erba pipa, vai nel mondo medievale e cerca Astor\" gli rispondi.\n"
                         + "Il tuo amico ti lancia un'occhiataccia.\n"
