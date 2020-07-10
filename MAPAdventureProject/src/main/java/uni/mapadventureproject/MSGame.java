@@ -587,8 +587,8 @@ public class MSGame extends GameManager {
                 this.getGame().getInventory().add(i);
 
                 // Viene descritto il finale del gioco
-                this.getGame().getCurrentRoom().setDesc("\n\n"
-                        + "Tornati alla metastazione, una scimmia con un piccolo cappello vi si avvicina:\n"
+                this.getGame().getCurrentRoom().setDesc(
+                          "Tornati alla metastazione, una scimmia con un piccolo cappello vi si avvicina:\n"
                         + "\"Datemi la roba! So che ce l'avete...\"\n"
                         + "\"Se vuoi un po' di erba pipa, vai nel mondo medievale e cerca Astor\" gli rispondi.\n"
                         + "Il tuo amico ti lancia un'occhiataccia.\n"
