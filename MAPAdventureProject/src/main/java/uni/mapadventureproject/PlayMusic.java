@@ -71,43 +71,40 @@ public class PlayMusic {
         //Legge le informazioni del Mixer dal sistema audio
         Mixer.Info[] mixers = AudioSystem.getMixerInfo();
 
-        for (Mixer.Info mixerInfo : mixers) {
+        Mixer mixer = AudioSystem.getMixer(mixers[0]);
+        Line.Info[] lineInfos = mixer.getTargetLineInfo();
 
-            Mixer mixer = AudioSystem.getMixer(mixerInfo);
-            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+        for (Line.Info lineInfo : lineInfos) {
+            Line line = null;
+            boolean opened = true;
 
-            for (Line.Info lineInfo : lineInfos) {
+            try {
 
-                Line line = null;
-                boolean opened = true;
+                line = mixer.getLine(lineInfo);
+                opened = line.isOpen() || line instanceof Clip;
 
-                try {
+                if (!opened) {
+                    line.open();
+                }
 
-                    line = mixer.getLine(lineInfo);
-                    opened = line.isOpen() || line instanceof Clip;
+                //fa un controllo sul float
+                FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+                //vede il volume attuale
+                float currentVolume = volControl.getValue();
 
-                    if (!opened) {
-                        line.open();
-                    }
+                Double volumeToCut = valueToPlusMinus;
+                //aumenta il volume se il valore di volumeToCut è positivo,altrimenti decrementa se è negativo
+                float changedCalc = (float) ((float) currentVolume + (double) volumeToCut);
+                volControl.setValue(changedCalc);    //imposta il volume della musica
 
-                    //fa un controllo sul float
-                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
-                    //vede il volume attuale
-                    float currentVolume = volControl.getValue();
+            } catch (LineUnavailableException | IllegalArgumentException e) {
+            } finally {
 
-                    Double volumeToCut = valueToPlusMinus;
-                    //aumenta il volume se il valore di volumeToCut è positivo,altrimenti decrementa se è negativo
-                    float changedCalc = (float) ((float) currentVolume + (double) volumeToCut);
-                    volControl.setValue(changedCalc);    //imposta il volume della musica
-
-                } catch (LineUnavailableException | IllegalArgumentException e) {
-                } finally {
-
-                    if (line != null && !opened) {
-                        line.close();
-                    }
+                if (line != null && !opened) {
+                    line.close();
                 }
             }
+            
         }
 
     }
@@ -122,40 +119,37 @@ public class PlayMusic {
 
         Mixer.Info[] mixers = AudioSystem.getMixerInfo();
 
-        for (Mixer.Info mixerInfo : mixers) {
+        Mixer mixer = AudioSystem.getMixer(mixers[0]);
+        Line.Info[] lineInfos = mixer.getTargetLineInfo();
 
-            Mixer mixer = AudioSystem.getMixer(mixerInfo);
-            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+        for (Line.Info lineInfo : lineInfos) {
+            Line line = null;
+            boolean opened = true;
 
-            for (Line.Info lineInfo : lineInfos) {
+            try {
+                line = mixer.getLine(lineInfo);
+                opened = line.isOpen() || line instanceof Clip;
 
-                Line line = null;
-                boolean opened = true;
+                if (!opened) {
+                    line.open();
+                }
 
-                try {
-                    line = mixer.getLine(lineInfo);
-                    opened = line.isOpen() || line instanceof Clip;
+                FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
 
-                    if (!opened) {
-                        line.open();
-                    }
+                Double volumeToCut = valueToPlusMinus;
+                //se volumeToCut è 0.0 allora la musica verrà mutata,se è 1.0 la musica verrà aumentata al massimo
+                float changedCalc = (float) ((double) volumeToCut);
+                volControl.setValue(changedCalc);  //imposta il volume della musica
 
-                    FloatControl volControl = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+            } catch (LineUnavailableException | IllegalArgumentException e) {
+            } finally {
 
-                    Double volumeToCut = valueToPlusMinus;
-                    //se volumeToCut è 0.0 allora la musica verrà mutata,se è 1.0 la musica verrà aumentata al massimo
-                    float changedCalc = (float) ((double) volumeToCut);
-                    volControl.setValue(changedCalc);  //imposta il volume della musica
-
-                } catch (LineUnavailableException | IllegalArgumentException e) {
-                } finally {
-
-                    if (line != null && !opened) {
-                        line.close();
-                    }
+                if (line != null && !opened) {
+                    line.close();
                 }
             }
         }
     }
+    
 
 }

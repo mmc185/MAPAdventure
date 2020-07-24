@@ -1,7 +1,6 @@
 # MAPAdventure
 MAPAdventureProject:
-
-|
+```
 
 |-NewGame
 
@@ -11,37 +10,31 @@ MAPAdventureProject:
 
 |-resources
 
-|                                           	|-Musica
+|    |-- Musica
 
-|                                           	|-db
+|    |-- db
 
-|                                           	|-font
+|    |-- font
 
-|                                           	|-img
+|    |-- img
 
 |-src
 
-​                 |-main
+|    |-- main
 
-​                               |-java
+|    |      |-- java/uni/mapadventureproject
 
-​                                        |-uni
+|    |    |      |-- GUI
 
-​                                             |-mapadventureproject
+|    |    |      |-- database
 
-​	                                                   	|-GUI
+|    |    |      |-- files
 
-​	                                                   	|-database
+|    |    |      |-- parser
 
-​	                                                   	|-files
+|    |    |      |-- type
 
-​	                                                   	|-parser
-
-​	                                                   	|-type
-
-​	                                                   	|-other classes
-
-
+```
 
 - NewGame: è possibile trovare il file di gioco per una nuova partita.
 
