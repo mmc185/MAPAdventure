@@ -542,25 +542,7 @@ public class GameGUI extends javax.swing.JFrame {
 
             // Se il comando ha fatto terminare il gioco ( ovvero se il tempo di completamento si è bloccato )
             if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
-                try {
-
-                    // Inserisce il nome del giocatore e il suo tempo nel DB
-                    db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
-                            gInteraction.getGameManager().getGame().getGameTime().getTime());
-
-                    // Disabilita l'uso di typing field e bottoni
-                    jtTypingField.setEnabled(false);
-                    jbSend.setEnabled(false);
-                    jbSouth.setEnabled(false);
-                    jbNorth.setEnabled(false);
-                    jbEast.setEnabled(false);
-                    jbWest.setEnabled(false);
-                    jbUp.setEnabled(false);
-                    jbDown.setEnabled(false);
-
-                } catch (SQLException | ParseException e) {
-                    JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
-                }
+                this.insertScore();
             }
 
         }
@@ -572,9 +554,40 @@ public class GameGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbSendActionPerformed
 
+    /**
+     * Richiama il db per inserire punteggio e giocatore una volta completato il
+     * gioco
+     */
+    private void insertScore() {
+        try {
+
+            // Inserisce il nome del giocatore e il suo tempo nel DB
+            db.insertScore(gInteraction.getGameManager().getGame().getPlayer(),
+                    gInteraction.getGameManager().getGame().getGameTime().getTime());
+
+            // Disabilita l'uso di typing field e bottoni
+            jtTypingField.setEnabled(false);
+            jbSend.setEnabled(false);
+            jbSouth.setEnabled(false);
+            jbNorth.setEnabled(false);
+            jbEast.setEnabled(false);
+            jbWest.setEnabled(false);
+            jbUp.setEnabled(false);
+            jbDown.setEnabled(false);
+
+        } catch (SQLException | ParseException e) {
+            JOptionPane.showMessageDialog(this, "Errore: " + e.getMessage(), e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     private void jbNorthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNorthActionPerformed
         // L'utente si muove verso nord
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("nord") + "\n", Color.white);
+
+        // Se il comando ha fatto terminare il gioco ( ovvero se il tempo di completamento si è bloccato )
+        if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
+            this.insertScore();
+        }
 
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
@@ -585,6 +598,11 @@ public class GameGUI extends javax.swing.JFrame {
         // L'utente si muove verso sud
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("sud") + "\n", Color.white);
 
+        // Se il comando ha fatto terminare il gioco ( ovvero se il tempo di completamento si è bloccato )
+        if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
+            this.insertScore();
+        }
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -593,6 +611,11 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbWestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbWestActionPerformed
         // L'utente si muove verso ovest
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("ovest") + "\n", Color.white);
+
+        // Se il comando ha fatto terminare il gioco ( ovvero se il tempo di completamento si è bloccato )
+        if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
+            this.insertScore();
+        }
 
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
@@ -603,6 +626,11 @@ public class GameGUI extends javax.swing.JFrame {
         // L'utente si muove verso est
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("est") + "\n", Color.white);
 
+        // Se il comando ha fatto terminare il gioco ( ovvero se il tempo di completamento si è bloccato )
+        if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
+            this.insertScore();
+        }
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -612,6 +640,11 @@ public class GameGUI extends javax.swing.JFrame {
         // L'utente si muove verso su
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("sali") + "\n", Color.white);
 
+        // Se il comando ha fatto terminare il gioco ( ovvero se il tempo di completamento si è bloccato )
+        if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
+            this.insertScore();
+        }
+
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
         jlImage.setToolTipText(gInteraction.getGameManager().getGame().getCurrentRoom().getName());
@@ -620,6 +653,11 @@ public class GameGUI extends javax.swing.JFrame {
     private void jbDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDownActionPerformed
         // L'utente si muove verso giù
         appendToPane(jtpReadingArea, "\n" + gInteraction.inputManager("scendi") + "\n", Color.white);
+
+        // Se il comando ha fatto terminare il gioco ( ovvero se il tempo di completamento si è bloccato )
+        if (!gInteraction.getGameManager().getGame().getGameTime().isActive()) {
+            this.insertScore();
+        }
 
         //Aggiorna l'immagine della Room e il suo tooltip
         jlImage.setIcon(gInteraction.getGameManager().getGame().getCurrentRoom().getRoomImage());
@@ -752,6 +790,7 @@ public class GameGUI extends javax.swing.JFrame {
 
     /**
      * Disconnette il database prima di chiudere il frame
+     *
      * @param evt evento di chiusura del frame
      */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
